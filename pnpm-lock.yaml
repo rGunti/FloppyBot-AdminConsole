@@ -35,6 +35,9 @@ dependencies:
   '@angular/router':
     specifier: ^17.3.0
     version: 17.3.3(@angular/common@17.3.3)(@angular/core@17.3.3)(@angular/platform-browser@17.3.3)(rxjs@7.8.1)
+  '@ng-icons/bootstrap-icons':
+    specifier: ^27.2.0
+    version: 27.2.0
   '@ng-icons/core':
     specifier: ^27.*
     version: 27.2.0
@@ -3165,6 +3168,12 @@ packages:
     dependencies:
       '@material/feature-targeting': 15.0.0-canary.7f224ddd4.0
       '@material/theme': 15.0.0-canary.7f224ddd4.0
+      tslib: 2.6.2
+    dev: false
+
+  /@ng-icons/bootstrap-icons@27.2.0:
+    resolution: {integrity: sha512-SPdFkhJR7WvC/TGtm6S/f6GSXv7Wn7JHZhuuKcQk+gZBzE15C6v+61s4LRxL5shEmh260BNoHpDKeorIAzQrXA==}
+    dependencies:
       tslib: 2.6.2
     dev: false
 
