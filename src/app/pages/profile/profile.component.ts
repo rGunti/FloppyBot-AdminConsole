@@ -6,9 +6,19 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatTabsModule } from '@angular/material/tabs';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import { bootstrapPersonCircle, bootstrapShieldCheck, bootstrapKey, bootstrapBox } from '@ng-icons/bootstrap-icons';
+import {
+  bootstrapPersonCircle,
+  bootstrapShieldCheck,
+  bootstrapKey,
+  bootstrapBox,
+  bootstrapPersonFill,
+  bootstrapHash,
+  bootstrapMailboxFlag,
+  bootstrapClock,
+} from '@ng-icons/bootstrap-icons';
 
 @Component({
   selector: 'fac-profile',
@@ -21,6 +31,7 @@ import { bootstrapPersonCircle, bootstrapShieldCheck, bootstrapKey, bootstrapBox
     MatDividerModule,
     MatInputModule,
     MatFormFieldModule,
+    MatTabsModule,
     ReactiveFormsModule,
     NgIconComponent,
   ],
@@ -30,6 +41,10 @@ import { bootstrapPersonCircle, bootstrapShieldCheck, bootstrapKey, bootstrapBox
       bootstrapShieldCheck,
       bootstrapKey,
       bootstrapBox,
+      bootstrapPersonFill,
+      bootstrapHash,
+      bootstrapMailboxFlag,
+      bootstrapClock,
     }),
   ],
   templateUrl: './profile.component.html',

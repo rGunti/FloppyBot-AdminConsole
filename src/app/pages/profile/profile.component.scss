@@ -2,10 +2,12 @@
   display: block;
 }
 
-.access-list {
-  li {
-    mat-icon {
-      margin-bottom: -7px;
-    }
+mat-form-field {
+  width: 100%;
+}
+
+.access-list > li {
+  mat-icon {
+    margin-bottom: -7px;
   }
 }

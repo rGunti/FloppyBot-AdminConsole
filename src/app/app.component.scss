@@ -1,3 +1,11 @@
-.mat-mdc-button-base {
-  margin: 8px 8px 8px 0;
+fac-navigation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999; // This ensures that the element is always on top of other elements
+}
+
+.page-container {
+  margin-top: 60px;
 }
