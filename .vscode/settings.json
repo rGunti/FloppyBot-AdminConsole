@@ -15,4 +15,13 @@
     },
     "editor.formatOnSave": true
   },
+  "angular-schematics.schematicsDefaultOptions": {
+    "angular-*": {
+      "style": "scss",
+      "externalTemplate": true
+    },
+    "angular-page": {
+      "skipChangeDetectionOnPush": true
+    }
+  },
 }

@@ -1,0 +1,76 @@
+<mat-toolbar>
+  <mat-toolbar-row>
+    <button mat-button [matMenuTriggerFor]="mMenu" matTooltip="Tap to start">
+      <mat-icon>
+        <ng-icon name="bootstrapFloppy2"></ng-icon>
+      </mat-icon>
+      FloppyBot Menu
+    </button>
+    <mat-menu #mMenu="matMenu">
+      <button mat-menu-item routerLink="/home" routerLinkActive="mat-mdc-menu-item-highlighted">
+        <mat-icon>
+          <ng-icon name="bootstrapHouse"></ng-icon>
+        </mat-icon>
+        Home
+      </button>
+
+      <mat-divider></mat-divider>
+
+      <button mat-menu-item [matMenuTriggerFor]="mCommands">
+        <mat-icon>
+          <ng-icon name="bootstrapCommand"></ng-icon>
+        </mat-icon>
+        Commands
+      </button>
+      <button mat-menu-item [matMenuTriggerFor]="mQuotes">
+        <mat-icon>
+          <ng-icon name="bootstrapQuote"></ng-icon>
+        </mat-icon>
+        Quotes
+      </button>
+      <button mat-menu-item routerLink="/files/manage" routerLinkActive="mat-mdc-menu-item-highlighted">
+        <mat-icon>
+          <ng-icon name="bootstrapFolder2Open"></ng-icon>
+        </mat-icon>
+        Files
+      </button>
+
+      <mat-divider></mat-divider>
+
+      <button mat-menu-item routerLink="/profile" routerLinkActive="mat-mdc-menu-item-highlighted">
+        <mat-icon>
+          <ng-icon name="bootstrapPersonCircle"></ng-icon>
+        </mat-icon>
+        Profile
+      </button>
+      <button mat-menu-item>
+        <mat-icon>
+          <ng-icon name="bootstrapUnlock"></ng-icon>
+        </mat-icon>
+        Login
+      </button>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>
+          <ng-icon name="bootstrapLock"></ng-icon>
+        </mat-icon>
+        Logout
+      </button>
+    </mat-menu>
+
+    <mat-menu #mCommands="matMenu">
+      <button mat-menu-item routerLink="/commands/built-in" routerLinkActive="mat-mdc-menu-item-highlighted">
+        Built-in Commands
+      </button>
+      <button mat-menu-item routerLink="/commands/custom" routerLinkActive="mat-mdc-menu-item-highlighted">
+        Custom Commands
+      </button>
+    </mat-menu>
+
+    <mat-menu #mQuotes="matMenu">
+      <button mat-menu-item routerLink="/quotes/manage" routerLinkActive="mat-mdc-menu-item-highlighted">
+        Manage Quotes
+      </button>
+      <button mat-menu-item routerLink="/quotes/export" routerLinkActive="mat-mdc-menu-item-highlighted">Export</button>
+    </mat-menu>
+  </mat-toolbar-row>
+</mat-toolbar>
