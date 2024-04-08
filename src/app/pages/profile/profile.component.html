@@ -1,1 +1,102 @@
-<p>profile works!</p>,
+<mat-card>
+  <mat-card-header>
+    <div mat-card-avatar>
+      <mat-icon>
+        <ng-icon name="bootstrapPersonCircle"></ng-icon>
+      </mat-icon>
+    </div>
+    <mat-card-title>Your Profile</mat-card-title>
+    <mat-card-subtitle>
+      This is the information our Identity Provider submits to us to make this app work.
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content [formGroup]="form">
+    <mat-form-field>
+      <mat-label>Username</mat-label>
+      <input matInput readonly formControlName="username" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>User ID</mat-label>
+      <input matInput readonly formControlName="userId" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput readonly formControlName="email" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Last updated</mat-label>
+      <input matInput readonly formControlName="updated" />
+    </mat-form-field>
+  </mat-card-content>
+</mat-card>
+
+<mat-card>
+  <mat-card-header>
+    <div mat-card-avatar>
+      <mat-icon>
+        <ng-icon name="bootstrapShieldCheck"></ng-icon>
+      </mat-icon>
+    </div>
+    <mat-card-title>Your Access</mat-card-title>
+    <mat-card-subtitle>These are your access permissions your account has been granted.</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>You have access to these channels:</p>
+    <ul class="access-list">
+      <li>
+        <mat-icon>
+          <ng-icon name="bootstrapBox"></ng-icon>
+        </mat-icon>
+        <span>some:channel</span>
+      </li>
+      <li>
+        <mat-icon>
+          <ng-icon name="bootstrapBox"></ng-icon>
+        </mat-icon>
+        <span>some:channel</span>
+      </li>
+      <li>
+        <mat-icon>
+          <ng-icon name="bootstrapBox"></ng-icon>
+        </mat-icon>
+        <span>some:channel</span>
+      </li>
+      <li>
+        <mat-icon>
+          <ng-icon name="bootstrapBox"></ng-icon>
+        </mat-icon>
+        <span>some:channel</span>
+      </li>
+    </ul>
+
+    <p>Your account has the following permissions granted:</p>
+    <ul class="access-list">
+      <li>
+        <mat-icon>
+          <ng-icon name="bootstrapKey"></ng-icon>
+        </mat-icon>
+        <span>some:permission</span>
+      </li>
+      <li>
+        <mat-icon>
+          <ng-icon name="bootstrapKey"></ng-icon>
+        </mat-icon>
+        <span>some:permission</span>
+      </li>
+      <li>
+        <mat-icon>
+          <ng-icon name="bootstrapKey"></ng-icon>
+        </mat-icon>
+        <span>some:permission</span>
+      </li>
+      <li>
+        <mat-icon>
+          <ng-icon name="bootstrapKey"></ng-icon>
+        </mat-icon>
+        <span>some:permission</span>
+      </li>
+    </ul>
+  </mat-card-content>
+</mat-card>
+
+<mat-card> </mat-card>
