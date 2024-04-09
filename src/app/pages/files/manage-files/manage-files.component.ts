@@ -3,11 +3,13 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, ViewChild } from '@a
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
+import { ChannelSelectorComponent } from '../../../components/channel-selector/channel-selector.component';
+import { Channel } from '../../../utils/channel/channel.entities';
 
 @Component({
   selector: 'fac-manage-files',
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatPaginatorModule, MatSortModule],
+  imports: [CommonModule, MatTableModule, MatPaginatorModule, MatSortModule, ChannelSelectorComponent],
   templateUrl: './manage-files.component.html',
   styleUrl: './manage-files.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -32,5 +34,9 @@ export class ManageFilesComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+  }
+
+  onChannelSelected(selectedChannel: Channel | null | undefined) {
+    console.log('Selected channel:', selectedChannel);
   }
 }

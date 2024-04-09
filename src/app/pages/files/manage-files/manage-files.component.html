@@ -1,4 +1,6 @@
 <div class="mat-elevation-z8">
+  <fac-channel-selector (channelSelected)="onChannelSelected($event)"></fac-channel-selector>
+
   <table mat-table [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>

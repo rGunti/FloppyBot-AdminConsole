@@ -1,0 +1,17 @@
+<mat-form-field [floatLabel]="'always'">
+  <mat-label>
+    <ng-icon name="bootstrapFolder2Open"></ng-icon>
+    Channel
+  </mat-label>
+
+  <mat-select [formControl]="form" placeholder="Select a channel">
+    @for (channel of channels; track $index) {
+      <mat-option [value]="channel">
+        <mat-icon>
+          <ng-icon [name]="(channel | channelIcon)!"></ng-icon>
+        </mat-icon>
+        <span>{{ channel | channelName }}</span>
+      </mat-option>
+    }
+  </mat-select>
+</mat-form-field>
