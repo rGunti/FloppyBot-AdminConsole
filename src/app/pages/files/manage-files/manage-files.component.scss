@@ -1,3 +1,14 @@
 :host {
   display: block;
 }
+
+.mat-column-icon {
+  width: 50px;
+}
+.mat-column-size {
+  width: 100px;
+}
+.mat-column-actions {
+  width: 200px;
+  text-align: right;
+}
