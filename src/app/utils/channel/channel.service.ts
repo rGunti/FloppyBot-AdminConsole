@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Channel } from './channel.entities';
+import { Channel } from '../../api/entities';
 
 @Injectable({
   providedIn: 'root',

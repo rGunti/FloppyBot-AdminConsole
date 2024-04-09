@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform, inject } from '@angular/core';
 import { ChannelService } from './channel.service';
-import { Channel } from './channel.entities';
+import { Channel } from '../../api/entities';
 
 @Pipe({
   name: 'channelIcon',

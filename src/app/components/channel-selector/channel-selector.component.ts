@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, EventEmitter, Input, OnDestroy, Output, inject } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, OnDestroy, Output, inject } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -7,12 +7,13 @@ import { MatSelectModule } from '@angular/material/select';
 import { Router } from '@angular/router';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { bootstrapDiscord, bootstrapFolder2Open, bootstrapQuestion, bootstrapTwitch } from '@ng-icons/bootstrap-icons';
-import { Channel } from '../../utils/channel/channel.entities';
 import { ChannelService } from '../../utils/channel/channel.service';
 import { ChannelNamePipe } from '../../utils/channel/channel-name.pipe';
 import { ChannelIconPipe } from '../../utils/channel/channel-icon.pipe';
-import { Subject, filter, first, map, takeUntil } from 'rxjs';
+import { Subject, filter, first, map, switchMap, takeUntil } from 'rxjs';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Channel } from '../../api/entities';
+import { UserApiService } from '../../api/user-api.service';
 
 @Component({
   selector: 'fac-channel-selector',
@@ -44,14 +45,11 @@ export class ChannelSelectorComponent implements AfterViewInit, OnDestroy {
 
   private readonly router = inject(Router);
   private readonly channelService = inject(ChannelService);
+  private readonly userApi = inject(UserApiService);
 
+  readonly channels$ = this.userApi.getAccessibleChannels();
   readonly form = new FormControl<Channel | null>(null);
 
-  @Input() channels: Channel[] = [
-    { type: 'Twitch', id: 'Channel1' },
-    { type: 'Discord', id: '72136387162378123' },
-    { type: 'Unknown', id: '123', alias: 'Does not exist' },
-  ];
   @Output() channelSelected = new EventEmitter<Channel | null | undefined>();
 
   ngAfterViewInit(): void {
@@ -61,7 +59,11 @@ export class ChannelSelectorComponent implements AfterViewInit, OnDestroy {
         takeUntil(this.destroyed$),
         filter((params) => params['channel'] !== undefined),
         map((params) => params['channel']!),
-        map((channelId) => this.channels.find((channel) => this.channelService.getChannelId(channel) === channelId)),
+        switchMap((channelId) =>
+          this.channels$.pipe(
+            map((channels) => channels.find((channel) => this.channelService.getChannelId(channel) === channelId)),
+          ),
+        ),
       )
       .subscribe((channel) => {
         this.form.setValue(channel!);

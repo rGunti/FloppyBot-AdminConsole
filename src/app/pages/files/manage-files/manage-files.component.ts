@@ -4,7 +4,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { ChannelSelectorComponent } from '../../../components/channel-selector/channel-selector.component';
-import { Channel } from '../../../utils/channel/channel.entities';
+import { Channel } from '../../../api/entities';
 
 @Component({
   selector: 'fac-manage-files',
