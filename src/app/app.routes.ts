@@ -60,6 +60,7 @@ export const routes: Routes = [
   },
   {
     path: 'profile',
+    title: 'Profile',
     loadComponent: () => import('./pages/profile/profile.component').then((m) => m.ProfileComponent),
   },
   //{
@@ -68,6 +69,7 @@ export const routes: Routes = [
   //},
   {
     path: '**',
+    title: 'Not Found',
     loadComponent: () => import('./pages/not-found/not-found.component').then((m) => m.NotFoundComponent),
   },
 ];
