@@ -1,10 +1,10 @@
 <mat-toolbar>
   <mat-toolbar-row>
-    <button mat-button [matMenuTriggerFor]="mMenu" matTooltip="Tap to start">
+    <button mat-icon-button [matMenuTriggerFor]="mMenu" matTooltip="Tap to start">
       <mat-icon>
         <ng-icon name="bootstrapFloppy2"></ng-icon>
       </mat-icon>
-      FloppyBot Menu
+      <!-- <span>FloppyBot Menu</span> -->
     </button>
     <mat-menu #mMenu="matMenu">
       <button mat-menu-item routerLink="/home" routerLinkActive="mat-mdc-menu-item-highlighted">
@@ -72,5 +72,7 @@
       </button>
       <button mat-menu-item routerLink="/quotes/export" routerLinkActive="mat-mdc-menu-item-highlighted">Export</button>
     </mat-menu>
+
+    <span>{{ title$ | async }}</span>
   </mat-toolbar-row>
 </mat-toolbar>

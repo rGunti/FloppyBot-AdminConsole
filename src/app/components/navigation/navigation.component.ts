@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { NavigationEnd, Router, RouterModule, TitleStrategy } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -20,6 +20,7 @@ import {
   bootstrapHouse,
 } from '@ng-icons/bootstrap-icons';
 import { LogoutDialogComponent } from '../../dialogs/logout-dialog/logout-dialog.component';
+import { filter, map } from 'rxjs';
 
 @Component({
   selector: 'fac-navigation',
@@ -54,6 +55,14 @@ import { LogoutDialogComponent } from '../../dialogs/logout-dialog/logout-dialog
 })
 export class NavigationComponent {
   private readonly dialog = inject(MatDialog);
+  private readonly titleService = inject(TitleStrategy);
+  private readonly router = inject(Router);
+
+  title$ = this.router.events.pipe(
+    filter((event) => event instanceof NavigationEnd),
+    map(() => this.router.routerState.snapshot),
+    map((snapshot) => this.titleService.buildTitle(snapshot)),
+  );
 
   logout(): void {
     this.dialog.open(LogoutDialogComponent);
