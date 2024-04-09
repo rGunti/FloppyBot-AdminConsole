@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, EventEmitter, OnDestroy, Output, inject } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, Output, inject } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -40,7 +40,7 @@ import { UserApiService } from '../../api/user-api.service';
     ChannelIconPipe,
   ],
 })
-export class ChannelSelectorComponent implements AfterViewInit, OnDestroy {
+export class ChannelSelectorComponent implements OnDestroy {
   private readonly destroyed$ = new Subject();
 
   private readonly router = inject(Router);
@@ -52,7 +52,7 @@ export class ChannelSelectorComponent implements AfterViewInit, OnDestroy {
 
   @Output() channelSelected = new EventEmitter<Channel | null | undefined>();
 
-  ngAfterViewInit(): void {
+  constructor() {
     this.router.routerState.root.queryParams
       .pipe(
         first(),

@@ -2,11 +2,12 @@
   display: block;
 }
 
-.mat-column-icon {
+.mat-column-mimeType {
   width: 50px;
 }
-.mat-column-size {
+.mat-column-fileSize {
   width: 100px;
+  text-align: right;
 }
 .mat-column-actions {
   width: 200px;

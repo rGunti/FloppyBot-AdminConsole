@@ -1,15 +1,19 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, OnDestroy, ViewChild, inject } from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { ChannelSelectorComponent } from '../../../components/channel-selector/channel-selector.component';
-import { Channel } from '../../../api/entities';
+import { Channel, FileHeader } from '../../../api/entities';
 import { MatIconModule } from '@angular/material/icon';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { MatButtonModule } from '@angular/material/button';
 import { bootstrapDownload, bootstrapFileEarmark, bootstrapTrash } from '@ng-icons/bootstrap-icons';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { BehaviorSubject, Subject, filter, map, of, switchMap, takeUntil } from 'rxjs';
+import { FileApiService } from '../../../api/file-api.service';
+import { FileSizePipe } from '../../../utils/files/file-size.pipe';
+import { ChannelService } from '../../../utils/channel/channel.service';
 
 @Component({
   selector: 'fac-manage-files',
@@ -24,6 +28,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     NgIconComponent,
     MatButtonModule,
     MatTooltipModule,
+    FileSizePipe,
   ],
   providers: [
     provideIcons({
@@ -36,19 +41,21 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   styleUrl: './manage-files.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ManageFilesComponent implements AfterViewInit {
-  readonly displayedColumns: string[] = ['icon', 'name', 'size', 'actions'];
-  readonly dataSource = new MatTableDataSource([
-    { name: 'File 1', size: '1.2 MB', date: '2021-01-01' },
-    { name: 'File 2', size: '2.5 MB', date: '2021-01-02' },
-    { name: 'File 3', size: '3.7 MB', date: '2021-01-03' },
-    { name: 'File 4', size: '4.9 MB', date: '2021-01-04' },
-    { name: 'File 5', size: '5.1 MB', date: '2021-01-05' },
-    { name: 'File 6', size: '6.3 MB', date: '2021-01-06' },
-    { name: 'File 7', size: '7.5 MB', date: '2021-01-07' },
-    { name: 'File 8', size: '8.7 MB', date: '2021-01-08' },
-    { name: 'File 9', size: '9.9 MB', date: '2021-01-09' },
-  ]);
+export class ManageFilesComponent implements AfterViewInit, OnDestroy {
+  private readonly fileApi = inject(FileApiService);
+  private readonly channelService = inject(ChannelService);
+  private readonly destroy$ = new Subject<void>();
+
+  private readonly selectedChannel = new BehaviorSubject<Channel | null>(null);
+
+  readonly displayedColumns: string[] = ['mimeType', 'fileName', 'fileSize', 'actions'];
+  readonly dataSource$ = this.selectedChannel.pipe(
+    takeUntil(this.destroy$),
+    filter((channel) => !!channel),
+    map((channel) => this.channelService.getChannelId(channel!)),
+    switchMap((channelId) => (channelId ? this.fileApi.getFilesForChannel(channelId) : of([]))),
+  );
+  readonly dataSource = new MatTableDataSource<FileHeader>([]);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -58,8 +65,17 @@ export class ManageFilesComponent implements AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+    this.dataSource$.subscribe((files) => {
+      this.dataSource.data = files;
+    });
+  }
+
   onChannelSelected(selectedChannel: Channel | null | undefined) {
     console.log('Selected channel:', selectedChannel);
+    this.selectedChannel.next(selectedChannel ?? null);
   }
 
   getDownloadTooltip(file: unknown) {
