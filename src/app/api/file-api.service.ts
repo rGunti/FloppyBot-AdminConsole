@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { FileHeader } from './entities';
 
+const MIME_TYPES = ['audio/mpeg', 'image/jpg', 'image/png', 'image/gif', 'application/zip', 'application/pdf'];
+
 function getRandomNumber(min: number = 0, max: number = 10): number {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
@@ -12,35 +14,15 @@ function getRandomNumber(min: number = 0, max: number = 10): number {
 export class FileApiService {
   getFilesForChannel(channelId: string): Observable<FileHeader[]> {
     console.log('Calling fake API FileApiService.getFilesForChannel', channelId);
-    return of([
-      {
-        id: '1',
+
+    return of(
+      Array.from({ length: 51 }, (_, i) => i + 1).map((i) => ({
+        id: i.toString(),
         channelId,
-        fileName: 'File 1',
+        fileName: `File ${i}`,
         fileSize: getRandomNumber(512, 10_000) * 1024,
-        mimeType: 'application/mpeg',
-      },
-      {
-        id: '2',
-        channelId,
-        fileName: 'File 2',
-        fileSize: getRandomNumber(512, 10_000) * 1024,
-        mimeType: 'application/pdf',
-      },
-      {
-        id: '3',
-        channelId,
-        fileName: 'File 3',
-        fileSize: getRandomNumber(512, 10_000) * 1024,
-        mimeType: 'image/jpeg',
-      },
-      {
-        id: '4',
-        channelId,
-        fileName: 'File 4',
-        fileSize: getRandomNumber(512, 10_000) * 1024,
-        mimeType: 'text/plain',
-      },
-    ]);
+        mimeType: MIME_TYPES[getRandomNumber(0, MIME_TYPES.length - 1)],
+      })),
+    );
   }
 }

@@ -1,12 +1,13 @@
 <div class="mat-elevation-z8">
   <fac-channel-selector></fac-channel-selector>
+  <mat-paginator [pageSize]="10" hidePageSize="true" showFirstLastButtons></mat-paginator>
 
   <table mat-table [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="mimeType">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let file">
-        <mat-icon>
-          <ng-icon name="bootstrapFileEarmark"></ng-icon>
+        <mat-icon [matTooltip]="file.mimeType">
+          <ng-icon [name]="file.mimeType | fileIcon"></ng-icon>
         </mat-icon>
       </td>
     </ng-container>
@@ -42,6 +43,4 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
-
-  <mat-paginator [pageSizeOptions]="[5, 10]" showFirstLastButtons></mat-paginator>
 </div>

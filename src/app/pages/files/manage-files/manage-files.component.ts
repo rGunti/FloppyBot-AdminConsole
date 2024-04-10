@@ -8,12 +8,21 @@ import { FileHeader } from '../../../api/entities';
 import { MatIconModule } from '@angular/material/icon';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { MatButtonModule } from '@angular/material/button';
-import { bootstrapDownload, bootstrapFileEarmark, bootstrapTrash } from '@ng-icons/bootstrap-icons';
+import {
+  bootstrapDownload,
+  bootstrapFileEarmark,
+  bootstrapFileEarmarkImage,
+  bootstrapFileEarmarkMusic,
+  bootstrapFileEarmarkPdf,
+  bootstrapFileEarmarkZip,
+  bootstrapTrash,
+} from '@ng-icons/bootstrap-icons';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { Subject, of, switchMap, takeUntil } from 'rxjs';
 import { FileApiService } from '../../../api/file-api.service';
 import { FileSizePipe } from '../../../utils/files/file-size.pipe';
 import { ChannelService } from '../../../utils/channel/channel.service';
+import { FileIconPipe } from '../../../utils/files/file-icon.pipe';
 
 @Component({
   selector: 'fac-manage-files',
@@ -29,12 +38,17 @@ import { ChannelService } from '../../../utils/channel/channel.service';
     MatButtonModule,
     MatTooltipModule,
     FileSizePipe,
+    FileIconPipe,
   ],
   providers: [
     provideIcons({
       bootstrapTrash,
-      bootstrapFileEarmark,
       bootstrapDownload,
+      bootstrapFileEarmark,
+      bootstrapFileEarmarkMusic,
+      bootstrapFileEarmarkZip,
+      bootstrapFileEarmarkImage,
+      bootstrapFileEarmarkPdf,
     }),
   ],
   templateUrl: './manage-files.component.html',
