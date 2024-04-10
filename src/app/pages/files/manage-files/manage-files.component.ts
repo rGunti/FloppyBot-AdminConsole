@@ -4,13 +4,13 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { ChannelSelectorComponent } from '../../../components/channel-selector/channel-selector.component';
-import { Channel, FileHeader } from '../../../api/entities';
+import { FileHeader } from '../../../api/entities';
 import { MatIconModule } from '@angular/material/icon';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { MatButtonModule } from '@angular/material/button';
 import { bootstrapDownload, bootstrapFileEarmark, bootstrapTrash } from '@ng-icons/bootstrap-icons';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { BehaviorSubject, Subject, filter, map, of, switchMap, takeUntil } from 'rxjs';
+import { Subject, of, switchMap, takeUntil } from 'rxjs';
 import { FileApiService } from '../../../api/file-api.service';
 import { FileSizePipe } from '../../../utils/files/file-size.pipe';
 import { ChannelService } from '../../../utils/channel/channel.service';
@@ -46,13 +46,9 @@ export class ManageFilesComponent implements AfterViewInit, OnDestroy {
   private readonly channelService = inject(ChannelService);
   private readonly destroy$ = new Subject<void>();
 
-  private readonly selectedChannel = new BehaviorSubject<Channel | null>(null);
-
   readonly displayedColumns: string[] = ['mimeType', 'fileName', 'fileSize', 'actions'];
-  readonly dataSource$ = this.selectedChannel.pipe(
+  readonly dataSource$ = this.channelService.selectedChannelId$.pipe(
     takeUntil(this.destroy$),
-    filter((channel) => !!channel),
-    map((channel) => this.channelService.getChannelId(channel!)),
     switchMap((channelId) => (channelId ? this.fileApi.getFilesForChannel(channelId) : of([]))),
   );
   readonly dataSource = new MatTableDataSource<FileHeader>([]);
@@ -63,28 +59,23 @@ export class ManageFilesComponent implements AfterViewInit, OnDestroy {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
     this.dataSource$.subscribe((files) => {
       this.dataSource.data = files;
     });
   }
 
-  onChannelSelected(selectedChannel: Channel | null | undefined) {
-    console.log('Selected channel:', selectedChannel);
-    this.selectedChannel.next(selectedChannel ?? null);
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
-  getDownloadTooltip(file: unknown) {
+  getDownloadTooltip(file: FileHeader): string {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return `Download file "${(file as any).name}"`;
+    return `Download file "${file.fileName}"`;
   }
 
-  getDeleteTooltip(file: unknown) {
+  getDeleteTooltip(file: FileHeader): string {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return `Delete file "${(file as any).name}"`;
+    return `Delete file "${file.fileName}"`;
   }
 }

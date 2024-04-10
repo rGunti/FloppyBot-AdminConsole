@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, OnDestroy, Output, inject } from '@angular/core';
+import { Component, OnDestroy, inject } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -10,10 +10,10 @@ import { bootstrapDiscord, bootstrapFolder2Open, bootstrapQuestion, bootstrapTwi
 import { ChannelService } from '../../utils/channel/channel.service';
 import { ChannelNamePipe } from '../../utils/channel/channel-name.pipe';
 import { ChannelIconPipe } from '../../utils/channel/channel-icon.pipe';
-import { Subject, filter, first, map, switchMap, takeUntil } from 'rxjs';
+import { Subject, distinctUntilChanged, takeUntil } from 'rxjs';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { Channel } from '../../api/entities';
 import { UserApiService } from '../../api/user-api.service';
+import { ChannelIdPipe } from '../../utils/channel/channel-id.pipe';
 
 @Component({
   selector: 'fac-channel-selector',
@@ -38,50 +38,35 @@ import { UserApiService } from '../../api/user-api.service';
     NgIconComponent,
     ChannelNamePipe,
     ChannelIconPipe,
+    ChannelIdPipe,
   ],
 })
 export class ChannelSelectorComponent implements OnDestroy {
-  private readonly destroyed$ = new Subject();
+  private readonly destroyed$ = new Subject<void>();
 
   private readonly router = inject(Router);
   private readonly channelService = inject(ChannelService);
   private readonly userApi = inject(UserApiService);
 
   readonly channels$ = this.userApi.getAccessibleChannels();
-  readonly form = new FormControl<Channel | null>(null);
-
-  @Output() channelSelected = new EventEmitter<Channel | null | undefined>();
+  readonly form = new FormControl<string | null>(null);
 
   constructor() {
-    this.router.routerState.root.queryParams
-      .pipe(
-        first(),
-        takeUntil(this.destroyed$),
-        filter((params) => params['channel'] !== undefined),
-        map((params) => params['channel']!),
-        switchMap((channelId) =>
-          this.channels$.pipe(
-            map((channels) => channels.find((channel) => this.channelService.getChannelId(channel) === channelId)),
-          ),
-        ),
-      )
+    this.channelService.selectedChannelId$
+      .pipe(takeUntil(this.destroyed$), distinctUntilChanged())
       .subscribe((channel) => {
+        console.log('ChannelSelectorComponent selectedChannelId$', channel);
         this.form.setValue(channel!);
       });
 
-    this.form.valueChanges
-      .pipe(
-        takeUntil(this.destroyed$),
-        filter((channel) => !!channel),
-      )
-      .subscribe((channel) => {
-        this.channelSelected.emit(channel);
-        this.router.navigate([], { queryParams: { channel: this.channelService.getChannelId(channel!) } });
-      });
+    this.form.valueChanges.pipe(takeUntil(this.destroyed$), distinctUntilChanged()).subscribe((channel) => {
+      console.log('ChannelSelectorComponent form.valueChanges', channel);
+      this.router.navigate([], { queryParams: { channel } });
+    });
   }
 
   ngOnDestroy(): void {
-    this.destroyed$.next(true);
+    this.destroyed$.next();
     this.destroyed$.complete();
   }
 }

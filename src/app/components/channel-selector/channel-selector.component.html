@@ -6,7 +6,7 @@
 
   <mat-select [formControl]="form" placeholder="Select a channel">
     @for (channel of channels$ | async; track $index) {
-      <mat-option [value]="channel">
+      <mat-option [value]="channel | channelId">
         <mat-icon>
           <ng-icon [name]="(channel | channelIcon)!"></ng-icon>
         </mat-icon>

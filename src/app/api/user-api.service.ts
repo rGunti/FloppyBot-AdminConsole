@@ -7,10 +7,11 @@ import { Channel } from './entities';
 })
 export class UserApiService {
   getAccessibleChannels(): Observable<Channel[]> {
+    console.log('Calling fake API UserApiService.getAccessibleChannels');
     return of([
-      { type: 'Twitch', id: 'Channel1' },
-      { type: 'Discord', id: '72136387162378123' },
-      { type: 'Unknown', id: '123', alias: 'Does not exist' },
+      { interface: 'Twitch', channel: 'Channel1' },
+      { interface: 'Discord', channel: '72136387162378123' },
+      { interface: 'Unknown', channel: '123', alias: 'Does not exist' },
     ]);
   }
 }

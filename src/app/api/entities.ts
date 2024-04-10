@@ -1,6 +1,6 @@
 export interface Channel {
-  type: string;
-  id: string;
+  interface: string;
+  channel: string;
   alias?: string;
 }
 
