@@ -1,3 +1,16 @@
 :host {
   display: block;
+  padding: 30px;
+}
+
+.page-not-found {
+  text-align: center;
+
+  mat-icon {
+    $size: 100px;
+
+    font-size: $size;
+    width: $size;
+    height: $size;
+  }
 }
