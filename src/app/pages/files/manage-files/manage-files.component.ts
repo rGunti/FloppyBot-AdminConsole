@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, OnDestroy, ViewChild, inject } from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { MatSort, MatSortModule } from '@angular/material/sort';
 import { ChannelSelectorComponent } from '../../../components/channel-selector/channel-selector.component';
 import { FileHeader } from '../../../api/entities';
 import { MatIconModule } from '@angular/material/icon';
@@ -31,7 +30,6 @@ import { FileIconPipe } from '../../../utils/files/file-icon.pipe';
     CommonModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule,
     ChannelSelectorComponent,
     MatIconModule,
     NgIconComponent,
@@ -61,18 +59,17 @@ export class ManageFilesComponent implements AfterViewInit, OnDestroy {
   private readonly destroy$ = new Subject<void>();
 
   readonly displayedColumns: string[] = ['mimeType', 'fileName', 'fileSize', 'actions'];
+  readonly dataSource = new MatTableDataSource<FileHeader>([]);
+
   readonly dataSource$ = this.channelService.selectedChannelId$.pipe(
     takeUntil(this.destroy$),
     switchMap((channelId) => (channelId ? this.fileApi.getFilesForChannel(channelId) : of([]))),
   );
-  readonly dataSource = new MatTableDataSource<FileHeader>([]);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
     this.dataSource$.subscribe((files) => {
       this.dataSource.data = files;
     });
