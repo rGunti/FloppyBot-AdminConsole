@@ -22,13 +22,23 @@
         </mat-icon>
         Commands
       </button>
-      <button mat-menu-item [matMenuTriggerFor]="mQuotes">
+      <button
+        mat-menu-item
+        routerLink="/quotes/manage"
+        routerLinkActive="mat-mdc-menu-item-highlighted"
+        queryParamsHandling="merge"
+      >
         <mat-icon>
           <ng-icon name="bootstrapQuote"></ng-icon>
         </mat-icon>
         Quotes
       </button>
-      <button mat-menu-item routerLink="/files/manage" routerLinkActive="mat-mdc-menu-item-highlighted">
+      <button
+        mat-menu-item
+        routerLink="/files/manage"
+        routerLinkActive="mat-mdc-menu-item-highlighted"
+        queryParamsHandling="merge"
+      >
         <mat-icon>
           <ng-icon name="bootstrapFolder2Open"></ng-icon>
         </mat-icon>
@@ -58,19 +68,22 @@
     </mat-menu>
 
     <mat-menu #mCommands="matMenu">
-      <button mat-menu-item routerLink="/commands/built-in" routerLinkActive="mat-mdc-menu-item-highlighted">
+      <button
+        mat-menu-item
+        routerLink="/commands/built-in"
+        routerLinkActive="mat-mdc-menu-item-highlighted"
+        queryParamsHandling="merge"
+      >
         Built-in Commands
       </button>
-      <button mat-menu-item routerLink="/commands/custom" routerLinkActive="mat-mdc-menu-item-highlighted">
+      <button
+        mat-menu-item
+        routerLink="/commands/custom"
+        routerLinkActive="mat-mdc-menu-item-highlighted"
+        queryParamsHandling="merge"
+      >
         Custom Commands
       </button>
-    </mat-menu>
-
-    <mat-menu #mQuotes="matMenu">
-      <button mat-menu-item routerLink="/quotes/manage" routerLinkActive="mat-mdc-menu-item-highlighted">
-        Manage Quotes
-      </button>
-      <button mat-menu-item routerLink="/quotes/export" routerLinkActive="mat-mdc-menu-item-highlighted">Export</button>
     </mat-menu>
 
     <span>{{ title$ | async }}</span>
