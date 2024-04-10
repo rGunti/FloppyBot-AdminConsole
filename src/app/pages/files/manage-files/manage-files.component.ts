@@ -17,6 +17,7 @@ import {
   bootstrapTrash,
 } from '@ng-icons/bootstrap-icons';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSort, MatSortModule } from '@angular/material/sort';
 import { Subject, of, switchMap, takeUntil } from 'rxjs';
 import { FileApiService } from '../../../api/file-api.service';
 import { FileSizePipe } from '../../../utils/files/file-size.pipe';
@@ -30,6 +31,7 @@ import { FileIconPipe } from '../../../utils/files/file-icon.pipe';
     CommonModule,
     MatTableModule,
     MatPaginatorModule,
+    MatSortModule,
     ChannelSelectorComponent,
     MatIconModule,
     NgIconComponent,
@@ -67,9 +69,11 @@ export class ManageFilesComponent implements AfterViewInit, OnDestroy {
   );
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
     this.dataSource$.subscribe((files) => {
       this.dataSource.data = files;
     });

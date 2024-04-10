@@ -1,12 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { FileHeader } from './entities';
+import { getRandomNumber } from '../utils/rng';
 
 const MIME_TYPES = ['audio/mpeg', 'image/jpg', 'image/png', 'image/gif', 'application/zip', 'application/pdf'];
-
-function getRandomNumber(min: number = 0, max: number = 10): number {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
 
 @Injectable({
   providedIn: 'root',
