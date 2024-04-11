@@ -58,6 +58,8 @@ export class CommandListComponent implements AfterViewInit {
     this.dataSource.data = commands || [];
   }
 
+  @Input() allowDelete = false;
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -76,5 +78,9 @@ export class CommandListComponent implements AfterViewInit {
 
   getDisableTooltip(command: CommandInfo): string {
     return `Disable ${command.name}`;
+  }
+
+  getDeleteTooltip(command: CommandInfo): string {
+    return `Delete ${command.name}`;
   }
 }

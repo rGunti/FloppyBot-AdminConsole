@@ -48,11 +48,19 @@
           <ng-icon name="bootstrapPencil"></ng-icon>
         </mat-icon>
       </button>
-      <button mat-icon-button [matTooltip]="getDisableTooltip(command)">
-        <mat-icon>
-          <ng-icon name="bootstrapBan"></ng-icon>
-        </mat-icon>
-      </button>
+      @if (allowDelete) {
+        <button mat-icon-button [matTooltip]="getDeleteTooltip(command)">
+          <mat-icon>
+            <ng-icon name="bootstrapTrash"></ng-icon>
+          </mat-icon>
+        </button>
+      } @else {
+        <button mat-icon-button [matTooltip]="getDisableTooltip(command)">
+          <mat-icon>
+            <ng-icon name="bootstrapBan"></ng-icon>
+          </mat-icon>
+        </button>
+      }
     </td>
   </ng-container>
 
