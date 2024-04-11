@@ -575,6 +575,6 @@ export class CommandApiService {
 
   getCustomCommandsForChannel(channelId: string): Observable<CommandInfo[]> {
     console.log('Calling fake API CommandApiService.getCustomCommandsForChannel', channelId);
-    return of([]);
+    return of(COMMANDS);
   }
 }
