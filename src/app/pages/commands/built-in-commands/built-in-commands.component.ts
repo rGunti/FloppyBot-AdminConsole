@@ -9,6 +9,7 @@ import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {
+  bootstrapBan,
   bootstrapCheckCircle,
   bootstrapDiscord,
   bootstrapPencil,
@@ -55,6 +56,7 @@ import { ListPipe } from '../../../utils/list.pipe';
       bootstrapShieldFill,
       bootstrapCheckCircle,
       bootstrapXCircle,
+      bootstrapBan,
     }),
   ],
   templateUrl: './built-in-commands.component.html',
