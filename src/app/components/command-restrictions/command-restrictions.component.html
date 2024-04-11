@@ -1,0 +1,16 @@
+@if (hasPrivilegeRestrictions) {
+  <mat-icon [matTooltip]="privilegeRestrictionTooltip">
+    <ng-icon [name]="privilegeIcon"></ng-icon>
+  </mat-icon>
+}
+
+@if (isRestrictedToDiscord) {
+  <mat-icon matTooltip="Restricted to Discord">
+    <ng-icon name="bootstrapDiscord"></ng-icon>
+  </mat-icon>
+}
+@if (isRestrictedToTwitch) {
+  <mat-icon matTooltip="Restricted to Twitch">
+    <ng-icon name="bootstrapTwitch"></ng-icon>
+  </mat-icon>
+}

@@ -1,3 +1,22 @@
 :host {
   display: block;
 }
+
+.command-aliases {
+  font-style: italic;
+  font-size: small;
+  margin-left: 10px;
+}
+
+.mat-column-enabled {
+  width: 55px;
+  text-align: center;
+}
+.mat-column-restrictions {
+  width: 150px;
+  text-align: center;
+}
+.mat-column-actions {
+  width: 200px;
+  text-align: right;
+}

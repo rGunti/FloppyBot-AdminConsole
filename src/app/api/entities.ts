@@ -21,3 +21,30 @@ export interface Quote {
   createdAt: Date;
   createdBy: string;
 }
+
+export interface CommandInfo {
+  name: string;
+  description: string;
+  aliases: string[];
+  restrictedToInterfaces: string[];
+  requiredPrivilegeLevel: PrivilegeLevel;
+  customCommand: boolean;
+  cooldown: CooldownInfo;
+  syntax: CommandSyntax[];
+  obsolete: boolean;
+}
+
+export declare type PrivilegeLevel = 'Unknown' | 'Viewer' | 'Moderator' | 'Administrator' | 'SuperUser';
+
+export interface CommandSyntax {
+  syntax: string;
+  purpose: string;
+  examples: string[];
+}
+
+export interface CooldownInfo {
+  cooldownMode: string;
+  defaultCooldown?: number;
+  modCooldown?: number;
+  adminCooldown?: number;
+}
