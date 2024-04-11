@@ -6,6 +6,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { provideNgIconsConfig, withContentSecurityPolicy } from '@ng-icons/core';
 import { FloppyBotTitleStrategy } from './utils/title-strategy';
 import { provideServiceWorker } from '@angular/service-worker';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { provideLoadingIndicatorInterceptor } from './interceptors/loading-indicator.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -20,5 +22,6 @@ export const appConfig: ApplicationConfig = {
       enabled: !isDevMode(),
       registrationStrategy: 'registerWhenStable:30000',
     }),
+    provideHttpClient(withInterceptors([provideLoadingIndicatorInterceptor])),
   ],
 };
