@@ -18,9 +18,11 @@ import {
   bootstrapUnlock,
   bootstrapPersonCircle,
   bootstrapHouse,
+  bootstrapDoorOpen,
 } from '@ng-icons/bootstrap-icons';
 import { LogoutDialogComponent } from '../../dialogs/logout-dialog/logout-dialog.component';
 import { filter, map } from 'rxjs';
+import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'fac-navigation',
@@ -43,6 +45,7 @@ import { filter, map } from 'rxjs';
       bootstrapCommand,
       bootstrapQuote,
       bootstrapFolder2Open,
+      bootstrapDoorOpen,
       bootstrapLock,
       bootstrapUnlock,
       bootstrapPersonCircle,
@@ -57,6 +60,9 @@ export class NavigationComponent {
   private readonly dialog = inject(MatDialog);
   private readonly titleService = inject(TitleStrategy);
   private readonly router = inject(Router);
+  private readonly auth = inject(AuthService);
+
+  readonly isAuthenticated$ = this.auth.isAuthenticated$;
 
   title$ = this.router.events.pipe(
     filter((event) => event instanceof NavigationEnd),
@@ -64,7 +70,20 @@ export class NavigationComponent {
     map((snapshot) => this.titleService.buildTitle(snapshot)),
   );
 
+  login(): void {
+    this.auth.loginWithPopup({
+      authorizationParams: { prompt: 'login' },
+    });
+  }
+
   logout(): void {
-    this.dialog.open(LogoutDialogComponent);
+    this.dialog
+      .open(LogoutDialogComponent)
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) {
+          this.auth.logout({ logoutParams: { returnTo: window.location.origin } });
+        }
+      });
   }
 }

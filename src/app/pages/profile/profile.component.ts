@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -19,6 +19,8 @@ import {
   bootstrapMailboxFlag,
   bootstrapClock,
 } from '@ng-icons/bootstrap-icons';
+import { AuthService } from '@auth0/auth0-angular';
+import { map, startWith, switchMap } from 'rxjs';
 
 @Component({
   selector: 'fac-profile',
@@ -51,7 +53,9 @@ import {
   styleUrl: './profile.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit {
+  private readonly auth = inject(AuthService);
+
   private readonly formBuilder = inject(FormBuilder);
   readonly form = this.formBuilder.group({
     username: [''],
@@ -59,4 +63,23 @@ export class ProfileComponent {
     email: [''],
     updated: [new Date()],
   });
+
+  readonly userForm$ = this.auth.user$.pipe(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    map((user: any) => {
+      console.log('Got user', user);
+      return {
+        username: user.nickname,
+        userId: user.sub,
+        email: user.email,
+        updated: user.updated_at,
+      };
+    }),
+  );
+
+  ngOnInit(): void {
+    this.userForm$.subscribe((user) => {
+      this.form.patchValue(user);
+    });
+  }
 }

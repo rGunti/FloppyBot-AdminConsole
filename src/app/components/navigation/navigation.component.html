@@ -53,18 +53,21 @@
         </mat-icon>
         Profile
       </button>
-      <button mat-menu-item>
-        <mat-icon>
-          <ng-icon name="bootstrapUnlock"></ng-icon>
-        </mat-icon>
-        Login
-      </button>
-      <button mat-menu-item (click)="logout()">
-        <mat-icon>
-          <ng-icon name="bootstrapLock"></ng-icon>
-        </mat-icon>
-        Logout
-      </button>
+      @if (isAuthenticated$ | async) {
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>
+            <ng-icon name="bootstrapDoorOpen"></ng-icon>
+          </mat-icon>
+          Logout
+        </button>
+      } @else {
+        <button mat-menu-item (click)="login()">
+          <mat-icon>
+            <ng-icon name="bootstrapUnlock"></ng-icon>
+          </mat-icon>
+          Login
+        </button>
+      }
     </mat-menu>
 
     <mat-menu #mCommands="matMenu">
