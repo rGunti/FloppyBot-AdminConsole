@@ -1,7 +1,7 @@
 import { HttpInterceptorFn, HttpRequest, HttpResponse } from '@angular/common/http';
 import { delay, of } from 'rxjs';
 
-import { UserReport } from '../api/entities';
+import { FileHeader, UserReport } from '../api/entities';
 
 export const FAKE_DATA_HOST = 'http://api.fake';
 
@@ -32,6 +32,30 @@ const FAKE_REPLIES: FakeMethodRouter = {
         'edit:files',
       ],
     } as UserReport,
+    '/api/v2/files/Twitch/floppypandach': [
+      {
+        id: 'Twitch/floppypandach/harmony.mp3',
+        channelId: 'Twitch/floppypandach',
+        fileName: 'harmony.mp3',
+        fileSize: 86_516,
+        mimeType: 'audio/mpeg',
+      },
+      {
+        id: 'Twitch/floppypandach/bonk.mp3',
+        channelId: 'Twitch/floppypandach',
+        fileName: 'bonk.mp3',
+        fileSize: 67_701,
+        mimeType: 'audio/mpeg',
+      },
+      {
+        id: 'Twitch/floppypandach/wow thats a lotta words too bad im not readin em.mp3',
+        channelId: 'Twitch/floppypandach',
+        fileName: 'wow thats a lotta words too bad im not readin em.mp3',
+        fileSize: 254_810,
+        mimeType: 'audio/mpeg',
+      },
+    ] as FileHeader[],
+    '/api/v2/files/Discord/123456789': [] as FileHeader[],
   },
   post: {},
   put: {},
