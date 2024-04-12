@@ -5,6 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {
   bootstrapDownload,
@@ -14,6 +15,7 @@ import {
   bootstrapFileEarmarkPdf,
   bootstrapFileEarmarkZip,
   bootstrapTrash,
+  bootstrapUpload,
 } from '@ng-icons/bootstrap-icons';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { of, Subject, switchMap, takeUntil } from 'rxjs';
@@ -42,11 +44,13 @@ import { FileSizePipe } from '../../../utils/files/file-size.pipe';
     FileSizePipe,
     FileIconPipe,
     FileStorageQuotaComponent,
+    MatToolbarModule,
   ],
   providers: [
     provideIcons({
       bootstrapTrash,
       bootstrapDownload,
+      bootstrapUpload,
       bootstrapFileEarmark,
       bootstrapFileEarmarkMusic,
       bootstrapFileEarmarkZip,
@@ -62,6 +66,8 @@ export class ManageFilesComponent implements AfterViewInit, OnDestroy {
   private readonly fileApi = inject(FileApiService);
   private readonly channelService = inject(ChannelService);
   private readonly destroy$ = new Subject<void>();
+
+  readonly selectedChannelId$ = this.channelService.selectedChannelId$;
 
   readonly displayedColumns: string[] = ['mimeType', 'fileName', 'fileSize', 'actions'];
   readonly dataSource = new MatTableDataSource<FileHeader>([]);

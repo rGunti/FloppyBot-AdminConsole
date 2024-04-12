@@ -10,6 +10,7 @@ import { environment } from '../environments/environment';
 
 import { fakeDataInterceptor } from './interceptors/fake-data.interceptor';
 import { loadingIndicatorInterceptor } from './interceptors/loading-indicator.interceptor';
+import { ChannelService } from './utils/channel/channel.service';
 import { FloppyBotTitleStrategy } from './utils/title-strategy';
 import { routes } from './app.routes';
 
@@ -32,5 +33,7 @@ export const appConfig: ApplicationConfig = {
         ...environment.auth,
       }),
     ),
+    // ChannelService should persist throughout the application to prevent deselection bugs
+    ChannelService,
   ],
 };
