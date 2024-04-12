@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
-import { ChannelIconPipe } from './channel-icon.pipe';
+
 import { ChannelService } from './channel.service';
+import { ChannelIconPipe } from './channel-icon.pipe';
 
 describe('ChannelIconPipe', () => {
   let pipe: ChannelIconPipe;

@@ -1,25 +1,25 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatTabsModule } from '@angular/material/tabs';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import {
-  bootstrapPersonCircle,
-  bootstrapShieldCheck,
-  bootstrapKey,
-  bootstrapBox,
-  bootstrapPersonFill,
-  bootstrapHash,
-  bootstrapMailboxFlag,
-  bootstrapClock,
-} from '@ng-icons/bootstrap-icons';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatTabsModule } from '@angular/material/tabs';
 import { AuthService } from '@auth0/auth0-angular';
+import {
+  bootstrapBox,
+  bootstrapClock,
+  bootstrapHash,
+  bootstrapKey,
+  bootstrapMailboxFlag,
+  bootstrapPersonCircle,
+  bootstrapPersonFill,
+  bootstrapShieldCheck,
+} from '@ng-icons/bootstrap-icons';
+import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { map, shareReplay } from 'rxjs';
 
 @Component({

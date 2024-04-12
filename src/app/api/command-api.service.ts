@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+
 import { CommandInfo } from './entities';
 
 const COMMANDS: CommandInfo[] = [

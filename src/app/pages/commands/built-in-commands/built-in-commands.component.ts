@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { ChannelSelectorComponent } from '../../../components/channel-selector/channel-selector.component';
 import { of, switchMap } from 'rxjs';
-import { ChannelService } from '../../../utils/channel/channel.service';
+
 import { CommandApiService } from '../../../api/command-api.service';
+import { ChannelSelectorComponent } from '../../../components/channel-selector/channel-selector.component';
 import { CommandListComponent } from '../../../components/command-list/command-list.component';
+import { ChannelService } from '../../../utils/channel/channel.service';
 
 @Component({
   selector: 'fac-built-in-commands',

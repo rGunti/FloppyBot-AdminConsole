@@ -1,7 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CommandRestrictionsComponent } from './command-restrictions.component';
 import { CommandInfo } from '../../api/entities';
+
+import { CommandRestrictionsComponent } from './command-restrictions.component';
 
 describe('CommandRestrictionsComponent', () => {
   let component: CommandRestrictionsComponent;

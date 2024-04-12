@@ -8,10 +8,9 @@ describe('GlobalLoadingIndicatorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GlobalLoadingIndicatorComponent]
-    })
-    .compileComponents();
-    
+      imports: [GlobalLoadingIndicatorComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(GlobalLoadingIndicatorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

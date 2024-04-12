@@ -1,15 +1,11 @@
-import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
-import { CommandInfo } from '../../api/entities';
 import { CommonModule } from '@angular/common';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
-import { MatIconModule } from '@angular/material/icon';
-import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import { MatButtonModule } from '@angular/material/button';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { CommandRestrictionsComponent } from '../command-restrictions/command-restrictions.component';
-import { ListPipe } from '../../utils/list.pipe';
 import {
   bootstrapBan,
   bootstrapCheckCircle,
@@ -18,6 +14,11 @@ import {
   bootstrapTrash,
   bootstrapXCircle,
 } from '@ng-icons/bootstrap-icons';
+import { NgIconComponent, provideIcons } from '@ng-icons/core';
+
+import { CommandInfo } from '../../api/entities';
+import { ListPipe } from '../../utils/list.pipe';
+import { CommandRestrictionsComponent } from '../command-restrictions/command-restrictions.component';
 
 @Component({
   selector: 'fac-command-list',

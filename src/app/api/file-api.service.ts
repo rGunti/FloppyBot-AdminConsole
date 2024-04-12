@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { FileHeader } from './entities';
+
 import { getRandomNumber } from '../utils/rng';
+
+import { FileHeader } from './entities';
 
 const MIME_TYPES = ['audio/mpeg', 'image/jpg', 'image/png', 'image/gif', 'application/zip', 'application/pdf'];
 

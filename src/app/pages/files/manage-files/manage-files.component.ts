@@ -1,12 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, OnDestroy, ViewChild, inject } from '@angular/core';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { ChannelSelectorComponent } from '../../../components/channel-selector/channel-selector.component';
-import { FileHeader } from '../../../api/entities';
-import { MatIconModule } from '@angular/material/icon';
-import { NgIconComponent, provideIcons } from '@ng-icons/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, inject, OnDestroy, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import {
   bootstrapDownload,
   bootstrapFileEarmark,
@@ -16,13 +15,15 @@ import {
   bootstrapFileEarmarkZip,
   bootstrapTrash,
 } from '@ng-icons/bootstrap-icons';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatSort, MatSortModule } from '@angular/material/sort';
-import { Subject, of, switchMap, takeUntil } from 'rxjs';
+import { NgIconComponent, provideIcons } from '@ng-icons/core';
+import { of, Subject, switchMap, takeUntil } from 'rxjs';
+
+import { FileHeader } from '../../../api/entities';
 import { FileApiService } from '../../../api/file-api.service';
-import { FileSizePipe } from '../../../utils/files/file-size.pipe';
+import { ChannelSelectorComponent } from '../../../components/channel-selector/channel-selector.component';
 import { ChannelService } from '../../../utils/channel/channel.service';
 import { FileIconPipe } from '../../../utils/files/file-icon.pipe';
+import { FileSizePipe } from '../../../utils/files/file-size.pipe';
 
 @Component({
   selector: 'fac-manage-files',

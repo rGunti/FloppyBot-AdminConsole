@@ -1,18 +1,19 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, OnDestroy, ViewChild, inject } from '@angular/core';
-import { ChannelSelectorComponent } from '../../../components/channel-selector/channel-selector.component';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import { bootstrapPencil, bootstrapTrash } from '@ng-icons/bootstrap-icons';
-import { MatIconModule } from '@angular/material/icon';
-import { Subject, of, switchMap, takeUntil } from 'rxjs';
-import { ChannelService } from '../../../utils/channel/channel.service';
-import { QuoteApiService } from '../../../api/quote-api.service';
-import { Quote } from '../../../api/entities';
+import { AfterViewInit, ChangeDetectionStrategy, Component, inject, OnDestroy, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatIconModule } from '@angular/material/icon';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { bootstrapPencil, bootstrapTrash } from '@ng-icons/bootstrap-icons';
+import { NgIconComponent, provideIcons } from '@ng-icons/core';
+import { of, Subject, switchMap, takeUntil } from 'rxjs';
+
+import { Quote } from '../../../api/entities';
+import { QuoteApiService } from '../../../api/quote-api.service';
+import { ChannelSelectorComponent } from '../../../components/channel-selector/channel-selector.component';
+import { ChannelService } from '../../../utils/channel/channel.service';
 
 @Component({
   selector: 'fac-manage-quotes',

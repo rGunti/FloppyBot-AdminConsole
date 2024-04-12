@@ -1,8 +1,9 @@
-import { Component, inject } from '@angular/core';
-import { LoadingIndicatorService } from '../../utils/loading-indicator.service';
 import { CommonModule } from '@angular/common';
+import { Component, inject } from '@angular/core';
 import { MatProgressBar, ProgressBarMode } from '@angular/material/progress-bar';
-import { Observable, map } from 'rxjs';
+import { map, Observable } from 'rxjs';
+
+import { LoadingIndicatorService } from '../../utils/loading-indicator.service';
 
 @Component({
   selector: 'fac-global-loading-indicator',

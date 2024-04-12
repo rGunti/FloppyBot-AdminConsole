@@ -1,7 +1,8 @@
-import { Injectable, OnDestroy, inject } from '@angular/core';
-import { Channel } from '../../api/entities';
-import { Observable, Subject, distinctUntilChanged, map, startWith, takeUntil } from 'rxjs';
+import { inject, Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { distinctUntilChanged, map, Observable, startWith, Subject, takeUntil } from 'rxjs';
+
+import { Channel } from '../../api/entities';
 
 @Injectable({
   providedIn: 'root',

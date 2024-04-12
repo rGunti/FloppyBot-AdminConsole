@@ -1,19 +1,20 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, inject } from '@angular/core';
+import { Component, inject, OnDestroy } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { Router } from '@angular/router';
-import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { bootstrapDiscord, bootstrapFolder2Open, bootstrapQuestion, bootstrapTwitch } from '@ng-icons/bootstrap-icons';
-import { ChannelService } from '../../utils/channel/channel.service';
-import { ChannelNamePipe } from '../../utils/channel/channel-name.pipe';
-import { ChannelIconPipe } from '../../utils/channel/channel-icon.pipe';
-import { Subject, distinctUntilChanged, takeUntil } from 'rxjs';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { NgIconComponent, provideIcons } from '@ng-icons/core';
+import { distinctUntilChanged, Subject, takeUntil } from 'rxjs';
+
 import { UserApiService } from '../../api/user-api.service';
+import { ChannelService } from '../../utils/channel/channel.service';
+import { ChannelIconPipe } from '../../utils/channel/channel-icon.pipe';
 import { ChannelIdPipe } from '../../utils/channel/channel-id.pipe';
+import { ChannelNamePipe } from '../../utils/channel/channel-name.pipe';
 
 @Component({
   selector: 'fac-channel-selector',

@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Quote } from './entities';
+
 import { getRandomNumber } from '../utils/rng';
+
+import { Quote } from './entities';
 
 const NAMES = ['John Doe', 'Jane Doe', 'Alice', 'Bob', 'Charlie', 'David', 'Eve', 'Frank', 'Grace', 'Heidi'];
 const GAMES = ['Chess', 'Checkers', 'Go', 'Poker', 'Bridge', 'Monopoly', 'Risk', 'Catan', 'Scrabble', 'Clue'];

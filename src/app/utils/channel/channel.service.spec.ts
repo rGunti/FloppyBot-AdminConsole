@@ -1,8 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 
-import { ChannelService } from './channel.service';
 import { Channel } from '../../api/entities';
+
+import { ChannelService } from './channel.service';
 
 describe('ChannelService', () => {
   let service: ChannelService;

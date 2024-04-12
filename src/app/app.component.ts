@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
-import { NavigationComponent } from './components/navigation/navigation.component';
 import { GlobalLoadingIndicatorComponent } from './components/global-loading-indicator/global-loading-indicator.component';
+import { NavigationComponent } from './components/navigation/navigation.component';
 
 @Component({
   selector: 'fac-root',

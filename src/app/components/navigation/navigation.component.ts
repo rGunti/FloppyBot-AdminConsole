@@ -1,28 +1,29 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { NavigationEnd, Router, RouterModule, TitleStrategy } from '@angular/router';
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatDividerModule } from '@angular/material/divider';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import {
-  bootstrapFloppy2,
-  bootstrapCommand,
-  bootstrapQuote,
-  bootstrapFolder2Open,
-  bootstrapLock,
-  bootstrapUnlock,
-  bootstrapPersonCircle,
-  bootstrapHouse,
-  bootstrapDoorOpen,
-} from '@ng-icons/bootstrap-icons';
-import { LogoutDialogComponent } from '../../dialogs/logout-dialog/logout-dialog.component';
-import { filter, map } from 'rxjs';
+import { NavigationEnd, Router, RouterModule, TitleStrategy } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
+import {
+  bootstrapCommand,
+  bootstrapDoorOpen,
+  bootstrapFloppy2,
+  bootstrapFolder2Open,
+  bootstrapHouse,
+  bootstrapLock,
+  bootstrapPersonCircle,
+  bootstrapQuote,
+  bootstrapUnlock,
+} from '@ng-icons/bootstrap-icons';
+import { NgIconComponent, provideIcons } from '@ng-icons/core';
+import { filter, map } from 'rxjs';
+
+import { LogoutDialogComponent } from '../../dialogs/logout-dialog/logout-dialog.component';
 
 @Component({
   selector: 'fac-navigation',

@@ -11,6 +11,7 @@
         "plugin:@angular-eslint/template/process-inline-templates",
         "plugin:prettier/recommended"
       ],
+      "plugins": ["simple-import-sort"],
       "rules": {
         "@angular-eslint/directive-selector": [
           "error",
@@ -27,7 +28,25 @@
             "prefix": "fac",
             "style": "kebab-case"
           }
-        ]
+        ],
+        "simple-import-sort/imports": [
+          "error",
+          {
+            "groups": [
+              // Packages `angular` related packages come first.
+              ["^@angular", "^@?\\w"],
+              // Internal packages.
+              ["^(@|components)(/.*|$)"],
+              // Side effect imports.
+              ["^\\u0000"],
+              // Parent imports. Put `..` last.
+              ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
+              // Other relative imports. Put same-folder imports and `.` last.
+              ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"]
+            ]
+          }
+        ],
+        "simple-import-sort/exports": "error"
       }
     },
     {

@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
-import { ChannelNamePipe } from './channel-name.pipe';
+
 import { ChannelService } from './channel.service';
+import { ChannelNamePipe } from './channel-name.pipe';
 
 describe('ChannelNamePipe', () => {
   let pipe: ChannelNamePipe;

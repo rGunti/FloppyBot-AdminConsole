@@ -1,6 +1,8 @@
-import { Pipe, PipeTransform, inject } from '@angular/core';
-import { ChannelService } from './channel.service';
+import { inject, Pipe, PipeTransform } from '@angular/core';
+
 import { Channel } from '../../api/entities';
+
+import { ChannelService } from './channel.service';
 
 @Pipe({
   name: 'channelName',

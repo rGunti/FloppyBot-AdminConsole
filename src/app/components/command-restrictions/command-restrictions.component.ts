@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import {
   bootstrapDiscord,
   bootstrapPerson,
@@ -11,8 +12,8 @@ import {
   bootstrapTwitch,
 } from '@ng-icons/bootstrap-icons';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
+
 import { CommandInfo } from '../../api/entities';
-import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'fac-command-restrictions',
