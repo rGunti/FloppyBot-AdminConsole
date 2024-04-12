@@ -48,3 +48,10 @@ export interface CooldownInfo {
   modCooldown?: number;
   adminCooldown?: number;
 }
+
+export interface UserReport {
+  userId: string;
+  ownerOf: string[];
+  channelAliases: { [key: string]: string };
+  permissions: string[];
+}

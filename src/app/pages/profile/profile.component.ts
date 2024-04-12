@@ -22,6 +22,9 @@ import {
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { map, shareReplay } from 'rxjs';
 
+import { UserApiService } from '../../api/user-api.service';
+import { ChannelAliasPipe } from '../../utils/channel/channel-alias.pipe';
+
 @Component({
   selector: 'fac-profile',
   standalone: true,
@@ -36,6 +39,7 @@ import { map, shareReplay } from 'rxjs';
     MatTabsModule,
     ReactiveFormsModule,
     NgIconComponent,
+    ChannelAliasPipe,
   ],
   providers: [
     provideIcons({
@@ -55,6 +59,7 @@ import { map, shareReplay } from 'rxjs';
 })
 export class ProfileComponent implements OnInit {
   private readonly auth = inject(AuthService);
+  private readonly userApi = inject(UserApiService);
 
   private readonly formBuilder = inject(FormBuilder);
   readonly form = this.formBuilder.group({
@@ -89,6 +94,11 @@ export class ProfileComponent implements OnInit {
       };
     }),
   );
+
+  readonly userInfo$ = this.userApi.getMe().pipe(shareReplay(1));
+  readonly accessibleChannels$ = this.userInfo$.pipe(map((user) => user.ownerOf));
+  readonly channelAliases$ = this.userInfo$.pipe(map((user) => user.channelAliases));
+  readonly permissions$ = this.userInfo$.pipe(map((user) => user.permissions));
 
   ngOnInit(): void {
     this.userForm$.subscribe((user) => {

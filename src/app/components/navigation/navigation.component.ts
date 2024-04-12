@@ -10,6 +10,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { NavigationEnd, Router, RouterModule, TitleStrategy } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
 import {
+  bootstrapBugFill,
   bootstrapCommand,
   bootstrapDoorOpen,
   bootstrapFloppy2,
@@ -51,6 +52,7 @@ import { LogoutDialogComponent } from '../../dialogs/logout-dialog/logout-dialog
       bootstrapUnlock,
       bootstrapPersonCircle,
       bootstrapHouse,
+      bootstrapBugFill,
     }),
   ],
   templateUrl: './navigation.component.html',

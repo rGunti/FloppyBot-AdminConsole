@@ -10,7 +10,6 @@ import { bootstrapDiscord, bootstrapFolder2Open, bootstrapQuestion, bootstrapTwi
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { distinctUntilChanged, Subject, takeUntil } from 'rxjs';
 
-import { UserApiService } from '../../api/user-api.service';
 import { ChannelService } from '../../utils/channel/channel.service';
 import { ChannelIconPipe } from '../../utils/channel/channel-icon.pipe';
 import { ChannelIdPipe } from '../../utils/channel/channel-id.pipe';
@@ -47,9 +46,8 @@ export class ChannelSelectorComponent implements OnDestroy {
 
   private readonly router = inject(Router);
   private readonly channelService = inject(ChannelService);
-  private readonly userApi = inject(UserApiService);
 
-  readonly channels$ = this.userApi.getAccessibleChannels();
+  readonly channels$ = this.channelService.getAccessibleChannels();
   readonly form = new FormControl<string | null>(null);
 
   constructor() {

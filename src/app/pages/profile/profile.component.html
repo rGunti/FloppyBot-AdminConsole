@@ -63,58 +63,28 @@
       <mat-card-content>
         <p>You have access to these channels:</p>
         <ul class="access-list">
-          <li>
-            <mat-icon>
-              <ng-icon name="bootstrapBox"></ng-icon>
-            </mat-icon>
-            <span>some:channel</span>
-          </li>
-          <li>
-            <mat-icon>
-              <ng-icon name="bootstrapBox"></ng-icon>
-            </mat-icon>
-            <span>some:channel</span>
-          </li>
-          <li>
-            <mat-icon>
-              <ng-icon name="bootstrapBox"></ng-icon>
-            </mat-icon>
-            <span>some:channel</span>
-          </li>
-          <li>
-            <mat-icon>
-              <ng-icon name="bootstrapBox"></ng-icon>
-            </mat-icon>
-            <span>some:channel</span>
-          </li>
+          @for (channel of accessibleChannels$ | async; track $index) {
+            <li>
+              <mat-icon>
+                <ng-icon name="bootstrapBox"></ng-icon>
+              </mat-icon>
+              <span>{{ channel | channelAlias | async }}</span>
+            </li>
+          }
         </ul>
 
         <p>Your account has the following permissions granted:</p>
         <ul class="access-list">
-          <li>
-            <mat-icon>
-              <ng-icon name="bootstrapKey"></ng-icon>
-            </mat-icon>
-            <span>some:permission</span>
-          </li>
-          <li>
-            <mat-icon>
-              <ng-icon name="bootstrapKey"></ng-icon>
-            </mat-icon>
-            <span>some:permission</span>
-          </li>
-          <li>
-            <mat-icon>
-              <ng-icon name="bootstrapKey"></ng-icon>
-            </mat-icon>
-            <span>some:permission</span>
-          </li>
-          <li>
-            <mat-icon>
-              <ng-icon name="bootstrapKey"></ng-icon>
-            </mat-icon>
-            <span>some:permission</span>
-          </li>
+          @for (permission of permissions$ | async; track $index) {
+            <li>
+              <mat-icon>
+                <ng-icon name="bootstrapKey"></ng-icon>
+              </mat-icon>
+              <span
+                ><code>{{ permission }}</code></span
+              >
+            </li>
+          }
         </ul>
       </mat-card-content>
     </mat-card>

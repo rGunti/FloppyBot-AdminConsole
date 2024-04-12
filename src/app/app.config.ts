@@ -8,6 +8,7 @@ import { provideNgIconsConfig, withContentSecurityPolicy } from '@ng-icons/core'
 
 import { environment } from '../environments/environment';
 
+import { fakeDataInterceptor } from './interceptors/fake-data.interceptor';
 import { loadingIndicatorInterceptor } from './interceptors/loading-indicator.interceptor';
 import { FloppyBotTitleStrategy } from './utils/title-strategy';
 import { routes } from './app.routes';
@@ -25,7 +26,7 @@ export const appConfig: ApplicationConfig = {
       enabled: !isDevMode(),
       registrationStrategy: 'registerWhenStable:30000',
     }),
-    provideHttpClient(withInterceptors([loadingIndicatorInterceptor])),
+    provideHttpClient(withInterceptors([loadingIndicatorInterceptor, fakeDataInterceptor])),
     importProvidersFrom(
       AuthModule.forRoot({
         ...environment.auth,

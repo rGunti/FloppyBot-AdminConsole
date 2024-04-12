@@ -1,12 +1,17 @@
-import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { Channel } from './entities';
+import { getUrl } from '../utils/api';
+
+import { Channel, UserReport } from './entities';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserApiService {
+  private readonly http = inject(HttpClient);
+
   getAccessibleChannels(): Observable<Channel[]> {
     console.log('Calling fake API UserApiService.getAccessibleChannels');
     return of([
@@ -14,5 +19,9 @@ export class UserApiService {
       { interface: 'Discord', channel: '72136387162378123' },
       { interface: 'Unknown', channel: '123', alias: 'Does not exist' },
     ]);
+  }
+
+  getMe(): Observable<UserReport> {
+    return this.http.get<UserReport>(getUrl(`/api/v2/user/me`));
   }
 }

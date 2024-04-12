@@ -14,6 +14,18 @@
         Home
       </button>
 
+      <button
+        mat-menu-item
+        routerLink="/debug"
+        routerLinkActive="mat-mdc-menu-item-highlighted"
+        queryParamsHandling="merge"
+      >
+        <mat-icon>
+          <ng-icon name="bootstrapBugFill"></ng-icon>
+        </mat-icon>
+        Debug
+      </button>
+
       <mat-divider></mat-divider>
 
       @if (isAuthenticated$ | async) {

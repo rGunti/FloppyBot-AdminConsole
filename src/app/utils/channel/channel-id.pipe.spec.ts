@@ -1,3 +1,5 @@
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 
 import { ChannelService } from './channel.service';
@@ -8,7 +10,7 @@ describe('ChannelIdPipe', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [ChannelIdPipe, ChannelService],
+      providers: [ChannelIdPipe, ChannelService, provideHttpClient(), provideHttpClientTesting()],
     });
     pipe = TestBed.inject(ChannelIdPipe);
   });

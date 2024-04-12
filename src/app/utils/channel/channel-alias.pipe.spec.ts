@@ -5,16 +5,16 @@ import { TestBed } from '@angular/core/testing';
 import { UserApiService } from '../../api/user-api.service';
 
 import { ChannelService } from './channel.service';
-import { ChannelNamePipe } from './channel-name.pipe';
+import { ChannelAliasPipe } from './channel-alias.pipe';
 
-describe('ChannelNamePipe', () => {
-  let pipe: ChannelNamePipe;
+describe('ChannelAliasPipe', () => {
+  let pipe: ChannelAliasPipe;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [ChannelNamePipe, ChannelService, UserApiService, provideHttpClient(), provideHttpClientTesting()],
+      providers: [ChannelAliasPipe, ChannelService, UserApiService, provideHttpClient(), provideHttpClientTesting()],
     });
-    pipe = TestBed.inject(ChannelNamePipe);
+    pipe = TestBed.inject(ChannelAliasPipe);
   });
 
   it('create an instance', () => {
