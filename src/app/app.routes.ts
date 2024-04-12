@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { AuthGuard } from '@auth0/auth0-angular';
 
 export const routes: Routes = [
   {
@@ -34,6 +35,7 @@ export const routes: Routes = [
           import('./pages/commands/custom-commands/custom-commands.component').then((m) => m.CustomCommandsComponent),
       },
     ],
+    canActivate: [AuthGuard],
   },
   {
     path: 'quotes',
@@ -51,6 +53,7 @@ export const routes: Routes = [
           import('./pages/quotes/export-quotes/export-quotes.component').then((m) => m.ExportQuotesComponent),
       },
     ],
+    canActivate: [AuthGuard],
   },
   {
     path: 'files',
@@ -62,11 +65,13 @@ export const routes: Routes = [
           import('./pages/files/manage-files/manage-files.component').then((m) => m.ManageFilesComponent),
       },
     ],
+    canActivate: [AuthGuard],
   },
   {
     path: 'profile',
     title: 'Profile',
     loadComponent: () => import('./pages/profile/profile.component').then((m) => m.ProfileComponent),
+    canActivate: [AuthGuard],
   },
   //{
   //  path: 'settings',
