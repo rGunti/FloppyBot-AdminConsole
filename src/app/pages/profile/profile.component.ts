@@ -20,7 +20,7 @@ import {
   bootstrapClock,
 } from '@ng-icons/bootstrap-icons';
 import { AuthService } from '@auth0/auth0-angular';
-import { map, startWith, switchMap } from 'rxjs';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'fac-profile',
