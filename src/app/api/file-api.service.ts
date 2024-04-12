@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { getUrl } from '../utils/api';
 
-import { FileHeader } from './entities';
+import { FileHeader, FileStorageQuota } from './entities';
 
 // const MIME_TYPES = ['audio/mpeg', 'image/jpg', 'image/png', 'image/gif', 'application/zip', 'application/pdf'];
 
@@ -25,5 +25,9 @@ export class FileApiService {
     //     mimeType: MIME_TYPES[getRandomNumber(0, MIME_TYPES.length - 1)],
     //   })),
     // );
+  }
+
+  getFileQuota(channelId: string): Observable<FileStorageQuota> {
+    return this.http.get<FileStorageQuota>(getUrl(`/api/v2/files/${channelId}/quota`));
   }
 }

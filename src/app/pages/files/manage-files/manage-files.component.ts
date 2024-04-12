@@ -21,6 +21,7 @@ import { of, Subject, switchMap, takeUntil } from 'rxjs';
 import { FileHeader } from '../../../api/entities';
 import { FileApiService } from '../../../api/file-api.service';
 import { ChannelSelectorComponent } from '../../../components/channel-selector/channel-selector.component';
+import { FileStorageQuotaComponent } from '../../../components/file-storage-quota/file-storage-quota.component';
 import { ChannelService } from '../../../utils/channel/channel.service';
 import { FileIconPipe } from '../../../utils/files/file-icon.pipe';
 import { FileSizePipe } from '../../../utils/files/file-size.pipe';
@@ -40,6 +41,7 @@ import { FileSizePipe } from '../../../utils/files/file-size.pipe';
     MatTooltipModule,
     FileSizePipe,
     FileIconPipe,
+    FileStorageQuotaComponent,
   ],
   providers: [
     provideIcons({

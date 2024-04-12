@@ -1,7 +1,7 @@
 import { HttpInterceptorFn, HttpRequest, HttpResponse } from '@angular/common/http';
 import { delay, of } from 'rxjs';
 
-import { FileHeader, UserReport } from '../api/entities';
+import { FileHeader, FileStorageQuota, UserReport } from '../api/entities';
 
 export const FAKE_DATA_HOST = 'http://api.fake';
 
@@ -55,7 +55,21 @@ const FAKE_REPLIES: FakeMethodRouter = {
         mimeType: 'audio/mpeg',
       },
     ] as FileHeader[],
+    '/api/v2/files/Twitch/floppypandach/quota': {
+      channelId: 'Twitch/floppypandach',
+      maxStorageQuota: 15_000_000,
+      maxFileNumber: 50,
+      storageUsed: 409_027,
+      fileCount: 3,
+    } as FileStorageQuota,
     '/api/v2/files/Discord/123456789': [] as FileHeader[],
+    '/api/v2/files/Discord/123456789/quota': {
+      channelId: 'Discord/123456789',
+      maxStorageQuota: 15_000_000,
+      maxFileNumber: 0,
+      storageUsed: 0,
+      fileCount: 0,
+    } as FileStorageQuota,
   },
   post: {},
   put: {},
@@ -68,14 +82,15 @@ export const fakeDataInterceptor: HttpInterceptorFn = (req, next) => {
   }
 
   if (!FAKE_REPLIES[req.method.toLowerCase()]) {
-    return next(req);
+    console.error('fakeDataInterceptor', 'Call intercepted but unhandled:', req.method, req.url, req.body);
+    return notFound();
   }
 
   const route = req.url.slice(FAKE_DATA_HOST.length);
   const handler = FAKE_REPLIES[req.method.toLowerCase()][route];
   if (!handler) {
-    console.log('fakeDataInterceptor', 'Call intercepted:', req.method, req.url, req.body, handler);
-    return next(req);
+    console.error('fakeDataInterceptor', 'Call intercepted but unhandled:', req.method, req.url, req.body);
+    return notFound();
   }
 
   if (typeof handler !== 'function') {
@@ -83,11 +98,16 @@ export const fakeDataInterceptor: HttpInterceptorFn = (req, next) => {
     return ok(handler);
   }
 
-  return handler(req);
+  console.error('fakeDataInterceptor', 'Call intercepted but unhandled:', req.method, req.url, req.body);
+  return notFound();
 };
 
 function ok(body: unknown) {
   return of(new HttpResponse({ status: 200, body })).pipe(delay(500));
+}
+
+function notFound() {
+  return of(new HttpResponse({ status: 404 })).pipe(delay(500));
 }
 
 /*

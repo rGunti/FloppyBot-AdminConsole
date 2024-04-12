@@ -12,6 +12,14 @@ export interface FileHeader {
   mimeType: string;
 }
 
+export interface FileStorageQuota {
+  channelId: string;
+  maxStorageQuota: number;
+  maxFileNumber: number;
+  storageUsed: number;
+  fileCount: number;
+}
+
 export interface Quote {
   id: string;
   channel: string;

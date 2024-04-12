@@ -1,0 +1,15 @@
+.storage-quota-text {
+  display: flex;
+  flex-flow: row;
+  padding: 10px;
+
+  font-size: small;
+
+  & > * {
+    flex: 1;
+  }
+
+  .file-count {
+    text-align: right;
+  }
+}
