@@ -1,3 +1,22 @@
 :host {
   display: block;
+  padding: 30px;
+}
+
+.page-content {
+  text-align: center;
+
+  mat-icon.banner-icon {
+    $size: 100px;
+
+    font-size: $size;
+    width: $size;
+    height: $size;
+  }
+}
+
+.button-row {
+  & > * {
+    margin: 0 10px;
+  }
 }
