@@ -20,7 +20,7 @@ import {
   bootstrapClock,
 } from '@ng-icons/bootstrap-icons';
 import { AuthService } from '@auth0/auth0-angular';
-import { map } from 'rxjs';
+import { map, shareReplay } from 'rxjs';
 
 @Component({
   selector: 'fac-profile',
@@ -64,10 +64,23 @@ export class ProfileComponent implements OnInit {
     updated: [new Date()],
   });
 
-  readonly userForm$ = this.auth.user$.pipe(
+  readonly currentUser$ = this.auth.user$.pipe(shareReplay(1));
+  readonly profilePictureStyle$ = this.currentUser$.pipe(
+    map((user) => user?.picture),
+    map((url) => {
+      if (!url) {
+        return undefined;
+      }
+
+      return {
+        'background-size': 'cover',
+        'background-image': `url(${url})`,
+      };
+    }),
+  );
+  readonly userForm$ = this.currentUser$.pipe(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     map((user: any) => {
-      console.log('Got user', user);
       return {
         username: user.nickname,
         userId: user.sub,

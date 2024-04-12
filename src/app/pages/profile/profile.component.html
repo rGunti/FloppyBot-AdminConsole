@@ -2,11 +2,15 @@
   <mat-tab label="Profile">
     <mat-card>
       <mat-card-header>
-        <div mat-card-avatar>
-          <mat-icon>
-            <ng-icon name="bootstrapPersonCircle"></ng-icon>
-          </mat-icon>
-        </div>
+        @if (profilePictureStyle$ | async; as profilePictureStyle) {
+          <div mat-card-avatar [style]="profilePictureStyle"></div>
+        } @else {
+          <div mat-card-avatar>
+            <mat-icon>
+              <ng-icon name="bootstrapPersonCircle"></ng-icon>
+            </mat-icon>
+          </div>
+        }
         <mat-card-title>Your Profile</mat-card-title>
         <mat-card-subtitle>
           This is the information our Identity Provider submits to us to make this app work.

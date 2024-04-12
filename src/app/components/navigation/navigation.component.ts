@@ -63,6 +63,8 @@ export class NavigationComponent {
   private readonly auth = inject(AuthService);
 
   readonly isAuthenticated$ = this.auth.isAuthenticated$;
+  readonly username$ = this.auth.user$.pipe(map((user) => user?.nickname));
+  readonly profilePictureUrl$ = this.auth.user$.pipe(map((user) => user?.picture));
 
   title$ = this.router.events.pipe(
     filter((event) => event instanceof NavigationEnd),

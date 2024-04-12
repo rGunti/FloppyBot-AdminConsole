@@ -16,44 +16,50 @@
 
       <mat-divider></mat-divider>
 
-      <button mat-menu-item [matMenuTriggerFor]="mCommands">
-        <mat-icon>
-          <ng-icon name="bootstrapCommand"></ng-icon>
-        </mat-icon>
-        Commands
-      </button>
-      <button
-        mat-menu-item
-        routerLink="/quotes/manage"
-        routerLinkActive="mat-mdc-menu-item-highlighted"
-        queryParamsHandling="merge"
-      >
-        <mat-icon>
-          <ng-icon name="bootstrapQuote"></ng-icon>
-        </mat-icon>
-        Quotes
-      </button>
-      <button
-        mat-menu-item
-        routerLink="/files/manage"
-        routerLinkActive="mat-mdc-menu-item-highlighted"
-        queryParamsHandling="merge"
-      >
-        <mat-icon>
-          <ng-icon name="bootstrapFolder2Open"></ng-icon>
-        </mat-icon>
-        Files
-      </button>
-
-      <mat-divider></mat-divider>
-
-      <button mat-menu-item routerLink="/profile" routerLinkActive="mat-mdc-menu-item-highlighted">
-        <mat-icon>
-          <ng-icon name="bootstrapPersonCircle"></ng-icon>
-        </mat-icon>
-        Profile
-      </button>
       @if (isAuthenticated$ | async) {
+        <button mat-menu-item [matMenuTriggerFor]="mCommands">
+          <mat-icon>
+            <ng-icon name="bootstrapCommand"></ng-icon>
+          </mat-icon>
+          Commands
+        </button>
+        <button
+          mat-menu-item
+          routerLink="/quotes/manage"
+          routerLinkActive="mat-mdc-menu-item-highlighted"
+          queryParamsHandling="merge"
+        >
+          <mat-icon>
+            <ng-icon name="bootstrapQuote"></ng-icon>
+          </mat-icon>
+          Quotes
+        </button>
+        <button
+          mat-menu-item
+          routerLink="/files/manage"
+          routerLinkActive="mat-mdc-menu-item-highlighted"
+          queryParamsHandling="merge"
+        >
+          <mat-icon>
+            <ng-icon name="bootstrapFolder2Open"></ng-icon>
+          </mat-icon>
+          Files
+        </button>
+
+        <mat-divider></mat-divider>
+        <button mat-menu-item routerLink="/profile" routerLinkActive="mat-mdc-menu-item-highlighted">
+          @if (profilePictureUrl$ | async; as profilePictureUrl) {
+            <mat-icon>
+              <img [src]="profilePictureUrl" alt="User Avatar" class="avatar" />
+            </mat-icon>
+          } @else {
+            <mat-icon>
+              <ng-icon name="bootstrapPersonCircle"></ng-icon>
+            </mat-icon>
+          }
+          Profile
+          <small>({{ username$ | async }})</small>
+        </button>
         <button mat-menu-item (click)="logout()">
           <mat-icon>
             <ng-icon name="bootstrapDoorOpen"></ng-icon>
