@@ -22,7 +22,7 @@ export interface FileStorageQuota {
 
 export interface Quote {
   id: string;
-  channel: string;
+  channelMappingId: string;
   quoteId: number;
   quoteText: string;
   quoteContext?: string;

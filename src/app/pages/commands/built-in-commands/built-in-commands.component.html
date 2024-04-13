@@ -1,4 +1,6 @@
 <div class="mat-elevation-z8">
-  <fac-channel-selector></fac-channel-selector>
+  <mat-toolbar class="action-toolbar">
+    <fac-channel-selector></fac-channel-selector>
+  </mat-toolbar>
   <fac-command-list [commands]="commands$ | async"></fac-command-list>
 </div>

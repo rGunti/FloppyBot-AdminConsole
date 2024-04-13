@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { of, switchMap } from 'rxjs';
 
 import { CommandApiService } from '../../../api/command-api.service';
@@ -10,7 +11,7 @@ import { ChannelService } from '../../../utils/channel/channel.service';
 @Component({
   selector: 'fac-custom-commands',
   standalone: true,
-  imports: [CommonModule, ChannelSelectorComponent, CommandListComponent],
+  imports: [CommonModule, ChannelSelectorComponent, CommandListComponent, MatToolbarModule],
   templateUrl: './custom-commands.component.html',
   styleUrl: './custom-commands.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

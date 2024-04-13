@@ -5,6 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { bootstrapPencil, bootstrapTrash } from '@ng-icons/bootstrap-icons';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
@@ -31,6 +32,7 @@ import { ChannelService } from '../../../utils/channel/channel.service';
     NgIconComponent,
     MatButtonModule,
     MatTooltipModule,
+    MatToolbarModule,
   ],
   providers: [
     provideIcons({

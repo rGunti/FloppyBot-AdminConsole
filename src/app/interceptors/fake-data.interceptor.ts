@@ -1,7 +1,7 @@
 import { HttpInterceptorFn, HttpRequest, HttpResponse } from '@angular/common/http';
 import { delay, of } from 'rxjs';
 
-import { FileHeader, FileStorageQuota, UserReport } from '../api/entities';
+import { FileHeader, FileStorageQuota, Quote, UserReport } from '../api/entities';
 
 export const FAKE_DATA_HOST = 'http://api.fake';
 
@@ -70,6 +70,36 @@ const FAKE_REPLIES: FakeMethodRouter = {
       storageUsed: 0,
       fileCount: 0,
     } as FileStorageQuota,
+    '/api/v2/quotes/Twitch/floppypandach': [
+      {
+        id: 'Twitch/floppypandach/1',
+        channelMappingId: 'Twitch/floppypandach',
+        quoteId: 1,
+        quoteText: 'Quote 1 text for Twitch/floppypandach',
+        quoteContext: 'Chess',
+        createdAt: new Date(),
+        createdBy: 'John Doe',
+      },
+      {
+        id: 'Twitch/floppypandach/2',
+        channelMappingId: 'Twitch/floppypandach',
+        quoteId: 2,
+        quoteText: 'Quote 2 text for Twitch/floppypandach',
+        quoteContext: 'Checkers',
+        createdAt: new Date(),
+        createdBy: 'Jane Doe',
+      },
+      {
+        id: 'Twitch/floppypandach/3',
+        channelMappingId: 'Twitch/floppypandach',
+        quoteId: 3,
+        quoteText: 'Quote 3 text for Twitch/floppypandach',
+        quoteContext: 'Go',
+        createdAt: new Date(),
+        createdBy: 'Alice',
+      },
+    ] as Quote[],
+    '/api/v2/quotes/Discord/123456789': [] as Quote[],
   },
   post: {},
   put: {},
