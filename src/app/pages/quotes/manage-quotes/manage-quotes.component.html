@@ -47,7 +47,7 @@
             <ng-icon name="bootstrapPencil"></ng-icon>
           </mat-icon>
         </button>
-        <button mat-icon-button [matTooltip]="getDeleteTooltip(quote)">
+        <button mat-icon-button [matTooltip]="getDeleteTooltip(quote)" (click)="deleteQuote(quote)">
           <mat-icon>
             <ng-icon name="bootstrapTrash"></ng-icon>
           </mat-icon>

@@ -1,5 +1,5 @@
 import { HttpInterceptorFn, HttpRequest, HttpResponse } from '@angular/common/http';
-import { delay, of } from 'rxjs';
+import { delay, dematerialize, materialize, of, throwError } from 'rxjs';
 
 import { FileHeader, FileStorageQuota, Quote, UserReport } from '../api/entities';
 
@@ -103,7 +103,11 @@ const FAKE_REPLIES: FakeMethodRouter = {
   },
   post: {},
   put: {},
-  delete: {},
+  delete: {
+    '/api/v2/quotes/Twitch/floppypandach/1': noContent,
+    '/api/v2/quotes/Twitch/floppypandach/2': noContent,
+    '/api/v2/quotes/Twitch/floppypandach/3': (req: HttpRequest<unknown>) => serverError(req),
+  },
 };
 
 export const fakeDataInterceptor: HttpInterceptorFn = (req, next) => {
@@ -124,24 +128,28 @@ export const fakeDataInterceptor: HttpInterceptorFn = (req, next) => {
   }
 
   if (typeof handler !== 'function') {
-    console.log('fakeDataInterceptor', 'Call intercepted:', req.method, req.url, req.body, handler);
+    console.log('fakeDataInterceptor', 'Call intercepted by data:', req.method, req.url, req.body, handler);
     return ok(handler);
   }
 
-  console.error('fakeDataInterceptor', 'Call intercepted but unhandled:', req.method, req.url, req.body);
-  return notFound();
+  console.log('fakeDataInterceptor', 'Call intercepted by fn:', req.method, req.url, req.body, handler);
+  return handler(req);
 };
 
 function ok(body: unknown) {
   return of(new HttpResponse({ status: 200, body })).pipe(delay(500));
 }
 
+function noContent(req?: HttpRequest<unknown>) {
+  console.debug('fakeDataInterceptor', 'Returning 204 No Content:', req?.method, req?.url, req?.body);
+  return of(new HttpResponse({ status: 204 })).pipe(delay(500));
+}
+
 function notFound() {
   return of(new HttpResponse({ status: 404 })).pipe(delay(500));
 }
 
-/*
-function error(body: unknown) {
-  return of(new HttpResponse({ status: 500, body })).pipe(delay(500));
+function serverError(req?: HttpRequest<unknown>, error?: unknown) {
+  console.debug('fakeDataInterceptor', 'Returning 500 server error:', req?.method, req?.url, req?.body);
+  return throwError(() => error || 'Unknown Error').pipe(materialize(), delay(500), dematerialize());
 }
- */
