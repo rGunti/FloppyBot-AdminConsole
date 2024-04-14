@@ -2,5 +2,9 @@
   <mat-toolbar class="action-toolbar">
     <fac-channel-selector></fac-channel-selector>
   </mat-toolbar>
-  <fac-command-list [commands]="commands$ | async" (disableCommand)="disableCommand($event)"></fac-command-list>
+  <fac-command-list
+    [commands]="commands$ | async"
+    (disableCommand)="disableCommand($event)"
+    (showCommandDetails)="showCommandDetails($event)"
+  ></fac-command-list>
 </div>

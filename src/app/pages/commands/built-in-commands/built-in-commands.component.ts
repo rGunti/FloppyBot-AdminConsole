@@ -1,12 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, OnDestroy } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { BehaviorSubject, filter, of, Subject, switchMap, take, takeUntil, tap } from 'rxjs';
+import { BehaviorSubject, of, Subject, switchMap, take, takeUntil, tap } from 'rxjs';
 
 import { CommandApiService } from '../../../api/command-api.service';
 import { CommandInfo } from '../../../api/entities';
 import { ChannelSelectorComponent } from '../../../components/channel-selector/channel-selector.component';
 import { CommandListComponent } from '../../../components/command-list/command-list.component';
+import { AboutCommandDialogComponent } from '../../../dialogs/about-command-dialog/about-command-dialog.component';
 import { ChannelService } from '../../../utils/channel/channel.service';
 import { CommandService } from '../../../utils/commands/command.service';
 import { DialogService } from '../../../utils/dialog.service';
@@ -29,8 +30,8 @@ export class BuiltInCommandsComponent implements OnDestroy {
   private readonly dialog = inject(DialogService);
 
   readonly commands$ = this.refresh$.pipe(
-    takeUntil(this.destroy$),
     switchMap(() => this.channelService.selectedChannelId$),
+    takeUntil(this.destroy$),
     switchMap((channelId) => (channelId ? this.commandService.getBuiltInCommands(channelId) : of([]))),
   );
 
@@ -40,9 +41,9 @@ export class BuiltInCommandsComponent implements OnDestroy {
   }
 
   disableCommand(command: CommandInfo): void {
+    console.log('Disabling command:', command);
     this.channelService.selectedChannelId$
       .pipe(
-        filter((channelId) => !!channelId),
         take(1),
         switchMap((channelId) => this.commandApi.disableCommandForChannel(channelId!, command.name, !command.disabled)),
         tap(() =>
@@ -50,5 +51,15 @@ export class BuiltInCommandsComponent implements OnDestroy {
         ),
       )
       .subscribe(() => this.refresh$.next());
+  }
+
+  showCommandDetails(command: CommandInfo): void {
+    console.log('Showing command', command);
+    this.channelService.selectedChannelId$
+      .pipe(
+        take(1),
+        switchMap((channelId) => this.dialog.show(AboutCommandDialogComponent, { command, channelId })),
+      )
+      .subscribe();
   }
 }

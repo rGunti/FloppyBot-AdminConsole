@@ -1,0 +1,89 @@
+<h1 mat-dialog-title>
+  <span
+    >About command <code>{{ command.name }}</code></span
+  >
+</h1>
+<div mat-dialog-content>
+  <table class="container">
+    @if (command$ | async; as commandInfo) {
+      @if (commandDisabled$ | async) {
+        <tr class="custom">
+          <td class="title">Status</td>
+          <td>
+            <span class="icon-wrapper">
+              <mat-icon>
+                <ng-icon name="bootstrapBan"></ng-icon>
+              </mat-icon>
+              <span><b>Disabled</b></span>
+            </span>
+            <span>This command is disabled for this channel and cannot be used.</span>
+          </td>
+        </tr>
+      }
+
+      <tr>
+        <td class="title">Description</td>
+        <td>{{ command.description }}</td>
+      </tr>
+
+      @if (commandInfo.aliases.length > 1) {
+        <tr>
+          <td class="title">Aliases</td>
+          <td>
+            <ul class="syntax">
+              <li *ngFor="let alias of commandInfo.aliases">
+                <code>{{ alias }}</code>
+              </li>
+            </ul>
+          </td>
+        </tr>
+      }
+
+      @if (hasPrivilegeRestrictions$ | async) {
+        <tr>
+          <td class="title">Privilege Restrictions</td>
+          <td>
+            <span class="icon-wrapper">
+              <fac-privilege-icon [privilege]="commandInfo.minPrivilegeLevel!"></fac-privilege-icon>
+              <span>{{ commandInfo.minPrivilegeLevel }}</span>
+            </span>
+          </td>
+        </tr>
+      }
+
+      @if (commandInfo.availableOnInterfaces.length > 0) {
+        <tr>
+          <td class="title">Restricted to Platforms</td>
+          <td>
+            <ul>
+              @for (interface of commandInfo.availableOnInterfaces; track $index) {
+                <li>
+                  <span class="icon-wrapper">
+                    <fac-interface-icon [interface]="interface"></fac-interface-icon>
+                    <span>{{ interface }}</span>
+                  </span>
+                </li>
+              }
+            </ul>
+          </td>
+        </tr>
+      }
+
+      @if (commandInfo.syntax && commandInfo.syntax.length > 0) {
+        <tr>
+          <td class="title">Syntax</td>
+          <td>
+            <ul class="syntax">
+              <li *ngFor="let syntax of commandInfo.syntax">
+                <code>{{ command.name }} {{ syntax }}</code>
+              </li>
+            </ul>
+          </td>
+        </tr>
+      }
+    }
+  </table>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+</div>

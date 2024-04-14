@@ -57,6 +57,7 @@ export class CommandListComponent implements AfterViewInit {
   readonly displayedColumns: string[] = ['enabled', 'name', 'restrictions', 'actions'];
 
   @Output() readonly disableCommand = new EventEmitter<CommandInfo>();
+  @Output() readonly showCommandDetails = new EventEmitter<CommandInfo>();
 
   @Input({ required: true }) get commands(): CommandInfo[] {
     return this.dataSource.data;

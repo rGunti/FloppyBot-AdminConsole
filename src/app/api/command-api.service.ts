@@ -583,6 +583,10 @@ export class CommandApiService {
     return this.http.get<CommandReport[]>(getUrl(`/api/v2/commands/config/${channelId}`));
   }
 
+  getCommandReport(channelId: string, commandName: string): Observable<CommandReport> {
+    return this.http.get<CommandReport>(getUrl(`/api/v2/commands/config/${channelId}/${commandName}`));
+  }
+
   disableCommandForChannel(channelId: string, commandName: string, isDisabled: boolean): Observable<void> {
     return this.http.post<void>(
       getUrl(`/api/v2/commands/config/${channelId}/${commandName}/disable?isDisabled=${isDisabled}`),

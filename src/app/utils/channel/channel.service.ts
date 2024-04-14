@@ -20,21 +20,30 @@ import { UserApiService } from '../../api/user-api.service';
 })
 export class ChannelService implements OnDestroy {
   private readonly cacheTrigger$ = new BehaviorSubject<void>(undefined);
+  private readonly selectedChannelIdSubject$ = new BehaviorSubject<string | undefined>(undefined);
   private readonly destroyed$ = new Subject<void>();
   private readonly router = inject(Router);
   private readonly userApi = inject(UserApiService);
 
-  public readonly selectedChannelId$: Observable<string | undefined> = this.router.routerState.root.queryParams.pipe(
-    takeUntil(this.destroyed$),
-    map((params) => params['channel']),
-    startWith(this.router.routerState.root.snapshot.queryParams['channel']),
-    distinctUntilChanged(),
-  );
+  private readonly selectedChannelIdSubscription = this.router.routerState.root.queryParams
+    .pipe(
+      takeUntil(this.destroyed$),
+      map((params) => params['channel']),
+      startWith(this.router.routerState.root.snapshot.queryParams['channel']),
+      distinctUntilChanged(),
+    )
+    .subscribe((channelId) => this.selectedChannelIdSubject$.next(channelId));
+
+  public readonly selectedChannelId$: Observable<string | undefined> = this.selectedChannelIdSubject$.asObservable();
   readonly userReport$ = this.cacheTrigger$.pipe(
     switchMap(() => this.userApi.getMe()),
     shareReplay(1),
     takeUntil(this.destroyed$),
   );
+
+  getSelectedChannelId(): string | undefined {
+    return this.selectedChannelIdSubject$.getValue();
+  }
 
   invalidateCache(): void {
     console.log('ChannelService', 'Cache invalidation triggered');
