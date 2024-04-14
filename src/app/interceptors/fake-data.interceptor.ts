@@ -1,7 +1,7 @@
 import { HttpInterceptorFn, HttpRequest, HttpResponse } from '@angular/common/http';
 import { delay, dematerialize, materialize, of, throwError } from 'rxjs';
 
-import { FileHeader, FileStorageQuota, Quote, UserReport } from '../api/entities';
+import { CommandReport, FileHeader, FileStorageQuota, Quote, UserReport } from '../api/entities';
 
 export const FAKE_DATA_HOST = 'http://api.fake';
 
@@ -100,6 +100,7 @@ const FAKE_REPLIES: FakeMethodRouter = {
       },
     ] as Quote[],
     '/api/v2/quotes/Discord/123456789': [] as Quote[],
+    '/api/v2/commands/config/Twitch/floppypandach': [] as CommandReport[],
   },
   post: {},
   put: {},
@@ -112,6 +113,7 @@ const FAKE_REPLIES: FakeMethodRouter = {
 
 export const fakeDataInterceptor: HttpInterceptorFn = (req, next) => {
   if (!req.url.startsWith(FAKE_DATA_HOST)) {
+    console.log('fakeDataInterceptor', 'Call not intercepted:', req.method, req.url, req.body);
     return next(req);
   }
 

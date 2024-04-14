@@ -32,7 +32,7 @@ export interface Quote {
 
 export interface CommandInfo {
   name: string;
-  description: string;
+  description?: string;
   aliases: string[];
   restrictedToInterfaces: string[];
   requiredPrivilegeLevel: PrivilegeLevel;
@@ -40,6 +40,7 @@ export interface CommandInfo {
   cooldown: CooldownInfo;
   syntax: CommandSyntax[];
   obsolete: boolean;
+  disabled?: boolean;
 }
 
 export declare type PrivilegeLevel = 'Unknown' | 'Viewer' | 'Moderator' | 'Administrator' | 'SuperUser';
@@ -62,4 +63,47 @@ export interface UserReport {
   ownerOf: string[];
   channelAliases: { [key: string]: string };
   permissions: string[];
+}
+
+export interface CooldownConfiguration {
+  privilegeLevel: PrivilegeLevel;
+  cooldownMs: number;
+}
+
+export interface CommandConfiguration {
+  id: string;
+  channelId: string;
+  commandName: string;
+  requiredPrivilegeLevel?: PrivilegeLevel;
+  disabled: boolean;
+  customCooldown: boolean;
+  customCooldownConfiguration: CooldownConfiguration[];
+}
+
+export declare type CommandParameterType = 'String' | 'Number' | 'Enum';
+
+export interface CommandParameterAbstract {
+  order: number;
+  name: string;
+  type: CommandParameterType;
+  required: boolean;
+  description?: string;
+  possibleValues?: string[];
+}
+
+export interface CommandAbstract {
+  name: string;
+  aliases: string[];
+  description?: string;
+  minPrivilegeLevel?: PrivilegeLevel;
+  availableOnInterfaces: string[];
+  syntax?: string[];
+  noParameters: boolean;
+  hidden: boolean;
+  parameters?: CommandParameterAbstract[];
+}
+
+export interface CommandReport {
+  command: CommandAbstract;
+  configuration: CommandConfiguration;
 }

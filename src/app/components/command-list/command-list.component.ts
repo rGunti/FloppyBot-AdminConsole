@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
@@ -10,9 +10,11 @@ import {
   bootstrapBan,
   bootstrapCheckCircle,
   bootstrapPencil,
+  bootstrapPower,
   bootstrapSearch,
   bootstrapTrash,
   bootstrapXCircle,
+  bootstrapXLg,
 } from '@ng-icons/bootstrap-icons';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 
@@ -42,7 +44,9 @@ import { CommandRestrictionsComponent } from '../command-restrictions/command-re
       bootstrapTrash,
       bootstrapCheckCircle,
       bootstrapXCircle,
+      bootstrapXLg,
       bootstrapBan,
+      bootstrapPower,
     }),
   ],
   templateUrl: './command-list.component.html',
@@ -51,6 +55,8 @@ import { CommandRestrictionsComponent } from '../command-restrictions/command-re
 export class CommandListComponent implements AfterViewInit {
   readonly dataSource = new MatTableDataSource<CommandInfo>([]);
   readonly displayedColumns: string[] = ['enabled', 'name', 'restrictions', 'actions'];
+
+  @Output() readonly disableCommand = new EventEmitter<CommandInfo>();
 
   @Input({ required: true }) get commands(): CommandInfo[] {
     return this.dataSource.data;
@@ -70,18 +76,18 @@ export class CommandListComponent implements AfterViewInit {
   }
 
   getDetailTooltip(command: CommandInfo): string {
-    return `Show more about ${command.name}`;
+    return `Show more about "${command.name}"`;
   }
 
   getEditTooltip(command: CommandInfo): string {
-    return `Edit ${command.name}`;
+    return `Edit "${command.name}"`;
   }
 
   getDisableTooltip(command: CommandInfo): string {
-    return `Disable ${command.name}`;
+    return `${command.disabled ? 'Enable' : 'Disable'} "${command.name}"`;
   }
 
   getDeleteTooltip(command: CommandInfo): string {
-    return `Delete ${command.name}`;
+    return `Delete "${command.name}"`;
   }
 }

@@ -57,6 +57,9 @@ body {
 .error {
   color: red;
 }
+.disabled {
+  opacity: 0.5;
+}
 
 // *** Global Overrides
 .mat-mdc-dialog-actions {

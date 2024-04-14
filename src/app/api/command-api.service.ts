@@ -1,7 +1,10 @@
-import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { CommandInfo } from './entities';
+import { getUrl } from '../utils/api';
+
+import { CommandInfo, CommandReport } from './entities';
 
 const COMMANDS: CommandInfo[] = [
   {
@@ -569,9 +572,22 @@ const COMMANDS: CommandInfo[] = [
   providedIn: 'root',
 })
 export class CommandApiService {
+  private readonly http = inject(HttpClient);
+
   getCommandsForChannel(channelId: string): Observable<CommandInfo[]> {
     console.log('Calling fake API CommandApiService.getCommandsForChannel', channelId);
     return of(COMMANDS);
+  }
+
+  getCommandConfigsForChannel(channelId: string): Observable<CommandReport[]> {
+    return this.http.get<CommandReport[]>(getUrl(`/api/v2/commands/config/${channelId}`));
+  }
+
+  disableCommandForChannel(channelId: string, commandName: string, isDisabled: boolean): Observable<void> {
+    return this.http.post<void>(
+      getUrl(`/api/v2/commands/config/${channelId}/${commandName}/disable?isDisabled=${isDisabled}`),
+      null,
+    );
   }
 
   getCustomCommandsForChannel(channelId: string): Observable<CommandInfo[]> {

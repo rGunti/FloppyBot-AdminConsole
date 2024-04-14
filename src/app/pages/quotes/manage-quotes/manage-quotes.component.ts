@@ -58,8 +58,8 @@ export class ManageQuotesComponent implements AfterViewInit, OnDestroy {
   readonly dataSource = new MatTableDataSource<Quote>([]);
 
   readonly dataSource$ = this.refresh$.pipe(
-    takeUntil(this.destroy$),
     mergeMap(() => this.channelService.selectedChannelId$),
+    takeUntil(this.destroy$),
     switchMap((channelId) => (channelId ? this.quoteApi.getQuotesForChannel(channelId) : of([]))),
   );
 
