@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Upload file</h1>
+<div mat-dialog-content class="file-upload">
+  <fac-file-drop-zone (filesSelected)="onFilesSelected($event)"></fac-file-drop-zone>
+
+  <div>
+    <span>{{ status }}</span>
+    <mat-progress-bar [mode]="mode" [value]="progress"></mat-progress-bar>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="false">Close</button>
+</div>

@@ -1,10 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatProgressBar } from '@angular/material/progress-bar';
-import { filter, map, shareReplay, switchMap } from 'rxjs';
 
-import { FileApiService } from '../../api/file-api.service';
-import { ChannelService } from '../../utils/channel/channel.service';
+import { FileStorageQuota } from '../../api/entities';
 import { FileSizePipe } from '../../utils/files/file-size.pipe';
 
 @Component({
@@ -15,15 +13,12 @@ import { FileSizePipe } from '../../utils/files/file-size.pipe';
   imports: [CommonModule, MatProgressBar, FileSizePipe],
 })
 export class FileStorageQuotaComponent {
-  private readonly channel = inject(ChannelService);
-  private readonly fileApi = inject(FileApiService);
+  @Input({ required: true }) quota!: FileStorageQuota | null | undefined;
 
-  readonly quota$ = this.channel.selectedChannelId$.pipe(
-    filter((channelId) => !!channelId),
-    switchMap((channelId) => this.fileApi.getFileQuota(channelId!)),
-    shareReplay(1),
-  );
-  readonly storageQuotaPercentage$ = this.quota$.pipe(
-    map((quota) => (quota.storageUsed / quota.maxStorageQuota) * 100),
-  );
+  get quotaPercentage(): number {
+    if (!this.quota) {
+      return 0;
+    }
+    return (this.quota.storageUsed / this.quota.maxStorageQuota) * 100;
+  }
 }

@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpEventType } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable, OperatorFunction } from 'rxjs';
 
 import { getUrl } from '../utils/api';
 
@@ -34,4 +34,40 @@ export class FileApiService {
   deleteFile(channelId: string, fileName: string): Observable<void> {
     return this.http.delete<void>(getUrl(`/api/v2/files/${channelId}/${fileName}`));
   }
+
+  uploadFile(channelId: string, file: File): Observable<UploadStatusReport> {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    return this.http
+      .post<void>(getUrl(`/api/v2/files/${channelId}`), formData, {
+        reportProgress: true,
+        observe: 'events',
+      })
+      .pipe(uploadProgress());
+  }
+}
+
+function uploadProgress(): OperatorFunction<HttpEvent<void>, UploadStatusReport> {
+  return map((e: HttpEvent<void>) => {
+    switch (e.type) {
+      case HttpEventType.DownloadProgress:
+      case HttpEventType.UploadProgress:
+        return {
+          percentage: Math.round((100 * e.loaded) / e.total!),
+        };
+      case HttpEventType.Sent:
+        return {
+          percentage: 1,
+        };
+      default:
+        return {
+          percentage: 0,
+        };
+    }
+  });
+}
+
+export interface UploadStatusReport {
+  percentage: number;
 }

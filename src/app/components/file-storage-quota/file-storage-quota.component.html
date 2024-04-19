@@ -1,7 +1,7 @@
 <div class="storage-quota-text">
-  @if (quota$ | async; as quota) {
+  @if (quota) {
     <span class="storage"> {{ quota.storageUsed | fileSize }} / {{ quota.maxStorageQuota | fileSize }} used </span>
     <span class="file-count"> {{ quota.fileCount }} / {{ quota.maxFileNumber }} file(s) </span>
   }
 </div>
-<mat-progress-bar [value]="storageQuotaPercentage$ | async"></mat-progress-bar>
+<mat-progress-bar [value]="quotaPercentage"></mat-progress-bar>

@@ -1,7 +1,12 @@
 <div class="mat-elevation-z8">
   <mat-toolbar class="action-toolbar">
     <fac-channel-selector></fac-channel-selector>
-    <button mat-icon-button matTooltip="Upload File" [disabled]="(selectedChannelId$ | async) === undefined">
+    <button
+      mat-icon-button
+      matTooltip="Upload File"
+      [disabled]="(selectedChannelId$ | async) === undefined"
+      (click)="uploadFile()"
+    >
       <mat-icon>
         <ng-icon name="bootstrapUpload"></ng-icon>
       </mat-icon>
@@ -51,5 +56,5 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
 
-  <fac-file-storage-quota></fac-file-storage-quota>
+  <fac-file-storage-quota [quota]="quota$ | async"></fac-file-storage-quota>
 </div>

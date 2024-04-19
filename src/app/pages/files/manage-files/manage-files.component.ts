@@ -25,6 +25,7 @@ import { FileApiService } from '../../../api/file-api.service';
 import { ChannelSelectorComponent } from '../../../components/channel-selector/channel-selector.component';
 import { FileStorageQuotaComponent } from '../../../components/file-storage-quota/file-storage-quota.component';
 import { DeleteFileDialogComponent } from '../../../dialogs/delete-file-dialog/delete-file-dialog.component';
+import { UploadFileDialogComponent } from '../../../dialogs/upload-file-dialog/upload-file-dialog.component';
 import { ChannelService } from '../../../utils/channel/channel.service';
 import { DialogService } from '../../../utils/dialog.service';
 import { FileIconPipe } from '../../../utils/files/file-icon.pipe';
@@ -82,6 +83,11 @@ export class ManageFilesComponent implements AfterViewInit, OnDestroy {
     takeUntil(this.destroy$),
     switchMap((channelId) => (channelId ? this.fileApi.getFilesForChannel(channelId) : of([]))),
   );
+  readonly quota$ = this.refresh$.pipe(
+    mergeMap(() => this.channelService.selectedChannelId$),
+    takeUntil(this.destroy$),
+    switchMap((channelId) => (channelId ? this.fileApi.getFileQuota(channelId) : of(undefined))),
+  );
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -125,6 +131,17 @@ export class ManageFilesComponent implements AfterViewInit, OnDestroy {
       )
       .subscribe({
         next: () => this.dialog.success('File deleted'),
+      });
+  }
+
+  uploadFile(): void {
+    this.selectedChannelId$
+      .pipe(
+        take(1),
+        switchMap((channelId) => this.dialog.show(UploadFileDialogComponent, channelId)),
+      )
+      .subscribe({
+        next: () => this.refresh$.next(),
       });
   }
 }

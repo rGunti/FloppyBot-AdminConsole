@@ -1,0 +1,14 @@
+<div class="drop-zone" facDropZone (filesDropped)="onFilesDropped($event)">
+  <input type="file" #fileInput id="fileInput" (change)="onFileSelected($event)" />
+
+  <p>
+    Drag and drop some files here<br />
+    or
+  </p>
+  <button mat-button (click)="fileInput.click()">
+    <mat-icon>
+      <ng-icon name="bootstrapFileEarmarkArrowUp"></ng-icon>
+    </mat-icon>
+    Select Files
+  </button>
+</div>
