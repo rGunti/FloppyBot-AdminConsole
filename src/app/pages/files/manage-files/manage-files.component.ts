@@ -18,13 +18,15 @@ import {
   bootstrapUpload,
 } from '@ng-icons/bootstrap-icons';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import { of, Subject, switchMap, takeUntil } from 'rxjs';
+import { BehaviorSubject, filter, mergeMap, of, Subject, switchMap, take, takeUntil, tap } from 'rxjs';
 
 import { FileHeader } from '../../../api/entities';
 import { FileApiService } from '../../../api/file-api.service';
 import { ChannelSelectorComponent } from '../../../components/channel-selector/channel-selector.component';
 import { FileStorageQuotaComponent } from '../../../components/file-storage-quota/file-storage-quota.component';
+import { DeleteFileDialogComponent } from '../../../dialogs/delete-file-dialog/delete-file-dialog.component';
 import { ChannelService } from '../../../utils/channel/channel.service';
+import { DialogService } from '../../../utils/dialog.service';
 import { FileIconPipe } from '../../../utils/files/file-icon.pipe';
 import { FileSizePipe } from '../../../utils/files/file-size.pipe';
 
@@ -63,16 +65,20 @@ import { FileSizePipe } from '../../../utils/files/file-size.pipe';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ManageFilesComponent implements AfterViewInit, OnDestroy {
+  private readonly refresh$ = new BehaviorSubject<void>(undefined);
+  private readonly destroy$ = new Subject<void>();
+
   private readonly fileApi = inject(FileApiService);
   private readonly channelService = inject(ChannelService);
-  private readonly destroy$ = new Subject<void>();
+  private readonly dialog = inject(DialogService);
 
   readonly selectedChannelId$ = this.channelService.selectedChannelId$;
 
   readonly displayedColumns: string[] = ['mimeType', 'fileName', 'fileSize', 'actions'];
   readonly dataSource = new MatTableDataSource<FileHeader>([]);
 
-  readonly dataSource$ = this.channelService.selectedChannelId$.pipe(
+  readonly dataSource$ = this.refresh$.pipe(
+    mergeMap(() => this.channelService.selectedChannelId$),
     takeUntil(this.destroy$),
     switchMap((channelId) => (channelId ? this.fileApi.getFilesForChannel(channelId) : of([]))),
   );
@@ -101,5 +107,24 @@ export class ManageFilesComponent implements AfterViewInit, OnDestroy {
   getDeleteTooltip(file: FileHeader): string {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return `Delete file "${file.fileName}"`;
+  }
+
+  deleteFile(file: FileHeader): void {
+    this.dialog
+      .show(DeleteFileDialogComponent, file)
+      .pipe(
+        filter((result) => !!result),
+        switchMap(() =>
+          this.channelService.selectedChannelId$.pipe(
+            filter((i) => !!i),
+            take(1),
+          ),
+        ),
+        switchMap((channelId) => this.fileApi.deleteFile(channelId!, file.fileName)),
+        tap(() => this.refresh$.next()),
+      )
+      .subscribe({
+        next: () => this.dialog.success('File deleted'),
+      });
   }
 }

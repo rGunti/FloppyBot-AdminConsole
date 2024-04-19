@@ -39,7 +39,7 @@
             <ng-icon name="bootstrapDownload"></ng-icon>
           </mat-icon>
         </button>
-        <button mat-icon-button [matTooltip]="getDeleteTooltip(file)">
+        <button mat-icon-button [matTooltip]="getDeleteTooltip(file)" (click)="deleteFile(file)">
           <mat-icon>
             <ng-icon name="bootstrapTrash"></ng-icon>
           </mat-icon>

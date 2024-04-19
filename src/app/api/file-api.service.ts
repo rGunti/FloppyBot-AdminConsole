@@ -30,4 +30,8 @@ export class FileApiService {
   getFileQuota(channelId: string): Observable<FileStorageQuota> {
     return this.http.get<FileStorageQuota>(getUrl(`/api/v2/files/${channelId}/quota`));
   }
+
+  deleteFile(channelId: string, fileName: string): Observable<void> {
+    return this.http.delete<void>(getUrl(`/api/v2/files/${channelId}/${fileName}`));
+  }
 }
