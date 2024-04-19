@@ -39,7 +39,7 @@
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef>Actions</th>
       <td mat-cell *matCellDef="let file">
-        <button mat-icon-button [matTooltip]="getDownloadTooltip(file)">
+        <button mat-icon-button [matTooltip]="getDownloadTooltip(file)" (click)="downloadFile(file)">
           <mat-icon>
             <ng-icon name="bootstrapDownload"></ng-icon>
           </mat-icon>

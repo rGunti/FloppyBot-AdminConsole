@@ -6,8 +6,6 @@ import { getUrl } from '../utils/api';
 
 import { FileHeader, FileStorageQuota } from './entities';
 
-// const MIME_TYPES = ['audio/mpeg', 'image/jpg', 'image/png', 'image/gif', 'application/zip', 'application/pdf'];
-
 @Injectable({
   providedIn: 'root',
 })
@@ -16,15 +14,6 @@ export class FileApiService {
 
   getFilesForChannel(channelId: string): Observable<FileHeader[]> {
     return this.http.get<FileHeader[]>(getUrl(`/api/v2/files/${channelId}`));
-    // return of(
-    //   Array.from({ length: 51 }, (_, i) => i + 1).map((i) => ({
-    //     id: i.toString(),
-    //     channelId,
-    //     fileName: `File ${i}`,
-    //     fileSize: getRandomNumber(512, 10_000) * 1024,
-    //     mimeType: MIME_TYPES[getRandomNumber(0, MIME_TYPES.length - 1)],
-    //   })),
-    // );
   }
 
   getFileQuota(channelId: string): Observable<FileStorageQuota> {
@@ -45,6 +34,14 @@ export class FileApiService {
         observe: 'events',
       })
       .pipe(uploadProgress());
+  }
+
+  downloadFile(channelId: string, filename: string): Observable<Blob> {
+    return this.http
+      .get(getUrl(`/api/v2/files/${channelId}/dl/${filename}`), {
+        responseType: 'arraybuffer',
+      })
+      .pipe(map((data) => new Blob([data])));
   }
 }
 

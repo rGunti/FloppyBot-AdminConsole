@@ -144,4 +144,24 @@ export class ManageFilesComponent implements AfterViewInit, OnDestroy {
         next: () => this.refresh$.next(),
       });
   }
+
+  downloadFile(file: FileHeader): void {
+    this.selectedChannelId$
+      .pipe(
+        take(1),
+        switchMap((channelId) => this.fileApi.downloadFile(channelId!, file.fileName)),
+      )
+      .subscribe({
+        next: (blob) => {
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = file.fileName;
+          a.click();
+          URL.revokeObjectURL(url);
+          a.remove();
+        },
+        error: () => this.dialog.error('Failed to download file'),
+      });
+  }
 }
