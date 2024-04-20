@@ -42,7 +42,7 @@
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef>Actions</th>
       <td mat-cell *matCellDef="let quote">
-        <button mat-icon-button [matTooltip]="getEditTooltip(quote)">
+        <button mat-icon-button [matTooltip]="getEditTooltip(quote)" (click)="editQuote(quote)">
           <mat-icon>
             <ng-icon name="bootstrapPencil"></ng-icon>
           </mat-icon>

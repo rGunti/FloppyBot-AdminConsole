@@ -11,12 +11,13 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { bootstrapPencil, bootstrapTrash } from '@ng-icons/bootstrap-icons';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import { BehaviorSubject, filter, mergeMap, of, Subject, switchMap, take, takeUntil, tap } from 'rxjs';
+import { BehaviorSubject, filter, map, mergeMap, of, Subject, switchMap, take, takeUntil, tap } from 'rxjs';
 
 import { Quote } from '../../../api/entities';
 import { QuoteApiService } from '../../../api/quote-api.service';
 import { ChannelSelectorComponent } from '../../../components/channel-selector/channel-selector.component';
 import { DeleteQuoteDialogComponent } from '../../../dialogs/delete-quote-dialog/delete-quote-dialog.component';
+import { EditQuoteDialogComponent } from '../../../dialogs/edit-quote-dialog/edit-quote-dialog.component';
 import { ChannelService } from '../../../utils/channel/channel.service';
 import { DialogService } from '../../../utils/dialog.service';
 
@@ -105,6 +106,33 @@ export class ManageQuotesComponent implements AfterViewInit, OnDestroy {
       .subscribe({
         next: () => {
           this.dialog.success('Quote deleted');
+        },
+      });
+  }
+
+  editQuote(quote: Quote): void {
+    this.dialog
+      .show<Quote>(EditQuoteDialogComponent, quote)
+      .pipe(
+        filter((result) => !!result),
+        switchMap((updatedQuote) =>
+          this.channelService.selectedChannelId$.pipe(
+            filter((i) => !!i),
+            take(1),
+            map((channelId) => ({ updatedQuote, channelId })),
+          ),
+        ),
+        switchMap(({ updatedQuote, channelId }) =>
+          this.quoteApi.updateQuote(channelId!, {
+            ...quote,
+            ...updatedQuote!,
+          }),
+        ),
+        tap(() => this.refresh$.next()),
+      )
+      .subscribe({
+        next: () => {
+          this.dialog.success('Quote updated');
         },
       });
   }

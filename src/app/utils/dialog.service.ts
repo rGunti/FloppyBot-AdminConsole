@@ -14,11 +14,11 @@ export class DialogService {
   private readonly dialog = inject(MatDialog);
   private readonly snackbar = inject(MatSnackBar);
 
-  show(component: ComponentType<unknown>, data: unknown): Observable<boolean> {
+  show<T>(component: ComponentType<unknown>, data: unknown): Observable<T> {
     return this.dialog
       .open(component, { data })
       .afterClosed()
-      .pipe(map((returnValue) => !!returnValue));
+      .pipe(map((result) => result as T));
   }
 
   success(text: string): void {
