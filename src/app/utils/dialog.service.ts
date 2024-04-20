@@ -6,6 +6,7 @@ import { map, Observable } from 'rxjs';
 
 import { ConfirmSnackComponent } from '../dialogs/confirm-snack/confirm-snack.component';
 import { ErrorSnackComponent } from '../dialogs/error-snack/error-snack.component';
+import { NotImplementedDialogComponent } from '../dialogs/not-implemented-dialog/not-implemented-dialog.component';
 
 @Injectable({
   providedIn: 'root',
@@ -33,5 +34,9 @@ export class DialogService {
       data: text,
       duration: 5_000,
     });
+  }
+
+  notImplemented(): void {
+    this.dialog.open(NotImplementedDialogComponent);
   }
 }
