@@ -12,6 +12,7 @@ import { CommandApiService } from '../../../api/command-api.service';
 import { ChannelSelectorComponent } from '../../../components/channel-selector/channel-selector.component';
 import { CommandListComponent } from '../../../components/command-list/command-list.component';
 import { ChannelService } from '../../../utils/channel/channel.service';
+import { CommandService } from '../../../utils/commands/command.service';
 
 @Component({
   selector: 'fac-custom-commands',
@@ -41,10 +42,11 @@ export class CustomCommandsComponent implements OnDestroy {
 
   private readonly channelService = inject(ChannelService);
   private readonly commandApi = inject(CommandApiService);
+  private readonly commandService = inject(CommandService);
 
   readonly selectedChannelId$ = this.channelService.selectedChannelId$;
   readonly commands$ = this.channelService.selectedChannelId$.pipe(
-    switchMap((channelId) => (channelId ? this.commandApi.getCustomCommandsForChannel(channelId) : of([]))),
+    switchMap((channelId) => (channelId ? this.commandService.getCustomCommands(channelId) : of([]))),
   );
 
   ngOnDestroy(): void {

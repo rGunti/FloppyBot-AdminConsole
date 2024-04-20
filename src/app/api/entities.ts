@@ -112,3 +112,31 @@ export interface CommandReport {
   command: CommandAbstract;
   configuration: CommandConfiguration;
 }
+
+export interface CustomCommand {
+  id: string;
+  name: string;
+  aliases: string[];
+  responses: CommandResponse[];
+  limitations: CommandLimitation;
+  responseMode: CommandResponseMode;
+}
+
+export interface CommandResponse {
+  type: CommandResponseType;
+  content: string;
+}
+
+export interface CommandLimitation {
+  minLevel: PrivilegeLevel;
+  cooldown: CooldownDescription[];
+  limitedToUsers: string[];
+}
+
+export interface CooldownDescription {
+  level: PrivilegeLevel;
+  milliseconds: number;
+}
+
+export declare type CommandResponseMode = 'First' | 'PickOneRandom' | 'All';
+export declare type CommandResponseType = 'Text' | 'Sound';

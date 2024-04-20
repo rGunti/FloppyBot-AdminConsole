@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 
 import { getUrl } from '../utils/api';
 
-import { CommandInfo, CommandReport } from './entities';
+import { CommandInfo, CommandReport, CustomCommand } from './entities';
 
 const COMMANDS: CommandInfo[] = [
   {
@@ -594,8 +594,7 @@ export class CommandApiService {
     );
   }
 
-  getCustomCommandsForChannel(channelId: string): Observable<CommandInfo[]> {
-    console.log('Calling fake API CommandApiService.getCustomCommandsForChannel', channelId);
-    return of(COMMANDS);
+  getCustomCommandsForChannel(channelId: string): Observable<CustomCommand[]> {
+    return this.http.get<CustomCommand[]>(getUrl(`/api/v2/custom-commands/${channelId}`));
   }
 }
