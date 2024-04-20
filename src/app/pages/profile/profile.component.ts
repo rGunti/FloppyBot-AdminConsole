@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -22,9 +22,11 @@ import {
   bootstrapShieldCheck,
 } from '@ng-icons/bootstrap-icons';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import { map, shareReplay } from 'rxjs';
+import { filter, map, of, shareReplay, Subject, switchMap, takeUntil, tap } from 'rxjs';
 
 import { UserApiService } from '../../api/user-api.service';
+import { RegenerateApiKeyDialogComponent } from '../../dialogs/regenerate-api-key-dialog/regenerate-api-key-dialog.component';
+import { ShowApiKeyDialogComponent } from '../../dialogs/show-api-key-dialog/show-api-key-dialog.component';
 import { ChannelAliasPipe } from '../../utils/channel/channel-alias.pipe';
 import { DialogService } from '../../utils/dialog.service';
 
@@ -62,7 +64,9 @@ import { DialogService } from '../../utils/dialog.service';
   styleUrl: './profile.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, OnDestroy {
+  private readonly destroy$ = new Subject<void>();
+
   private readonly auth = inject(AuthService);
   private readonly userApi = inject(UserApiService);
   private readonly dialog = inject(DialogService);
@@ -90,6 +94,7 @@ export class ProfileComponent implements OnInit {
     }),
   );
   readonly userForm$ = this.currentUser$.pipe(
+    takeUntil(this.destroy$),
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     map((user: any) => {
       return {
@@ -106,17 +111,38 @@ export class ProfileComponent implements OnInit {
   readonly channelAliases$ = this.userInfo$.pipe(map((user) => user.channelAliases));
   readonly permissions$ = this.userInfo$.pipe(map((user) => user.permissions));
 
+  readonly apiKeyCreatedAt$ = this.userInfo$.pipe(map((user) => user.apiKeyCreatedAt));
+  readonly apiKeyFunctionsDisabled$ = this.apiKeyCreatedAt$.pipe(map((apiKeyCreatedAt) => !apiKeyCreatedAt));
+
   ngOnInit(): void {
     this.userForm$.subscribe((user) => {
       this.form.patchValue(user);
     });
   }
 
-  revealAccessKey(): void {
-    this.dialog.notImplemented();
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
-  regenerateAccessKey(): void {
-    this.dialog.notImplemented();
+  revealAccessKey(): void {
+    this.userApi
+      .getAccessKey()
+      .pipe(switchMap((report) => this.dialog.show(ShowApiKeyDialogComponent, report)))
+      .subscribe();
+  }
+
+  regenerateAccessKey(firstTime: boolean): void {
+    const confirm = firstTime ? of(true) : this.dialog.show(RegenerateApiKeyDialogComponent, undefined);
+    confirm
+      .pipe(
+        takeUntil(this.destroy$),
+        filter((confirmed) => !!confirmed),
+        switchMap(() => this.userApi.regenerateAccessKey()),
+        tap(() => this.dialog.success('API key generated successfully')),
+      )
+      .subscribe(() => {
+        this.revealAccessKey();
+      });
   }
 }

@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 
 import { getUrl } from '../utils/api';
 
-import { Channel, UserReport } from './entities';
+import { ApiKeyReport, Channel, UserReport } from './entities';
 
 @Injectable({
   providedIn: 'root',
@@ -23,5 +23,13 @@ export class UserApiService {
 
   getMe(): Observable<UserReport> {
     return this.http.get<UserReport>(getUrl(`/api/v2/user/me`));
+  }
+
+  getAccessKey(): Observable<ApiKeyReport> {
+    return this.http.get<ApiKeyReport>(getUrl(`/api/v2/user/access-key`));
+  }
+
+  regenerateAccessKey(): Observable<void> {
+    return this.http.post<void>(getUrl(`/api/v2/user/access-key/generate`), null);
   }
 }

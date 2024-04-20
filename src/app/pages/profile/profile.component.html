@@ -109,7 +109,7 @@
           key has been compromised, you can regenerate it below.
         </p>
         <div>
-          <button mat-button color="primary" (click)="revealAccessKey()">
+          <button mat-button color="primary" [disabled]="apiKeyFunctionsDisabled$ | async" (click)="revealAccessKey()">
             <mat-icon>
               <ng-icon name="bootstrapEye"></ng-icon>
             </mat-icon>
@@ -117,18 +117,33 @@
           </button>
         </div>
 
-        <p>
-          If you suspect your access key has been compromised, you can regenerate it. This will invalidate the current
-          key and generate a new one. You will need to update any services using the old key.
-        </p>
-        <div>
-          <button mat-flat-button color="warn" (click)="regenerateAccessKey()">
-            <mat-icon>
-              <ng-icon name="bootstrapArrowCounterclockwise"></ng-icon>
-            </mat-icon>
-            Regenerate Access Key
-          </button>
-        </div>
+        @if (apiKeyFunctionsDisabled$ | async) {
+          <p>
+            You currently do not have an access key. You can generate one below to make use of services like OBS browser
+            sources without the requirement to sign in. <b>Please do not share this key with anyone!</b>
+          </p>
+          <div>
+            <button mat-flat-button color="primary" (click)="regenerateAccessKey(true)">
+              <mat-icon>
+                <ng-icon name="bootstrapArrowCounterclockwise"></ng-icon>
+              </mat-icon>
+              Generate Your Access Key
+            </button>
+          </div>
+        } @else {
+          <p>
+            If you suspect your access key has been compromised, you can regenerate it. This will invalidate the current
+            key and generate a new one. You will need to update any services using the old key.
+          </p>
+          <div>
+            <button mat-flat-button color="warn" (click)="regenerateAccessKey(false)">
+              <mat-icon>
+                <ng-icon name="bootstrapArrowCounterclockwise"></ng-icon>
+              </mat-icon>
+              Regenerate Access Key
+            </button>
+          </div>
+        }
       </mat-card-content>
     </mat-card>
   </mat-tab>

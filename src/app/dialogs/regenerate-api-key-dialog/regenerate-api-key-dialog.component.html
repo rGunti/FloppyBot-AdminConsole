@@ -1,0 +1,9 @@
+<h1 mat-dialog-title>Regenerate Access Key?</h1>
+<div mat-dialog-content>
+  <p>Are you sure you want to regenerate your access key?</p>
+  <p>This will invalidate the current key and generate a new one. All services using your old key will stop working.</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>No</button>
+  <button mat-flat-button color="warn" [mat-dialog-close]="true">Yes</button>
+</div>

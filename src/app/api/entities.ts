@@ -63,6 +63,11 @@ export interface UserReport {
   ownerOf: string[];
   channelAliases: { [key: string]: string };
   permissions: string[];
+  apiKeyCreatedAt?: Date | string;
+}
+
+export interface ApiKeyReport {
+  accessKey?: string;
 }
 
 export interface CooldownConfiguration {
