@@ -7,15 +7,26 @@
 
   <mat-form-field>
     <mat-label>Quote</mat-label>
+    <mat-icon matPrefix>
+      <ng-icon name="bootstrapChatRightQuote"></ng-icon>
+    </mat-icon>
     <input matInput formControlName="quoteText" />
+    <mat-error> The quote text cannot be empty. </mat-error>
   </mat-form-field>
   <mat-form-field>
     <mat-label>Context</mat-label>
+    <mat-icon matPrefix>
+      <ng-icon name="bootstrapController"></ng-icon>
+    </mat-icon>
     <input matInput formControlName="quoteContext" />
   </mat-form-field>
   <mat-form-field>
     <mat-label>Created by</mat-label>
-    <input matInput formControlName="createdBy" />
+    <mat-icon matPrefix>
+      <ng-icon name="bootstrapPerson"></ng-icon>
+    </mat-icon>
+    <input matInput formControlName="createdBy" readonly />
+    <mat-hint> This field cannot be changed </mat-hint>
   </mat-form-field>
 </div>
 <div mat-dialog-actions>

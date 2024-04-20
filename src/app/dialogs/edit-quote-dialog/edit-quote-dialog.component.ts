@@ -1,10 +1,13 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { Component, Inject, inject } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { bootstrapChatRightQuote, bootstrapController, bootstrapPerson } from '@ng-icons/bootstrap-icons';
+import { NgIconComponent, provideIcons } from '@ng-icons/core';
 
 import { Quote } from '../../api/entities';
 
@@ -19,6 +22,16 @@ import { Quote } from '../../api/entities';
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
+    MatIconModule,
+    NgIconComponent,
+  ],
+  providers: [
+    provideIcons({
+      bootstrapChatRightQuote,
+      bootstrapController,
+      bootstrapPerson,
+    }),
+    DatePipe,
   ],
   templateUrl: './edit-quote-dialog.component.html',
   styleUrl: './edit-quote-dialog.component.scss',
@@ -34,7 +47,7 @@ export class EditQuoteDialogComponent {
       },
       [Validators.required],
     ),
-    channelId: this.formBuilder.control(
+    channelMappingId: this.formBuilder.control(
       {
         value: '',
         disabled: true,
@@ -60,19 +73,19 @@ export class EditQuoteDialogComponent {
         value: '',
         disabled: false,
       },
-      [Validators.required],
+      [],
     ),
     createdAt: this.formBuilder.control(
       {
         value: new Date(),
-        disabled: true,
+        disabled: false,
       },
       [Validators.required],
     ),
     createdBy: this.formBuilder.control(
       {
         value: '',
-        disabled: true,
+        disabled: false,
       },
       [Validators.required],
     ),
