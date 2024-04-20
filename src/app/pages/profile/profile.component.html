@@ -89,4 +89,47 @@
       </mat-card-content>
     </mat-card>
   </mat-tab>
+
+  <mat-tab label="Access Key">
+    <mat-card>
+      <mat-card-header>
+        <div mat-card-avatar>
+          <mat-icon>
+            <ng-icon name="bootstrapKey"></ng-icon>
+          </mat-icon>
+        </div>
+        <mat-card-title>Your Access Key</mat-card-title>
+        <mat-card-subtitle>
+          Your access key is used to provide services like OBS browser sources without the requirement to sign in.
+        </mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>
+          You can reveal your access key on this screen. Please do not share this key with anyone. If you suspect your
+          key has been compromised, you can regenerate it below.
+        </p>
+        <div>
+          <button mat-button color="primary" (click)="revealAccessKey()">
+            <mat-icon>
+              <ng-icon name="bootstrapEye"></ng-icon>
+            </mat-icon>
+            Reveal Access Key
+          </button>
+        </div>
+
+        <p>
+          If you suspect your access key has been compromised, you can regenerate it. This will invalidate the current
+          key and generate a new one. You will need to update any services using the old key.
+        </p>
+        <div>
+          <button mat-flat-button color="warn" (click)="regenerateAccessKey()">
+            <mat-icon>
+              <ng-icon name="bootstrapArrowCounterclockwise"></ng-icon>
+            </mat-icon>
+            Regenerate Access Key
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </mat-tab>
 </mat-tab-group>

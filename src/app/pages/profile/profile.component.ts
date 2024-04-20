@@ -10,8 +10,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTabsModule } from '@angular/material/tabs';
 import { AuthService } from '@auth0/auth0-angular';
 import {
+  bootstrapArrowCounterclockwise,
   bootstrapBox,
   bootstrapClock,
+  bootstrapEye,
   bootstrapHash,
   bootstrapKey,
   bootstrapMailboxFlag,
@@ -24,6 +26,7 @@ import { map, shareReplay } from 'rxjs';
 
 import { UserApiService } from '../../api/user-api.service';
 import { ChannelAliasPipe } from '../../utils/channel/channel-alias.pipe';
+import { DialogService } from '../../utils/dialog.service';
 
 @Component({
   selector: 'fac-profile',
@@ -51,6 +54,8 @@ import { ChannelAliasPipe } from '../../utils/channel/channel-alias.pipe';
       bootstrapHash,
       bootstrapMailboxFlag,
       bootstrapClock,
+      bootstrapEye,
+      bootstrapArrowCounterclockwise,
     }),
   ],
   templateUrl: './profile.component.html',
@@ -60,6 +65,7 @@ import { ChannelAliasPipe } from '../../utils/channel/channel-alias.pipe';
 export class ProfileComponent implements OnInit {
   private readonly auth = inject(AuthService);
   private readonly userApi = inject(UserApiService);
+  private readonly dialog = inject(DialogService);
 
   private readonly formBuilder = inject(FormBuilder);
   readonly form = this.formBuilder.group({
@@ -104,5 +110,13 @@ export class ProfileComponent implements OnInit {
     this.userForm$.subscribe((user) => {
       this.form.patchValue(user);
     });
+  }
+
+  revealAccessKey(): void {
+    this.dialog.notImplemented();
+  }
+
+  regenerateAccessKey(): void {
+    this.dialog.notImplemented();
   }
 }
