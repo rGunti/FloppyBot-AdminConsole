@@ -9,7 +9,7 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { bootstrapPencil, bootstrapTrash } from '@ng-icons/bootstrap-icons';
+import { bootstrapArrowCounterclockwise, bootstrapPencil, bootstrapTrash } from '@ng-icons/bootstrap-icons';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { BehaviorSubject, filter, map, mergeMap, of, Subject, switchMap, take, takeUntil, tap } from 'rxjs';
 
@@ -45,11 +45,12 @@ import { DialogService } from '../../../utils/dialog.service';
     provideIcons({
       bootstrapTrash,
       bootstrapPencil,
+      bootstrapArrowCounterclockwise,
     }),
   ],
 })
 export class ManageQuotesComponent implements AfterViewInit, OnDestroy {
-  private readonly refresh$ = new BehaviorSubject<void>(undefined);
+  readonly refresh$ = new BehaviorSubject<void>(undefined);
   private readonly destroy$ = new Subject<void>();
   private readonly channelService = inject(ChannelService);
   private readonly quoteApi = inject(QuoteApiService);
@@ -58,6 +59,7 @@ export class ManageQuotesComponent implements AfterViewInit, OnDestroy {
   readonly displayedColumns: string[] = ['quoteId', 'quote', 'quoteContext', 'createdBy', 'createdAt', 'actions'];
   readonly dataSource = new MatTableDataSource<Quote>([]);
 
+  readonly selectedChannelId$ = this.channelService.selectedChannelId$;
   readonly dataSource$ = this.refresh$.pipe(
     mergeMap(() => this.channelService.selectedChannelId$),
     takeUntil(this.destroy$),

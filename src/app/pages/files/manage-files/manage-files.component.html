@@ -11,6 +11,16 @@
         <ng-icon name="bootstrapUpload"></ng-icon>
       </mat-icon>
     </button>
+    <button
+      mat-icon-button
+      matTooltip="Refresh"
+      [disabled]="(selectedChannelId$ | async) === undefined"
+      (click)="refresh$.next()"
+    >
+      <mat-icon>
+        <ng-icon name="bootstrapArrowCounterclockwise"></ng-icon>
+      </mat-icon>
+    </button>
   </mat-toolbar>
   <mat-paginator [pageSize]="10" hidePageSize="true" showFirstLastButtons></mat-paginator>
 

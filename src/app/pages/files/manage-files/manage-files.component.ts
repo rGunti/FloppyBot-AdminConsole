@@ -8,6 +8,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {
+  bootstrapArrowCounterclockwise,
   bootstrapDownload,
   bootstrapFileEarmark,
   bootstrapFileEarmarkImage,
@@ -59,6 +60,7 @@ import { FileSizePipe } from '../../../utils/files/file-size.pipe';
       bootstrapFileEarmarkZip,
       bootstrapFileEarmarkImage,
       bootstrapFileEarmarkPdf,
+      bootstrapArrowCounterclockwise,
     }),
   ],
   templateUrl: './manage-files.component.html',
@@ -66,7 +68,7 @@ import { FileSizePipe } from '../../../utils/files/file-size.pipe';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ManageFilesComponent implements AfterViewInit, OnDestroy {
-  private readonly refresh$ = new BehaviorSubject<void>(undefined);
+  readonly refresh$ = new BehaviorSubject<void>(undefined);
   private readonly destroy$ = new Subject<void>();
 
   private readonly fileApi = inject(FileApiService);

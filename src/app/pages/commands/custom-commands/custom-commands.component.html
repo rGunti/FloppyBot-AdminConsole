@@ -1,6 +1,16 @@
 <div class="mat-elevation-z8">
   <mat-toolbar class="action-toolbar">
     <fac-channel-selector></fac-channel-selector>
+    <button
+      mat-icon-button
+      matTooltip="Refresh"
+      [disabled]="(selectedChannelId$ | async) === undefined"
+      (click)="refresh$.next()"
+    >
+      <mat-icon>
+        <ng-icon name="bootstrapArrowCounterclockwise"></ng-icon>
+      </mat-icon>
+    </button>
   </mat-toolbar>
   <fac-command-list [commands]="commands$ | async" [allowDelete]="true"></fac-command-list>
 </div>

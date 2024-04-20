@@ -1,6 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, OnDestroy } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { bootstrapArrowCounterclockwise } from '@ng-icons/bootstrap-icons';
+import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { BehaviorSubject, of, Subject, switchMap, take, takeUntil, tap } from 'rxjs';
 
 import { CommandApiService } from '../../../api/command-api.service';
@@ -15,13 +20,27 @@ import { DialogService } from '../../../utils/dialog.service';
 @Component({
   selector: 'fac-built-in-commands',
   standalone: true,
-  imports: [CommonModule, ChannelSelectorComponent, CommandListComponent, MatToolbarModule],
+  imports: [
+    CommonModule,
+    ChannelSelectorComponent,
+    CommandListComponent,
+    MatToolbarModule,
+    MatIconModule,
+    NgIconComponent,
+    MatButtonModule,
+    MatTooltipModule,
+  ],
+  providers: [
+    provideIcons({
+      bootstrapArrowCounterclockwise,
+    }),
+  ],
   templateUrl: './built-in-commands.component.html',
   styleUrl: './built-in-commands.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BuiltInCommandsComponent implements OnDestroy {
-  private readonly refresh$ = new BehaviorSubject<void>(undefined);
+  readonly refresh$ = new BehaviorSubject<void>(undefined);
   private readonly destroy$ = new Subject<void>();
 
   private readonly channelService = inject(ChannelService);
@@ -29,6 +48,7 @@ export class BuiltInCommandsComponent implements OnDestroy {
   private readonly commandApi = inject(CommandApiService);
   private readonly dialog = inject(DialogService);
 
+  readonly selectedChannelId$ = this.channelService.selectedChannelId$;
   readonly commands$ = this.refresh$.pipe(
     switchMap(() => this.channelService.selectedChannelId$),
     takeUntil(this.destroy$),
