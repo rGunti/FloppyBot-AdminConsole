@@ -96,41 +96,64 @@
       <mat-hint> Users with a lower level will not be able to use this command. </mat-hint>
     </mat-form-field>
 
-    <!--
-    <input type="hidden" formControlName="cooldown" />
-    <input type="hidden" formControlName="limitedToUsers" />
-    <mat-form-field>
-      <mat-label>Cooldown</mat-label>
-      <input matInput formControlName="cooldown" />
-    </mat-form-field>
-    -->
-
     <h4>Limited to Users</h4>
     <fac-list-form-control
       label="Limited to Users"
       addPlaceholder="Add user …"
       formControlName="limitedToUsers"
     ></fac-list-form-control>
+
+    <h4>Cooldown</h4>
+    <div formArrayName="cooldown">
+      @for (cooldown of cooldownArray.controls; track $index) {
+        <div class="form-row" [formGroupName]="$index">
+          <mat-form-field>
+            <mat-label>Level</mat-label>
+            <mat-icon matPrefix>
+              <fac-privilege-icon
+                matPrefix
+                [privilege]="cooldown.get('level')!.value"
+                [tooltip]="false"
+              ></fac-privilege-icon>
+            </mat-icon>
+            <mat-select formControlName="level">
+              <!-- <mat-option value="SuperUser">Super User</mat-option> -->
+              @for (privilege of allPrivileges; track $index) {
+                <mat-option [value]="privilege.privilege">
+                  <mat-icon>
+                    <ng-icon [svg]="privilege.icon"></ng-icon>
+                  </mat-icon>
+                  {{ privilege.label }}
+                </mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Cooldown (milliseconds)</mat-label>
+            <input matInput type="number" formControlName="milliseconds" />
+          </mat-form-field>
+          <button mat-icon-button matTooltip="Remove cooldown" (click)="removeCooldown($index)">
+            <mat-icon>
+              <ng-icon name="bootstrapTrash"></ng-icon>
+            </mat-icon>
+          </button>
+        </div>
+      }
+
+      <div class="button-row">
+        <button mat-button (click)="addCooldown()">
+          <mat-icon>
+            <ng-icon name="bootstrapPlus"></ng-icon>
+          </mat-icon>
+          Add Cooldown
+        </button>
+      </div>
+    </div>
     <!--
+    <input type="hidden" formControlName="cooldown" />
     <mat-form-field>
-      <mat-label>Limited to Users</mat-label>
-      <mat-chip-grid #chipGrid>
-        @for (user of limitedToUsers; track user) {
-          <mat-chip-row [editable]="true" (removed)="removeUserFromLimitedUsers($event)">
-            {{ user }}
-            <button matChipRemove>
-              <mat-icon>cancel</mat-icon>
-            </button>
-          </mat-chip-row>
-        }
-        <input
-          placeholder="New User"
-          [matChipInputFor]="chipGrid"
-          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-          [matChipInputAddOnBlur]="true"
-          (matChipInputTokenEnd)="addUserToLimitedUsers($event)"
-        />
-      </mat-chip-grid>
+      <mat-label>Cooldown</mat-label>
+      <input matInput formControlName="cooldown" />
     </mat-form-field>
     -->
   </div>

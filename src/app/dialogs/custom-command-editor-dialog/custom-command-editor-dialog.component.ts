@@ -140,6 +140,10 @@ export class CustomCommandEditorDialogComponent {
     return this.form.get('responses') as FormArray;
   }
 
+  get cooldownArray(): FormArray {
+    return this.form.get('limitations.cooldown') as FormArray;
+  }
+
   getResponseForm(form: AbstractControl): FormGroup {
     return form as FormGroup;
   }
@@ -160,26 +164,19 @@ export class CustomCommandEditorDialogComponent {
   }
 
   addResponse(): void {
-    this.responsesArray.push(this.constructResponseForm({ type: 'Text', content: '' }));
+    const newResponse: CommandResponse = { type: 'Text', content: '' };
+    this.responsesArray.push(this.constructResponseForm(newResponse));
   }
 
   removeResponse(index: number): void {
     this.responsesArray.removeAt(index);
   }
 
-  addUserToLimitedUsers($event: MatChipInputEvent) {
-    console.log('CustomCommandEditorDialog', 'addUserToLimitedUsers', $event, this.limitedToUsers);
-    const value = $event.value.trim();
-    if (!value) {
-      return;
-    }
-
-    this.form.get('limitations.limitedToUsers')!.setValue([...this.limitedToUsers, value]);
-    $event.chipInput!.clear();
+  addCooldown(): void {
+    this.cooldownArray.push(this.constructCooldownForm({ level: 'Viewer', milliseconds: 0 }));
   }
 
-  removeUserFromLimitedUsers($event: MatChipEvent) {
-    console.log('CustomCommandEditorDialog', 'removeUserFromLimitedUsers', $event);
-    //const index = this.limitedToUsers.indexOf($event.chip);
+  removeCooldown(index: number): void {
+    this.cooldownArray.removeAt(index);
   }
 }
