@@ -4,7 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { bootstrapArrowCounterclockwise } from '@ng-icons/bootstrap-icons';
+import { bootstrapArrowCounterclockwise, bootstrapPlus } from '@ng-icons/bootstrap-icons';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { BehaviorSubject, filter, map, of, Subject, switchMap, take, takeUntil, tap } from 'rxjs';
 
@@ -33,6 +33,7 @@ import { DialogService } from '../../../utils/dialog.service';
   providers: [
     provideIcons({
       bootstrapArrowCounterclockwise,
+      bootstrapPlus,
     }),
   ],
   templateUrl: './custom-commands.component.html',
@@ -57,6 +58,35 @@ export class CustomCommandsComponent implements OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  createCommand(): void {
+    const emptyCommand: CustomCommand = {
+      id: '',
+      name: '',
+      aliases: [],
+      responses: [],
+      responseMode: 'First',
+      limitations: {
+        minLevel: 'Viewer',
+        cooldown: [],
+        limitedToUsers: [],
+      },
+    };
+    this.selectedChannelId$
+      .pipe(
+        takeUntil(this.destroy$),
+        filter((c) => !!c),
+        take(1),
+        switchMap((channelId) =>
+          this.dialog
+            .show<CustomCommand>(CustomCommandEditorDialogComponent, emptyCommand)
+            .pipe(map((newCommand) => ({ newCommand, channelId }))),
+        ),
+        filter(({ newCommand }) => !!newCommand),
+        switchMap((response) => this.commandApi.createCustomCommand(response.channelId!, response.newCommand)),
+      )
+      .subscribe(() => this.dialog.success('Command created'));
   }
 
   editCommand($event: CommandInfo): void {
