@@ -12,5 +12,10 @@
       </mat-icon>
     </button>
   </mat-toolbar>
-  <fac-command-list [commands]="commands$ | async" [allowDelete]="true"></fac-command-list>
+  <fac-command-list
+    [commands]="commands$ | async"
+    [allowDelete]="true"
+    [allowDetail]="false"
+    (editCommand)="editCommand($event)"
+  ></fac-command-list>
 </div>

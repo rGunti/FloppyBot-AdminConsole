@@ -1,0 +1,143 @@
+<h1 mat-dialog-title>
+  Edit Command <code>{{ command.name }}</code>
+</h1>
+<div mat-dialog-content [formGroup]="form">
+  <input type="hidden" formControlName="id" />
+
+  <!-- Command Name -->
+  <mat-form-field>
+    <mat-label>Command Name</mat-label>
+    <mat-icon matPrefix>
+      <ng-icon name="bootstrapExclamationLg"></ng-icon>
+    </mat-icon>
+    <input matInput formControlName="name" [readonly]="!!command.id" />
+  </mat-form-field>
+
+  <!-- Aliases -->
+  <fac-list-form-control label="Aliases" addPlaceholder="Add alias …" formControlName="aliases"></fac-list-form-control>
+
+  <!-- Responses -->
+  <h3>
+    Responses (<span>{{ responsesArray.controls.length }}</span
+    >)
+  </h3>
+  <div formArrayName="responses">
+    @for (response of responsesArray.controls; track $index) {
+      <div class="response-row">
+        <fac-custom-command-response-form [formControlName]="$index"></fac-custom-command-response-form>
+        <button mat-icon-button matTooltip="Remove response" (click)="removeResponse($index)">
+          <mat-icon>
+            <ng-icon name="bootstrapTrash"></ng-icon>
+          </mat-icon>
+        </button>
+      </div>
+    }
+
+    <div class="button-row">
+      <button mat-button (click)="addResponse()">
+        <mat-icon>
+          <ng-icon name="bootstrapPlus"></ng-icon>
+        </mat-icon>
+        Add Response
+      </button>
+    </div>
+  </div>
+  <mat-form-field>
+    <mat-label>Response Mode</mat-label>
+    <mat-icon matPrefix>
+      <ng-icon [svg]="(selectedModeIcon$ | async)!"></ng-icon>
+    </mat-icon>
+    <mat-select formControlName="responseMode">
+      <mat-option value="First">
+        <mat-icon>
+          <ng-icon name="bootstrapPlayFill"></ng-icon>
+        </mat-icon>
+        First (Default)
+      </mat-option>
+      <mat-option value="PickOneRandom">
+        <mat-icon>
+          <ng-icon name="bootstrapShuffle"></ng-icon>
+        </mat-icon>
+        Pick one randomly
+      </mat-option>
+      <mat-option value="All">
+        <mat-icon>
+          <ng-icon name="bootstrapFastForwardFill"></ng-icon>
+        </mat-icon>
+        Run all
+      </mat-option>
+    </mat-select>
+    <mat-hint>{{ selectedModeTip$ | async }}</mat-hint>
+  </mat-form-field>
+
+  <!-- Limitations -->
+  <h3>Limitations</h3>
+  <div formGroupName="limitations">
+    <mat-form-field>
+      <mat-label>Minimum Privilege Level</mat-label>
+      <mat-icon matPrefix>
+        <fac-privilege-icon
+          matPrefix
+          [privilege]="(selectedPrivilegeLevel$ | async)!"
+          [tooltip]="false"
+        ></fac-privilege-icon>
+      </mat-icon>
+      <mat-select formControlName="minLevel">
+        <!-- <mat-option value="SuperUser">Super User</mat-option> -->
+        @for (privilege of allPrivileges; track $index) {
+          <mat-option [value]="privilege.privilege">
+            <mat-icon>
+              <ng-icon [svg]="privilege.icon"></ng-icon>
+            </mat-icon>
+            {{ privilege.label }}
+          </mat-option>
+        }
+      </mat-select>
+      <mat-hint> Users with a lower level will not be able to use this command. </mat-hint>
+    </mat-form-field>
+
+    <!--
+    <input type="hidden" formControlName="cooldown" />
+    <input type="hidden" formControlName="limitedToUsers" />
+    <mat-form-field>
+      <mat-label>Cooldown</mat-label>
+      <input matInput formControlName="cooldown" />
+    </mat-form-field>
+    -->
+
+    <h4>Limited to Users</h4>
+    <fac-list-form-control
+      label="Limited to Users"
+      addPlaceholder="Add user …"
+      formControlName="limitedToUsers"
+    ></fac-list-form-control>
+    <!--
+    <mat-form-field>
+      <mat-label>Limited to Users</mat-label>
+      <mat-chip-grid #chipGrid>
+        @for (user of limitedToUsers; track user) {
+          <mat-chip-row [editable]="true" (removed)="removeUserFromLimitedUsers($event)">
+            {{ user }}
+            <button matChipRemove>
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip-row>
+        }
+        <input
+          placeholder="New User"
+          [matChipInputFor]="chipGrid"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          [matChipInputAddOnBlur]="true"
+          (matChipInputTokenEnd)="addUserToLimitedUsers($event)"
+        />
+      </mat-chip-grid>
+    </mat-form-field>
+    -->
+  </div>
+
+  <pre>{{ form.value | json }}</pre>
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="undefined">Cancel</button>
+  <button mat-flat-button color="primary" [disabled]="form.invalid" [mat-dialog-close]="form.value">Save</button>
+</div>

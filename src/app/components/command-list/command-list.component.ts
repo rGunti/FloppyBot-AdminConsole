@@ -57,7 +57,9 @@ export class CommandListComponent implements AfterViewInit {
   readonly displayedColumns: string[] = ['enabled', 'name', 'restrictions', 'actions'];
 
   @Output() readonly disableCommand = new EventEmitter<CommandInfo>();
+  @Output() readonly deleteCommand = new EventEmitter<CommandInfo>();
   @Output() readonly showCommandDetails = new EventEmitter<CommandInfo>();
+  @Output() readonly editCommand = new EventEmitter<CommandInfo>();
 
   @Input({ required: true }) get commands(): CommandInfo[] {
     return this.dataSource.data;
@@ -66,6 +68,7 @@ export class CommandListComponent implements AfterViewInit {
     this.dataSource.data = commands || [];
   }
 
+  @Input() allowDetail = true;
   @Input() allowDelete = false;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;

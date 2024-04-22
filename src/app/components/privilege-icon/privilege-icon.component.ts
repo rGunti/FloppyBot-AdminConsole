@@ -8,6 +8,7 @@ import {
   bootstrapShieldFill,
   bootstrapShieldLockFill,
   bootstrapShieldShaded,
+  bootstrapShieldSlash,
 } from '@ng-icons/bootstrap-icons';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 
@@ -24,6 +25,7 @@ import { PrivilegeLevel } from '../../api/entities';
       bootstrapShieldShaded,
       bootstrapShield,
       bootstrapPerson,
+      bootstrapShieldSlash,
     }),
   ],
   templateUrl: './privilege-icon.component.html',
@@ -31,9 +33,12 @@ import { PrivilegeLevel } from '../../api/entities';
 })
 export class PrivilegeIconComponent {
   @Input({ required: true }) privilege!: PrivilegeLevel;
+  @Input() tooltip = true;
 
   get icon(): string {
     switch (this.privilege) {
+      case 'Unknown':
+        return 'bootstrapShieldSlash';
       case 'Viewer':
         return 'bootstrapShield';
       case 'Moderator':

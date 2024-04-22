@@ -1,0 +1,36 @@
+<div [formGroup]="form">
+  <mat-form-field>
+    <mat-label>Response Type</mat-label>
+    <mat-select formControlName="type">
+      <mat-option value="Text">
+        <mat-icon>
+          <ng-icon name="bootstrapChatDots"></ng-icon>
+        </mat-icon>
+        Text
+      </mat-option>
+      <mat-option value="Sound">
+        <mat-icon>
+          <ng-icon name="bootstrapMusicNote"></ng-icon>
+        </mat-icon>
+        Sound
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  @if (form.get('type')!.value === 'Text') {
+    <mat-form-field>
+      <mat-label>Response Message</mat-label>
+      <input matInput formControlName="content" />
+    </mat-form-field>
+    <input type="hidden" formControlName="auxiliaryContent" />
+  } @else if (form.get('type')!.value === 'Sound') {
+    <mat-form-field>
+      <mat-label>Sound file to play</mat-label>
+      <input matInput formControlName="content" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Response Message (optional)</mat-label>
+      <input matInput formControlName="auxiliaryContent" />
+    </mat-form-field>
+  }
+</div>

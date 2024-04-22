@@ -77,7 +77,7 @@ export class CommandService {
   private convertCustomCommandToCommandInfo(command: CustomCommand): CommandInfo {
     return {
       name: command.name,
-      description: '',
+      description: this.createDescriptionForCommandInfo(command),
       aliases: command.aliases,
       restrictedToInterfaces: [],
       requiredPrivilegeLevel: command.limitations.minLevel || 'Unknown',
@@ -87,6 +87,17 @@ export class CommandService {
       obsolete: false,
       disabled: false,
     };
+  }
+
+  private createDescriptionForCommandInfo(command: CustomCommand): string {
+    if (command.responses.length === 0) {
+      return 'No responses';
+    }
+    if (command.responses.length === 1) {
+      const response = command.responses[0];
+      return `${response.type}: ${response.content}`;
+    }
+    return `${command.responses.length} responses`;
   }
 
   private convertLimitationsToCooldown(limitations: CommandLimitation): CooldownInfo {

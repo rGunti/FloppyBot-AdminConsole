@@ -597,4 +597,12 @@ export class CommandApiService {
   getCustomCommandsForChannel(channelId: string): Observable<CustomCommand[]> {
     return this.http.get<CustomCommand[]>(getUrl(`/api/v2/custom-commands/${channelId}`));
   }
+
+  getCustomCommandForChannel(channelId: string, commandName: string): Observable<CustomCommand> {
+    return this.http.get<CustomCommand>(getUrl(`/api/v2/custom-commands/${channelId}/${commandName}`));
+  }
+
+  updateCustomCommand(channelId: string, command: CustomCommand): Observable<void> {
+    return this.http.put<void>(getUrl(`/api/v2/custom-commands/${channelId}/${command.name}`), command);
+  }
 }
