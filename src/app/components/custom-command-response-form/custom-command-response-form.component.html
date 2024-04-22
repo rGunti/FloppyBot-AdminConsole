@@ -20,7 +20,7 @@
   @if (form.get('type')!.value === 'Text') {
     <mat-form-field>
       <mat-label>Response Message</mat-label>
-      <input matInput formControlName="content" />
+      <textarea matInput formControlName="content"></textarea>
     </mat-form-field>
     <input type="hidden" formControlName="auxiliaryContent" />
   } @else if (form.get('type')!.value === 'Sound') {
@@ -30,7 +30,10 @@
     </mat-form-field>
     <mat-form-field>
       <mat-label>Response Message (optional)</mat-label>
-      <input matInput formControlName="auxiliaryContent" />
+      <textarea matInput formControlName="auxiliaryContent"></textarea>
     </mat-form-field>
+  } @else {
+    <input type="hidden" formControlName="content" />
+    <input type="hidden" formControlName="auxiliaryContent" />
   }
 </div>
