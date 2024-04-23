@@ -3,17 +3,14 @@
   @if (form.get('type')!.value === 'Text') {
     <mat-form-field>
       <mat-label>Response Message</mat-label>
-      <textarea matInput formControlName="content"></textarea>
+      <textarea matInput formControlName="content" rows="4"></textarea>
     </mat-form-field>
     <input type="hidden" formControlName="auxiliaryContent" />
   } @else if (form.get('type')!.value === 'Sound') {
-    <mat-form-field>
-      <mat-label>Sound file to play</mat-label>
-      <input matInput formControlName="content" />
-    </mat-form-field>
+    <fac-file-picker label="Sound file to play" formControlName="content"></fac-file-picker>
     <mat-form-field>
       <mat-label>Response Message (optional)</mat-label>
-      <textarea matInput formControlName="auxiliaryContent"></textarea>
+      <textarea matInput formControlName="auxiliaryContent" rows="4"></textarea>
     </mat-form-field>
   } @else {
     <input type="hidden" formControlName="content" />

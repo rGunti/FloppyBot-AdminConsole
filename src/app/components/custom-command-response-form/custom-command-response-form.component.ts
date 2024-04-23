@@ -17,6 +17,7 @@ import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { Subject, takeUntil } from 'rxjs';
 
 import { CommandResponse, CommandResponseType } from '../../api/entities';
+import { FilePickerComponent } from '../file-picker/file-picker.component';
 
 @Component({
   selector: 'fac-custom-command-response-form',
@@ -29,6 +30,7 @@ import { CommandResponse, CommandResponseType } from '../../api/entities';
     MatIconModule,
     NgIconComponent,
     ReactiveFormsModule,
+    FilePickerComponent,
   ],
   providers: [
     {
