@@ -1,22 +1,5 @@
 <div [formGroup]="form">
-  <mat-form-field>
-    <mat-label>Response Type</mat-label>
-    <mat-select formControlName="type">
-      <mat-option value="Text">
-        <mat-icon>
-          <ng-icon name="bootstrapChatDots"></ng-icon>
-        </mat-icon>
-        Text
-      </mat-option>
-      <mat-option value="Sound">
-        <mat-icon>
-          <ng-icon name="bootstrapMusicNote"></ng-icon>
-        </mat-icon>
-        Sound
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-
+  <input type="hidden" formControlName="type" />
   @if (form.get('type')!.value === 'Text') {
     <mat-form-field>
       <mat-label>Response Message</mat-label>

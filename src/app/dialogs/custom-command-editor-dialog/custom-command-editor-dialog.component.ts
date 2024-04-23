@@ -3,18 +3,24 @@ import { CommonModule } from '@angular/common';
 import { Component, Inject, inject } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatChipEvent, MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
+import { MatChipsModule } from '@angular/material/chips';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {
   bootstrap1Square,
+  bootstrapChatQuote,
   bootstrapExclamationLg,
   bootstrapFastForwardBtn,
   bootstrapFastForwardFill,
+  bootstrapLock,
+  bootstrapMusicNote,
   bootstrapPlayBtn,
   bootstrapPlayFill,
   bootstrapPlus,
@@ -27,6 +33,7 @@ import { map, startWith } from 'rxjs';
 import {
   CommandResponse,
   CommandResponseMode,
+  CommandResponseType,
   CooldownDescription,
   CustomCommand,
   PrivilegeLevel,
@@ -48,6 +55,9 @@ import { PrivilegeService } from '../../utils/privilege.service';
     MatChipsModule,
     MatIconModule,
     NgIconComponent,
+    MatTabsModule,
+    MatDividerModule,
+    MatMenuModule,
     ReactiveFormsModule,
     MatSelectModule,
     MatTooltipModule,
@@ -66,6 +76,9 @@ import { PrivilegeService } from '../../utils/privilege.service';
       bootstrapFastForwardBtn,
       bootstrapTrash,
       bootstrapPlus,
+      bootstrapChatQuote,
+      bootstrapLock,
+      bootstrapMusicNote,
     }),
   ],
   templateUrl: './custom-command-editor-dialog.component.html',
@@ -148,6 +161,19 @@ export class CustomCommandEditorDialogComponent {
     return form as FormGroup;
   }
 
+  getResponseIcon(form: AbstractControl): string {
+    const fg = form as FormGroup;
+    const type = fg.get('type')!.value as CommandResponseType;
+    switch (type) {
+      case 'Text':
+        return bootstrapChatQuote;
+      case 'Sound':
+        return bootstrapMusicNote;
+      default:
+        return '';
+    }
+  }
+
   private constructResponseForm(response: CommandResponse) {
     return this.formBuilder.group({
       type: [response.type, [Validators.required]],
@@ -163,8 +189,8 @@ export class CustomCommandEditorDialogComponent {
     });
   }
 
-  addResponse(): void {
-    const newResponse: CommandResponse = { type: 'Text', content: '' };
+  addResponse(responseType: CommandResponseType): void {
+    const newResponse: CommandResponse = { type: responseType, content: '' };
     this.responsesArray.push(this.constructResponseForm(newResponse));
   }
 
