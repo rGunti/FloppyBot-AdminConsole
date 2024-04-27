@@ -1,10 +1,24 @@
-FROM nginx:1-alpine AS base
+FROM node:20-slim AS build-base
+RUN npm install -g pnpm
+
+FROM build-base AS build
+WORKDIR /app
+
+COPY --chown=node:node pnpm-lock.yaml ./
+RUN pnpm fetch
+
+COPY --chown=node:node . .
+RUN pnpm install --offline
+RUN npm run build
+
+FROM nginx:1-alpine AS nginx-base
 COPY ["nginx.conf", "/etc/nginx/conf.d/default.conf"]
 RUN apk add gettext
 COPY ["nginx.startup.sh", "/startup.sh"]
 
-FROM base AS publish
+FROM nginx-base AS publish
 WORKDIR /usr/share/nginx/html
-COPY ./dist/floppybot-admin-console/browser/ .
+COPY --from=build /app/dist/floppybot-admin-console/browser/ .
+#COPY ./dist/floppybot-admin-console/browser/ .
 CMD ["sh", "/startup.sh"]
 EXPOSE 80
