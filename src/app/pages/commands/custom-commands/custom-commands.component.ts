@@ -85,6 +85,7 @@ export class CustomCommandsComponent implements OnDestroy {
         ),
         filter(({ newCommand }) => !!newCommand),
         switchMap((response) => this.commandApi.createCustomCommand(response.channelId!, response.newCommand)),
+        tap(() => this.refresh$.next()),
       )
       .subscribe(() => this.dialog.success('Command created'));
   }
