@@ -13,7 +13,7 @@ updates:
       # Ignore all major updates
       - dependency-name: "*"
         versions:
-          - "version-update:semver-major"
+          - "major"
     groups:
       angular:
         patterns:
@@ -30,4 +30,4 @@ updates:
       # Ignore all major updates
       - dependency-name: "*"
         versions:
-          - "version-update:semver-major"
+          - "major"
