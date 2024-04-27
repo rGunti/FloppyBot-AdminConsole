@@ -1,0 +1,61 @@
+name: Build & Test
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20.x]
+        pnpm-version: [9.x]
+        chrome-version: [latest]
+
+    steps:
+      # Checkout the repository
+      - uses: actions/checkout@v1
+
+      # Setup Node.js and pnpm
+      - name: Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: ${{ matrix.pnpm-version }}
+          run_install: false
+
+      # Setup Chrome
+      - name: Setup Chrome for testing
+        uses: browser-actions/setup-chrome@v1
+        id: setup-chrome
+        with:
+          chrome-version: ${{ matrix.chrome-version }}
+
+      # Cache pnpm store
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+      - uses: actions/cache@v4
+        name: Setup pnpm cache
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      # Install dependencies
+      - name: Fetch dependencies
+        run: pnpm fetch && pnpm install --offline
+
+      # Build & Test
+      - name: Build
+        run: npm run build
+      - name: Test
+        run: npm test:ci
+        env:
+          CHROME_BIN: ${{ steps.setup-chrome.outputs.chrome-path }}
