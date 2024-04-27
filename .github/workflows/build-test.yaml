@@ -1,5 +1,6 @@
 name: Build & Test
 on:
+  workflow_run:
   pull_request:
     branches:
       - main
