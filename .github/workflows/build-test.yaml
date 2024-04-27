@@ -16,7 +16,7 @@ jobs:
 
     steps:
       # Checkout the repository
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v4
 
       # Setup Node.js and pnpm
       - name: Node ${{ matrix.node-version }}
