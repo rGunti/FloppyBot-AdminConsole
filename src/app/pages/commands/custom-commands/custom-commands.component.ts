@@ -13,6 +13,7 @@ import { CommandInfo, CustomCommand } from '../../../api/entities';
 import { ChannelSelectorComponent } from '../../../components/channel-selector/channel-selector.component';
 import { CommandListComponent } from '../../../components/command-list/command-list.component';
 import { CustomCommandEditorDialogComponent } from '../../../dialogs/custom-command-editor-dialog/custom-command-editor-dialog.component';
+import { DeleteCommandDialogComponent } from '../../../dialogs/delete-command-dialog/delete-command-dialog.component';
 import { ChannelService } from '../../../utils/channel/channel.service';
 import { CommandService } from '../../../utils/commands/command.service';
 import { DialogService } from '../../../utils/dialog.service';
@@ -107,5 +108,18 @@ export class CustomCommandsComponent implements OnDestroy {
         tap(() => this.refresh$.next()),
       )
       .subscribe(() => this.dialog.success('Command updated'));
+  }
+
+  deleteCommand($event: CommandInfo): void {
+    this.dialog
+      .show<boolean>(DeleteCommandDialogComponent, $event)
+      .pipe(
+        takeUntil(this.destroy$),
+        filter((result) => !!result),
+        switchMap(() => this.selectedChannelId$),
+        switchMap((channelId) => this.commandApi.deleteCustomCommand(channelId!, $event.name)),
+        tap(() => this.refresh$.next()),
+      )
+      .subscribe(() => this.dialog.success('Command deleted'));
   }
 }

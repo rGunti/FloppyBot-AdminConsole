@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>
+  Delete Command <code>{{ command.name }}</code>
+</h1>
+<div mat-dialog-content>
+  <p>Do you want to delete this command?</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="false">No</button>
+  <button mat-flat-button color="warn" [mat-dialog-close]="true">Yes</button>
+</div>

@@ -609,4 +609,8 @@ export class CommandApiService {
   updateCustomCommand(channelId: string, command: CustomCommand): Observable<void> {
     return this.http.put<void>(getUrl(`/api/v2/custom-commands/${channelId}/${command.name}`), command);
   }
+
+  deleteCustomCommand(channelId: string, commandName: string): Observable<void> {
+    return this.http.delete<void>(getUrl(`/api/v2/custom-commands/${channelId}/${commandName}`));
+  }
 }
