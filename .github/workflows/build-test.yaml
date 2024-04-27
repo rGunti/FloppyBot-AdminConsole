@@ -56,6 +56,6 @@ jobs:
       - name: Build
         run: npm run build
       - name: Test
-        run: npm test:ci
+        run: npm run test:ci
         env:
           CHROME_BIN: ${{ steps.setup-chrome.outputs.chrome-path }}
