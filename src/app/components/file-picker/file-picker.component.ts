@@ -11,8 +11,11 @@ import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { filter } from 'rxjs';
 
 import { FileHeader } from '../../api/entities';
+import {
+  FilePickerDialogComponent,
+  FilePickerDialogOptions,
+} from '../../dialogs/file-picker-dialog/file-picker-dialog.component';
 import { DialogService } from '../../utils/dialog.service';
-import { FilePickerDialogComponent, FilePickerDialogOptions } from '../file-picker-dialog/file-picker-dialog.component';
 
 @Component({
   selector: 'fac-file-picker',
