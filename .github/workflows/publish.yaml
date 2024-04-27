@@ -34,13 +34,6 @@ jobs:
           version: ${{ matrix.pnpm-version }}
           run_install: false
 
-      # Setup Chrome
-      - name: Setup Chrome for testing
-        uses: browser-actions/setup-chrome@v1
-        id: setup-chrome
-        with:
-          chrome-version: ${{ matrix.chrome-version }}
-
       # Cache pnpm store
       - name: Get pnpm store directory
         shell: bash
