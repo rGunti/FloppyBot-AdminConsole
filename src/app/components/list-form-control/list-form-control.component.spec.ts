@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ListFormControlComponent } from './list-form-control.component';
 
@@ -8,10 +9,9 @@ describe('ListFormControlComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ListFormControlComponent]
-    })
-    .compileComponents();
-    
+      imports: [ListFormControlComponent, NoopAnimationsModule],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(ListFormControlComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

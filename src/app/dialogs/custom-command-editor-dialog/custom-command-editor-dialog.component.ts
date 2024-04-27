@@ -43,7 +43,7 @@ import { CustomCommandResponseFormComponent } from '../../components/custom-comm
 import { ListFormControlComponent } from '../../components/list-form-control/list-form-control.component';
 import { PrivilegeIconComponent } from '../../components/privilege-icon/privilege-icon.component';
 import { ChannelService } from '../../utils/channel/channel.service';
-import { CustomCommandValidators, FormErrorPipe, HasErrorPipe } from '../../utils/forms';
+import { CustomCommandValidators, FormErrorPipe } from '../../utils/forms';
 import { PrivilegeService } from '../../utils/privilege.service';
 
 @Component({
@@ -68,7 +68,6 @@ import { PrivilegeService } from '../../utils/privilege.service';
     CustomCommandResponseFormComponent,
     ListFormControlComponent,
     FormErrorPipe,
-    HasErrorPipe,
   ],
   providers: [
     provideIcons({

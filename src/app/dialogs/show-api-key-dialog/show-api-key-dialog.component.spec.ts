@@ -1,4 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+
+import { ApiKeyReport } from '../../api/entities';
+import { DialogService } from '../../utils/dialog.service';
 
 import { ShowApiKeyDialogComponent } from './show-api-key-dialog.component';
 
@@ -8,10 +13,18 @@ describe('ShowApiKeyDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ShowApiKeyDialogComponent]
-    })
-    .compileComponents();
-    
+      imports: [ShowApiKeyDialogComponent, NoopAnimationsModule],
+      providers: [
+        DialogService,
+        {
+          provide: MAT_DIALOG_DATA,
+          useValue: {
+            accessKey: 'NotARealAccessKey',
+          } as ApiKeyReport,
+        },
+      ],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(ShowApiKeyDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

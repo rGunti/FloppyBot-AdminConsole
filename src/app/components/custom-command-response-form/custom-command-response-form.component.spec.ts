@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { CustomCommandResponseFormComponent } from './custom-command-response-form.component';
 
@@ -8,10 +9,9 @@ describe('CustomCommandResponseFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CustomCommandResponseFormComponent]
-    })
-    .compileComponents();
-    
+      imports: [CustomCommandResponseFormComponent, NoopAnimationsModule],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(CustomCommandResponseFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

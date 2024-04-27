@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FilePickerComponent } from './file-picker.component';
 
@@ -8,10 +9,9 @@ describe('FilePickerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FilePickerComponent]
-    })
-    .compileComponents();
-    
+      imports: [FilePickerComponent, NoopAnimationsModule],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(FilePickerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
