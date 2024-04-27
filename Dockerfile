@@ -2,6 +2,8 @@
 # --- Node.js Build Base Image ----------------------------
 FROM node:20-slim AS build-base
 RUN npm install -g pnpm
+RUN apt-get update && apt-get install -y chromium
+ENV CHROME_BIN /usr/bin/chromium
 
 # --- Nginx Base Image ------------------------------------
 FROM nginx:1-alpine AS nginx-base
@@ -20,6 +22,7 @@ RUN pnpm fetch
 COPY --chown=node:node . .
 RUN pnpm install --offline
 RUN npm run build
+RUN npm run test:ci
 
 # === Publish Application =================================
 FROM nginx-base AS publish
