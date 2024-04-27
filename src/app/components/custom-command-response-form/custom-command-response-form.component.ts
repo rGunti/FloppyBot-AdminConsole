@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, forwardRef, OnDestroy } from '@angular/core';
+import { Component, forwardRef, Input, OnDestroy } from '@angular/core';
 import {
   ControlValueAccessor,
   FormControl,
@@ -52,6 +52,8 @@ export class CustomCommandResponseFormComponent implements ControlValueAccessor,
   private _onChange: (_: unknown) => void = () => {};
   private _onTouch: (_: unknown) => void = () => {};
   private _isDisabled: boolean = false;
+
+  @Input({ required: true }) channelId!: string | null;
 
   readonly form: FormGroup = new FormGroup({
     type: new FormControl<CommandResponseType>('Text', {

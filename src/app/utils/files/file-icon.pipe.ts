@@ -1,4 +1,11 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import {
+  bootstrapFileEarmark,
+  bootstrapFileEarmarkImage,
+  bootstrapFileEarmarkMusic,
+  bootstrapFileEarmarkPdf,
+  bootstrapFileEarmarkZip,
+} from '@ng-icons/bootstrap-icons';
 import { IconType } from '@ng-icons/core';
 
 @Pipe({
@@ -8,27 +15,27 @@ import { IconType } from '@ng-icons/core';
 export class FileIconPipe implements PipeTransform {
   transform(value: string | null | undefined): IconType {
     if (!value) {
-      return 'bootstrapFileEarmark';
+      return bootstrapFileEarmark;
     }
 
     const baseType = value.split('/')[0];
     const subType = value.split('/')[1];
     switch (baseType) {
       case 'audio':
-        return 'bootstrapFileEarmarkMusic';
+        return bootstrapFileEarmarkMusic;
       case 'image':
-        return 'bootstrapFileEarmarkImage';
+        return bootstrapFileEarmarkImage;
       case 'application':
         switch (subType) {
           case 'zip':
-            return 'bootstrapFileEarmarkZip';
+            return bootstrapFileEarmarkZip;
           case 'pdf':
-            return 'bootstrapFileEarmarkPdf';
+            return bootstrapFileEarmarkPdf;
           default:
-            return 'bootstrapFileEarmark';
+            return bootstrapFileEarmark;
         }
       default:
-        return 'bootstrapFileEarmark';
+        return bootstrapFileEarmark;
     }
   }
 }

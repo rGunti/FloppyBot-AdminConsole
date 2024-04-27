@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Select a file</h1>
+<div mat-dialog-content>
+  <mat-action-list>
+    @for (file of files$ | async; track $index) {
+      <button mat-list-item [mat-dialog-close]="file">
+        <mat-icon matListItemIcon>
+          <ng-icon [svg]="file.mimeType | fileIcon"></ng-icon>
+        </mat-icon>
+        <span matListItemTitle>{{ file.fileName }}</span>
+        <span matListItemLine>{{ file.fileSize | fileSize }}</span>
+      </button>
+    }
+  </mat-action-list>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
+</div>

@@ -29,7 +29,7 @@
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let file">
         <mat-icon [matTooltip]="file.mimeType">
-          <ng-icon [name]="file.mimeType | fileIcon"></ng-icon>
+          <ng-icon [svg]="file.mimeType | fileIcon"></ng-icon>
         </mat-icon>
       </td>
     </ng-container>

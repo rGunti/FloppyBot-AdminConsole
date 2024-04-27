@@ -7,7 +7,11 @@
     </mat-form-field>
     <input type="hidden" formControlName="auxiliaryContent" />
   } @else if (form.get('type')!.value === 'Sound') {
-    <fac-file-picker label="Sound file to play" formControlName="content"></fac-file-picker>
+    <fac-file-picker
+      label="Sound file to play"
+      [restrictToChannel]="channelId!"
+      formControlName="content"
+    ></fac-file-picker>
     <mat-form-field>
       <mat-label>Response Message (optional)</mat-label>
       <textarea matInput formControlName="auxiliaryContent" rows="4"></textarea>

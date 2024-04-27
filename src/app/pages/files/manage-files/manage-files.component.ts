@@ -10,11 +10,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import {
   bootstrapArrowCounterclockwise,
   bootstrapDownload,
-  bootstrapFileEarmark,
-  bootstrapFileEarmarkImage,
-  bootstrapFileEarmarkMusic,
-  bootstrapFileEarmarkPdf,
-  bootstrapFileEarmarkZip,
   bootstrapTrash,
   bootstrapUpload,
 } from '@ng-icons/bootstrap-icons';
@@ -55,11 +50,6 @@ import { FileSizePipe } from '../../../utils/files/file-size.pipe';
       bootstrapTrash,
       bootstrapDownload,
       bootstrapUpload,
-      bootstrapFileEarmark,
-      bootstrapFileEarmarkMusic,
-      bootstrapFileEarmarkZip,
-      bootstrapFileEarmarkImage,
-      bootstrapFileEarmarkPdf,
       bootstrapArrowCounterclockwise,
     }),
   ],

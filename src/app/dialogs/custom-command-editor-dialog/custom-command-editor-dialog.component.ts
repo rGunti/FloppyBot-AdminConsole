@@ -28,7 +28,7 @@ import {
   bootstrapTrash,
 } from '@ng-icons/bootstrap-icons';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import { map, startWith } from 'rxjs';
+import { filter, map, Observable, startWith } from 'rxjs';
 
 import {
   CommandResponse,
@@ -41,6 +41,7 @@ import {
 import { CustomCommandResponseFormComponent } from '../../components/custom-command-response-form/custom-command-response-form.component';
 import { ListFormControlComponent } from '../../components/list-form-control/list-form-control.component';
 import { PrivilegeIconComponent } from '../../components/privilege-icon/privilege-icon.component';
+import { ChannelService } from '../../utils/channel/channel.service';
 import { PrivilegeService } from '../../utils/privilege.service';
 
 @Component({
@@ -89,6 +90,12 @@ export class CustomCommandEditorDialogComponent {
 
   private readonly formBuilder = inject(FormBuilder);
   private readonly privilegeService = inject(PrivilegeService);
+  private readonly channelService = inject(ChannelService);
+
+  readonly ownerChannel$: Observable<string> = this.channelService.selectedChannelId$.pipe(
+    filter((channelId) => !!channelId),
+    map((channelId) => channelId!),
+  );
 
   readonly form = this.formBuilder.group({
     id: [this.command.id],
