@@ -13,4 +13,5 @@ export const environment: AppEnvironment = {
     },
     errorPath: '/callback',
   },
+  enableDebugTools: true,
 };

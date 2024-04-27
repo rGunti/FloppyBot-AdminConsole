@@ -24,6 +24,7 @@ import {
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { filter, map } from 'rxjs';
 
+import { environment } from '../../../environments/environment';
 import { LogoutDialogComponent } from '../../dialogs/logout-dialog/logout-dialog.component';
 
 @Component({
@@ -65,11 +66,13 @@ export class NavigationComponent {
   private readonly router = inject(Router);
   private readonly auth = inject(AuthService);
 
+  readonly debugFeaturesEnabled = environment.enableDebugTools;
+
   readonly isAuthenticated$ = this.auth.isAuthenticated$;
   readonly username$ = this.auth.user$.pipe(map((user) => user?.nickname));
   readonly profilePictureUrl$ = this.auth.user$.pipe(map((user) => user?.picture));
 
-  title$ = this.router.events.pipe(
+  readonly title$ = this.router.events.pipe(
     filter((event) => event instanceof NavigationEnd),
     map(() => this.router.routerState.snapshot),
     map((snapshot) => this.titleService.buildTitle(snapshot)),
