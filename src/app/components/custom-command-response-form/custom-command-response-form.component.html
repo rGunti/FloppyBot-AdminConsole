@@ -4,6 +4,7 @@
     <mat-form-field>
       <mat-label>Response Message</mat-label>
       <textarea matInput formControlName="content" rows="4"></textarea>
+      <mat-error>{{ form | formError: 'content' | async }}</mat-error>
     </mat-form-field>
     <input type="hidden" formControlName="auxiliaryContent" />
   } @else if (form.get('type')!.value === 'Sound') {
@@ -15,6 +16,7 @@
     <mat-form-field>
       <mat-label>Response Message (optional)</mat-label>
       <textarea matInput formControlName="auxiliaryContent" rows="4"></textarea>
+      <mat-error>{{ form | formError: 'auxiliaryContent' | async }}</mat-error>
     </mat-form-field>
   } @else {
     <input type="hidden" formControlName="content" />

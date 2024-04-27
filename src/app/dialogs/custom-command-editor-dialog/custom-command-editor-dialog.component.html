@@ -23,6 +23,9 @@
         <mat-hint>
           This is the name of your command. Use only lowercase letters and numbers. Cannot contain spaces.
         </mat-hint>
+        <mat-error>
+          {{ form | formError: 'name' | async }}
+        </mat-error>
       </mat-form-field>
 
       <!-- Aliases -->

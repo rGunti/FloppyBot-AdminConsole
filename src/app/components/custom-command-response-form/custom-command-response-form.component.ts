@@ -17,21 +17,12 @@ import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { Subject, takeUntil } from 'rxjs';
 
 import { CommandResponse, CommandResponseType } from '../../api/entities';
+import { FormErrorPipe } from '../../utils/forms/form-error.pipe';
 import { FilePickerComponent } from '../file-picker/file-picker.component';
 
 @Component({
   selector: 'fac-custom-command-response-form',
   standalone: true,
-  imports: [
-    CommonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    MatIconModule,
-    NgIconComponent,
-    ReactiveFormsModule,
-    FilePickerComponent,
-  ],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -45,6 +36,17 @@ import { FilePickerComponent } from '../file-picker/file-picker.component';
   ],
   templateUrl: './custom-command-response-form.component.html',
   styleUrl: './custom-command-response-form.component.scss',
+  imports: [
+    CommonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatIconModule,
+    NgIconComponent,
+    ReactiveFormsModule,
+    FilePickerComponent,
+    FormErrorPipe,
+  ],
 })
 export class CustomCommandResponseFormComponent implements ControlValueAccessor, OnDestroy {
   private readonly destroy$ = new Subject<void>();
@@ -61,11 +63,11 @@ export class CustomCommandResponseFormComponent implements ControlValueAccessor,
       updateOn: 'blur',
     }),
     content: new FormControl<string>('', {
-      validators: [Validators.required],
+      validators: [Validators.required, Validators.maxLength(300)],
       updateOn: 'blur',
     }),
     auxiliaryContent: new FormControl<string | null | undefined>(null, {
-      validators: [],
+      validators: [Validators.maxLength(300)],
       updateOn: 'blur',
     }),
   });

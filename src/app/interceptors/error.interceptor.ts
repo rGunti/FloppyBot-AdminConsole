@@ -1,6 +1,6 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { catchError, throwError } from 'rxjs';
+import { catchError, of, throwError } from 'rxjs';
 
 import { DialogService } from '../utils/dialog.service';
 
@@ -8,6 +8,11 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
   const dialog = inject(DialogService);
   return next(req).pipe(
     catchError((error) => {
+      if (error.status === 404) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        return of<any>(null);
+      }
+
       console.error('Captured request with error response', req, error);
       dialog.error(renderMessage(error));
       return throwError(() => error);

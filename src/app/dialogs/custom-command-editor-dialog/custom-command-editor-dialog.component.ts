@@ -30,6 +30,7 @@ import {
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { filter, map, Observable, startWith } from 'rxjs';
 
+import { CommandApiService } from '../../api/command-api.service';
 import {
   CommandResponse,
   CommandResponseMode,
@@ -42,6 +43,7 @@ import { CustomCommandResponseFormComponent } from '../../components/custom-comm
 import { ListFormControlComponent } from '../../components/list-form-control/list-form-control.component';
 import { PrivilegeIconComponent } from '../../components/privilege-icon/privilege-icon.component';
 import { ChannelService } from '../../utils/channel/channel.service';
+import { CustomCommandValidators, FormErrorPipe, HasErrorPipe } from '../../utils/forms';
 import { PrivilegeService } from '../../utils/privilege.service';
 
 @Component({
@@ -65,6 +67,8 @@ import { PrivilegeService } from '../../utils/privilege.service';
     PrivilegeIconComponent,
     CustomCommandResponseFormComponent,
     ListFormControlComponent,
+    FormErrorPipe,
+    HasErrorPipe,
   ],
   providers: [
     provideIcons({
@@ -91,6 +95,7 @@ export class CustomCommandEditorDialogComponent {
   private readonly formBuilder = inject(FormBuilder);
   private readonly privilegeService = inject(PrivilegeService);
   private readonly channelService = inject(ChannelService);
+  private readonly commandApi = inject(CommandApiService);
 
   readonly ownerChannel$: Observable<string> = this.channelService.selectedChannelId$.pipe(
     filter((channelId) => !!channelId),
@@ -99,17 +104,34 @@ export class CustomCommandEditorDialogComponent {
 
   readonly form = this.formBuilder.group({
     id: [this.command.id],
-    name: ['', [Validators.required]],
-    aliases: [[] as string[]],
-    responseMode: ['First' as CommandResponseMode, [Validators.required]],
-    responses: this.formBuilder.array(this.command.responses.map((response) => this.constructResponseForm(response))),
-    limitations: this.formBuilder.group({
-      minLevel: ['Viewer' as PrivilegeLevel, [Validators.required]],
-      cooldown: this.formBuilder.array(
-        this.command.limitations.cooldown.map((cooldown) => this.constructCooldownForm(cooldown)),
-      ),
-      limitedToUsers: [[] as string[]],
+    name: this.formBuilder.control(this.command.name, {
+      validators: [Validators.required, CustomCommandValidators.customCommandName],
+      asyncValidators: [
+        CustomCommandValidators.uniqueCommandName(this.ownerChannel$, this.command.id, this.commandApi),
+      ],
+      // To reduce the amount of validation requests to the backend, we only validate on blur.
+      updateOn: 'blur',
     }),
+    aliases: this.formBuilder.control(this.command.aliases, {
+      validators: [Validators.required, CustomCommandValidators.customCommandNameList],
+      // To reduce the amount of validation requests to the backend, we only validate on blur.
+      updateOn: 'blur',
+    }),
+    responseMode: ['First' as CommandResponseMode, [Validators.required]],
+    responses: this.formBuilder.array(
+      this.command.responses.map((response) => this.constructResponseForm(response)),
+      [Validators.required, Validators.minLength(1)],
+    ),
+    limitations: this.formBuilder.group(
+      {
+        minLevel: ['Viewer' as PrivilegeLevel, [Validators.required]],
+        cooldown: this.formBuilder.array(
+          this.command.limitations.cooldown.map((cooldown) => this.constructCooldownForm(cooldown)),
+        ),
+        limitedToUsers: [[] as string[]],
+      },
+      [Validators.required],
+    ),
   });
 
   private readonly selectedCommandMode$ = this.form.get('responseMode')!.valueChanges;
@@ -184,7 +206,7 @@ export class CustomCommandEditorDialogComponent {
   private constructResponseForm(response: CommandResponse) {
     return this.formBuilder.group({
       type: [response.type, [Validators.required]],
-      content: [response.content, [Validators.required]],
+      content: [response.content, [Validators.required, Validators.maxLength(300)]],
       auxiliaryContent: [response.auxiliaryContent],
     });
   }
