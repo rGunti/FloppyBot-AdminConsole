@@ -6,6 +6,7 @@ import { map, Observable } from 'rxjs';
 
 import { ConfirmSnackComponent } from '../dialogs/confirm-snack/confirm-snack.component';
 import { ErrorSnackComponent } from '../dialogs/error-snack/error-snack.component';
+import { GenericQuestionDialogComponent } from '../dialogs/generic-question-dialog/generic-question-dialog.component';
 import { NotImplementedDialogComponent } from '../dialogs/not-implemented-dialog/not-implemented-dialog.component';
 
 @Injectable({
@@ -15,11 +16,15 @@ export class DialogService {
   private readonly dialog = inject(MatDialog);
   private readonly snackbar = inject(MatSnackBar);
 
-  show<T>(component: ComponentType<unknown>, data: unknown): Observable<T> {
+  show<T>(component: ComponentType<unknown>, data?: unknown): Observable<T> {
     return this.dialog
       .open(component, { data })
       .afterClosed()
       .pipe(map((result) => result as T));
+  }
+
+  ask(title: string, content: string, isYesDangerous?: boolean): Observable<boolean> {
+    return this.show<boolean>(GenericQuestionDialogComponent, { title, content, isYesDangerous });
   }
 
   success(text: string): void {

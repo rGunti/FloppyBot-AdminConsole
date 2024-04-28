@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
@@ -11,6 +11,7 @@ import { NavigationEnd, Router, RouterModule, TitleStrategy } from '@angular/rou
 import { AuthService } from '@auth0/auth0-angular';
 import {
   bootstrapBugFill,
+  bootstrapCaretLeft,
   bootstrapCommand,
   bootstrapDoorOpen,
   bootstrapFloppy2,
@@ -26,6 +27,7 @@ import { filter, map } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
 import { LogoutDialogComponent } from '../../dialogs/logout-dialog/logout-dialog.component';
+import { DialogService } from '../../utils/dialog.service';
 
 @Component({
   selector: 'fac-navigation',
@@ -54,6 +56,7 @@ import { LogoutDialogComponent } from '../../dialogs/logout-dialog/logout-dialog
       bootstrapPersonCircle,
       bootstrapHouse,
       bootstrapBugFill,
+      bootstrapCaretLeft,
     }),
   ],
   templateUrl: './navigation.component.html',
@@ -61,7 +64,7 @@ import { LogoutDialogComponent } from '../../dialogs/logout-dialog/logout-dialog
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavigationComponent {
-  private readonly dialog = inject(MatDialog);
+  private readonly dialog = inject(DialogService);
   private readonly titleService = inject(TitleStrategy);
   private readonly router = inject(Router);
   private readonly auth = inject(AuthService);
@@ -85,13 +88,22 @@ export class NavigationComponent {
   }
 
   logout(): void {
+    this.dialog.show(LogoutDialogComponent).subscribe((result) => {
+      if (result) {
+        this.auth.logout({ logoutParams: { returnTo: window.location.origin } });
+      }
+    });
+  }
+
+  onReturnToV1(): void {
     this.dialog
-      .open(LogoutDialogComponent)
-      .afterClosed()
-      .subscribe((result) => {
-        if (result) {
-          this.auth.logout({ logoutParams: { returnTo: window.location.origin } });
-        }
+      .ask(
+        'Return to V1',
+        'Would you like to return to the old version of the application? This will open the old version in a new tab.',
+      )
+      .pipe(filter((result) => result))
+      .subscribe(() => {
+        window.open('https://bot.floppypanda.ch', '_blank');
       });
   }
 }
