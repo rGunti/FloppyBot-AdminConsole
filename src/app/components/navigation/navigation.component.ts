@@ -23,7 +23,7 @@ import {
   bootstrapUnlock,
 } from '@ng-icons/bootstrap-icons';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import { filter, map } from 'rxjs';
+import { filter, map, switchMap } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
 import { LogoutDialogComponent } from '../../dialogs/logout-dialog/logout-dialog.component';
@@ -82,9 +82,14 @@ export class NavigationComponent {
   );
 
   login(): void {
-    this.auth.loginWithPopup({
-      authorizationParams: { prompt: 'login' },
-    });
+    this.auth
+      .loginWithPopup({
+        authorizationParams: { prompt: 'login' },
+      })
+      .pipe(switchMap(() => this.auth.user$))
+      .subscribe((user) => {
+        this.dialog.success(`Welcome, ${user!.nickname}`);
+      });
   }
 
   logout(): void {
