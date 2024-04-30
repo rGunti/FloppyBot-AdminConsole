@@ -78,10 +78,18 @@ export const routes: Routes = [
     title: 'Debug',
     loadComponent: () => import('./pages/debug/debug.component').then((m) => m.DebugComponent),
   },
-  //{
-  //  path: 'settings',
-  //  loadChildren: () => import('./pages/settings/settings.module').then(m => m.SettingsModule),
-  //},
+  {
+    path: 'settings',
+    title: 'Settings',
+    children: [
+      {
+        path: 'channel-aliases',
+        title: 'Settings / Channel Aliases',
+        loadComponent: () =>
+          import('./pages/settings/channel-aliases/channel-aliases.component').then((m) => m.ChannelAliasesComponent),
+      },
+    ],
+  },
   {
     path: '**',
     title: 'Not Found',
