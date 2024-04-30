@@ -81,6 +81,12 @@
           Profile
           <small>({{ username$ | async }})</small>
         </button>
+        <button mat-menu-item [matMenuTriggerFor]="mSettings">
+          <mat-icon>
+            <ng-icon name="bootstrapGear"></ng-icon>
+          </mat-icon>
+          Settings
+        </button>
         <button mat-menu-item (click)="logout()">
           <mat-icon>
             <ng-icon name="bootstrapDoorOpen"></ng-icon>
@@ -113,6 +119,17 @@
         queryParamsHandling="merge"
       >
         Custom Commands
+      </button>
+    </mat-menu>
+
+    <mat-menu #mSettings="matMenu">
+      <button
+        mat-menu-item
+        routerLink="/settings/channel-aliases"
+        routerLinkActive="mat-mdc-menu-item-highlighted"
+        queryParamsHandling="merge"
+      >
+        Channel Aliases
       </button>
     </mat-menu>
 

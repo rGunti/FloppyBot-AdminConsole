@@ -1,0 +1,34 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title> Channel Aliases </mat-card-title>
+    <mat-card-subtitle>
+      Channel Aliases are customized names for channels. They are used to make it easier to remember which channel is
+      which.
+    </mat-card-subtitle>
+  </mat-card-header>
+  @if (form$ | async; as form) {
+    <mat-card-content>
+      <form [formGroup]="form">
+        @for (control of form.controls | keyvalue; track $index) {
+          <mat-form-field>
+            <mat-label>{{ control.key }}</mat-label>
+            <input matInput [formControl]="control.value" />
+            <button matSuffix mat-icon-button matTooltip="Clear Alias" (click)="clearValue(control.value)">
+              <mat-icon>
+                <ng-icon name="bootstrapXLg"></ng-icon>
+              </mat-icon>
+            </button>
+          </mat-form-field>
+        }
+      </form>
+    </mat-card-content>
+    <mat-card-actions>
+      <span class="spacer"></span>
+      <button mat-button (click)="onSaveChanges(form)">Save Changes</button>
+    </mat-card-actions>
+  } @else {
+    <mat-card-content>
+      <mat-spinner></mat-spinner>
+    </mat-card-content>
+  }
+</mat-card>

@@ -23,4 +23,8 @@ export class UserApiService {
   regenerateAccessKey(): Observable<void> {
     return this.http.post<void>(getUrl(`/api/v2/user/access-key/generate`), null);
   }
+
+  updateChannelAliases(channelAliases: Record<string, string>): Observable<void> {
+    return this.http.post<void>(getUrl(`/api/v2/user/me/channel-aliases`), channelAliases);
+  }
 }
