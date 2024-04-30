@@ -8,10 +8,9 @@ describe('FileDropZoneComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FileDropZoneComponent]
-    })
-    .compileComponents();
-    
+      imports: [FileDropZoneComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(FileDropZoneComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

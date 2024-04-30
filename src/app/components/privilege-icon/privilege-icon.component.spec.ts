@@ -8,10 +8,9 @@ describe('PrivilegeIconComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PrivilegeIconComponent]
-    })
-    .compileComponents();
-    
+      imports: [PrivilegeIconComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(PrivilegeIconComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

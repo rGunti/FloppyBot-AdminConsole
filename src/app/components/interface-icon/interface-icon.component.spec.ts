@@ -8,10 +8,9 @@ describe('InterfaceIconComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [InterfaceIconComponent]
-    })
-    .compileComponents();
-    
+      imports: [InterfaceIconComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(InterfaceIconComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
