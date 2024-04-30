@@ -8,10 +8,9 @@ describe('RegenerateApiKeyDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RegenerateApiKeyDialogComponent]
-    })
-    .compileComponents();
-    
+      imports: [RegenerateApiKeyDialogComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(RegenerateApiKeyDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
