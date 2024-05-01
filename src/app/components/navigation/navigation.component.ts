@@ -28,6 +28,8 @@ import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { filter, map, switchMap } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
+import { VERSION } from '../../../version/version';
+import { calculateDisplayVersion } from '../../../version/version.interface';
 import { LogoutDialogComponent } from '../../dialogs/logout-dialog/logout-dialog.component';
 import { DialogService } from '../../utils/dialog.service';
 
@@ -74,6 +76,8 @@ export class NavigationComponent {
   private readonly auth = inject(AuthService);
 
   readonly debugFeaturesEnabled = environment.enableDebugTools;
+  readonly version = calculateDisplayVersion(VERSION);
+  readonly buildTime = VERSION.buildTime;
 
   readonly isAuthenticated$ = this.auth.isAuthenticated$;
   readonly username$ = this.auth.user$.pipe(map((user) => user?.nickname));
