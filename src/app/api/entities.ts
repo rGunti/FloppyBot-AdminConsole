@@ -32,7 +32,7 @@ export interface Quote {
 
 export interface CommandInfo {
   name: string;
-  description?: string;
+  description?: string | null;
   aliases: string[];
   restrictedToInterfaces: string[];
   requiredPrivilegeLevel: PrivilegeLevel;
@@ -79,7 +79,7 @@ export interface CommandConfiguration {
   id: string;
   channelId: string;
   commandName: string;
-  requiredPrivilegeLevel?: PrivilegeLevel;
+  requiredPrivilegeLevel?: PrivilegeLevel | null;
   disabled: boolean;
   customCooldown: boolean;
   customCooldownConfiguration: CooldownConfiguration[];
@@ -92,25 +92,26 @@ export interface CommandParameterAbstract {
   name: string;
   type: CommandParameterType;
   required: boolean;
-  description?: string;
+  description?: string | null;
   possibleValues?: string[];
 }
 
 export interface CommandAbstract {
   name: string;
   aliases: string[];
-  description?: string;
+  description?: string | null;
   minPrivilegeLevel?: PrivilegeLevel;
   availableOnInterfaces: string[];
   syntax?: string[];
   noParameters: boolean;
   hidden: boolean;
   parameters?: CommandParameterAbstract[];
+  allMetadata: Record<string, string>;
 }
 
 export interface CommandReport {
   command: CommandAbstract;
-  configuration: CommandConfiguration;
+  configuration: CommandConfiguration | null;
 }
 
 export interface CustomCommand {

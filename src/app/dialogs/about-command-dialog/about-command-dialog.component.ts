@@ -51,5 +51,5 @@ export class AboutCommandDialogComponent {
   readonly hasPrivilegeRestrictions$ = this.command$.pipe(
     map((command) => !!command.minPrivilegeLevel && command.minPrivilegeLevel !== 'Unknown'),
   );
-  readonly commandDisabled$ = this.config$.pipe(map((config) => !!config.disabled));
+  readonly commandDisabled$ = this.config$.pipe(map((config) => !config || !!config.disabled));
 }
