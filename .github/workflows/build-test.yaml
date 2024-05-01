@@ -36,6 +36,14 @@ jobs:
         with:
           chrome-version: ${{ matrix.chrome-version }}
 
+      # Setup CodeQL
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: typescript
+          build-mode: manual
+          source-root: src/
+
       # Cache pnpm store
       - name: Get pnpm store directory
         shell: bash
@@ -62,3 +70,9 @@ jobs:
         run: npm run test:ci
         env:
           CHROME_BIN: ${{ steps.setup-chrome.outputs.chrome-path }}
+
+      # Upload CodeQL results
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: '/language:typescript'
