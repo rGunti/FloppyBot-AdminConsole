@@ -126,7 +126,7 @@ export interface CustomCommand {
 export interface CommandResponse {
   type: CommandResponseType;
   content: string;
-  auxiliaryContent?: string;
+  auxiliaryContent?: string | null;
 }
 
 export interface CommandLimitation {

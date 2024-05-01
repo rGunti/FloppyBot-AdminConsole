@@ -2,7 +2,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 
-import { CommandAbstract, CommandInfo, CommandReport } from '../../api/entities';
+import { CommandAbstract, CommandInfo, CommandReport, CustomCommand } from '../../api/entities';
 import { FAKE_DATA_HOST } from '../../interceptors/fake-data.interceptor';
 
 import { CommandService } from './command.service';
@@ -187,5 +187,171 @@ describe('CommandService', () => {
 
       httpTestingController.expectOne(`${FAKE_DATA_HOST}/api/v2/commands/config/${CHANNEL_ID}`).flush(FAKE_COMMANDS);
     });
+  });
+
+  describe('getCustomCommands', () => {
+    const cases: [string, CustomCommand[], CommandInfo[]][] = [
+      [
+        'single with 2 responses',
+        [
+          {
+            id: '6605ad6c2440796b5e14f0f5',
+            name: 'nlf',
+            aliases: [],
+            responses: [
+              {
+                type: 'Text',
+                content: 'This is a command\n\nWith multiple messages',
+                auxiliaryContent: null,
+              },
+              {
+                type: 'Sound',
+                content: `${CHANNEL_ID}/harmony.mp3`,
+                auxiliaryContent: null,
+              },
+            ],
+            limitations: {
+              minLevel: 'Viewer',
+              cooldown: [
+                {
+                  level: 'Unknown',
+                  milliseconds: 1000,
+                },
+              ],
+              limitedToUsers: [],
+            },
+            responseMode: 'All',
+          },
+        ],
+        [
+          {
+            name: 'nlf',
+            description: '2 responses',
+            aliases: [],
+            restrictedToInterfaces: [],
+            requiredPrivilegeLevel: 'Viewer',
+            customCommand: true,
+            cooldown: {
+              cooldownMode: 'Unknown',
+              defaultCooldown: undefined,
+              modCooldown: undefined,
+              adminCooldown: undefined,
+            },
+            syntax: [],
+            obsolete: false,
+            disabled: false,
+          },
+        ],
+      ],
+      [
+        'single with 1 text responses',
+        [
+          {
+            id: '6605ad6c2440796b5e14f0f5',
+            name: 'nlf',
+            aliases: [],
+            responses: [
+              {
+                type: 'Text',
+                content: 'This is a command\n\nWith multiple messages',
+                auxiliaryContent: null,
+              },
+            ],
+            limitations: {
+              minLevel: 'Viewer',
+              cooldown: [
+                {
+                  level: 'Viewer',
+                  milliseconds: 1_000,
+                },
+              ],
+              limitedToUsers: [],
+            },
+            responseMode: 'All',
+          },
+        ],
+        [
+          {
+            name: 'nlf',
+            description: 'Text: This is a command\n\nWith multiple messages',
+            aliases: [],
+            restrictedToInterfaces: [],
+            requiredPrivilegeLevel: 'Viewer',
+            customCommand: true,
+            cooldown: {
+              cooldownMode: 'Unknown',
+              defaultCooldown: 1_000,
+              modCooldown: undefined,
+              adminCooldown: undefined,
+            },
+            syntax: [],
+            obsolete: false,
+            disabled: false,
+          },
+        ],
+      ],
+      [
+        'single with 1 text responses',
+        [
+          {
+            id: '6605ad6c2440796b5e14f0f5',
+            name: 'nlf',
+            aliases: [],
+            responses: [
+              {
+                type: 'Sound',
+                content: `${CHANNEL_ID}/harmony.mp3`,
+                auxiliaryContent: null,
+              },
+            ],
+            limitations: {
+              minLevel: 'Viewer',
+              cooldown: [
+                {
+                  level: 'Viewer',
+                  milliseconds: 1_000,
+                },
+                {
+                  level: 'Moderator',
+                  milliseconds: 0,
+                },
+              ],
+              limitedToUsers: [],
+            },
+            responseMode: 'All',
+          },
+        ],
+        [
+          {
+            name: 'nlf',
+            description: 'Sound: Twitch/NotARealChannel/harmony.mp3',
+            aliases: [],
+            restrictedToInterfaces: [],
+            requiredPrivilegeLevel: 'Viewer',
+            customCommand: true,
+            cooldown: {
+              cooldownMode: 'Unknown',
+              defaultCooldown: 1_000,
+              modCooldown: 0,
+              adminCooldown: undefined,
+            },
+            syntax: [],
+            obsolete: false,
+            disabled: false,
+          },
+        ],
+      ],
+      ['empty', [], []],
+    ];
+
+    for (const [description, apiCommands, expectedData] of cases) {
+      it(`should return custom commands "${description}"`, () => {
+        service.getCustomCommands(CHANNEL_ID).subscribe((commands) => {
+          expect(commands).toEqual(expectedData);
+        });
+
+        httpTestingController.expectOne(`${FAKE_DATA_HOST}/api/v2/custom-commands/${CHANNEL_ID}`).flush(apiCommands);
+      });
+    }
   });
 });
