@@ -11,3 +11,15 @@ export interface Version {
   buildTime: string;
   buildEnv: Record<string, string>;
 }
+
+export function calculateDisplayVersion(version: Version): string {
+  if (version.semverString) {
+    return version.semverString;
+  }
+
+  if (version.raw) {
+    return version.raw;
+  }
+
+  return version.version;
+}

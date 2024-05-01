@@ -145,5 +145,9 @@
     </mat-menu>
 
     <span>{{ title$ | async }}</span>
+
+    <span class="spacer"></span>
+
+    <span class="version" [matTooltip]="buildTime">{{ version }}</span>
   </mat-toolbar-row>
 </mat-toolbar>
