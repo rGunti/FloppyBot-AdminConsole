@@ -41,7 +41,7 @@ jobs:
         uses: github/codeql-action/init@v3
         with:
           languages: typescript
-          build-mode: manual
+          build-mode: none
           source-root: src/
 
       # Cache pnpm store
