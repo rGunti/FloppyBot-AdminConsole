@@ -22,6 +22,7 @@ import {
   bootstrapPersonCircle,
   bootstrapQuote,
   bootstrapUnlock,
+  bootstrapWindowFullscreen,
 } from '@ng-icons/bootstrap-icons';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { filter, map, switchMap } from 'rxjs';
@@ -59,6 +60,7 @@ import { DialogService } from '../../utils/dialog.service';
       bootstrapBugFill,
       bootstrapCaretLeft,
       bootstrapGear,
+      bootstrapWindowFullscreen,
     }),
   ],
   templateUrl: './navigation.component.html',

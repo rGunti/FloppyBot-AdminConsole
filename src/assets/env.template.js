@@ -10,6 +10,9 @@
       },
       errorPath: '/callback',
     },
+    streamSource: {
+      baseUrl: '${FLPY_STREAM_SOURCE_BASE_URL}',
+    },
     enableDebugTools: !!'${FLPY_DEBUG}',
   };
 })();

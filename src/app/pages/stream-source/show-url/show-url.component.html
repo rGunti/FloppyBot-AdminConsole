@@ -1,0 +1,13 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Stream Source Link</mat-card-title>
+    <mat-card-subtitle>Use this link to add browser sources to OBS</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>Select the channel you want to use and copy the link below to add it as a browser source in OBS.</p>
+    <div class="row">
+      <fac-channel-selector></fac-channel-selector>
+      <fac-stream-source-url [selectedChannel]="selectedChannel$ | async"></fac-stream-source-url>
+    </div>
+  </mat-card-content>
+</mat-card>
