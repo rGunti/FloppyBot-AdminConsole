@@ -54,7 +54,7 @@ export class CommandService {
 
   private convertPrivilegeLevel(
     defaultPrivilegeLevel?: PrivilegeLevel,
-    overridePrivilegeLevel?: PrivilegeLevel,
+    overridePrivilegeLevel?: PrivilegeLevel | null,
   ): PrivilegeLevel {
     if (overridePrivilegeLevel) {
       return overridePrivilegeLevel;
