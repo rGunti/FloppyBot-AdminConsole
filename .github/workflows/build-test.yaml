@@ -7,13 +7,88 @@ on:
 
 jobs:
   build:
+    name: Build Application
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [20.x]
-        pnpm-version: [9.x]
-        chrome-version: [latest]
+        node-version:
+          # current LTS
+          - 20.x
+        pnpm-version:
+          # latest stable
+          - 9.x
 
+    steps:
+      # Checkout the repository
+      - uses: actions/checkout@v4
+
+      # Setup Node.js and pnpm
+      - name: Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: ${{ matrix.pnpm-version }}
+          run_install: false
+
+      # Setup CodeQL
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: typescript
+          build-mode: none
+          source-root: src/
+
+      # Cache pnpm store
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+      - uses: actions/cache@v4
+        name: Setup pnpm cache
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      # Install dependencies
+      - name: Fetch dependencies
+        run: pnpm fetch && pnpm install --offline
+
+      # Build & Test
+      - name: Build
+        run: npm run build
+      - name: Linting
+        run: npm run lint
+
+      # Upload CodeQL results
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: '/language:typescript'
+  test:
+    name: Test Application
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version:
+          # current LTS
+          - 20.x
+          # next LTS
+          - 22.x
+        pnpm-version:
+          # latest stable
+          - 9.x
+          # latest build
+          - latest
+        chrome-version:
+          - stable
+          - beta
+          - dev
+          - canary
     steps:
       # Checkout the repository
       - uses: actions/checkout@v4
@@ -70,9 +145,3 @@ jobs:
         run: npm run test:ci
         env:
           CHROME_BIN: ${{ steps.setup-chrome.outputs.chrome-path }}
-
-      # Upload CodeQL results
-      - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v3
-        with:
-          category: '/language:typescript'
