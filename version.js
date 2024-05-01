@@ -1,14 +1,22 @@
 const { gitDescribeSync } = require('git-describe');
-const { version } = require('./package.json');
 const { resolve, relative } = require('path');
 const { writeFileSync } = require('fs');
 
-const gitInfo = gitDescribeSync({
-  dirtyMark: false,
-  dirtySemver: false
-});
-
-gitInfo.version = version;
+const gitInfo = {
+  ...JSON.parse(JSON.stringify(gitDescribeSync({
+    dirtyMark: false,
+    dirtySemver: false
+  }))),
+  version: require('./package.json').version,
+  buildTime: new Date().toISOString(),
+  buildEnv: {
+    node: `${process.versions.node}-${process.arch}-${process.platform}`,
+    typescript: require('typescript').version,
+    angular: require('@angular/core/package.json').version,
+    angularMaterial: require('@angular/material/package.json').version,
+    ngIcons: require('@ng-icons/core/package.json').version,
+  },
+};
 
 const srcDir = resolve(__dirname, 'src');
 const jsonAsset = resolve(srcDir, 'assets', 'version.json');
@@ -21,6 +29,8 @@ writeFileSync(tsFile,
 `// IMPORTANT: THIS FILE IS AUTO GENERATED! DO NOT MANUALLY EDIT OR CHECKIN!
 /* tslint:disable */
 import { Version } from "./version.interface";
-export const VERSION = ${JSON.stringify(gitInfo, null, 4)};
+export const VERSION: Version = ${JSON.stringify(gitInfo, null, 4)};
 /* tslint:enable */
 `, { encoding: 'utf-8' });
+
+console.log('Version info written', gitInfo);
