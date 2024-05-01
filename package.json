@@ -4,13 +4,17 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "run-s build:app",
+    "build:app": "ng build",
     "build:container": "docker build -t floppybot/admin-console .",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "test:ci": "ng test --watch=false --browsers=ChromeHeadlessCustom",
     "lint": "ng lint",
-    "lint:fix": "ng lint --fix"
+    "lint:fix": "ng lint --fix",
+    "prebuild": "run-s prebuild:*",
+    "prebuild:version": "node version.js",
+    "postinstall": "run-s prebuild"
   },
   "private": true,
   "dependencies": {
@@ -51,12 +55,14 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.1.3",
     "eslint-plugin-simple-import-sort": "^12.0.0",
+    "git-describe": "^4.1.1",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "npm-run-all2": "^6.1.2",
     "prettier": "^3.2.5",
     "prettier-eslint": "^16.3.0",
     "typescript": "~5.4.2"
