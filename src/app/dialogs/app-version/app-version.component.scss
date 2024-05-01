@@ -1,0 +1,20 @@
+$border-color: #ccc;
+$highlight: yellow;
+
+.version-table {
+  th, td {
+    border-right: 1px solid $border-color;
+    border-bottom: 1px solid $border-color;
+  }
+  td:first-child {
+    font-weight: bold;
+  }
+
+  td.changed {
+    background-color: $highlight;
+  }
+
+  td.version {
+    font-size: x-large;
+  }
+}

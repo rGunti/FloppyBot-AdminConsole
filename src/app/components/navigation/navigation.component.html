@@ -148,6 +148,14 @@
 
     <span class="spacer"></span>
 
-    <span class="version" [matTooltip]="buildTime">{{ version }}</span>
+    <button
+      mat-button
+      class="version"
+      [class.has-update]="hasUpdates$ | async"
+      [matTooltip]="buildTime"
+      (click)="onVersionClicked()"
+    >
+      {{ version }}
+    </button>
   </mat-toolbar-row>
 </mat-toolbar>

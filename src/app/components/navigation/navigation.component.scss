@@ -12,5 +12,8 @@
 .version {
   font-weight: normal;
   font-size: small;
-  cursor: default;
+
+  &.has-update {
+    color: red;
+  }
 }
