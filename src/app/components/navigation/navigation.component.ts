@@ -30,7 +30,9 @@ import { filter, map, switchMap } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { VERSION } from '../../../version/version';
 import { calculateDisplayVersion } from '../../../version/version.interface';
+import { AppVersionComponent } from '../../dialogs/app-version/app-version.component';
 import { LogoutDialogComponent } from '../../dialogs/logout-dialog/logout-dialog.component';
+import { AppUpdateService } from '../../utils/app-update.service';
 import { DialogService } from '../../utils/dialog.service';
 
 @Component({
@@ -74,10 +76,13 @@ export class NavigationComponent {
   private readonly titleService = inject(TitleStrategy);
   private readonly router = inject(Router);
   private readonly auth = inject(AuthService);
+  private readonly appUpdateService = inject(AppUpdateService);
 
   readonly debugFeaturesEnabled = environment.enableDebugTools;
   readonly version = calculateDisplayVersion(VERSION);
   readonly buildTime = VERSION.buildTime;
+
+  readonly hasUpdates$ = this.appUpdateService.hasUpdates();
 
   readonly isAuthenticated$ = this.auth.isAuthenticated$;
   readonly username$ = this.auth.user$.pipe(map((user) => user?.nickname));
@@ -118,5 +123,9 @@ export class NavigationComponent {
       .subscribe(() => {
         window.open('https://bot.floppypanda.ch', '_blank');
       });
+  }
+
+  onVersionClicked(): void {
+    this.dialog.show(AppVersionComponent).subscribe();
   }
 }
