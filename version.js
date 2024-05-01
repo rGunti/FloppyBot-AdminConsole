@@ -20,6 +20,7 @@ console.log('Writing TS version info to', tsFile);
 writeFileSync(tsFile,
 `// IMPORTANT: THIS FILE IS AUTO GENERATED! DO NOT MANUALLY EDIT OR CHECKIN!
 /* tslint:disable */
+import { Version } from "./version.interface";
 export const VERSION = ${JSON.stringify(gitInfo, null, 4)};
 /* tslint:enable */
 `, { encoding: 'utf-8' });
