@@ -91,6 +91,18 @@ export const routes: Routes = [
     ],
   },
   {
+    path: 'stream-source',
+    title: 'Stream Source',
+    children: [
+      {
+        path: 'show-url',
+        title: 'Stream Source / Copy Link',
+        loadComponent: () =>
+          import('./pages/stream-source/show-url/show-url.component').then((m) => m.ShowUrlComponent),
+      },
+    ],
+  },
+  {
     path: '**',
     title: 'Not Found',
     loadComponent: () => import('./pages/not-found/not-found.component').then((m) => m.NotFoundComponent),

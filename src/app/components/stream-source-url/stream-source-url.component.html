@@ -1,0 +1,17 @@
+<mat-form-field>
+  <mat-label>Stream Source Link</mat-label>
+  <input matInput type="password" [value]="streamSourceLink$ | async" readonly />
+
+  @if (streamSourceLink$ | async; as streamSourceLink) {
+    <button
+      matSuffix
+      mat-icon-button
+      matTooltip="Copy Stream Source Link"
+      (click)="copyStreamSourceLink(streamSourceLink)"
+    >
+      <mat-icon>
+        <ng-icon name="bootstrapCopy"></ng-icon>
+      </mat-icon>
+    </button>
+  }
+</mat-form-field>
