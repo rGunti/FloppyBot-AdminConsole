@@ -1,0 +1,43 @@
+<div class="mat-elevation-z8">
+  <mat-toolbar class="action-toolbar">
+    <fac-channel-selector [interfaceFilter]="channelInterfaceFilter"></fac-channel-selector>
+  </mat-toolbar>
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title> Shoutout </mat-card-title>
+      <mat-card-subtitle>
+        Shoutout other creators in chat by running <code>!shoutout &lt;Channel Name&gt;</code> or
+        <code>!so &lt;Channel Name&gt;</code>.
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>Responses can have the following placeholders:</p>
+      <ul>
+        <li><code>&#123;User&#125;</code>: The name of the Twitch user that has been requested</li>
+        <li><code>&#123;UserLink&#125;</code>: The link to the Twitch channel in question</li>
+        <li><code>&#123;LastGame&#125;</code>: The last game the Twitch user has broadcasted</li>
+      </ul>
+      <p>Note that this feature is only supported in Twitch chats at this time.</p>
+      @if (shoutoutMessage$ | async; as shoutoutMessage) {
+        <div [formGroup]="form">
+          <mat-form-field>
+            <mat-label>Shoutout Message</mat-label>
+            <input matInput formControlName="message" />
+            <mat-hint> If you clear this message, the <code>!shoutout</code> command will be deactivated. </mat-hint>
+          </mat-form-field>
+        </div>
+      } @else {
+        <div>
+          <p>Please select a supported channel above. <code>!shoutout</code> is currently only supported on Twitch.</p>
+        </div>
+      }
+    </mat-card-content>
+    <mat-card-actions>
+      <span class="spacer"></span>
+      @if (shoutoutMessage$ | async; as shoutoutMessage) {
+        <button mat-button color="primary" (click)="saveChanges()">Save Changes</button>
+      }
+    </mat-card-actions>
+  </mat-card>
+</div>

@@ -121,14 +121,34 @@
         routerLinkActive="mat-mdc-menu-item-highlighted"
         queryParamsHandling="merge"
       >
+        <mat-icon>
+          <ng-icon name="bootstrapExclamationLg"></ng-icon>
+        </mat-icon>
         Built-in Commands
       </button>
+      <button
+        mat-menu-item
+        routerLink="/commands/shoutout"
+        routerLinkActive="mat-mdc-menu-item-highlighted"
+        queryParamsHandling="merge"
+      >
+        <mat-icon>
+          <ng-icon name="bootstrapMegaphone"></ng-icon>
+        </mat-icon>
+        Shoutout
+      </button>
+
+      <mat-divider></mat-divider>
+
       <button
         mat-menu-item
         routerLink="/commands/custom"
         routerLinkActive="mat-mdc-menu-item-highlighted"
         queryParamsHandling="merge"
       >
+        <mat-icon>
+          <ng-icon name="bootstrapPencilSquare"></ng-icon>
+        </mat-icon>
         Custom Commands
       </button>
     </mat-menu>
