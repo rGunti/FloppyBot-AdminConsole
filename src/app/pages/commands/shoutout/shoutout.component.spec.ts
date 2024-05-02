@@ -1,6 +1,7 @@
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ShoutoutComponent } from './shoutout.component';
 
@@ -10,7 +11,7 @@ describe('ShoutoutComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ShoutoutComponent],
+      imports: [ShoutoutComponent, NoopAnimationsModule],
       providers: [provideHttpClient(), provideHttpClientTesting()],
     }).compileComponents();
 
