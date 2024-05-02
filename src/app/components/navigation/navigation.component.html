@@ -68,6 +68,17 @@
         </button>
         <button
           mat-menu-item
+          routerLink="/shoutout"
+          routerLinkActive="mat-mdc-menu-item-highlighted"
+          queryParamsHandling="merge"
+        >
+          <mat-icon>
+            <ng-icon name="bootstrapMegaphone"></ng-icon>
+          </mat-icon>
+          Shoutout
+        </button>
+        <button
+          mat-menu-item
           routerLink="/stream-source/show-url"
           routerLinkActive="mat-mdc-menu-item-highlighted"
           queryParamsHandling="merge"

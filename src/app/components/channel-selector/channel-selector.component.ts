@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnDestroy } from '@angular/core';
+import { Component, inject, Input, OnDestroy } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -8,7 +8,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { Router } from '@angular/router';
 import { bootstrapDiscord, bootstrapFolder2Open, bootstrapQuestion, bootstrapTwitch } from '@ng-icons/bootstrap-icons';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import { distinctUntilChanged, Subject, takeUntil } from 'rxjs';
+import { BehaviorSubject, distinctUntilChanged, map, Subject, switchMap, takeUntil } from 'rxjs';
 
 import { ChannelService } from '../../utils/channel/channel.service';
 import { ChannelIconPipe } from '../../utils/channel/channel-icon.pipe';
@@ -42,12 +42,21 @@ import { ChannelNamePipe } from '../../utils/channel/channel-name.pipe';
   ],
 })
 export class ChannelSelectorComponent implements OnDestroy {
+  private readonly interfaceFilter$ = new BehaviorSubject<string[] | null>(null);
   private readonly destroyed$ = new Subject<void>();
 
   private readonly router = inject(Router);
   private readonly channelService = inject(ChannelService);
 
-  readonly channels$ = this.channelService.getAccessibleChannels();
+  readonly channels$ = this.channelService
+    .getAccessibleChannels()
+    .pipe(
+      switchMap((channels) =>
+        this.interfaceFilter$.pipe(
+          map((filter) => (filter ? channels.filter((channel) => filter.includes(channel.interface)) : channels)),
+        ),
+      ),
+    );
   readonly form = new FormControl<string | null>(null);
 
   constructor() {
@@ -62,6 +71,13 @@ export class ChannelSelectorComponent implements OnDestroy {
       console.log('ChannelSelectorComponent form.valueChanges', channel);
       this.router.navigate([], { queryParams: { channel } });
     });
+  }
+
+  @Input() get interfaceFilter(): string[] | null {
+    return this.interfaceFilter$.value;
+  }
+  set interfaceFilter(value: string[] | null) {
+    this.interfaceFilter$.next(value);
   }
 
   ngOnDestroy(): void {

@@ -142,3 +142,7 @@ export interface CooldownDescription {
 
 export declare type CommandResponseMode = 'First' | 'PickOneRandom' | 'All';
 export declare type CommandResponseType = 'Text' | 'Sound';
+
+export interface ShoutoutCommandConfig {
+  message: string;
+}

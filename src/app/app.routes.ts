@@ -103,6 +103,11 @@ export const routes: Routes = [
     ],
   },
   {
+    path: 'shoutout',
+    title: 'Shoutout',
+    loadComponent: () => import('./pages/shoutout/shoutout.component').then((m) => m.ShoutoutComponent),
+  },
+  {
     path: '**',
     title: 'Not Found',
     loadComponent: () => import('./pages/not-found/not-found.component').then((m) => m.NotFoundComponent),
