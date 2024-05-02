@@ -34,6 +34,11 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./pages/commands/custom-commands/custom-commands.component').then((m) => m.CustomCommandsComponent),
       },
+      {
+        path: 'shoutout',
+        title: 'Shoutout',
+        loadComponent: () => import('./pages/commands/shoutout/shoutout.component').then((m) => m.ShoutoutComponent),
+      },
     ],
     canActivate: [AuthGuard],
   },
@@ -101,11 +106,6 @@ export const routes: Routes = [
           import('./pages/stream-source/show-url/show-url.component').then((m) => m.ShowUrlComponent),
       },
     ],
-  },
-  {
-    path: 'shoutout',
-    title: 'Shoutout',
-    loadComponent: () => import('./pages/shoutout/shoutout.component').then((m) => m.ShoutoutComponent),
   },
   {
     path: '**',

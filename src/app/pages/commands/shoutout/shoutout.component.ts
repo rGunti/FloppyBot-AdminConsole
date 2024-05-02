@@ -11,11 +11,11 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { filter, map, of, shareReplay, switchMap, take, tap } from 'rxjs';
 
-import { CommandApiService } from '../../api/command-api.service';
-import { ShoutoutCommandConfig } from '../../api/entities';
-import { ChannelSelectorComponent } from '../../components/channel-selector/channel-selector.component';
-import { ChannelService } from '../../utils/channel/channel.service';
-import { DialogService } from '../../utils/dialog.service';
+import { CommandApiService } from '../../../api/command-api.service';
+import { ShoutoutCommandConfig } from '../../../api/entities';
+import { ChannelSelectorComponent } from '../../../components/channel-selector/channel-selector.component';
+import { ChannelService } from '../../../utils/channel/channel.service';
+import { DialogService } from '../../../utils/dialog.service';
 
 @Component({
   selector: 'fac-shoutout',
