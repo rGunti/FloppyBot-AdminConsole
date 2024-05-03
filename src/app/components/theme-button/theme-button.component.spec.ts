@@ -33,9 +33,11 @@ describe('ThemeButtonComponent', () => {
     expect(localStorageService.hasItem('alt-theme-enabled')).toBe(false);
 
     component.changeTheme();
+    fixture.detectChanges();
     expect(localStorageService.getItem<boolean>('alt-theme-enabled')).toBe(true);
 
     component.changeTheme();
+    fixture.detectChanges();
     expect(localStorageService.getItem<boolean>('alt-theme-enabled')).toBe(false);
   });
 });
