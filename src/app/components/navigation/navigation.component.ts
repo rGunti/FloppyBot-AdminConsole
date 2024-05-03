@@ -37,6 +37,7 @@ import { AppVersionComponent } from '../../dialogs/app-version/app-version.compo
 import { LogoutDialogComponent } from '../../dialogs/logout-dialog/logout-dialog.component';
 import { AppUpdateService } from '../../utils/app-update.service';
 import { DialogService } from '../../utils/dialog.service';
+import { ThemeButtonComponent } from '../theme-button/theme-button.component';
 
 @Component({
   selector: 'fac-navigation',
@@ -52,6 +53,7 @@ import { DialogService } from '../../utils/dialog.service';
     MatDividerModule,
     MatTooltipModule,
     MatDialogModule,
+    ThemeButtonComponent,
   ],
   providers: [
     provideIcons({

@@ -1,0 +1,5 @@
+<button mat-icon-button (click)="changeTheme()" matTooltip="Switch Theme">
+  <mat-icon>
+    <ng-icon [svg]="(themeIcon$ | async)!"></ng-icon>
+  </mat-icon>
+</button>

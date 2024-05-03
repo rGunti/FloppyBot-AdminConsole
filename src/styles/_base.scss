@@ -1,0 +1,52 @@
+@use '@angular/material' as mat;
+@include mat.core();
+
+$light-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: mat.define-palette(mat.$green-palette),
+      accent: mat.define-palette(mat.$deep-purple-palette, A200, A100, A400),
+      warn: mat.define-palette(mat.$red-palette),
+    ),
+    typography: mat.define-typography-config(),
+    density: 0,
+  )
+);
+$dark-theme: mat.define-dark-theme(
+  (
+    color: (
+      primary: mat.define-palette(mat.$light-green-palette),
+      accent: mat.define-palette(mat.$deep-purple-palette, A200, A100, A400),
+      warn: mat.define-palette(mat.$red-palette),
+    ),
+    typography: mat.define-typography-config(),
+    density: 0,
+  )
+);
+
+@include mat.all-component-themes($dark-theme);
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+
+  /* Set the overall container to use flexbox */
+  app-root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure the container takes the full viewport height */
+  }
+
+  &.dark-mode {
+    @include mat.all-component-colors($light-theme);
+  }
+}

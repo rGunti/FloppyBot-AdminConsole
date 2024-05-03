@@ -11,6 +11,7 @@ import { environment } from '../environments/environment';
 import { errorInterceptor } from './interceptors/error.interceptor';
 import { fakeDataInterceptor } from './interceptors/fake-data.interceptor';
 import { ChannelService } from './utils/channel/channel.service';
+import { provideLocalStorageService } from './utils/local-storage';
 import { FloppyBotTitleStrategy } from './utils/title-strategy';
 import { routes } from './app.routes';
 
@@ -46,5 +47,6 @@ export const appConfig: ApplicationConfig = {
       useClass: AuthHttpInterceptor,
       multi: true,
     },
+    provideLocalStorageService(),
   ],
 };
