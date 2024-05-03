@@ -20,7 +20,6 @@ describe('ThemeButtonComponent', () => {
 
     // make sure local storage is reset
     localStorageService = TestBed.inject(LocalStorageService);
-    localStorageService.clear();
 
     fixture.detectChanges();
   });
@@ -30,6 +29,7 @@ describe('ThemeButtonComponent', () => {
   });
 
   it('should save the theme preference to local storage', () => {
+    localStorageService.clear();
     expect(localStorageService.hasItem('alt-theme-enabled')).toBe(false);
 
     component.changeTheme();
