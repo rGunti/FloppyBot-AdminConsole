@@ -1,37 +1,55 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { ApplicationRef, inject, Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
-const ALT_THEME_COLOR = 'dark-mode';
+const ALT_THEME_CLASS = 'dark-mode';
+
+function detectDarkModePreference(): boolean {
+  return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+}
+
+function updateBodyClass(altThemeEnabled: boolean): void {
+  if (altThemeEnabled) {
+    document.body.classList.add(ALT_THEME_CLASS);
+  } else {
+    document.body.classList.remove(ALT_THEME_CLASS);
+  }
+}
 
 @Injectable({
   providedIn: 'root',
 })
 export class ThemeService implements OnDestroy {
-  private readonly darkMode$ = new BehaviorSubject<boolean>(false);
+  private readonly appRef = inject(ApplicationRef);
+  private readonly altThemeEnabled$ = new BehaviorSubject<boolean>(false);
+
+  readonly alternativeThemeEnabled$ = this.altThemeEnabled$.asObservable();
 
   constructor() {
-    this.darkMode$.subscribe((isDarkMode) => {
-      if (isDarkMode) {
-        document.body.classList.add(ALT_THEME_COLOR);
-      } else {
-        document.body.classList.remove(ALT_THEME_COLOR);
-      }
-    });
-  }
+    this.altThemeEnabled$.subscribe(updateBodyClass);
 
-  get darkMode() {
-    return this.darkMode$.asObservable();
-  }
+    const darkModePreference = detectDarkModePreference();
+    if (!darkModePreference) {
+      this.altThemeEnabled$.next(true);
+    }
 
-  get isDarkMode(): boolean {
-    return this.darkMode$.value;
-  }
-
-  set isDarkMode(isDarkMode: boolean) {
-    this.darkMode$.next(isDarkMode);
+    window
+      .matchMedia('(prefers-color-scheme: light)')
+      .addEventListener('change', this.handleColorPreferenceChange.bind(this));
   }
 
   ngOnDestroy(): void {
-    this.darkMode$.complete();
+    this.altThemeEnabled$.complete();
+    window
+      .matchMedia('(prefers-color-scheme: light)')
+      .removeEventListener('change', this.handleColorPreferenceChange.bind(this));
+  }
+
+  toggleTheme(): void {
+    this.altThemeEnabled$.next(!this.altThemeEnabled$.value);
+  }
+
+  private handleColorPreferenceChange(event: MediaQueryListEvent): void {
+    this.altThemeEnabled$.next(event.matches);
+    this.appRef.tick();
   }
 }
