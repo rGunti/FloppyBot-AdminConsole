@@ -9,7 +9,23 @@
       <mat-card-subtitle> Timer Messages are messages that are issued in an interval. </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
+      <p>
+        Timer messages are messages that are issued in an interval. You can use this feature to remind your viewers
+        about your social media, upcoming events, or other important information.
+      </p>
+
       @if (config$ | async; as config) {
+        @if (timerMessagesDisabled$ | async) {
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title> Timer Messages disabled </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <p>Timer Messages are currently disabled. To enable Timer Messages, set "Min Messages" to 0.</p>
+            </mat-card-content>
+          </mat-card>
+        }
+
         <div [formGroup]="form">
           <input type="hidden" formControlName="channelId" />
 
@@ -26,14 +42,14 @@
             <mat-form-field>
               <mat-label>Interval</mat-label>
               <input matInput type="number" formControlName="interval" />
-              <span matSuffix>min</span>
-              <mat-error>This field is required.</mat-error>
+              <span matTextSuffix>min</span>
+              <mat-error>Interval needs to be >= 5</mat-error>
             </mat-form-field>
             <mat-form-field>
               <mat-label>Min Messages</mat-label>
               <input matInput type="number" formControlName="minMessages" />
-              <span matSuffix>msgs</span>
-              <mat-error>This field is required.</mat-error>
+              <span matTextSuffix>msgs</span>
+              <mat-error> Min Messages needs to be >= 0. Set to 0 to enable Timer Messages. </mat-error>
             </mat-form-field>
           </div>
         </div>

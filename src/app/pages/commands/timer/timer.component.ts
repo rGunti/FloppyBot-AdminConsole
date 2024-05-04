@@ -1,6 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  ValidationErrors,
+  Validators,
+} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -19,6 +26,30 @@ import { DialogService } from '../../../utils/dialog.service';
 
 function isMessage(message: string): boolean {
   return message.trim().length > 0;
+}
+
+function validateMessage(group: FormGroup): ValidationErrors | null {
+  const messageCount = group.get('messages')!.value?.split('\n').filter(isMessage).length || 0;
+  const minMessages = group.get('minMessages')!.value || 0;
+
+  if (minMessages <= 0) {
+    return null;
+  }
+
+  if (messageCount < 1) {
+    return { minMessages: true };
+  }
+
+  return null;
+}
+
+function validateInterval(control: AbstractControl): ValidationErrors | null {
+  const value = control.value;
+  if (value < 5 && value !== 0) {
+    return { minInterval: true };
+  }
+
+  return null;
 }
 
 @Component({
@@ -50,12 +81,15 @@ export class TimerComponent {
   private readonly dialog = inject(DialogService);
 
   readonly channelInterfaceFilter = ['Twitch'];
-  readonly form = this.formBuilder.group({
-    channelId: ['', Validators.required],
-    messages: [''],
-    interval: [0, [Validators.required, Validators.min(0)]],
-    minMessages: [0, [Validators.required, Validators.min(0)]],
-  });
+  readonly form = this.formBuilder.group(
+    {
+      channelId: ['', [Validators.required]],
+      messages: ['', []],
+      interval: [0, [Validators.required, Validators.min(5)]],
+      minMessages: [0, [Validators.required, Validators.min(0), validateInterval]],
+    },
+    { validators: [validateMessage] },
+  );
 
   readonly messageCount$ = merge(this.messageCountRefresh$, this.form.get('messages')!.valueChanges).pipe(
     startWith(undefined),
@@ -66,6 +100,12 @@ export class TimerComponent {
   readonly messageRows$ = this.messageCount$.pipe(
     map((count) => Math.max(count, 2) + 1),
     startWith(3),
+  );
+
+  readonly timerMessagesDisabled$ = merge(this.messageCountRefresh$, this.form.get('minMessages')!.valueChanges).pipe(
+    startWith(undefined),
+    map(() => this.form.get('minMessages')!.value),
+    map((interval) => interval <= 0),
   );
 
   readonly selectedChannel$ = this.channelService.selectedChannelId$.pipe(
@@ -105,6 +145,17 @@ export class TimerComponent {
   );
 
   onSaveChanges(): void {
+    if (this.form.invalid) {
+      if (this.form.errors!['minMessages']) {
+        this.dialog.error(
+          'Please provide at least one message or disable timer messages by setting "Min messages" to 0',
+        );
+      } else {
+        this.dialog.error('Please fill out all required fields');
+      }
+      return;
+    }
+
     const formValue = this.form.value;
     const config: TimerMessageConfig = {
       channelId: formValue.channelId!,
