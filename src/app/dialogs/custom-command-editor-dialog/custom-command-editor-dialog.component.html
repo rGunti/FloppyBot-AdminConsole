@@ -199,8 +199,9 @@
                 </mat-select>
               </mat-form-field>
               <mat-form-field>
-                <mat-label>Cooldown (milliseconds)</mat-label>
+                <mat-label>Cooldown</mat-label>
                 <input matInput type="number" formControlName="milliseconds" />
+                <span matTextSuffix>ms</span>
               </mat-form-field>
               <button mat-icon-button matTooltip="Remove cooldown" (click)="removeCooldown($index)">
                 <mat-icon>

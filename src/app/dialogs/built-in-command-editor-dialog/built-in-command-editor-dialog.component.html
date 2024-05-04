@@ -1,0 +1,151 @@
+<h1 matDialogTitle>
+  Edit Command <code>{{ commandName }}</code>
+</h1>
+<div matDialogContent [formGroup]="form">
+  <mat-tab-group dynamicHeight>
+    <!-- Basics -->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon>
+          <ng-icon name="bootstrapExclamationLg"></ng-icon>
+        </mat-icon>
+        Basics
+      </ng-template>
+
+      <div>
+        <p>
+          You can disable <code>{{ commandName }}</code> if you do not wish to use it on your channel. If you disabled
+          this command, all settings below will be ignored.
+        </p>
+      </div>
+
+      <div>
+        <mat-slide-toggle formControlName="disabled" color="warn"> Disable Command </mat-slide-toggle>
+      </div>
+    </mat-tab>
+
+    <!-- Permissions -->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon>
+          <ng-icon name="bootstrapShieldCheck"></ng-icon>
+        </mat-icon>
+        Permissions
+      </ng-template>
+
+      <div>
+        <h3>Override Privilege Level</h3>
+        <p>
+          You can override the minimum privilege level required to use this command. Note that this setting can be very
+          powerful, especially if used on commands intended for moderation. You should only change the privilege level
+          upwards.
+        </p>
+        <mat-form-field>
+          <mat-label>Minimum Privilege Level</mat-label>
+          <!--
+          <mat-icon matPrefix>
+            <fac-privilege-icon
+              matPrefix
+              [privilege]="(selectedPrivilegeLevel$ | async)!"
+              [tooltip]="false"
+            ></fac-privilege-icon>
+          </mat-icon>
+          -->
+          <mat-select formControlName="privilegeLevel">
+            <mat-option [value]="null">
+              <mat-icon>
+                <ng-icon *ngIf="defaultPrivilegeIcon" [svg]="defaultPrivilegeIcon"></ng-icon>
+              </mat-icon>
+              Default ({{ defaultPrivilegeLevel }})
+            </mat-option>
+            <mat-divider></mat-divider>
+            <!-- <mat-option value="SuperUser">Super User</mat-option> -->
+            @for (privilege of allPrivileges; track $index) {
+              <mat-option [value]="privilege.privilege">
+                <mat-icon>
+                  <ng-icon [svg]="privilege.icon"></ng-icon>
+                </mat-icon>
+                {{ privilege.label }}
+              </mat-option>
+            }
+          </mat-select>
+          <mat-hint>Users with a lower level will not be able to use this command.</mat-hint>
+        </mat-form-field>
+      </div>
+    </mat-tab>
+
+    <!-- Cooldown -->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon>
+          <ng-icon name="bootstrapClockHistory"></ng-icon>
+        </mat-icon>
+        Cooldown
+      </ng-template>
+
+      <div>
+        <h3>Override Cooldown</h3>
+        <p>
+          You can override the cooldown for this command. This will only affect this command on this particular channel.
+        </p>
+
+        <div class="button-row">
+          <mat-slide-toggle formControlName="customCooldown">Apply custom cooldowns</mat-slide-toggle>
+        </div>
+
+        <div formArrayName="cooldowns">
+          @for (cooldown of cooldownArray.controls; track $index) {
+            <div class="form-row" [formGroupName]="$index">
+              <mat-form-field>
+                <mat-label>Level</mat-label>
+                <mat-icon matPrefix>
+                  <fac-privilege-icon
+                    matPrefix
+                    [privilege]="cooldown.get('privilegeLevel')!.value"
+                    [tooltip]="false"
+                  ></fac-privilege-icon>
+                </mat-icon>
+                <mat-select formControlName="privilegeLevel">
+                  <!-- <mat-option value="SuperUser">Super User</mat-option> -->
+                  @for (privilege of allPrivileges; track $index) {
+                    <mat-option [value]="privilege.privilege">
+                      <mat-icon>
+                        <ng-icon [svg]="privilege.icon"></ng-icon>
+                      </mat-icon>
+                      {{ privilege.label }}
+                    </mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Cooldown</mat-label>
+                <input matInput type="number" formControlName="cooldownMs" />
+                <span matTextSuffix>ms</span>
+              </mat-form-field>
+              <button mat-icon-button matTooltip="Remove cooldown" (click)="removeCooldown($index)">
+                <mat-icon>
+                  <ng-icon name="bootstrapTrash"></ng-icon>
+                </mat-icon>
+              </button>
+            </div>
+          }
+
+          <div class="button-row">
+            <button mat-button [disabled]="cooldownArray.disabled" (click)="addCooldown()">
+              <mat-icon>
+                <ng-icon name="bootstrapPlus"></ng-icon>
+              </mat-icon>
+              Add Cooldown
+            </button>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+<div matDialogActions>
+  <button mat-button (click)="resetSettings()">Reset Settings</button>
+  <span class="spacer"></span>
+  <button mat-button [mat-dialog-close]="undefined">Cancel</button>
+  <button mat-button color="primary" [disabled]="form.invalid" (click)="saveChanges()">Save</button>
+</div>
