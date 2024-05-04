@@ -15,6 +15,10 @@ import {
 import { Channel } from '../../api/entities';
 import { UserApiService } from '../../api/user-api.service';
 
+function generateSortKey(channel: Channel): string {
+  return `${channel.interface}/${channel.alias || channel.channel}`;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -34,7 +38,7 @@ export class ChannelService implements OnDestroy {
     )
     .subscribe((channelId) => this.selectedChannelIdSubject$.next(channelId));
 
-  public readonly selectedChannelId$: Observable<string | undefined> = this.selectedChannelIdSubject$.asObservable();
+  readonly selectedChannelId$: Observable<string | undefined> = this.selectedChannelIdSubject$.asObservable();
   readonly userReport$ = this.cacheTrigger$.pipe(
     switchMap(() => this.userApi.getMe()),
     shareReplay(1),
@@ -80,6 +84,7 @@ export class ChannelService implements OnDestroy {
       map((report) =>
         report.ownerOf.map((channelId) => this.parseChannelFromChannelId(channelId, report.channelAliases[channelId])),
       ),
+      map((channels) => channels.sort((a, b) => generateSortKey(a).localeCompare(generateSortKey(b)))),
     );
   }
 
