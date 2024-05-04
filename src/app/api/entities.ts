@@ -146,3 +146,10 @@ export declare type CommandResponseType = 'Text' | 'Sound';
 export interface ShoutoutCommandConfig {
   message: string;
 }
+
+export interface TimerMessageConfig {
+  channelId: string;
+  messages: string[];
+  interval: number;
+  minMessages: number;
+}

@@ -12,6 +12,7 @@ import { AuthService } from '@auth0/auth0-angular';
 import {
   bootstrapBugFill,
   bootstrapCaretLeft,
+  bootstrapClockHistory,
   bootstrapCommand,
   bootstrapDoorOpen,
   bootstrapExclamationLg,
@@ -73,6 +74,7 @@ import { ThemeButtonComponent } from '../theme-button/theme-button.component';
       bootstrapMegaphone,
       bootstrapExclamationLg,
       bootstrapPencilSquare,
+      bootstrapClockHistory,
     }),
   ],
   templateUrl: './navigation.component.html',

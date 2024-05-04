@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { getUrl } from '../utils/api';
 
-import { CommandReport, CustomCommand, ShoutoutCommandConfig } from './entities';
+import { CommandReport, CustomCommand, ShoutoutCommandConfig, TimerMessageConfig } from './entities';
 
 @Injectable({
   providedIn: 'root',
@@ -53,5 +53,13 @@ export class CommandApiService {
 
   setShoutoutCommandMessage(channelId: string, message: ShoutoutCommandConfig): Observable<void> {
     return this.http.post<void>(getUrl(`/api/v2/commands/config/${channelId}/shoutout`), message);
+  }
+
+  getTimerConfigForChannel(channelId: string): Observable<TimerMessageConfig> {
+    return this.http.get<TimerMessageConfig>(getUrl(`/api/v2/commands/config/${channelId}/timer`));
+  }
+
+  setTimerConfigForChannel(channelId: string, config: TimerMessageConfig): Observable<void> {
+    return this.http.post<void>(getUrl(`/api/v2/commands/config/${channelId}/timer`), config);
   }
 }
