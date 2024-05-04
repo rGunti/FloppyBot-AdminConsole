@@ -68,6 +68,17 @@
         </button>
         <button
           mat-menu-item
+          routerLink="/timer"
+          routerLinkActive="mat-mdc-menu-item-highlighted"
+          queryParamsHandling="merge"
+        >
+          <mat-icon>
+            <ng-icon name="bootstrapClockHistory"></ng-icon>
+          </mat-icon>
+          Timer Messages
+        </button>
+        <button
+          mat-menu-item
           routerLink="/stream-source/show-url"
           routerLinkActive="mat-mdc-menu-item-highlighted"
           queryParamsHandling="merge"

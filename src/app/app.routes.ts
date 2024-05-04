@@ -108,6 +108,11 @@ export const routes: Routes = [
     ],
   },
   {
+    path: 'timer',
+    title: 'Timer Messages',
+    loadComponent: () => import('./pages/commands/timer/timer.component').then((m) => m.TimerComponent),
+  },
+  {
     path: '**',
     title: 'Not Found',
     loadComponent: () => import('./pages/not-found/not-found.component').then((m) => m.NotFoundComponent),

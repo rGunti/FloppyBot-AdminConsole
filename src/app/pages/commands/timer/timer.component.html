@@ -1,0 +1,51 @@
+<div class="mat-elevation-z8">
+  <mat-toolbar class="action-toolbar">
+    <fac-channel-selector [interfaceFilter]="channelInterfaceFilter"></fac-channel-selector>
+  </mat-toolbar>
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title> Timer Messages </mat-card-title>
+      <mat-card-subtitle> Timer Messages are messages that are issued in an interval. </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      @if (config$ | async; as config) {
+        <div [formGroup]="form">
+          <input type="hidden" formControlName="channelId" />
+
+          <div class="message-list">
+            <mat-form-field>
+              <mat-label>Messages</mat-label>
+              <textarea matInput formControlName="messages" [rows]="messageRows$ | async"></textarea>
+              <mat-hint> One message per line. You currently have {{ messageCount$ | async }} messages </mat-hint>
+              <mat-error>This field is required.</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <mat-form-field>
+              <mat-label>Interval</mat-label>
+              <input matInput type="number" formControlName="interval" />
+              <span matSuffix>min</span>
+              <mat-error>This field is required.</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Min Messages</mat-label>
+              <input matInput type="number" formControlName="minMessages" />
+              <span matSuffix>msgs</span>
+              <mat-error>This field is required.</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      } @else {
+        <div>
+          <p>Please select a supported channel above. Timer messages are currently only supported on Twitch.</p>
+        </div>
+      }
+    </mat-card-content>
+    <mat-card-actions>
+      <span class="spacer"></span>
+      <button mat-button color="primary" (click)="onSaveChanges()">Save Changes</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
