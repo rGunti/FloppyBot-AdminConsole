@@ -4,7 +4,13 @@ import { Observable } from 'rxjs';
 
 import { getUrl } from '../utils/api';
 
-import { CommandReport, CustomCommand, ShoutoutCommandConfig, TimerMessageConfig } from './entities';
+import {
+  CommandConfiguration,
+  CommandReport,
+  CustomCommand,
+  ShoutoutCommandConfig,
+  TimerMessageConfig,
+} from './entities';
 
 @Injectable({
   providedIn: 'root',
@@ -25,6 +31,18 @@ export class CommandApiService {
       getUrl(`/api/v2/commands/config/${channelId}/${commandName}/disable?isDisabled=${isDisabled}`),
       null,
     );
+  }
+
+  updateCommandConfigurationForChannel(
+    channelId: string,
+    commandName: string,
+    configuration: CommandConfiguration,
+  ): Observable<void> {
+    return this.http.post<void>(getUrl(`/api/v2/commands/config/${channelId}/${commandName}`), configuration);
+  }
+
+  resetCommandConfigurationForChannel(channelId: string, commandName: string): Observable<void> {
+    return this.http.delete<void>(getUrl(`/api/v2/commands/config/${channelId}/${commandName}`));
   }
 
   getCustomCommandsForChannel(channelId: string): Observable<CustomCommand[]> {

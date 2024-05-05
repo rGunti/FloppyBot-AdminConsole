@@ -1,0 +1,21 @@
+mat-form-field {
+  width: 100%;
+}
+
+.form-row {
+  display: flex;
+}
+
+.response-row {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+
+  fac-custom-command-response-form {
+    flex: 1;
+  }
+}
+
+.button-row {
+  margin-bottom: 16px;
+}

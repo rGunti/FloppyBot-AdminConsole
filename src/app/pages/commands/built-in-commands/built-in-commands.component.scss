@@ -12,3 +12,12 @@
     margin-top: 25px;
   }
 }
+
+.form-row {
+  display: flex;
+  flex-flow: row;
+
+  & > * {
+    flex: 1;
+  }
+}

@@ -21,6 +21,11 @@ body {
   opacity: 0.5;
 }
 
+// *** Forms
+input[type="number"] {
+  text-align: right;
+}
+
 // *** Global Overrides
 .mat-mdc-dialog-actions {
   justify-content: end !important;
@@ -28,4 +33,8 @@ body {
 
 .spacer {
   flex: 1;
+}
+
+mat-divider.mat-divider {
+  margin: 10px 0;
 }
