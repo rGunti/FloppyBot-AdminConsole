@@ -6,14 +6,12 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NEVER } from 'rxjs';
 
 import { CustomCommand } from '../../api/entities';
-import { DialogService } from '../../utils/dialog.service';
 
 import { CustomCommandEditorDialogComponent } from './custom-command-editor-dialog.component';
 
 describe('CustomCommandEditorDialogComponent', () => {
   let component: CustomCommandEditorDialogComponent;
   let fixture: ComponentFixture<CustomCommandEditorDialogComponent>;
-  let service: DialogService;
 
   const customCommand: CustomCommand = {
     id: 'NotARealId',
@@ -48,7 +46,6 @@ describe('CustomCommandEditorDialogComponent', () => {
     }).compileComponents();
 
     fixture = TestBed.createComponent(CustomCommandEditorDialogComponent);
-    service = TestBed.inject(DialogService);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
