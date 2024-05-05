@@ -121,6 +121,7 @@ export interface CustomCommand {
   responses: CommandResponse[];
   limitations: CommandLimitation;
   responseMode: CommandResponseMode;
+  counter?: CounterValue;
 }
 
 export interface CommandResponse {
@@ -142,6 +143,10 @@ export interface CooldownDescription {
 
 export declare type CommandResponseMode = 'First' | 'PickOneRandom' | 'All';
 export declare type CommandResponseType = 'Text' | 'Sound';
+
+export interface CounterValue {
+  value: number;
+}
 
 export interface ShoutoutCommandConfig {
   message: string;

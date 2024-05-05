@@ -4,17 +4,19 @@ import { Component, Inject, inject } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
-import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {
   bootstrap1Square,
+  bootstrap9Square,
   bootstrapChatQuote,
   bootstrapExclamationLg,
   bootstrapFastForwardBtn,
@@ -28,7 +30,7 @@ import {
   bootstrapTrash,
 } from '@ng-icons/bootstrap-icons';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import { filter, map, Observable, startWith } from 'rxjs';
+import { filter, map, Observable, startWith, takeUntil } from 'rxjs';
 
 import { CommandApiService } from '../../api/command-api.service';
 import {
@@ -64,6 +66,7 @@ import { PrivilegeService } from '../../utils/privilege.service';
     ReactiveFormsModule,
     MatSelectModule,
     MatTooltipModule,
+    MatSlideToggleModule,
     PrivilegeIconComponent,
     CustomCommandResponseFormComponent,
     ListFormControlComponent,
@@ -83,6 +86,7 @@ import { PrivilegeService } from '../../utils/privilege.service';
       bootstrapChatQuote,
       bootstrapLock,
       bootstrapMusicNote,
+      bootstrap9Square,
     }),
   ],
   templateUrl: './custom-command-editor-dialog.component.html',
@@ -95,6 +99,7 @@ export class CustomCommandEditorDialogComponent {
   private readonly privilegeService = inject(PrivilegeService);
   private readonly channelService = inject(ChannelService);
   private readonly commandApi = inject(CommandApiService);
+  private readonly dialogRef = inject(MatDialogRef<CustomCommandEditorDialogComponent>);
 
   readonly ownerChannel$: Observable<string> = this.channelService.selectedChannelId$.pipe(
     filter((channelId) => !!channelId),
@@ -112,7 +117,7 @@ export class CustomCommandEditorDialogComponent {
       updateOn: 'blur',
     }),
     aliases: this.formBuilder.control(this.command.aliases, {
-      validators: [Validators.required, CustomCommandValidators.customCommandNameList],
+      validators: [CustomCommandValidators.customCommandNameList],
       // To reduce the amount of validation requests to the backend, we only validate on blur.
       updateOn: 'blur',
     }),
@@ -131,7 +136,12 @@ export class CustomCommandEditorDialogComponent {
       },
       [Validators.required],
     ),
+    counter: this.formBuilder.group({
+      value: [this.command.counter?.value],
+    }),
   });
+
+  readonly changeCounterForm = this.formBuilder.control(false);
 
   private readonly selectedCommandMode$ = this.form.get('responseMode')!.valueChanges;
   readonly selectedModeIcon$ = this.selectedCommandMode$.pipe(
@@ -175,6 +185,16 @@ export class CustomCommandEditorDialogComponent {
   constructor(@Inject(MAT_DIALOG_DATA) readonly command: CustomCommand) {
     console.log('CustomCommandEditorDialog', 'constructor', command);
     this.form.patchValue(command);
+
+    this.changeCounterForm.valueChanges.pipe(takeUntil(this.dialogRef.afterClosed()), startWith(false)).subscribe({
+      next: (value) => {
+        if (value) {
+          this.form.get('counter')!.enable();
+        } else {
+          this.form.get('counter')!.disable();
+        }
+      },
+    });
   }
 
   get responsesArray(): FormArray {
@@ -232,5 +252,14 @@ export class CustomCommandEditorDialogComponent {
 
   removeCooldown(index: number): void {
     this.cooldownArray.removeAt(index);
+  }
+
+  saveChanges(): void {
+    const formValue = this.form.value;
+    if (!this.changeCounterForm.value) {
+      formValue.counter = undefined;
+    }
+
+    this.dialogRef.close(formValue);
   }
 }
