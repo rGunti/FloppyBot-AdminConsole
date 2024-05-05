@@ -1,8 +1,9 @@
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { of } from 'rxjs';
 
 import { CustomCommand } from '../../api/entities';
 
@@ -33,6 +34,12 @@ describe('CustomCommandEditorDialogComponent', () => {
         {
           provide: MAT_DIALOG_DATA,
           useValue: customCommand,
+        },
+        {
+          provide: MatDialogRef,
+          useValue: {
+            afterClosed: () => of(null),
+          },
         },
       ],
     }).compileComponents();
