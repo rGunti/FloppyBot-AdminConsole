@@ -79,6 +79,28 @@
       </mat-form-field>
       <mat-divider></mat-divider>
 
+      <p>
+        Responses are the messages that will be sent when the command is triggered. You can add text responses or sound
+        responses.
+      </p>
+      <p>You can also use placeholders in your text responses to add more dynamic content.</p>
+      <ul>
+        <li><code class="syntax-code">&#123;Caller&#125;</code>: The name of the user who called the command</li>
+        <li>
+          <code class="syntax-code">&#123;Params.X&#125;</code>: If provided, the parameter at position
+          <code class="syntax-code">X</code>. The first parameter is located at <code class="syntax-code">0</code> (i.e.
+          <code class="syntax-code">&#123;Params.0&#125;</code>).
+        </li>
+        <li>
+          <code class="syntax-code">&#123;AllParam&#125;</code> /
+          <code class="syntax-code">&#123;AllParams&#125;</code>: Lists all parameters provided to the command joined by
+          a space.
+        </li>
+        <li><code class="syntax-code">&#123;Now&#125;</code>: Returns the current date and time (in UTC)</li>
+        <li><code class="syntax-code">&#123;Random&#125;</code>: Returns a random number between 0 and 99</li>
+        <li><code class="syntax-code">&#123;Counter&#125;</code>: Returns a number that increases with every call</li>
+      </ul>
+
       <div formArrayName="responses">
         @for (response of responsesArray.controls; track $index) {
           <div class="response-row">
@@ -120,6 +142,34 @@
             </button>
           </mat-menu>
         </div>
+      </div>
+    </mat-tab>
+
+    <!-- Counter -->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon>
+          <ng-icon name="bootstrap9Square"></ng-icon>
+        </mat-icon>
+        Counter
+      </ng-template>
+
+      <div formGroupName="counter">
+        <p>
+          If you use <code class="syntax-code">&#123;Counter&#125;</code> in your responses, you can define the current
+          value here.
+        </p>
+
+        <div>
+          <mat-slide-toggle [formControl]="changeCounterForm">
+            <mat-label>Change Counter Value</mat-label>
+          </mat-slide-toggle>
+        </div>
+
+        <mat-form-field>
+          <mat-label>Current Value</mat-label>
+          <input matInput type="number" formControlName="value" />
+        </mat-form-field>
       </div>
     </mat-tab>
 
@@ -230,5 +280,5 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button [mat-dialog-close]="undefined">Cancel</button>
-  <button mat-flat-button color="primary" [disabled]="form.invalid" [mat-dialog-close]="form.value">Save</button>
+  <button mat-flat-button color="primary" [disabled]="form.invalid" (click)="saveChanges()">Save</button>
 </div>

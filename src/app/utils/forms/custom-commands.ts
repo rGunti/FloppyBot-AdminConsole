@@ -48,7 +48,7 @@ export class CustomCommandValidators {
     if (!value) {
       return null;
     }
-    if (value.some((v) => customCommandNameRegex.test(v))) {
+    if (value.some((v) => !customCommandNameRegex.test(v))) {
       return { [CustomCommandValidators.invalidCustomCommandName]: true };
     }
     return null;
