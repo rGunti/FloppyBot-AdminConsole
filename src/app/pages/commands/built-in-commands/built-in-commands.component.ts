@@ -6,7 +6,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { bootstrapArrowCounterclockwise } from '@ng-icons/bootstrap-icons';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import { BehaviorSubject, config, filter, map, of, Subject, switchMap, take, takeUntil, tap } from 'rxjs';
+import { BehaviorSubject, filter, map, of, Subject, switchMap, take, takeUntil, tap } from 'rxjs';
 
 import { CommandApiService } from '../../../api/command-api.service';
 import { CommandConfiguration, CommandInfo } from '../../../api/entities';
