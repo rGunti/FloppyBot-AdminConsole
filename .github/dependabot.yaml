@@ -22,6 +22,9 @@ updates:
       ng-icons:
         patterns:
           - "@ng-icons/*"
+      typescript-eslint:
+        patterns:
+          - "@typescript-eslint/*"
   - package-ecosystem: "docker"
     directory: "/"
     schedule:
