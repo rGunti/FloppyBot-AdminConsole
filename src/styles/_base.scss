@@ -54,3 +54,7 @@ body {
 .syntax-code {
   color: mat.get-color-from-palette(mat.$green-palette, 500);
 }
+
+a {
+  color: mat.get-color-from-palette(mat.$green-palette, 500);
+}

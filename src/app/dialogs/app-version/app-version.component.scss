@@ -1,16 +1,8 @@
-.version-table {
-  td, th {
-    padding-right: 10px;
-  }
-  td:first-child {
-    font-weight: bold;
-  }
+.mat-mdc-dialog-content {
+  max-width: 600px;
+}
 
-  td.changed {
-    background-color: var(--fac-highlight-background);
-  }
-
-  td.version {
-    font-size: x-large;
-  }
+.version {
+  font-family: monospace;
+  font-weight: bold;
 }
