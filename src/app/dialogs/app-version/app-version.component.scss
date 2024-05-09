@@ -1,17 +1,13 @@
-$border-color: #ccc;
-$highlight: yellow;
-
 .version-table {
-  th, td {
-    border-right: 1px solid $border-color;
-    border-bottom: 1px solid $border-color;
+  td, th {
+    padding-right: 10px;
   }
   td:first-child {
     font-weight: bold;
   }
 
   td.changed {
-    background-color: $highlight;
+    background-color: var(--fac-highlight-background);
   }
 
   td.version {

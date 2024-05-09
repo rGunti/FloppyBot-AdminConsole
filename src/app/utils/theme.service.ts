@@ -3,7 +3,7 @@ import { BehaviorSubject, filter, map, Subject, takeUntil } from 'rxjs';
 
 import { LocalStorageService } from './local-storage';
 
-const ALT_THEME_CLASS = 'dark-mode';
+const ALT_THEME_CLASS = 'alt-theme';
 const ALT_THEME_KEY = 'alt-theme-enabled';
 
 function detectDarkModePreference(): boolean {

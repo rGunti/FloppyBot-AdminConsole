@@ -46,7 +46,7 @@ body {
     min-height: 100vh; /* Ensure the container takes the full viewport height */
   }
 
-  &.dark-mode {
+  &.alt-theme {
     @include mat.all-component-colors($light-theme);
   }
 }

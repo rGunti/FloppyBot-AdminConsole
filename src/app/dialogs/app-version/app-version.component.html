@@ -1,7 +1,7 @@
 <h1 mat-dialog-title>About FloppyBot Admin Console</h1>
 <div mat-dialog-content>
-  @if (hasUpdates$ | async) {
-    <p>You have an update available. Click the "Update" button to install the latest version.</p>
+  @if ((hasUpdates$ | async) || true) {
+    <p class="fac-highlight">You have an update available. Click the "Update" button to install the latest version.</p>
   }
 
   <table class="version-table">
@@ -17,7 +17,7 @@
       <td
         *ngIf="latestVersion$ | async as latestVersion"
         class="version"
-        [class.changed]="currentVersion !== calculateDisplayVersion(latestVersion)"
+        [class.fac-highlight]="currentVersion !== calculateDisplayVersion(latestVersion)"
       >
         {{ calculateDisplayVersion(latestVersion) }}
       </td>
@@ -28,7 +28,7 @@
       <td>{{ version.buildTime }}</td>
       <td
         *ngIf="latestVersion$ | async as latestVersion"
-        [class.changed]="version.buildTime !== latestVersion.buildTime"
+        [class.fac-highlight]="version.buildTime !== latestVersion.buildTime"
       >
         {{ latestVersion.buildTime }}
       </td>
@@ -46,7 +46,7 @@
         <td>{{ item.value }}</td>
         <td
           *ngIf="latestVersion$ | async as latestVersion"
-          [class.changed]="latestVersion.buildEnv[item.key] !== item.value"
+          [class.fac-highlight]="latestVersion.buildEnv[item.key] !== item.value"
         >
           {{ latestVersion.buildEnv[item.key] }}
         </td>
