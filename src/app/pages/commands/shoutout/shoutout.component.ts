@@ -46,6 +46,7 @@ export class ShoutoutComponent {
   readonly channelInterfaceFilter = ['Twitch'];
   readonly form = this.formBuilder.group({
     message: [''],
+    teamMessage: [''],
   });
 
   readonly selectedChannel$ = this.channelService.selectedChannelId$.pipe(
@@ -72,6 +73,7 @@ export class ShoutoutComponent {
   saveChanges(): void {
     const formValue: ShoutoutCommandConfig = {
       message: this.form.value.message!,
+      teamMessage: this.form.value.teamMessage!,
     };
 
     this.selectedChannel$

@@ -150,6 +150,7 @@ export interface CounterValue {
 
 export interface ShoutoutCommandConfig {
   message: string;
+  teamMessage: string;
 }
 
 export interface TimerMessageConfig {
