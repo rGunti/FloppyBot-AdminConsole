@@ -24,7 +24,7 @@ export class StreamSourceService {
   }
 
   buildStreamSourceUrl(baseUrl: string, channel: string, accessKey: string): string {
-    const params = new HttpParams({ fromObject: { channel, accessKey } });
+    const params = new HttpParams({ fromObject: { channel, token: accessKey } });
     return `${baseUrl}?${params.toString()}`;
   }
 }
