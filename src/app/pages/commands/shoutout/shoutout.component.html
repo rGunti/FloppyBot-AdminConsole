@@ -14,8 +14,12 @@
     <mat-card-content>
       <p>Responses can have the following placeholders:</p>
       <ul>
-        <li><code>&#123;User&#125;</code>: The name of the Twitch user that has been requested</li>
-        <li><code>&#123;UserLink&#125;</code>: The link to the Twitch channel in question</li>
+        <li><code>&#123;DisplayName&#125;</code>: The name of the Twitch user that has been requested</li>
+        <li><code>&#123;Link&#125;</code>: The link to the Twitch channel in question</li>
+        <li>
+          <code>&#123;TeamLink&#125;</code>: The link to the Twitch stream team the user is a part of (only applies if
+          both streamers are part of the same stream team)
+        </li>
         <li><code>&#123;LastGame&#125;</code>: The last game the Twitch user has broadcasted</li>
       </ul>
       <p>Note that this feature is only supported in Twitch chats at this time.</p>
@@ -25,6 +29,13 @@
             <mat-label>Shoutout Message</mat-label>
             <input matInput formControlName="message" />
             <mat-hint> If you clear this message, the <code>!shoutout</code> command will be deactivated. </mat-hint>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Shoutout Message for Team Members</mat-label>
+            <input matInput formControlName="teamMessage" />
+            <mat-hint>
+              This message will be applied if the user you're shouting out is a member of the same stream team.
+            </mat-hint>
           </mat-form-field>
         </div>
       } @else {
