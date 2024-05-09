@@ -46,11 +46,15 @@ body {
     min-height: 100vh; /* Ensure the container takes the full viewport height */
   }
 
-  &.dark-mode {
+  &.alt-theme {
     @include mat.all-component-colors($light-theme);
   }
 }
 
 .syntax-code {
+  color: mat.get-color-from-palette(mat.$green-palette, 500);
+}
+
+a {
   color: mat.get-color-from-palette(mat.$green-palette, 500);
 }

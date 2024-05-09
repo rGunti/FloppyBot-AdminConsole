@@ -11,12 +11,3 @@ mat-form-field {
     margin-bottom: -7px;
   }
 }
-
-.mat-mdc-card-avatar mat-icon.mat-icon {
-  width: 40px;
-  height: 40px;
-
-  ng-icon {
-    --ng-icon__size: 40px !important;
-  }
-}

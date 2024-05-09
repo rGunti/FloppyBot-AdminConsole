@@ -1,62 +1,66 @@
 <h1 mat-dialog-title>About FloppyBot Admin Console</h1>
 <div mat-dialog-content>
   @if (hasUpdates$ | async) {
-    <p>You have an update available. Click the "Update" button to install the latest version.</p>
+    <mat-card class="fac-highlight">
+      <mat-card-header>
+        <div mat-card-avatar>
+          <mat-icon>
+            <ng-icon name="bootstrapDownload"></ng-icon>
+          </mat-icon>
+        </div>
+        <mat-card-title> Update available </mat-card-title>
+        <mat-card-subtitle class="fac-highlight">
+          You have an update available. Click the "Update &amp; Restart" button to install the latest version.
+        </mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>
+          You are currently running version <span class="version">{{ currentVersion }}</span> of FloppyBot Admin
+          Console, but version <span class="version">{{ calculateDisplayVersion(latestVersion$ | async) }}</span> is
+          available.
+        </p>
+      </mat-card-content>
+    </mat-card>
   }
 
-  <table class="version-table">
-    <tr>
-      <th></th>
-      <th>You're running</th>
-      <th>Latest Version</th>
-    </tr>
+  <p>
+    FloppyBot Admin Console is a web-based application that allows you to manage your FloppyBot instance. It provides a
+    user-friendly interface to manage your bot, view logs, and more.
+  </p>
 
-    <tr>
-      <td>App Version</td>
-      <td class="version">{{ currentVersion }}</td>
-      <td
-        *ngIf="latestVersion$ | async as latestVersion"
-        class="version"
-        [class.changed]="currentVersion !== calculateDisplayVersion(latestVersion)"
-      >
-        {{ calculateDisplayVersion(latestVersion) }}
-      </td>
-    </tr>
+  <p>
+    FloppyBot is an open-source project. The source code for the whole project is published on GitHub at
+    <a href="https://github.com/rGunti/FloppyBot" target="_blank">https://github.com/rGunti/FloppyBot</a>
+    under the <a href="https://github.com/rGunti/FloppyBot/blob/main/LICENSE" target="_blank">BSD 3-Clause License</a>.
+    The content of this license is also shown below.
+  </p>
 
-    <tr>
-      <td>Build Time</td>
-      <td>{{ version.buildTime }}</td>
-      <td
-        *ngIf="latestVersion$ | async as latestVersion"
-        [class.changed]="version.buildTime !== latestVersion.buildTime"
-      >
-        {{ latestVersion.buildTime }}
-      </td>
-    </tr>
+  <h2>Version & Runtime</h2>
+  <p>The following section contains version information about FloppyBot Admin Console.</p>
+  <ul>
+    <li>
+      <strong>App Version: </strong>
+      <span class="version">{{ currentVersion }}</span> ({{ version.buildTime }})
+    </li>
 
-    <tr>
-      <td colspan="3">
-        <h2>Build Environment</h2>
-      </td>
-    </tr>
+    <li>
+      <strong>Build Environment:</strong>
+      <ul>
+        @for (item of version.buildEnv | keyvalue; track item.key) {
+          <li>
+            <strong>{{ getTitle(item.key) }}:</strong> {{ item.value }}
+          </li>
+        }
+      </ul>
+    </li>
+  </ul>
 
-    @for (item of version.buildEnv | keyvalue; track item.key) {
-      <tr>
-        <td>{{ getTitle(item.key) }}</td>
-        <td>{{ item.value }}</td>
-        <td
-          *ngIf="latestVersion$ | async as latestVersion"
-          [class.changed]="latestVersion.buildEnv[item.key] !== item.value"
-        >
-          {{ latestVersion.buildEnv[item.key] }}
-        </td>
-      </tr>
-    }
-  </table>
+  <h2>License</h2>
+  <fac-license></fac-license>
 </div>
 <div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
   @if (hasUpdates$ | async) {
-    <button mat-button (click)="update()">Update</button>
+    <button mat-flat-button color="primary" (click)="update()">Update &amp; Restart</button>
   }
-  <button mat-button mat-dialog-close>OK</button>
 </div>

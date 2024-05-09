@@ -12,7 +12,11 @@ export interface Version {
   buildEnv: Record<string, string>;
 }
 
-export function calculateDisplayVersion(version: Version): string {
+export function calculateDisplayVersion(version: Version | null): string {
+  if (!version) {
+    return 'unknown';
+  }
+
   if (version.semverString) {
     return version.semverString;
   }

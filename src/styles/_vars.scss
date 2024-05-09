@@ -1,0 +1,22 @@
+:root {
+  // default theme
+  --fac-default-theme-highlight-background: #c4c400;
+  --fac-default-theme-highlight-border: #ccc;
+  --fac-default-theme-highlight-color: #000;
+
+  // alt theme
+  --fac-alt-theme-highlight-background: #e0ff42;
+  --fac-alt-theme-highlight-border: #ccc;
+  --fac-alt-theme-highlight-color: #000;
+
+  // used variable
+  --fac-highlight-background: var(--fac-default-theme-highlight-background);
+  --fac-highlight-border: var(--fac-default-theme-highlight-border);
+  --fac-highlight-color: var(--fac-default-theme-highlight-color);
+}
+
+body.alt-theme {
+  --fac-highlight-background: var(--fac-alt-theme-highlight-background);
+  --fac-highlight-border: var(--fac-alt-theme-highlight-border);
+  --fac-highlight-color: var(--fac-alt-theme-highlight-color);
+}
