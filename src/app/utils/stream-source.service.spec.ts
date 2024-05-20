@@ -24,6 +24,6 @@ describe('StreamSourceService', () => {
       'Twitch/SomeChannel',
       'Some-Access-Key',
     );
-    expect(generatedUrl).toBe('https://stream-source.host.fake/?channel=Twitch/SomeChannel&accessKey=Some-Access-Key');
+    expect(generatedUrl).toBe('https://stream-source.host.fake/?channel=Twitch/SomeChannel&token=Some-Access-Key');
   });
 });
