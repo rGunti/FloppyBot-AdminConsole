@@ -90,6 +90,14 @@
         </button>
 
         <mat-divider></mat-divider>
+        <button mat-menu-item [matMenuTriggerFor]="mAdmin">
+          <mat-icon>
+            <ng-icon name="bootstrapShieldLock"></ng-icon>
+          </mat-icon>
+          Admin
+        </button>
+
+        <mat-divider></mat-divider>
         <button mat-menu-item routerLink="/profile" routerLinkActive="mat-mdc-menu-item-highlighted">
           @if (profilePictureUrl$ | async; as profilePictureUrl) {
             <mat-icon>
@@ -172,6 +180,20 @@
         queryParamsHandling="merge"
       >
         Channel Aliases
+      </button>
+    </mat-menu>
+
+    <mat-menu #mAdmin="matMenu">
+      <button
+        mat-menu-item
+        routerLink="/admin/logs"
+        routerLinkActive="mat-mdc-menu-item-highlighted"
+        queryParamsHandling="merge"
+      >
+        <mat-icon>
+          <ng-icon name="bootstrapFileText"></ng-icon>
+        </mat-icon>
+        Logs
       </button>
     </mat-menu>
 

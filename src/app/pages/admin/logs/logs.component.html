@@ -1,0 +1,81 @@
+<div class="mat-elevation-z8">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title> Logs </mat-card-title>
+      <mat-card-subtitle> You can access the application logs through this screen. </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        You can access the application logs through this screen. The logs are useful for debugging and troubleshooting
+        purposes. You can also use the logs to monitor the application's performance and behavior.
+      </p>
+
+      <div [formGroup]="form">
+        <mat-form-field>
+          <mat-label>Minimum Level</mat-label>
+          <mat-select formControlName="minLevel">
+            <mat-option *ngFor="let level of logLevels" [value]="level">
+              {{ level }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Maximum Level</mat-label>
+          <mat-select formControlName="maxLevel">
+            <mat-option *ngFor="let level of logLevels" [value]="level">
+              {{ level }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Maximum Records</mat-label>
+          <input matInput type="number" formControlName="maxRecords" min="10" max="10000" />
+        </mat-form-field>
+
+        <mat-slide-toggle formControlName="hasException">
+          <span>Show Exception</span>
+        </mat-slide-toggle>
+      </div>
+
+      <p>Found {{ (logs$ | async)?.length || '...' }} log entries.</p>
+
+      <table mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="timestamp">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Timestamp</th>
+          <td mat-cell *matCellDef="let log">
+            <span [matTooltip]="log.timestamp">{{ log.timestamp | date: 'short' }}</span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="level">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            <span matTooltip="Level">Lv.</span>
+          </th>
+          <td mat-cell *matCellDef="let log">
+            <fac-log-level [level]="log.level"></fac-log-level>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="context">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Context</th>
+          <td mat-cell *matCellDef="let log" [matTooltip]="log.context">{{ log.context }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="renderedMessage">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Message</th>
+          <td mat-cell *matCellDef="let log">
+            <p>{{ log.renderedMessage }}</p>
+            @if (log.exception) {
+              <div class="exception">
+                <pre>{{ log.exception }}</pre>
+              </div>
+            }
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+</div>

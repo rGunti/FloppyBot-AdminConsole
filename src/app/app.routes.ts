@@ -113,6 +113,17 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/commands/timer/timer.component').then((m) => m.TimerComponent),
   },
   {
+    path: 'admin',
+    title: 'Admin',
+    children: [
+      {
+        path: 'logs',
+        title: 'Logs',
+        loadComponent: () => import('./pages/admin/logs/logs.component').then((m) => m.LogsComponent),
+      },
+    ],
+  },
+  {
     path: '**',
     title: 'Not Found',
     loadComponent: () => import('./pages/not-found/not-found.component').then((m) => m.NotFoundComponent),
