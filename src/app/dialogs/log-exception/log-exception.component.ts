@@ -1,3 +1,4 @@
+import { Clipboard } from '@angular/cdk/clipboard';
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { MatButton } from '@angular/material/button';
@@ -13,5 +14,6 @@ import { LogRecord } from '../../api/entities';
   styleUrl: './log-exception.component.scss',
 })
 export class LogExceptionComponent {
+  readonly clipboard = inject(Clipboard);
   readonly logRecord: LogRecord = inject(MAT_DIALOG_DATA);
 }

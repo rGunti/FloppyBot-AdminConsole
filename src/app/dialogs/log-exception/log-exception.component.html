@@ -5,5 +5,8 @@
   <pre>{{ logRecord.exception }}</pre>
 </div>
 <div matDialogActions>
-  <button mat-button mat-dialog-close>Close</button>
+  @if (logRecord.exception) {
+    <button mat-button (click)="clipboard.copy(logRecord.exception)">Copy Exception</button>
+  }
+  <button mat-button mat-dialog-close cdkFocusInitial>Close</button>
 </div>

@@ -53,12 +53,15 @@
       <td>Message Template:</td>
       <td>{{ logRecord.messageTemplate }}</td>
     </tr>
-    <!--
-    <tr>
-      <td>Exception:</td>
-      <td>{{ logRecord.exception || '-' }}</td>
-    </tr>
-    -->
+    @if (logRecord.exception) {
+      <tr>
+        <td>Exception:</td>
+        <td>
+          <p>{{ logRecord.exception | truncate }}</p>
+          <button mat-button (click)="showException()">Show Exception</button>
+        </td>
+      </tr>
+    }
     @if (logRecord.properties) {
       <tr class="properties-header">
         <td colspan="2">Properties</td>
