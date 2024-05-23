@@ -163,7 +163,7 @@ export interface TimerMessageConfig {
 export interface LogRecord {
   id: string;
   timestamp: Date;
-  level: string;
+  level: LogLevel;
   messageTemplate: string;
   renderedMessage: string;
   service: LogRecordService;

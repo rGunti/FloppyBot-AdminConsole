@@ -11,39 +11,108 @@
       </p>
 
       <div [formGroup]="form">
-        <mat-form-field>
-          <mat-label>Minimum Level</mat-label>
-          <mat-select formControlName="minLevel">
-            <mat-option *ngFor="let level of logLevels" [value]="level">
-              {{ level }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Maximum Level</mat-label>
-          <mat-select formControlName="maxLevel">
-            <mat-option *ngFor="let level of logLevels" [value]="level">
-              {{ level }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Maximum Records</mat-label>
-          <input matInput type="number" formControlName="maxRecords" min="10" max="10000" />
-        </mat-form-field>
+        <mat-accordion>
+          <!-- Log Level -->
+          <mat-expansion-panel expanded>
+            <mat-expansion-panel-header>
+              <mat-panel-title>Log Levels</mat-panel-title>
+              <mat-panel-description>
+                {{ formatLogLevel(form.get('minLevel')!.value || 0) }} -
+                {{ formatLogLevel(form.get('maxLevel')!.value || logLevels.length - 1) }}
+                @if (form.get('hasException')!.value) {
+                  (only messages with exceptions)
+                }
+              </mat-panel-description>
+            </mat-expansion-panel-header>
 
-        <mat-slide-toggle formControlName="hasException">
-          <span>Show Exception</span>
-        </mat-slide-toggle>
+            <div class="inline-block">
+              <span class="log-level right">{{ formatLogLevel(0) }}</span>
+              <mat-slider
+                class="log-level-slider"
+                min="0"
+                [max]="logLevels.length - 1"
+                showTickMarks
+                [displayWith]="formatLogLevel"
+              >
+                <input matSliderStartThumb formControlName="minLevel" />
+                <input matSliderEndThumb formControlName="maxLevel" />
+              </mat-slider>
+              <span class="log-level">{{ formatLogLevel(logLevels.length - 1) }}</span>
+            </div>
+
+            <mat-slide-toggle formControlName="hasException">
+              <span>Show only messages with exceptions</span>
+            </mat-slide-toggle>
+          </mat-expansion-panel>
+
+          <!-- Context Filter -->
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>Context Filters</mat-panel-title>
+              <mat-panel-description>
+                include {{ contextFilterCount$ | async }} and exclude {{ excludeContextFilterCount$ | async }} contexts
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <fac-list-form-control formControlName="context" label="Context" />
+            <fac-list-form-control formControlName="excludeContext" label="Exclude Context" />
+
+            <div class="button-row">
+              <button mat-button (click)="clearContextFilters()">
+                <mat-icon>
+                  <ng-icon name="bootstrapTrash"></ng-icon>
+                </mat-icon>
+                Clear Filters
+              </button>
+            </div>
+          </mat-expansion-panel>
+
+          <!-- Message Filter -->
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>Message Filter</mat-panel-title>
+              <mat-panel-description>
+                include {{ messageTemplateFilterCount$ | async }} and exclude
+                {{ excludeMessageTemplateFilterCount$ | async }} messages
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <fac-list-form-control formControlName="messageTemplate" label="Include Messages" />
+            <fac-list-form-control formControlName="excludeMessageTemplate" label="Exclude Messages" />
+
+            <div class="button-row">
+              <button mat-button (click)="clearMessageTemplateFilters()">
+                <mat-icon>
+                  <ng-icon name="bootstrapTrash"></ng-icon>
+                </mat-icon>
+                Clear Filters
+              </button>
+            </div>
+          </mat-expansion-panel>
+
+          <!-- Advanced Settings -->
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>Advanced Settings</mat-panel-title>
+              <mat-panel-description>Advanced settings for filtering logs</mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <mat-form-field>
+              <mat-label>Maximum Records</mat-label>
+              <input matInput type="number" formControlName="maxRecords" min="10" max="10000" />
+            </mat-form-field>
+          </mat-expansion-panel>
+        </mat-accordion>
       </div>
 
-      <p>Found {{ (logs$ | async)?.length || '...' }} log entries.</p>
+      <mat-paginator [pageSize]="50" [pageSizeOptions]="[10, 50, 100]" showFirstLastButtons></mat-paginator>
+      <mat-progress-bar mode="indeterminate" *ngIf="loading$ | async"></mat-progress-bar>
 
       <table mat-table [dataSource]="dataSource">
         <ng-container matColumnDef="timestamp">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Timestamp</th>
           <td mat-cell *matCellDef="let log">
-            <span [matTooltip]="log.timestamp">{{ log.timestamp | date: 'short' }}</span>
+            <span [matTooltip]="log.timestamp">{{ log.timestamp | dateFormat }}</span>
           </td>
         </ng-container>
 
@@ -58,18 +127,25 @@
 
         <ng-container matColumnDef="context">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Context</th>
-          <td mat-cell *matCellDef="let log" [matTooltip]="log.context">{{ log.context }}</td>
+          <td mat-cell *matCellDef="let log" [matTooltip]="log.context">
+            <span class="menu-trigger" [matMenuTriggerFor]="mContextFilter" [matMenuTriggerData]="log">{{
+              log.context
+            }}</span>
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="renderedMessage">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Message</th>
           <td mat-cell *matCellDef="let log">
-            <p>{{ log.renderedMessage }}</p>
-            @if (log.exception) {
-              <div class="exception">
-                <pre>{{ log.exception }}</pre>
-              </div>
-            }
+            <p [matMenuTriggerFor]="mMessageTemplateFilter" [matMenuTriggerData]="log">{{ log.renderedMessage }}</p>
+            <div>
+              <button mat-button (click)="showEntry(log)">Show Entry</button>
+              @if (log.exception) {
+                <button mat-button [matTooltip]="log.exception | truncate" (click)="showException(log)">
+                  Show Exception
+                </button>
+              }
+            </div>
           </td>
         </ng-container>
 
@@ -79,3 +155,21 @@
     </mat-card-content>
   </mat-card>
 </div>
+
+<mat-menu #mContextFilter="matMenu">
+  <ng-template matMenuContent let-context="context">
+    <button mat-menu-item (click)="addContextFilter(context, 'include')">Filter for this context</button>
+    <button mat-menu-item (click)="addContextFilter(context, 'exclude')">Exclude this context</button>
+  </ng-template>
+</mat-menu>
+
+<mat-menu #mMessageTemplateFilter="matMenu">
+  <ng-template matMenuContent let-messageTemplate="messageTemplate">
+    <button mat-menu-item (click)="addMessageTemplateFilter(messageTemplate, 'include')">
+      Filter for messages like this
+    </button>
+    <button mat-menu-item (click)="addMessageTemplateFilter(messageTemplate, 'exclude')">
+      Exclude messages like this
+    </button>
+  </ng-template>
+</mat-menu>

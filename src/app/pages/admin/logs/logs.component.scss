@@ -1,6 +1,6 @@
 .mat-column-timestamp {
-  width: 150px;
-  max-width: 150px;
+  width: 210px;
+  max-width: 210px;
 }
 .mat-column-level {
   max-width: 60px;
@@ -10,6 +10,30 @@
 .mat-column-context {
   max-width: 250px;
   width: 250px;
+}
+
+.menu-trigger {
+  cursor: pointer;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.button-row {
+  text-align: right;
+}
+
+.log-level-slider {
+  width: 250px;
+}
+.log-level {
+  width: 100px;
+  display: inline-block;
+
+  &.right {
+    text-align: right;
+  }
 }
 
 .exception {

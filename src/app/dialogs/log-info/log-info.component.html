@@ -1,0 +1,77 @@
+<!--
+  {
+    "id": "664b0bf55a247aa70613dc23",
+    "timestamp": "2024-05-20T08:38:12.005+00:00",
+    "level": "Debug",
+    "messageTemplate": "Extracting metadata for command {CommandInfo}",
+    "renderedMessage": "Extracting metadata for command \"Cmd quoteadd [Alias=q+,quoteadd] => System.String AddQuote(FloppyBot.Chat.Entities.Identifiers.ChannelIdentifier, System.String, FloppyBot.Chat.Entities.ChatUser, System.String)\"",
+    "service": {
+      "assemblyName": "FloppyBot.Commands.Executor.Agent",
+      "assemblyVersion": "2.2405.9.0",
+      "assemblyInformationalVersion": "2.2405.09-beta01+457a3b1fe61d3ea662b77741d9940c96f9d3c2d2",
+      "instanceName": null
+    },
+    "context": "FloppyBot.Commands.Executor.Agent.DistRegistry.DistributedCommandRegistryAdapter",
+    "exception": null,
+    "properties": null
+  }
+-->
+
+<h1 matDialogTitle>
+  Log Entry <code>{{ logRecord.id }}</code>
+</h1>
+<div matDialogContent>
+  <table class="log-entry">
+    <tr>
+      <td>Timestamp:</td>
+      <td>{{ logRecord.timestamp | dateFormat }}</td>
+    </tr>
+    <tr>
+      <td>Level:</td>
+      <td>
+        <fac-log-level [level]="logRecord.level"></fac-log-level>
+        {{ logRecord.level }}
+      </td>
+    </tr>
+    <tr>
+      <td>Service:</td>
+      <td>{{ logRecord.service.assemblyName }} ({{ logRecord.service.assemblyInformationalVersion }})</td>
+    </tr>
+    <tr>
+      <td>Instance Name:</td>
+      <td>{{ logRecord.service.instanceName || '-' }}</td>
+    </tr>
+    <tr>
+      <td>Context:</td>
+      <td>{{ logRecord.context }}</td>
+    </tr>
+    <tr>
+      <td>Rendered Message:</td>
+      <td>{{ logRecord.renderedMessage }}</td>
+    </tr>
+    <tr>
+      <td>Message Template:</td>
+      <td>{{ logRecord.messageTemplate }}</td>
+    </tr>
+    <!--
+    <tr>
+      <td>Exception:</td>
+      <td>{{ logRecord.exception || '-' }}</td>
+    </tr>
+    -->
+    @if (logRecord.properties) {
+      <tr class="properties-header">
+        <td colspan="2">Properties</td>
+      </tr>
+      @for (property of logRecord.properties | keyvalue; track property.key) {
+        <tr>
+          <td>{{ property.key }}</td>
+          <td>{{ property.value }}</td>
+        </tr>
+      }
+    }
+  </table>
+</div>
+<div matDialogActions>
+  <button mat-button mat-dialog-close>Close</button>
+</div>
