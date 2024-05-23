@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { MatButton } from '@angular/material/button';
+import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
@@ -16,7 +16,7 @@ import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatTooltip } from '@angular/material/tooltip';
-import { bootstrapTrash } from '@ng-icons/bootstrap-icons';
+import { bootstrapEye, bootstrapSignStopFill, bootstrapTrash } from '@ng-icons/bootstrap-icons';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import {
   BehaviorSubject,
@@ -75,6 +75,7 @@ const LOG_LEVELS: readonly LogLevel[] = [
     MatPaginator,
     DateFormatPipe,
     ListFormControlComponent,
+    MatIconButton,
     MatIcon,
     NgIconComponent,
     TruncatePipe,
@@ -82,6 +83,8 @@ const LOG_LEVELS: readonly LogLevel[] = [
   providers: [
     provideIcons({
       bootstrapTrash,
+      bootstrapEye,
+      bootstrapSignStopFill,
     }),
   ],
   templateUrl: './logs.component.html',
@@ -124,7 +127,7 @@ export class LogsComponent implements OnInit, OnDestroy {
   );
 
   readonly dataSource = new MatTableDataSource<LogRecord>([]);
-  readonly displayedColumns = ['timestamp', 'level', 'context', 'renderedMessage'] as const;
+  readonly displayedColumns = ['timestamp', 'level', 'context', 'renderedMessage', '_functions'] as const;
 
   readonly loading$ = new BehaviorSubject<boolean>(false);
   readonly logs$ = this.form.valueChanges.pipe(

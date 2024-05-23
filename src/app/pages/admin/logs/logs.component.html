@@ -138,14 +138,24 @@
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Message</th>
           <td mat-cell *matCellDef="let log">
             <p [matMenuTriggerFor]="mMessageTemplateFilter" [matMenuTriggerData]="log">{{ log.renderedMessage }}</p>
-            <div>
-              <button mat-button (click)="showEntry(log)">Show Entry</button>
-              @if (log.exception) {
-                <button mat-button [matTooltip]="log.exception | truncate" (click)="showException(log)">
-                  Show Exception
-                </button>
-              }
-            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="_functions">
+          <th mat-header-cell *matHeaderCellDef>Fn</th>
+          <td mat-cell *matCellDef="let log">
+            <button mat-icon-button matTooltip="Show Entry" (click)="showEntry(log)">
+              <mat-icon>
+                <ng-icon name="bootstrapEye"></ng-icon>
+              </mat-icon>
+            </button>
+            @if (log.exception) {
+              <button mat-icon-button matTooltip="Show Exception" (click)="showException(log)">
+                <mat-icon>
+                  <ng-icon name="bootstrapSignStopFill"></ng-icon>
+                </mat-icon>
+              </button>
+            }
           </td>
         </ng-container>
 
