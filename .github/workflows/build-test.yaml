@@ -9,28 +9,19 @@ jobs:
   build:
     name: Build Application
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version:
-          # current LTS
-          - 20.x
-        pnpm-version:
-          # latest stable
-          - 9.x
-
     steps:
       # Checkout the repository
       - uses: actions/checkout@v4
 
       # Setup Node.js and pnpm
-      - name: Node ${{ matrix.node-version }}
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
-      - name: pnpm
+          node-version-file: '.nvmrc'
+      - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: ${{ matrix.pnpm-version }}
+          version: 9.x
           run_install: false
 
       # Setup CodeQL
