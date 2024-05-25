@@ -1,12 +1,14 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, DATE_PIPE_DEFAULT_OPTIONS, DatePipe } from '@angular/common';
 import { Component, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { provideNativeDateAdapter } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
-import { MatInput } from '@angular/material/input';
+import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatProgressBar } from '@angular/material/progress-bar';
@@ -16,13 +18,16 @@ import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatTooltip } from '@angular/material/tooltip';
-import { bootstrapEye, bootstrapSignStopFill, bootstrapTrash } from '@ng-icons/bootstrap-icons';
+import { bootstrapEye, bootstrapSignStopFill, bootstrapTrash, bootstrapX } from '@ng-icons/bootstrap-icons';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import {
   BehaviorSubject,
   catchError,
+  combineLatest,
   debounceTime,
+  finalize,
   map,
+  of,
   shareReplay,
   startWith,
   Subject,
@@ -31,13 +36,12 @@ import {
   tap,
 } from 'rxjs';
 
-import { LogLevel, LogRecord } from '../../../api/entities';
+import { LogLevel, LogRecord, LogRecordSearchParameters, LogStats } from '../../../api/entities';
 import { LogApiService } from '../../../api/log-api.service';
 import { ListFormControlComponent } from '../../../components/list-form-control/list-form-control.component';
 import { LogLevelComponent } from '../../../components/log-level/log-level.component';
 import { LogExceptionComponent } from '../../../dialogs/log-exception/log-exception.component';
 import { LogInfoComponent } from '../../../dialogs/log-info/log-info.component';
-import { DateFormatPipe } from '../../../utils/date-format.pipe';
 import { DialogService } from '../../../utils/dialog.service';
 import { TruncatePipe } from '../../../utils/truncate.pipe';
 
@@ -59,9 +63,9 @@ const LOG_LEVELS: readonly LogLevel[] = [
     MatTableModule,
     LogLevelComponent,
     ReactiveFormsModule,
-    MatFormField,
-    MatLabel,
-    MatInput,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
     MatSelect,
     MatOption,
     MatTooltip,
@@ -73,7 +77,7 @@ const LOG_LEVELS: readonly LogLevel[] = [
     MatSliderModule,
     MatExpansionModule,
     MatPaginator,
-    DateFormatPipe,
+    DatePipe,
     ListFormControlComponent,
     MatIconButton,
     MatIcon,
@@ -85,7 +89,15 @@ const LOG_LEVELS: readonly LogLevel[] = [
       bootstrapTrash,
       bootstrapEye,
       bootstrapSignStopFill,
+      bootstrapX,
     }),
+    {
+      provide: DATE_PIPE_DEFAULT_OPTIONS,
+      useValue: {
+        dateFormat: 'yyyy-MM-dd HH:mm:ss.SSS',
+      },
+    },
+    provideNativeDateAdapter(),
   ],
   templateUrl: './logs.component.html',
   styleUrl: './logs.component.scss',
@@ -100,9 +112,11 @@ export class LogsComponent implements OnInit, OnDestroy {
   readonly logLevels = LOG_LEVELS;
 
   readonly form = this.fb.group({
-    minLevel: this.fb.control<number>(0),
-    maxLevel: this.fb.control<number>(LOG_LEVELS.length - 1),
-    maxRecords: this.fb.control<number>(1_000),
+    minLevel: this.fb.control<number>(2), // Information
+    maxLevel: this.fb.control<number>(LOG_LEVELS.length - 1), // Fatal
+    minTime: this.fb.control<Date | null>(null),
+    maxTime: this.fb.control<Date | null>(null),
+    maxRecords: this.fb.control<number>(100),
     hasException: this.fb.control<boolean>(false),
     context: this.fb.control<string[]>([]),
     excludeContext: this.fb.control<string[]>([]),
@@ -126,43 +140,73 @@ export class LogsComponent implements OnInit, OnDestroy {
     map((excludeTemplates) => excludeTemplates?.length || 0),
   );
 
-  readonly dataSource = new MatTableDataSource<LogRecord>([]);
-  readonly displayedColumns = ['timestamp', 'level', 'context', 'renderedMessage', '_functions'] as const;
-
-  readonly loading$ = new BehaviorSubject<boolean>(false);
-  readonly logs$ = this.form.valueChanges.pipe(
+  readonly filterParams$ = this.form.valueChanges.pipe(
     debounceTime(500),
     startWith(this.form.value),
-    tap((formValue) => {
-      console.log('formValue', formValue);
-      this.loading$.next(true);
-    }),
-    switchMap((formValue) =>
-      this.logApi
-        .getLogs({
+    map(
+      (formValue) =>
+        ({
           minLevel: LOG_LEVELS[formValue.minLevel || 0],
           maxLevel: LOG_LEVELS[formValue.maxLevel || LOG_LEVELS.length - 1],
-          maxRecords: formValue.maxRecords || 1_000,
+          minTime: formValue.minTime || null,
+          maxTime: formValue.maxTime || null,
+          maxRecords: formValue.maxRecords || 100,
           hasException: formValue.hasException || false,
           context: formValue.context || [],
           excludeContext: formValue.excludeContext || [],
           messageTemplate: formValue.messageTemplate || [],
           excludeMessageTemplate: formValue.excludeMessageTemplate || [],
           includeProperties: true,
-        })
-        .pipe(
+        }) as LogRecordSearchParameters,
+    ),
+  );
+
+  readonly dataSource = new MatTableDataSource<LogRecord>([]);
+  readonly displayedColumns = ['timestamp', 'level', 'context', 'renderedMessage', '_functions'] as const;
+
+  readonly loading$ = new BehaviorSubject<boolean>(false);
+  readonly data$ = this.filterParams$.pipe(
+    tap(() => {
+      this.loading$.next(true);
+    }),
+    switchMap((filter) =>
+      combineLatest([
+        this.logApi.getLogs(filter).pipe(catchError(() => [])),
+        this.logApi.getLogStats(filter).pipe(
           catchError(() => {
-            this.loading$.next(false);
-            return [];
+            return of<LogStats>({ totalCount: 0, oldestLogEntry: '', newestLogEntry: '' });
           }),
         ),
+        this.logApi.getLogStats({}).pipe(
+          catchError(() => {
+            return of<LogStats>({ totalCount: 0, oldestLogEntry: '', newestLogEntry: '' });
+          }),
+        ),
+      ]),
     ),
-    tap((logs) => {
-      this.dataSource.data = logs;
-      this.dataSource.paginator = this.paginator;
+    tap(() => {
+      this.loading$.next(false);
+    }),
+    finalize(() => {
       this.loading$.next(false);
     }),
     shareReplay(1),
+  );
+  readonly logs$ = this.data$.pipe(
+    map(([logs]) => logs),
+    tap((logs) => {
+      this.dataSource.data = logs;
+      this.dataSource.paginator = this.paginator;
+    }),
+  );
+  readonly stats$ = this.data$.pipe(
+    map(([, stats, unfilteredStats]) => ({ filtered: stats, unfiltered: unfilteredStats })),
+  );
+  readonly minTime$ = this.stats$.pipe(
+    map((stats) => (stats.unfiltered.oldestLogEntry ? new Date(stats.unfiltered.oldestLogEntry) : null)),
+  );
+  readonly maxTime$ = this.stats$.pipe(
+    map((stats) => (stats.unfiltered.newestLogEntry ? new Date(stats.unfiltered.newestLogEntry) : null)),
   );
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -204,6 +248,11 @@ export class LogsComponent implements OnInit, OnDestroy {
 
   showException(log: LogRecord): void {
     this.dialog.show(LogExceptionComponent, log);
+  }
+
+  clearTimeFilter(): void {
+    this.form.get('minTime')!.setValue(null);
+    this.form.get('maxTime')!.setValue(null);
   }
 
   private updateIncludeExcludeFilter(

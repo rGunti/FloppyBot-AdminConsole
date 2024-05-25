@@ -210,3 +210,9 @@ export interface LogRecordSearchParameters {
   includeProperties?: boolean;
   maxRecords?: number;
 }
+
+export interface LogStats {
+  totalCount: number;
+  oldestLogEntry?: string;
+  newestLogEntry?: string;
+}

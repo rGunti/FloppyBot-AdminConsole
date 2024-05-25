@@ -17,7 +17,7 @@
             <mat-expansion-panel-header>
               <mat-panel-title>Log Levels</mat-panel-title>
               <mat-panel-description>
-                {{ formatLogLevel(form.get('minLevel')!.value || 0) }} -
+                between {{ formatLogLevel(form.get('minLevel')!.value || 0) }} and
                 {{ formatLogLevel(form.get('maxLevel')!.value || logLevels.length - 1) }}
                 @if (form.get('hasException')!.value) {
                   (only messages with exceptions)
@@ -43,6 +43,42 @@
             <mat-slide-toggle formControlName="hasException">
               <span>Show only messages with exceptions</span>
             </mat-slide-toggle>
+          </mat-expansion-panel>
+
+          <!-- Time Filter -->
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>Time Filter</mat-panel-title>
+              <mat-panel-description>
+                between {{ (form.get('minTime')!.value || (minTime$ | async) | date: 'mediumDate') || '...' }} and
+                {{ (form.get('maxTime')!.value || (maxTime$ | async) | date: 'mediumDate') || '...' }}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <mat-form-field>
+              <mat-label>Time Range</mat-label>
+              <mat-date-range-input [rangePicker]="picker" [min]="minTime$ | async" [max]="maxTime$ | async">
+                <input matStartDate formControlName="minTime" placeholder="Start date" />
+                <input matEndDate formControlName="maxTime" placeholder="End date" />
+              </mat-date-range-input>
+              <button mat-icon-button matIconSuffix matTooltip="Clear" (click)="clearTimeFilter()">
+                <mat-icon>
+                  <ng-icon name="bootstrapX"></ng-icon>
+                </mat-icon>
+              </button>
+              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-date-range-picker #picker>
+                <mat-date-range-picker-actions>
+                  <button mat-button matDateRangePickerCancel>Cancel</button>
+                  <button mat-raised-button color="primary" matDateRangePickerApply>Apply</button>
+                </mat-date-range-picker-actions>
+              </mat-date-range-picker>
+            </mat-form-field>
+
+            <p>
+              Data available between <b>{{ (minTime$ | async | date) || '...' }}</b> and
+              <b>{{ (maxTime$ | async | date) || '...' }}</b>
+            </p>
           </mat-expansion-panel>
 
           <!-- Context Filter -->
@@ -93,14 +129,15 @@
           <!-- Advanced Settings -->
           <mat-expansion-panel>
             <mat-expansion-panel-header>
-              <mat-panel-title>Advanced Settings</mat-panel-title>
-              <mat-panel-description>Advanced settings for filtering logs</mat-panel-description>
+              <mat-panel-title>Limit Records</mat-panel-title>
+              <mat-panel-description>
+                limit to {{ form.get('maxRecords')!.value | number }} records
+              </mat-panel-description>
             </mat-expansion-panel-header>
 
-            <mat-form-field>
-              <mat-label>Maximum Records</mat-label>
-              <input matInput type="number" formControlName="maxRecords" min="10" max="10000" />
-            </mat-form-field>
+            <mat-slider class="full-width" [min]="10" [max]="1000" step="10" showTickMarks discrete>
+              <input matSliderThumb formControlName="maxRecords" />
+            </mat-slider>
           </mat-expansion-panel>
         </mat-accordion>
       </div>
@@ -112,7 +149,7 @@
         <ng-container matColumnDef="timestamp">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Timestamp</th>
           <td mat-cell *matCellDef="let log">
-            <span [matTooltip]="log.timestamp">{{ log.timestamp | dateFormat }}</span>
+            <span [matTooltip]="log.timestamp">{{ log.timestamp | date }}</span>
           </td>
         </ng-container>
 
@@ -162,6 +199,19 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
+
+      <div class="stats">
+        @if (stats$ | async; as stats) {
+          <p>
+            Found <b>{{ stats.filtered.totalCount | number }}</b
+            >/<b>{{ stats.unfiltered.totalCount | number }}</b> record(s) between
+            <b>{{ stats.filtered.oldestLogEntry | date }}</b> and
+            <b>{{ stats.filtered.newestLogEntry | date }}</b>
+          </p>
+        } @else {
+          <p>Loading...</p>
+        }
+      </div>
     </mat-card-content>
   </mat-card>
 </div>
