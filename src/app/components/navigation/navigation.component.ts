@@ -38,7 +38,10 @@ import { VERSION } from '../../../version/version';
 import { calculateDisplayVersion } from '../../../version/version.interface';
 import { AppVersionComponent } from '../../dialogs/app-version/app-version.component';
 import { LogoutDialogComponent } from '../../dialogs/logout-dialog/logout-dialog.component';
+import { ADMIN_PERMISSIONS, Permissions } from '../../guards/permissions';
 import { AppUpdateService } from '../../utils/app-update.service';
+import { HasAnyPermissionDirective } from '../../utils/auth/has-any-permission.directive';
+import { HasAnyPermissionPipe } from '../../utils/auth/has-any-permission.pipe';
 import { DialogService } from '../../utils/dialog.service';
 import { ThemeButtonComponent } from '../theme-button/theme-button.component';
 
@@ -57,6 +60,8 @@ import { ThemeButtonComponent } from '../theme-button/theme-button.component';
     MatTooltipModule,
     MatDialogModule,
     ThemeButtonComponent,
+    HasAnyPermissionPipe,
+    HasAnyPermissionDirective,
   ],
   providers: [
     provideIcons({
@@ -91,6 +96,9 @@ export class NavigationComponent {
   private readonly router = inject(Router);
   private readonly auth = inject(AuthService);
   private readonly appUpdateService = inject(AppUpdateService);
+
+  readonly Permissions = Permissions;
+  readonly adminPermissions = ADMIN_PERMISSIONS;
 
   readonly debugFeaturesEnabled = environment.enableDebugTools;
   readonly version = calculateDisplayVersion(VERSION);
