@@ -1,5 +1,11 @@
 # FloppyBot Admin Console
 
+[![FloppyBot][img-floppybot]][floppybot]
+[![FloppyBot][img-floppybot-ac]][floppybot-ac]
+[![FloppyBot][img-floppybot-ss]][floppybot-ss]
+
+---
+
 [![BSD-3-Clause](https://img.shields.io/github/license/rGunti/FloppyBot-AdminConsole)](https://github.com/rGunti/FloppyBot-AdminConsole/blob/master/LICENSE)
 [![GitHub issues](https://img.shields.io/github/issues/rGunti/FloppyBot-AdminConsole)](https://github.com/rGunti/FloppyBot-AdminConsole/issues)
 [![GitHub pull requests](https://img.shields.io/github/issues-pr/rGunti/FloppyBot-AdminConsole.svg?style=flat)](https://github.com/rGunti/FloppyBot-AdminConsole/pulls)
@@ -20,3 +26,8 @@ FloppyBot Admin Console is distributed as a Docker image under the tag `floppybo
 ---
 
 [floppybot]: https://github.com/rgunti/floppybot
+[floppybot-ac]: https://github.com/rGunti/FloppyBot-AdminConsole
+[floppybot-ss]: https://github.com/rGunti/FloppyBot-StreamSource
+[img-floppybot]: https://img.shields.io/badge/FloppyBot-gray?logo=.net
+[img-floppybot-ac]: https://img.shields.io/badge/Admin_Console-blue?logo=googlechrome
+[img-floppybot-ss]: https://img.shields.io/badge/Stream_Source-gray?logo=obsstudio
