@@ -1,6 +1,9 @@
 import { Routes } from '@angular/router';
 import { AuthGuard } from '@auth0/auth0-angular';
 
+import { hasAnyPermission } from './guards/auth-role.guard';
+import { ADMIN_PERMISSIONS, Permissions } from './guards/permissions';
+
 export const routes: Routes = [
   {
     path: '',
@@ -92,8 +95,10 @@ export const routes: Routes = [
         title: 'Settings / Channel Aliases',
         loadComponent: () =>
           import('./pages/settings/channel-aliases/channel-aliases.component').then((m) => m.ChannelAliasesComponent),
+        canActivate: [AuthGuard],
       },
     ],
+    canActivate: [AuthGuard],
   },
   {
     path: 'stream-source',
@@ -111,6 +116,20 @@ export const routes: Routes = [
     path: 'timer',
     title: 'Timer Messages',
     loadComponent: () => import('./pages/commands/timer/timer.component').then((m) => m.TimerComponent),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'admin',
+    title: 'Admin',
+    children: [
+      {
+        path: 'logs',
+        title: 'Logs',
+        loadComponent: () => import('./pages/admin/logs/logs.component').then((m) => m.LogsComponent),
+        canActivate: [AuthGuard, hasAnyPermission(Permissions.NoOne)],
+      },
+    ],
+    canActivate: [AuthGuard, hasAnyPermission(...ADMIN_PERMISSIONS)],
   },
   {
     path: '**',

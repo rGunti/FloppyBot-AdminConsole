@@ -1,0 +1,60 @@
+<h1 matDialogTitle>
+  Log Entry <code>{{ logRecord.id }}</code>
+</h1>
+<div matDialogContent>
+  <table class="log-entry">
+    <tr>
+      <td>Timestamp:</td>
+      <td>{{ logRecord.timestamp | dateFormat }}</td>
+    </tr>
+    <tr>
+      <td>Level:</td>
+      <td>
+        {{ logRecord.level }}
+      </td>
+    </tr>
+    <tr>
+      <td>Service:</td>
+      <td>{{ logRecord.service.assemblyName }} ({{ logRecord.service.assemblyInformationalVersion }})</td>
+    </tr>
+    <tr>
+      <td>Instance Name:</td>
+      <td>{{ logRecord.service.instanceName || '-' }}</td>
+    </tr>
+    <tr>
+      <td>Context:</td>
+      <td>{{ logRecord.context }}</td>
+    </tr>
+    <tr>
+      <td>Rendered Message:</td>
+      <td>{{ logRecord.renderedMessage }}</td>
+    </tr>
+    <tr>
+      <td>Message Template:</td>
+      <td>{{ logRecord.messageTemplate }}</td>
+    </tr>
+    @if (logRecord.exception) {
+      <tr>
+        <td>Exception:</td>
+        <td>
+          <p>{{ logRecord.exception | truncate }}</p>
+          <button mat-button (click)="showException()">Show Exception</button>
+        </td>
+      </tr>
+    }
+    @if (logRecord.properties) {
+      <tr class="properties-header">
+        <td colspan="2">Properties</td>
+      </tr>
+      @for (property of logRecord.properties | keyvalue; track property.key) {
+        <tr>
+          <td>{{ property.key }}</td>
+          <td>{{ property.value }}</td>
+        </tr>
+      }
+    }
+  </table>
+</div>
+<div matDialogActions>
+  <button mat-button mat-dialog-close>Close</button>
+</div>

@@ -1,0 +1,235 @@
+<div class="mat-elevation-z8">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title> Logs </mat-card-title>
+      <mat-card-subtitle> You can access the application logs through this screen. </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        You can access the application logs through this screen. The logs are useful for debugging and troubleshooting
+        purposes. You can also use the logs to monitor the application's performance and behavior.
+      </p>
+
+      <div [formGroup]="form">
+        <mat-accordion>
+          <!-- Log Level -->
+          <mat-expansion-panel expanded>
+            <mat-expansion-panel-header>
+              <mat-panel-title>Log Levels</mat-panel-title>
+              <mat-panel-description>
+                between {{ formatLogLevel(form.get('minLevel')!.value || 0) }} and
+                {{ formatLogLevel(form.get('maxLevel')!.value || logLevels.length - 1) }}
+                @if (form.get('hasException')!.value) {
+                  (only messages with exceptions)
+                }
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <div class="inline-block">
+              <span class="log-level right">{{ formatLogLevel(0) }}</span>
+              <mat-slider
+                class="log-level-slider"
+                min="0"
+                [max]="logLevels.length - 1"
+                showTickMarks
+                [displayWith]="formatLogLevel"
+              >
+                <input matSliderStartThumb formControlName="minLevel" />
+                <input matSliderEndThumb formControlName="maxLevel" />
+              </mat-slider>
+              <span class="log-level">{{ formatLogLevel(logLevels.length - 1) }}</span>
+            </div>
+
+            <mat-slide-toggle formControlName="hasException">
+              <span>Show only messages with exceptions</span>
+            </mat-slide-toggle>
+          </mat-expansion-panel>
+
+          <!-- Time Filter -->
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>Time Filter</mat-panel-title>
+              <mat-panel-description>
+                between {{ (form.get('minTime')!.value || (minTime$ | async) | date: 'mediumDate') || '...' }} and
+                {{ (form.get('maxTime')!.value || (maxTime$ | async) | date: 'mediumDate') || '...' }}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <mat-form-field>
+              <mat-label>Time Range</mat-label>
+              <mat-date-range-input [rangePicker]="picker" [min]="minTime$ | async" [max]="maxTime$ | async">
+                <input matStartDate formControlName="minTime" placeholder="Start date" />
+                <input matEndDate formControlName="maxTime" placeholder="End date" />
+              </mat-date-range-input>
+              <button mat-icon-button matIconSuffix matTooltip="Clear" (click)="clearTimeFilter()">
+                <mat-icon>
+                  <ng-icon name="bootstrapX"></ng-icon>
+                </mat-icon>
+              </button>
+              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-date-range-picker #picker>
+                <mat-date-range-picker-actions>
+                  <button mat-button matDateRangePickerCancel>Cancel</button>
+                  <button mat-raised-button color="primary" matDateRangePickerApply>Apply</button>
+                </mat-date-range-picker-actions>
+              </mat-date-range-picker>
+            </mat-form-field>
+
+            <p>
+              Data available between <b>{{ (minTime$ | async | date) || '...' }}</b> and
+              <b>{{ (maxTime$ | async | date) || '...' }}</b>
+            </p>
+          </mat-expansion-panel>
+
+          <!-- Context Filter -->
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>Context Filters</mat-panel-title>
+              <mat-panel-description>
+                include {{ contextFilterCount$ | async }} and exclude {{ excludeContextFilterCount$ | async }} contexts
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <fac-list-form-control formControlName="context" label="Context" />
+            <fac-list-form-control formControlName="excludeContext" label="Exclude Context" />
+
+            <div class="button-row">
+              <button mat-button (click)="clearContextFilters()">
+                <mat-icon>
+                  <ng-icon name="bootstrapTrash"></ng-icon>
+                </mat-icon>
+                Clear Filters
+              </button>
+            </div>
+          </mat-expansion-panel>
+
+          <!-- Message Filter -->
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>Message Filter</mat-panel-title>
+              <mat-panel-description>
+                include {{ messageTemplateFilterCount$ | async }} and exclude
+                {{ excludeMessageTemplateFilterCount$ | async }} messages
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <fac-list-form-control formControlName="messageTemplate" label="Include Messages" />
+            <fac-list-form-control formControlName="excludeMessageTemplate" label="Exclude Messages" />
+
+            <div class="button-row">
+              <button mat-button (click)="clearMessageTemplateFilters()">
+                <mat-icon>
+                  <ng-icon name="bootstrapTrash"></ng-icon>
+                </mat-icon>
+                Clear Filters
+              </button>
+            </div>
+          </mat-expansion-panel>
+
+          <!-- Advanced Settings -->
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>Limit Records</mat-panel-title>
+              <mat-panel-description>
+                limit to {{ form.get('maxRecords')!.value | number }} records
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <mat-slider class="full-width" [min]="10" [max]="1000" step="10" showTickMarks discrete>
+              <input matSliderThumb formControlName="maxRecords" />
+            </mat-slider>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+
+      <mat-paginator [pageSize]="50" [pageSizeOptions]="[10, 50, 100]" showFirstLastButtons></mat-paginator>
+      <mat-progress-bar mode="indeterminate" *ngIf="loading$ | async"></mat-progress-bar>
+
+      <table mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="timestamp">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Timestamp</th>
+          <td mat-cell *matCellDef="let log">
+            <span [matTooltip]="log.timestamp">{{ log.timestamp | date }}</span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="level">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            <span matTooltip="Level">Lv.</span>
+          </th>
+          <td mat-cell *matCellDef="let log">
+            <fac-log-level [level]="log.level"></fac-log-level>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="context">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Context</th>
+          <td mat-cell *matCellDef="let log" [matTooltip]="log.context">
+            <span class="menu-trigger" [matMenuTriggerFor]="mContextFilter" [matMenuTriggerData]="log">{{
+              log.context
+            }}</span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="renderedMessage">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Message</th>
+          <td mat-cell *matCellDef="let log">
+            <p [matMenuTriggerFor]="mMessageTemplateFilter" [matMenuTriggerData]="log">{{ log.renderedMessage }}</p>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="_functions">
+          <th mat-header-cell *matHeaderCellDef>Fn</th>
+          <td mat-cell *matCellDef="let log">
+            <button mat-icon-button matTooltip="Show Entry" (click)="showEntry(log)">
+              <mat-icon>
+                <ng-icon name="bootstrapEye"></ng-icon>
+              </mat-icon>
+            </button>
+            @if (log.exception) {
+              <button mat-icon-button matTooltip="Show Exception" (click)="showException(log)">
+                <mat-icon>
+                  <ng-icon name="bootstrapSignStopFill"></ng-icon>
+                </mat-icon>
+              </button>
+            }
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+
+      <div class="stats">
+        @if (stats$ | async; as stats) {
+          <p>
+            Found <b>{{ stats.filtered.totalCount | number }}</b
+            >/<b>{{ stats.unfiltered.totalCount | number }}</b> record(s) between
+            <b>{{ stats.filtered.oldestLogEntry | date }}</b> and
+            <b>{{ stats.filtered.newestLogEntry | date }}</b>
+          </p>
+        } @else {
+          <p>Loading...</p>
+        }
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<mat-menu #mContextFilter="matMenu">
+  <ng-template matMenuContent let-context="context">
+    <button mat-menu-item (click)="addContextFilter(context, 'include')">Filter for this context</button>
+    <button mat-menu-item (click)="addContextFilter(context, 'exclude')">Exclude this context</button>
+  </ng-template>
+</mat-menu>
+
+<mat-menu #mMessageTemplateFilter="matMenu">
+  <ng-template matMenuContent let-messageTemplate="messageTemplate">
+    <button mat-menu-item (click)="addMessageTemplateFilter(messageTemplate, 'include')">
+      Filter for messages like this
+    </button>
+    <button mat-menu-item (click)="addMessageTemplateFilter(messageTemplate, 'exclude')">
+      Exclude messages like this
+    </button>
+  </ng-template>
+</mat-menu>

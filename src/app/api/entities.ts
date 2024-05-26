@@ -159,3 +159,60 @@ export interface TimerMessageConfig {
   interval: number;
   minMessages: number;
 }
+
+export interface LogRecord {
+  id: string;
+  timestamp: Date;
+  level: LogLevel;
+  messageTemplate: string;
+  renderedMessage: string;
+  service: LogRecordService;
+  context: string;
+  exception?: string;
+  properties?: Record<string, string>;
+}
+
+export interface LogRecordService {
+  assemblyName: string;
+  assemblyVersion: string;
+  assemblyInformationalVersion: string;
+  instanceName?: string;
+}
+
+export enum LogLevel {
+  Verbose = 'Verbose',
+  Debug = 'Debug',
+  Information = 'Information',
+  Warning = 'Warning',
+  Error = 'Error',
+  Fatal = 'Fatal',
+}
+
+export interface LogRecordSearchParameters {
+  minTime?: Date;
+  maxTime?: Date;
+
+  minLevel?: LogLevel;
+  maxLevel?: LogLevel;
+
+  hasException?: boolean;
+
+  context?: string[];
+  service?: string[];
+  instanceName?: string[];
+  messageTemplate?: string[];
+
+  excludeContext?: string[];
+  excludeService?: string[];
+  excludeInstanceName?: string[];
+  excludeMessageTemplate?: string[];
+
+  includeProperties?: boolean;
+  maxRecords?: number;
+}
+
+export interface LogStats {
+  totalCount: number;
+  oldestLogEntry?: string;
+  newestLogEntry?: string;
+}

@@ -1,0 +1,59 @@
+.mat-column-timestamp {
+  width: 210px;
+  max-width: 210px;
+}
+.mat-column-level {
+  max-width: 60px;
+  width: 60px;
+  text-align: center;
+}
+.mat-column-context {
+  max-width: 250px;
+  width: 250px;
+}
+.mat-column-_functions {
+  max-width: 150px;
+  width: 150px;
+}
+
+.menu-trigger {
+  cursor: pointer;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.button-row {
+  text-align: right;
+}
+
+.log-level-slider {
+  width: 250px;
+}
+.log-level {
+  width: 100px;
+  display: inline-block;
+
+  &.right {
+    text-align: right;
+  }
+}
+
+.exception {
+  white-space: pre-wrap;
+  pre {
+    word-wrap: break-word;
+  }
+}
+
+.full-width {
+  width: 100%;
+}
+
+.stats {
+  text-align: center;
+  font-style: italic;
+  font-size: small;
+  padding: 10px;
+}
