@@ -126,7 +126,7 @@ export const routes: Routes = [
         path: 'logs',
         title: 'Logs',
         loadComponent: () => import('./pages/admin/logs/logs.component').then((m) => m.LogsComponent),
-        canActivate: [AuthGuard, hasAnyPermission(Permissions.NoOne)],
+        canActivate: [AuthGuard, hasAnyPermission(Permissions.ReadLogs)],
       },
     ],
     canActivate: [AuthGuard, hasAnyPermission(...ADMIN_PERMISSIONS)],
