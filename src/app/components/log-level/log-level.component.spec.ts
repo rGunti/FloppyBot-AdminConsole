@@ -8,10 +8,9 @@ describe('LogLevelComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LogLevelComponent]
-    })
-    .compileComponents();
-    
+      imports: [LogLevelComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(LogLevelComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
