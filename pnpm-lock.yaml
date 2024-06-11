@@ -50,15 +50,6 @@ importers:
       '@ng-icons/core':
         specifier: ^27.*
         version: 27.5.2
-      '@ng-icons/heroicons':
-        specifier: ^27.*
-        version: 27.5.2
-      '@ng-icons/ionicons':
-        specifier: ^27.*
-        version: 27.5.2
-      '@ng-icons/simple-icons':
-        specifier: ^27.*
-        version: 27.5.2
       rxjs:
         specifier: ~7.8.0
         version: 7.8.1
@@ -1607,15 +1598,6 @@ packages:
 
   '@ng-icons/core@27.5.2':
     resolution: {integrity: sha512-LDfhrfxJ5yM8NkpSlz9ix+RRuecFHZYjfCgXH0dVDuk5gx+40Dxi/v9vL8oRpUP4oL9spR7Ndry2ENVZY/h4Tw==}
-
-  '@ng-icons/heroicons@27.5.2':
-    resolution: {integrity: sha512-+OaXaZb+E6yQrfiqME92OMstUH+1tv9GvPr7IY6Bnxdm+db633gs/8Vz3O+lMq6/luqSY87nwglwLWhoR4Nm4A==}
-
-  '@ng-icons/ionicons@27.5.2':
-    resolution: {integrity: sha512-RkyRpZaANbgfW070R86/Jga7dDKQ+rF+HE/t70cmlWrULhEkq+6HU0lFvHv+LdhX4smWPMONlmAVCgS+rE0dvQ==}
-
-  '@ng-icons/simple-icons@27.5.2':
-    resolution: {integrity: sha512-SakKpF89Jw+VaNHB1WP1FsbfI+jHn8V6SpM/XjxVWDe7hc/RS2f1sI12gkLpnxodEZmSKz8ShP11e/3eSoasew==}
 
   '@ngtools/webpack@18.0.3':
     resolution: {integrity: sha512-wYskgAomDgyBJ8fsP+jfb0rt1t5OpNx4EXEzZo37Nxb04P5CkW+9yQ/xuhPMF8hO/dfKL1k/BKAKUeOOUQmAIA==}
@@ -7166,18 +7148,6 @@ snapshots:
       tslib: 2.6.2
 
   '@ng-icons/core@27.5.2':
-    dependencies:
-      tslib: 2.6.2
-
-  '@ng-icons/heroicons@27.5.2':
-    dependencies:
-      tslib: 2.6.2
-
-  '@ng-icons/ionicons@27.5.2':
-    dependencies:
-      tslib: 2.6.2
-
-  '@ng-icons/simple-icons@27.5.2':
     dependencies:
       tslib: 2.6.2
 
