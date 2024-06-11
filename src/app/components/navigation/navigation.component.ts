@@ -135,18 +135,6 @@ export class NavigationComponent {
     });
   }
 
-  onReturnToV1(): void {
-    this.dialog
-      .ask(
-        'Return to V1',
-        'Would you like to return to the old version of the application? This will open the old version in a new tab.',
-      )
-      .pipe(filter((result) => result))
-      .subscribe(() => {
-        window.open('https://bot.floppypanda.ch', '_blank');
-      });
-  }
-
   onVersionClicked(): void {
     this.dialog.show(AppVersionComponent).subscribe();
   }
