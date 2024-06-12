@@ -4,12 +4,12 @@ export interface Version {
   hash: string;
   distance: number | null;
   tag: string | null;
-  semver: string | null;
   suffix: string;
   semverString: string | null;
   version: string;
   buildTime: string;
   buildEnv: Record<string, string>;
+  semver?: unknown;
 }
 
 export function calculateDisplayVersion(version: Version | null): string {

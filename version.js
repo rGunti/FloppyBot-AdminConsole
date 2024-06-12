@@ -1,5 +1,5 @@
 const { gitDescribeSync } = require('git-describe');
-const { resolve, relative } = require('path');
+const { resolve } = require('path');
 const { writeFileSync } = require('fs');
 
 const gitInfo = {
