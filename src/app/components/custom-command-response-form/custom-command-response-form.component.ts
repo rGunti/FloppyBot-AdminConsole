@@ -63,11 +63,11 @@ export class CustomCommandResponseFormComponent implements ControlValueAccessor,
       updateOn: 'blur',
     }),
     content: new FormControl<string>('', {
-      validators: [Validators.required, Validators.maxLength(300)],
+      validators: [Validators.required, Validators.maxLength(500)],
       updateOn: 'blur',
     }),
     auxiliaryContent: new FormControl<string | null | undefined>(null, {
-      validators: [Validators.maxLength(300)],
+      validators: [Validators.maxLength(400)],
       updateOn: 'blur',
     }),
   });

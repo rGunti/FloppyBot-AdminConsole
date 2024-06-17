@@ -221,6 +221,7 @@ describe('CommandService', () => {
               limitedToUsers: [],
             },
             responseMode: 'All',
+            allowCounterOperations: false,
           },
         ],
         [
@@ -268,6 +269,7 @@ describe('CommandService', () => {
               limitedToUsers: [],
             },
             responseMode: 'All',
+            allowCounterOperations: false,
           },
         ],
         [
@@ -319,6 +321,7 @@ describe('CommandService', () => {
               limitedToUsers: [],
             },
             responseMode: 'All',
+            allowCounterOperations: true,
           },
         ],
         [
