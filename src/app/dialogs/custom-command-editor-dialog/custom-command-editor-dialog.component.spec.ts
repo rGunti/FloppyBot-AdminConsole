@@ -23,6 +23,7 @@ describe('CustomCommandEditorDialogComponent', () => {
       minLevel: 'Viewer',
     },
     responseMode: 'First',
+    allowCounterOperations: false,
     responses: [],
   };
 

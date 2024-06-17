@@ -99,6 +99,9 @@
         <li><code class="syntax-code">&#123;Now&#125;</code>: Returns the current date and time (in UTC)</li>
         <li><code class="syntax-code">&#123;Random&#125;</code>: Returns a random number between 0 and 99</li>
         <li><code class="syntax-code">&#123;Counter&#125;</code>: Returns a number that increases with every call</li>
+        <li>
+          <code class="syntax-code">&#123;PeekCounter&#125;</code>: Returns the counter value without increasing it
+        </li>
       </ul>
 
       <div formArrayName="responses">
@@ -153,6 +156,22 @@
         </mat-icon>
         Counter
       </ng-template>
+
+      <div>
+        <p>
+          If you use <code class="syntax-code">&#123;Counter&#125;</code> in your responses, you can allow mods to
+          easily update its value by using <code class="syntax-code">!{{ command.name }} +</code> or
+          <code class="syntax-code">!{{ command.name }} -</code>. Please note that enabling this feature may mess with
+          arguments (i.e. <code class="syntax-code">&#123;Params.X&#125;</code>) and should not be used in combination.
+          It will also disable the <code class="syntax-code">&#123;Counter&#125;</code> placeholder.
+        </p>
+
+        <mat-slide-toggle formControlName="allowCounterOperations">
+          <mat-label
+            >Enable Counter Operations (<code class="syntax-code">!{{ command.name }} +/-</code>)</mat-label
+          >
+        </mat-slide-toggle>
+      </div>
 
       <div formGroupName="counter">
         <p>

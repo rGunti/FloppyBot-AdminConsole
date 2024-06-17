@@ -121,6 +121,7 @@ export interface CustomCommand {
   responses: CommandResponse[];
   limitations: CommandLimitation;
   responseMode: CommandResponseMode;
+  allowCounterOperations: boolean;
   counter?: CounterValue;
 }
 

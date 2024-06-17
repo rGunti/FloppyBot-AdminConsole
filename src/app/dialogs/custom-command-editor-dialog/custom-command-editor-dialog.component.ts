@@ -136,6 +136,7 @@ export class CustomCommandEditorDialogComponent {
       },
       [Validators.required],
     ),
+    allowCounterOperations: [this.command.allowCounterOperations],
     counter: this.formBuilder.group({
       value: [this.command.counter?.value],
     }),

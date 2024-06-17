@@ -73,6 +73,7 @@ export class CustomCommandsComponent implements OnDestroy {
         cooldown: [],
         limitedToUsers: [],
       },
+      allowCounterOperations: false,
     };
     this.selectedChannelId$
       .pipe(
