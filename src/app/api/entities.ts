@@ -217,3 +217,14 @@ export interface LogStats {
   oldestLogEntry?: string;
   newestLogEntry?: string;
 }
+
+export interface AuditLogRecord {
+  id: string;
+  timestamp: Date;
+  userIdentifier: string;
+  channelIdentifier: string;
+  objectType: string;
+  objectIdentifier: string;
+  action: string;
+  additionalData: string;
+}

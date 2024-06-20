@@ -1,0 +1,84 @@
+<div class="mat-elevation-z8">
+  <mat-toolbar class="action-toolbar">
+    <fac-channel-selector></fac-channel-selector>
+    <button
+      mat-icon-button
+      matTooltip="Refresh"
+      [disabled]="(selectedChannelId$ | async) === undefined"
+      (click)="refresh$.next()"
+    >
+      <mat-icon>
+        <ng-icon name="bootstrapArrowCounterclockwise"></ng-icon>
+      </mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title> Audit Logs </mat-card-title>
+      <mat-card-subtitle>
+        You can access logs of actions that were taken on FloppyBot from this page.
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-paginator [pageSize]="50" [pageSizeOptions]="[10, 50, 100]" showFirstLastButtons></mat-paginator>
+      <mat-progress-bar mode="indeterminate" *ngIf="loading$ | async"></mat-progress-bar>
+
+      <table mat-table matSort [dataSource]="dataSource">
+        <ng-container matColumnDef="timestamp">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Timestamp</th>
+          <td mat-cell *matCellDef="let log">
+            <span [matTooltip]="log.timestamp">{{ log.timestamp | date }}</span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="userIdentifier">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>User</th>
+          <td mat-cell *matCellDef="let log">
+            {{ log.userIdentifier }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="channelIdentifier">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Channel Identifier</th>
+          <td mat-cell *matCellDef="let log">
+            <span [matTooltip]="(log.channelIdentifier | channelAlias | async) || ''">
+              {{ log.channelIdentifier }}
+            </span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="objectType">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Object Type</th>
+          <td mat-cell *matCellDef="let log">
+            {{ log.objectType }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="objectIdentifier">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Object Identifier</th>
+          <td mat-cell *matCellDef="let log">
+            {{ log.objectIdentifier }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
+          <td mat-cell *matCellDef="let log">
+            {{ log.action }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="additionalData">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Additional Data</th>
+          <td mat-cell *matCellDef="let log">
+            {{ log.additionalData }}
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+</div>
