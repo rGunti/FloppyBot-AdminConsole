@@ -11,9 +11,10 @@ export enum Permissions {
   ReadFiles = 'read:files',
   EditFiles = 'edit:files',
   ReadLogs = 'read:logs',
+  ReadAudit = 'read:audit',
 
   /** This role is not assigned to anyone */
   NoOne = 'no:one',
 }
 
-export const ADMIN_PERMISSIONS: readonly Permissions[] = [Permissions.ReadLogs] as const;
+export const ADMIN_PERMISSIONS: readonly Permissions[] = [Permissions.ReadLogs, Permissions.ReadAudit] as const;

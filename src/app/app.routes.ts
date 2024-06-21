@@ -128,6 +128,12 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/admin/logs/logs.component').then((m) => m.LogsComponent),
         canActivate: [AuthGuard, hasAnyPermission(Permissions.ReadLogs)],
       },
+      {
+        path: 'audit',
+        title: 'Audit Logs',
+        loadComponent: () => import('./pages/admin/audit/audit.component').then((m) => m.AuditComponent),
+        canActivate: [AuthGuard, hasAnyPermission(Permissions.ReadAudit)],
+      },
     ],
     canActivate: [AuthGuard, hasAnyPermission(...ADMIN_PERMISSIONS)],
   },

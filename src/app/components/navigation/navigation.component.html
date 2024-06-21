@@ -198,6 +198,18 @@
         </mat-icon>
         Logs
       </button>
+      <button
+        mat-menu-item
+        routerLink="/admin/audit"
+        routerLinkActive="mat-mdc-menu-item-highlighted"
+        queryParamsHandling="merge"
+        *facHasAnyPermission="Permissions.ReadAudit"
+      >
+        <mat-icon>
+          <ng-icon name="bootstrapSearch"></ng-icon>
+        </mat-icon>
+        Audit Logs
+      </button>
     </mat-menu>
 
     <span>{{ title$ | async }}</span>
