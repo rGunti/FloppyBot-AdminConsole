@@ -10,6 +10,7 @@
       },
       errorPath: '/callback',
     },
+    loginMode: '${FLPY_LOGIN_MODE}',
     streamSource: {
       baseUrl: '${FLPY_STREAM_SOURCE_BASE_URL}',
     },

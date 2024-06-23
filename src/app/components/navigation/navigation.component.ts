@@ -119,14 +119,25 @@ export class NavigationComponent {
   );
 
   login(): void {
-    this.auth
-      .loginWithPopup({
-        authorizationParams: { prompt: 'login' },
-      })
-      .pipe(switchMap(() => this.auth.user$))
-      .subscribe((user) => {
+    const loginMode = environment.loginMode;
+    const login$ =
+      loginMode === 'redirect'
+        ? this.auth.loginWithRedirect({
+            authorizationParams: { prompt: 'login' },
+          })
+        : this.auth.loginWithPopup({
+            authorizationParams: { prompt: 'login' },
+          });
+
+    login$.pipe(switchMap(() => this.auth.user$)).subscribe({
+      next: (user) => {
         this.dialog.success(`Welcome, ${user!.nickname}`);
-      });
+      },
+      error: (error) => {
+        console.error('Login error:', error);
+        this.dialog.error('Whoops! Something about that login went sideways. Try again later.');
+      },
+    });
   }
 
   logout(): void {

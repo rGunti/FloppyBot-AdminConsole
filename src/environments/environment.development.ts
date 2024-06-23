@@ -13,6 +13,7 @@ export const environment: AppEnvironment = {
     },
     errorPath: '/callback',
   },
+  loginMode: 'popup',
   streamSource: {
     baseUrl: 'https://stream-source.host.fake/',
   },
