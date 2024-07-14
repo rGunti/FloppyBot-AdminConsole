@@ -23,6 +23,7 @@ import {
   bootstrapFastForwardFill,
   bootstrapLock,
   bootstrapMusicNote,
+  bootstrapPersonVideo3,
   bootstrapPlayBtn,
   bootstrapPlayFill,
   bootstrapPlus,
@@ -87,6 +88,7 @@ import { PrivilegeService } from '../../utils/privilege.service';
       bootstrapLock,
       bootstrapMusicNote,
       bootstrap9Square,
+      bootstrapPersonVideo3,
     }),
   ],
   templateUrl: './custom-command-editor-dialog.component.html',
@@ -218,6 +220,8 @@ export class CustomCommandEditorDialogComponent {
         return bootstrapChatQuote;
       case 'Sound':
         return bootstrapMusicNote;
+      case 'Visual':
+        return bootstrapPersonVideo3;
       default:
         return '';
     }

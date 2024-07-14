@@ -143,7 +143,7 @@ export interface CooldownDescription {
 }
 
 export declare type CommandResponseMode = 'First' | 'PickOneRandom' | 'All';
-export declare type CommandResponseType = 'Text' | 'Sound';
+export declare type CommandResponseType = 'Text' | 'Sound' | 'Visual';
 
 export interface CounterValue {
   value: number;
