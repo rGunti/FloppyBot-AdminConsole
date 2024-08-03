@@ -32,7 +32,7 @@ import {
   bootstrapWindowFullscreen,
 } from '@ng-icons/bootstrap-icons';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import { filter, map, switchMap } from 'rxjs';
+import { filter, map, Observable, shareReplay, switchMap } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
 import { VERSION } from '../../../version/version';
@@ -41,8 +41,7 @@ import { AppVersionComponent } from '../../dialogs/app-version/app-version.compo
 import { LogoutDialogComponent } from '../../dialogs/logout-dialog/logout-dialog.component';
 import { ADMIN_PERMISSIONS, Permissions } from '../../guards/permissions';
 import { AppUpdateService } from '../../utils/app-update.service';
-import { HasAnyPermissionDirective } from '../../utils/auth/has-any-permission.directive';
-import { HasAnyPermissionPipe } from '../../utils/auth/has-any-permission.pipe';
+import { AuthService as AppAuthService } from '../../utils/auth.service';
 import { DialogService } from '../../utils/dialog.service';
 import { ThemeButtonComponent } from '../theme-button/theme-button.component';
 
@@ -61,8 +60,6 @@ import { ThemeButtonComponent } from '../theme-button/theme-button.component';
     MatTooltipModule,
     MatDialogModule,
     ThemeButtonComponent,
-    HasAnyPermissionPipe,
-    HasAnyPermissionDirective,
   ],
   providers: [
     provideIcons({
@@ -97,10 +94,11 @@ export class NavigationComponent {
   private readonly titleService = inject(TitleStrategy);
   private readonly router = inject(Router);
   private readonly auth = inject(AuthService);
+  private readonly appAuthService = inject(AppAuthService);
   private readonly appUpdateService = inject(AppUpdateService);
 
   readonly Permissions = Permissions;
-  readonly adminPermissions = ADMIN_PERMISSIONS;
+  readonly hasAdminPermissions$ = this.appAuthService.hasAnyPermission(...ADMIN_PERMISSIONS);
 
   readonly debugFeaturesEnabled = environment.enableDebugTools;
   readonly version = calculateDisplayVersion(VERSION);
@@ -146,6 +144,13 @@ export class NavigationComponent {
         this.auth.logout({ logoutParams: { returnTo: window.location.origin } });
       }
     });
+  }
+
+  hasPermissions(permission: Permissions): Observable<boolean> {
+    return this.auth.isAuthenticated$.pipe(
+      shareReplay(1),
+      switchMap((isAuthenticated) => (isAuthenticated ? this.appAuthService.hasPermission(permission) : [false])),
+    );
   }
 
   onVersionClicked(): void {

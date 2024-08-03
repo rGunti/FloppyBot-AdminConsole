@@ -37,56 +37,60 @@
           </mat-icon>
           Commands
         </button>
-        <button
-          mat-menu-item
-          routerLink="/quotes/manage"
-          routerLinkActive="mat-mdc-menu-item-highlighted"
-          queryParamsHandling="merge"
-          *facHasAnyPermission="Permissions.ReadQuotes"
-        >
-          <mat-icon>
-            <ng-icon name="bootstrapQuote"></ng-icon>
-          </mat-icon>
-          Quotes
-        </button>
-        <button
-          mat-menu-item
-          routerLink="/files/manage"
-          routerLinkActive="mat-mdc-menu-item-highlighted"
-          queryParamsHandling="merge"
-          *facHasAnyPermission="Permissions.ReadFiles"
-        >
-          <mat-icon>
-            <ng-icon name="bootstrapFolder2Open"></ng-icon>
-          </mat-icon>
-          Files
-        </button>
-        <button
-          mat-menu-item
-          routerLink="/timer"
-          routerLinkActive="mat-mdc-menu-item-highlighted"
-          queryParamsHandling="merge"
-          *facHasAnyPermission="Permissions.ReadCommands"
-        >
-          <mat-icon>
-            <ng-icon name="bootstrapClockHistory"></ng-icon>
-          </mat-icon>
-          Timer Messages
-        </button>
-        <button
-          mat-menu-item
-          routerLink="/stream-source/show-url"
-          routerLinkActive="mat-mdc-menu-item-highlighted"
-          queryParamsHandling="merge"
-          *facHasAnyPermission="Permissions.ReadConfig"
-        >
-          <mat-icon>
-            <ng-icon name="bootstrapWindowFullscreen"></ng-icon>
-          </mat-icon>
-          Stream Source
-        </button>
+        @if (hasPermissions(Permissions.ReadQuotes) | async) {
+          <button
+            mat-menu-item
+            routerLink="/quotes/manage"
+            routerLinkActive="mat-mdc-menu-item-highlighted"
+            queryParamsHandling="merge"
+          >
+            <mat-icon>
+              <ng-icon name="bootstrapQuote"></ng-icon>
+            </mat-icon>
+            Quotes
+          </button>
+        }
+        @if (hasPermissions(Permissions.ReadFiles) | async) {
+          <button
+            mat-menu-item
+            routerLink="/files/manage"
+            routerLinkActive="mat-mdc-menu-item-highlighted"
+            queryParamsHandling="merge"
+          >
+            <mat-icon>
+              <ng-icon name="bootstrapFolder2Open"></ng-icon>
+            </mat-icon>
+            Files
+          </button>
+        }
+        @if (hasPermissions(Permissions.ReadCommands) | async) {
+          <button
+            mat-menu-item
+            routerLink="/timer"
+            routerLinkActive="mat-mdc-menu-item-highlighted"
+            queryParamsHandling="merge"
+          >
+            <mat-icon>
+              <ng-icon name="bootstrapClockHistory"></ng-icon>
+            </mat-icon>
+            Timer Messages
+          </button>
+        }
+        @if (hasPermissions(Permissions.ReadConfig) | async) {
+          <button
+            mat-menu-item
+            routerLink="/stream-source/show-url"
+            routerLinkActive="mat-mdc-menu-item-highlighted"
+            queryParamsHandling="merge"
+          >
+            <mat-icon>
+              <ng-icon name="bootstrapWindowFullscreen"></ng-icon>
+            </mat-icon>
+            Stream Source
+          </button>
+        }
 
-        @if (adminPermissions | hasAnyPermission | async) {
+        @if (hasAdminPermissions$ | async) {
           <mat-divider></mat-divider>
           <button mat-menu-item [matMenuTriggerFor]="mAdmin">
             <mat-icon>
@@ -133,45 +137,48 @@
     </mat-menu>
 
     <mat-menu #mCommands="matMenu">
-      <button
-        mat-menu-item
-        routerLink="/commands/built-in"
-        routerLinkActive="mat-mdc-menu-item-highlighted"
-        queryParamsHandling="merge"
-        *facHasAnyPermission="Permissions.ReadCommands"
-      >
-        <mat-icon>
-          <ng-icon name="bootstrapExclamationLg"></ng-icon>
-        </mat-icon>
-        Built-in Commands
-      </button>
-      <button
-        mat-menu-item
-        routerLink="/commands/shoutout"
-        routerLinkActive="mat-mdc-menu-item-highlighted"
-        queryParamsHandling="merge"
-        *facHasAnyPermission="Permissions.ReadConfig"
-      >
-        <mat-icon>
-          <ng-icon name="bootstrapMegaphone"></ng-icon>
-        </mat-icon>
-        Shoutout
-      </button>
+      @if (hasPermissions(Permissions.ReadCommands) | async) {
+        <button
+          mat-menu-item
+          routerLink="/commands/built-in"
+          routerLinkActive="mat-mdc-menu-item-highlighted"
+          queryParamsHandling="merge"
+        >
+          <mat-icon>
+            <ng-icon name="bootstrapExclamationLg"></ng-icon>
+          </mat-icon>
+          Built-in Commands
+        </button>
+      }
+      @if (hasPermissions(Permissions.ReadConfig) | async) {
+        <button
+          mat-menu-item
+          routerLink="/commands/shoutout"
+          routerLinkActive="mat-mdc-menu-item-highlighted"
+          queryParamsHandling="merge"
+        >
+          <mat-icon>
+            <ng-icon name="bootstrapMegaphone"></ng-icon>
+          </mat-icon>
+          Shoutout
+        </button>
+      }
 
-      <mat-divider></mat-divider>
+      @if (hasPermissions(Permissions.ReadCustomCommands) | async) {
+        <mat-divider></mat-divider>
 
-      <button
-        mat-menu-item
-        routerLink="/commands/custom"
-        routerLinkActive="mat-mdc-menu-item-highlighted"
-        queryParamsHandling="merge"
-        *facHasAnyPermission="Permissions.ReadCustomCommands"
-      >
-        <mat-icon>
-          <ng-icon name="bootstrapPencilSquare"></ng-icon>
-        </mat-icon>
-        Custom Commands
-      </button>
+        <button
+          mat-menu-item
+          routerLink="/commands/custom"
+          routerLinkActive="mat-mdc-menu-item-highlighted"
+          queryParamsHandling="merge"
+        >
+          <mat-icon>
+            <ng-icon name="bootstrapPencilSquare"></ng-icon>
+          </mat-icon>
+          Custom Commands
+        </button>
+      }
     </mat-menu>
 
     <mat-menu #mSettings="matMenu">
@@ -186,30 +193,33 @@
     </mat-menu>
 
     <mat-menu #mAdmin="matMenu">
-      <button
-        mat-menu-item
-        routerLink="/admin/logs"
-        routerLinkActive="mat-mdc-menu-item-highlighted"
-        queryParamsHandling="merge"
-        *facHasAnyPermission="Permissions.ReadLogs"
-      >
-        <mat-icon>
-          <ng-icon name="bootstrapFileText"></ng-icon>
-        </mat-icon>
-        Logs
-      </button>
-      <button
-        mat-menu-item
-        routerLink="/admin/audit"
-        routerLinkActive="mat-mdc-menu-item-highlighted"
-        queryParamsHandling="merge"
-        *facHasAnyPermission="Permissions.ReadAudit"
-      >
-        <mat-icon>
-          <ng-icon name="bootstrapSearch"></ng-icon>
-        </mat-icon>
-        Audit Logs
-      </button>
+      @if (hasPermissions(Permissions.ReadLogs) | async) {
+        <button
+          mat-menu-item
+          routerLink="/admin/logs"
+          routerLinkActive="mat-mdc-menu-item-highlighted"
+          queryParamsHandling="merge"
+        >
+          <mat-icon>
+            <ng-icon name="bootstrapFileText"></ng-icon>
+          </mat-icon>
+          Logs
+        </button>
+      }
+
+      @if (hasPermissions(Permissions.ReadAudit) | async) {
+        <button
+          mat-menu-item
+          routerLink="/admin/audit"
+          routerLinkActive="mat-mdc-menu-item-highlighted"
+          queryParamsHandling="merge"
+        >
+          <mat-icon>
+            <ng-icon name="bootstrapSearch"></ng-icon>
+          </mat-icon>
+          Audit Logs
+        </button>
+      }
     </mat-menu>
 
     <span>{{ title$ | async }}</span>
