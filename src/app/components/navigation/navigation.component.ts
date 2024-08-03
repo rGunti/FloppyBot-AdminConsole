@@ -42,8 +42,6 @@ import { LogoutDialogComponent } from '../../dialogs/logout-dialog/logout-dialog
 import { ADMIN_PERMISSIONS, Permissions } from '../../guards/permissions';
 import { AppUpdateService } from '../../utils/app-update.service';
 import { AuthService as AppAuthService } from '../../utils/auth.service';
-import { HasAnyPermissionDirective } from '../../utils/auth/has-any-permission.directive';
-import { HasAnyPermissionPipe } from '../../utils/auth/has-any-permission.pipe';
 import { DialogService } from '../../utils/dialog.service';
 import { ThemeButtonComponent } from '../theme-button/theme-button.component';
 
@@ -62,8 +60,6 @@ import { ThemeButtonComponent } from '../theme-button/theme-button.component';
     MatTooltipModule,
     MatDialogModule,
     ThemeButtonComponent,
-    HasAnyPermissionPipe,
-    HasAnyPermissionDirective,
   ],
   providers: [
     provideIcons({
