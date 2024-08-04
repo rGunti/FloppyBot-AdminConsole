@@ -2,7 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import {
   AbstractControl,
-  FormBuilder,
+  FormArray,
+  FormControl,
   FormGroup,
   ReactiveFormsModule,
   ValidationErrors,
@@ -15,7 +16,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { NgIconComponent } from '@ng-icons/core';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { bootstrapPlus } from '@ng-icons/bootstrap-icons';
+import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { BehaviorSubject, filter, map, merge, of, shareReplay, startWith, switchMap, take, tap } from 'rxjs';
 
 import { CommandApiService } from '../../../api/command-api.service';
@@ -24,11 +27,14 @@ import { ChannelSelectorComponent } from '../../../components/channel-selector/c
 import { ChannelService } from '../../../utils/channel/channel.service';
 import { DialogService } from '../../../utils/dialog.service';
 
-function isMessage(message: string): boolean {
+function isMessage(message: string | null): boolean {
+  if (message === null) {
+    return false;
+  }
   return message.trim().length > 0;
 }
 
-function validateMessage(group: FormGroup): ValidationErrors | null {
+function validateMessage(group: AbstractControl): ValidationErrors | null {
   const messageCount = group.get('messages')!.value?.split('\n').filter(isMessage).length || 0;
   const minMessages = group.get('minMessages')!.value || 0;
 
@@ -65,8 +71,15 @@ function validateInterval(control: AbstractControl): ValidationErrors | null {
     NgIconComponent,
     MatProgressSpinnerModule,
     MatToolbarModule,
+    MatTooltipModule,
     ChannelSelectorComponent,
     ReactiveFormsModule,
+    NgIconComponent,
+  ],
+  providers: [
+    provideIcons({
+      bootstrapPlus,
+    }),
   ],
   templateUrl: './timer.component.html',
   styleUrl: './timer.component.scss',
@@ -77,24 +90,20 @@ export class TimerComponent {
 
   private readonly channelService = inject(ChannelService);
   private readonly commandApiService = inject(CommandApiService);
-  private readonly formBuilder = inject(FormBuilder);
   private readonly dialog = inject(DialogService);
 
   readonly channelInterfaceFilter = ['Twitch'];
-  readonly form = this.formBuilder.group(
-    {
-      channelId: ['', [Validators.required]],
-      messages: ['', []],
-      interval: [0, [Validators.required, Validators.min(5)]],
-      minMessages: [0, [Validators.required, Validators.min(0), validateInterval]],
-    },
-    { validators: [validateMessage] },
-  );
+  readonly form = new FormGroup({
+    channelId: new FormControl('', [Validators.required]),
+    messages: new FormArray([new FormControl('', [Validators.required])]),
+    interval: new FormControl(0, [Validators.required, Validators.min(5)]),
+    minMessages: new FormControl(0, [Validators.required, Validators.min(0), validateInterval]),
+  });
 
   readonly messageCount$ = merge(this.messageCountRefresh$, this.form.get('messages')!.valueChanges).pipe(
     startWith(undefined),
     map(() => this.form.get('messages')!.value),
-    map((messages) => messages?.split('\n').filter(isMessage).length || 0),
+    map((messages) => messages.filter(isMessage).length || 0),
     startWith(0),
   );
   readonly messageRows$ = this.messageCount$.pipe(
@@ -105,7 +114,7 @@ export class TimerComponent {
   readonly timerMessagesDisabled$ = merge(this.messageCountRefresh$, this.form.get('minMessages')!.valueChanges).pipe(
     startWith(undefined),
     map(() => this.form.get('minMessages')!.value),
-    map((interval) => interval <= 0),
+    map((interval) => (interval || -1) <= 0),
   );
 
   readonly selectedChannel$ = this.channelService.selectedChannelId$.pipe(
@@ -133,9 +142,13 @@ export class TimerComponent {
       }
 
       this.form.reset();
+      this.form.controls.messages.clear();
+      this.form.controls.messages.controls.push(
+        ...config.messages.map((message) => new FormControl(message, [Validators.required])),
+      );
       this.form.patchValue({
         channelId: config.channelId,
-        messages: config.messages.join('\n'),
+        messages: config.messages,
         interval: config.interval,
         minMessages: config.minMessages,
       });
@@ -159,7 +172,7 @@ export class TimerComponent {
     const formValue = this.form.value;
     const config: TimerMessageConfig = {
       channelId: formValue.channelId!,
-      messages: (formValue.messages?.split('\n') || []).filter(isMessage),
+      messages: (formValue.messages || []).filter(isMessage).map((message) => `${message}`),
       interval: formValue.interval!,
       minMessages: formValue.minMessages!,
     };
@@ -174,5 +187,15 @@ export class TimerComponent {
       .subscribe(() => {
         this.dialog.success('Timer Messages saved');
       });
+  }
+
+  addMessage(): void {
+    this.form.controls.messages.push(new FormControl('', [Validators.required]));
+    this.messageCountRefresh$.next();
+  }
+
+  removeMessage(index: number) {
+    this.form.controls.messages.removeAt(index);
+    this.messageCountRefresh$.next();
   }
 }

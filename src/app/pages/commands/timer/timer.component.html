@@ -29,13 +29,25 @@
         <div [formGroup]="form">
           <input type="hidden" formControlName="channelId" />
 
-          <div class="message-list">
-            <mat-form-field>
-              <mat-label>Messages</mat-label>
-              <textarea matInput formControlName="messages" [rows]="messageRows$ | async"></textarea>
-              <mat-hint> One message per line. You currently have {{ messageCount$ | async }} messages </mat-hint>
-              <mat-error>This field is required.</mat-error>
-            </mat-form-field>
+          <div class="message-list" formArrayName="messages">
+            @for (messageControl of form.controls.messages.controls; track $index) {
+              <mat-form-field>
+                <mat-label>Message {{ $index + 1 }}</mat-label>
+                <textarea matInput [formControlName]="$index"></textarea>
+                <mat-error>This field is required.</mat-error>
+                <button mat-icon-button matSuffix (click)="removeMessage($index)" matTooltip="Remove message">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </mat-form-field>
+            }
+            <div class="button-row right">
+              <button mat-button (click)="addMessage()">
+                <mat-icon>
+                  <ng-icon name="bootstrapPlus"></ng-icon>
+                </mat-icon>
+                Add Message
+              </button>
+            </div>
           </div>
 
           <div class="form-row">
