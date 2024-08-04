@@ -100,7 +100,7 @@ export class TimerComponent {
     minMessages: new FormControl(0, [Validators.required, Validators.min(0), validateInterval]),
   });
 
-  readonly messageCount$ = merge(this.messageCountRefresh$, this.form.get('messages')!.valueChanges).pipe(
+  readonly messageCount$ = merge(this.messageCountRefresh$, this.form.controls.messages.valueChanges).pipe(
     startWith(undefined),
     map(() => this.form.get('messages')!.value),
     map((messages) => messages.filter(isMessage).length || 0),
@@ -111,9 +111,9 @@ export class TimerComponent {
     startWith(3),
   );
 
-  readonly timerMessagesDisabled$ = merge(this.messageCountRefresh$, this.form.get('minMessages')!.valueChanges).pipe(
+  readonly timerMessagesDisabled$ = merge(this.messageCountRefresh$, this.form.controls.messages.valueChanges).pipe(
     startWith(undefined),
-    map(() => this.form.get('minMessages')!.value),
+    map(() => this.form.controls.minMessages.value),
     map((interval) => (interval || -1) <= 0),
   );
 
@@ -138,11 +138,15 @@ export class TimerComponent {
     }),
     tap((config) => {
       if (!config) {
+        console.log('TimerComponent', 'No config found');
         return;
       }
 
-      this.form.reset();
+      console.log('TimerComponent', 'Config loaded, resetting form', config);
       this.form.controls.messages.clear();
+      this.form.reset();
+
+      console.log('TimerComponent', 'Patching form with new values', config);
       this.form.controls.messages.controls.push(
         ...config.messages.map((message) => new FormControl(message, [Validators.required])),
       );
@@ -159,7 +163,7 @@ export class TimerComponent {
 
   onSaveChanges(): void {
     if (this.form.invalid) {
-      if (this.form.errors!['minMessages']) {
+      if (this.form.errors && this.form.errors['minMessages']) {
         this.dialog.error(
           'Please provide at least one message or disable timer messages by setting "Min messages" to 0',
         );
