@@ -18,7 +18,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { bootstrapChevronExpand, bootstrapPlus, bootstrapTrash } from '@ng-icons/bootstrap-icons';
+import { bootstrapChevronExpand, bootstrapPlus, bootstrapTrash, bootstrapUpload } from '@ng-icons/bootstrap-icons';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { BehaviorSubject, filter, map, merge, of, shareReplay, startWith, switchMap, take, tap } from 'rxjs';
 
@@ -28,15 +28,17 @@ import { ChannelSelectorComponent } from '../../../components/channel-selector/c
 import { ChannelService } from '../../../utils/channel/channel.service';
 import { DialogService } from '../../../utils/dialog.service';
 
-function isMessage(message: string | null): boolean {
-  if (message === null) {
+function isMessage(message: string | null | undefined): boolean {
+  if (message === null || message === undefined) {
     return false;
   }
   return message.trim().length > 0;
 }
 
 function validateMessage(group: AbstractControl): ValidationErrors | null {
-  const messageCount = (group.get('messages')! as FormArray).value.filter(isMessage).length || 0;
+  const messageCount =
+    (group.get('messages')! as FormArray).value.map((i: { message: string }) => i.message).filter(isMessage).length ||
+    0;
   const minMessages = group.get('minMessages')!.value || 0;
 
   if (minMessages <= 0) {
@@ -57,6 +59,10 @@ function validateInterval(control: AbstractControl): ValidationErrors | null {
   }
 
   return null;
+}
+
+function generateUniqueId(): string {
+  return Math.random().toString(36).substring(2);
 }
 
 @Component({
@@ -85,6 +91,7 @@ function validateInterval(control: AbstractControl): ValidationErrors | null {
       bootstrapPlus,
       bootstrapTrash,
       bootstrapChevronExpand,
+      bootstrapUpload,
     }),
   ],
   templateUrl: './timer.component.html',
@@ -102,7 +109,12 @@ export class TimerComponent {
   readonly form = new FormGroup(
     {
       channelId: new FormControl('', [Validators.required]),
-      messages: new FormArray([new FormControl('', [Validators.required])]),
+      messages: new FormArray([
+        new FormGroup({
+          id: new FormControl(''),
+          message: new FormControl('', [Validators.required]),
+        }),
+      ]),
       interval: new FormControl(0, [Validators.required, Validators.min(5)]),
       minMessages: new FormControl(0, [Validators.required, Validators.min(0), validateInterval]),
     },
@@ -112,7 +124,7 @@ export class TimerComponent {
   readonly messageCount$ = merge(this.messageCountRefresh$, this.form.controls.messages.valueChanges).pipe(
     startWith(undefined),
     map(() => this.form.get('messages')!.value),
-    map((messages) => messages.filter(isMessage).length || 0),
+    map((messages) => messages.map((i) => i.message).filter(isMessage).length || 0),
     startWith(0),
   );
   readonly messageRows$ = this.messageCount$.pipe(
@@ -157,11 +169,14 @@ export class TimerComponent {
 
       console.log('TimerComponent', 'Patching form with new values', config);
       this.form.controls.messages.controls.push(
-        ...config.messages.map((message) => new FormControl(message, [Validators.required])),
+        ...config.messages.map(
+          (message) =>
+            new FormGroup({ id: new FormControl(''), message: new FormControl(message, [Validators.required]) }),
+        ),
       );
       this.form.patchValue({
         channelId: config.channelId,
-        messages: config.messages,
+        messages: config.messages.map((i) => ({ id: `${config.channelId}/${generateUniqueId()}`, message: i })),
         interval: config.interval,
         minMessages: config.minMessages,
       });
@@ -185,7 +200,10 @@ export class TimerComponent {
     const formValue = this.form.value;
     const config: TimerMessageConfig = {
       channelId: formValue.channelId!,
-      messages: (formValue.messages || []).filter(isMessage).map((message) => `${message}`),
+      messages: (formValue.messages || [])
+        .map((i) => i.message)
+        .filter(isMessage)
+        .map((message) => `${message}`),
       interval: formValue.interval!,
       minMessages: formValue.minMessages!,
     };
@@ -203,8 +221,18 @@ export class TimerComponent {
   }
 
   addMessage(): void {
-    this.form.controls.messages.push(new FormControl('', [Validators.required]));
-    this.messageCountRefresh$.next();
+    this.selectedChannel$
+      .pipe(
+        take(1),
+        filter((channel) => !!channel),
+      )
+      .subscribe((channel) => {
+        const newId = `${channel}/${generateUniqueId()}`;
+        this.form.controls.messages.push(
+          new FormGroup({ id: new FormControl(newId), message: new FormControl('', [Validators.required]) }),
+        );
+        this.messageCountRefresh$.next();
+      });
   }
 
   removeMessage(index: number) {
@@ -214,8 +242,12 @@ export class TimerComponent {
 
   onMessageDropped(event: CdkDragDrop<unknown, unknown, unknown>) {
     console.log('TimerComponent', 'onMessageDropped()', event);
-    const messages = this.form.controls.messages.value;
+    const messages = <{ id: string | null; message: string | null }[]>this.form.controls.messages.value;
     moveItemInArray(messages, event.previousIndex, event.currentIndex);
     this.form.controls.messages.setValue(messages);
+  }
+
+  importMessages(): void {
+    alert('Not implemented');
   }
 }

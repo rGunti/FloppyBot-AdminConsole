@@ -1,6 +1,16 @@
 <div class="mat-elevation-z8">
   <mat-toolbar class="action-toolbar">
     <fac-channel-selector [interfaceFilter]="channelInterfaceFilter"></fac-channel-selector>
+    <button
+      mat-icon-button
+      matTooltip="Import Messages"
+      [disabled]="(selectedChannel$ | async) === undefined"
+      (click)="importMessages()"
+    >
+      <mat-icon>
+        <ng-icon name="bootstrapUpload"></ng-icon>
+      </mat-icon>
+    </button>
   </mat-toolbar>
 
   <mat-card>
@@ -35,10 +45,11 @@
             cdkDropList
             (cdkDropListDropped)="onMessageDropped($event)"
           >
-            @for (messageControl of form.controls.messages.controls; track $index) {
-              <mat-form-field cdkDrag>
+            @for (messageControl of form.controls.messages.controls; track messageControl.value.id) {
+              <mat-form-field cdkDrag [formGroupName]="$index">
+                <input type="hidden" formControlName="id" />
                 <mat-label>Message {{ $index + 1 }}</mat-label>
-                <textarea matInput [formControlName]="$index"></textarea>
+                <textarea matInput formControlName="message"></textarea>
                 <mat-error>This field is required.</mat-error>
                 <mat-icon cdkDragHandle class="drag-handle" matPrefix matTooltip="Drag me to move the message around">
                   <ng-icon name="bootstrapChevronExpand"></ng-icon>
