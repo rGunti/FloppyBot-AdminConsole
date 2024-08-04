@@ -1,3 +1,4 @@
+import { CdkDrag, CdkDragDrop, CdkDragHandle, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import {
@@ -17,7 +18,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { bootstrapPlus, bootstrapTrash } from '@ng-icons/bootstrap-icons';
+import { bootstrapChevronExpand, bootstrapPlus, bootstrapTrash } from '@ng-icons/bootstrap-icons';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { BehaviorSubject, filter, map, merge, of, shareReplay, startWith, switchMap, take, tap } from 'rxjs';
 
@@ -75,11 +76,15 @@ function validateInterval(control: AbstractControl): ValidationErrors | null {
     ChannelSelectorComponent,
     ReactiveFormsModule,
     NgIconComponent,
+    CdkDropList,
+    CdkDrag,
+    CdkDragHandle,
   ],
   providers: [
     provideIcons({
       bootstrapPlus,
       bootstrapTrash,
+      bootstrapChevronExpand,
     }),
   ],
   templateUrl: './timer.component.html',
@@ -202,5 +207,12 @@ export class TimerComponent {
   removeMessage(index: number) {
     this.form.controls.messages.removeAt(index);
     this.messageCountRefresh$.next();
+  }
+
+  onMessageDropped(event: CdkDragDrop<unknown, unknown, unknown>) {
+    console.log('TimerComponent', 'onMessageDropped()', event);
+    const messages = this.form.controls.messages.value;
+    moveItemInArray(messages, event.previousIndex, event.currentIndex);
+    this.form.controls.messages.setValue(messages);
   }
 }

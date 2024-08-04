@@ -29,12 +29,20 @@
         <div [formGroup]="form">
           <input type="hidden" formControlName="channelId" />
 
-          <div class="message-list" formArrayName="messages">
+          <div
+            class="message-list"
+            formArrayName="messages"
+            cdkDropList
+            (cdkDropListDropped)="onMessageDropped($event)"
+          >
             @for (messageControl of form.controls.messages.controls; track $index) {
-              <mat-form-field>
+              <mat-form-field cdkDrag>
                 <mat-label>Message {{ $index + 1 }}</mat-label>
                 <textarea matInput [formControlName]="$index"></textarea>
                 <mat-error>This field is required.</mat-error>
+                <mat-icon cdkDragHandle class="drag-handle" matPrefix matTooltip="Drag me to move the message around">
+                  <ng-icon name="bootstrapChevronExpand"></ng-icon>
+                </mat-icon>
                 <button mat-icon-button matSuffix (click)="removeMessage($index)" matTooltip="Remove message">
                   <mat-icon>
                     <ng-icon name="bootstrapTrash"></ng-icon>
