@@ -1,3 +1,4 @@
+import { Clipboard } from '@angular/cdk/clipboard';
 import { CdkDrag, CdkDragDrop, CdkDragHandle, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
@@ -18,7 +19,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { bootstrapChevronExpand, bootstrapPlus, bootstrapTrash, bootstrapUpload } from '@ng-icons/bootstrap-icons';
+import {
+  bootstrapChevronExpand,
+  bootstrapDownload,
+  bootstrapPlus,
+  bootstrapTrash,
+  bootstrapUpload,
+} from '@ng-icons/bootstrap-icons';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { BehaviorSubject, filter, map, merge, of, shareReplay, startWith, switchMap, take, tap } from 'rxjs';
 
@@ -96,6 +103,7 @@ function generateUniqueId(): string {
       bootstrapTrash,
       bootstrapChevronExpand,
       bootstrapUpload,
+      bootstrapDownload,
     }),
   ],
   templateUrl: './timer.component.html',
@@ -108,6 +116,8 @@ export class TimerComponent {
   private readonly channelService = inject(ChannelService);
   private readonly commandApiService = inject(CommandApiService);
   private readonly dialog = inject(DialogService);
+
+  private readonly clipboard = inject(Clipboard);
 
   readonly channelInterfaceFilter = ['Twitch'];
   readonly form = new FormGroup(
@@ -279,5 +289,12 @@ export class TimerComponent {
           );
         this.form.controls.messages.controls.push(...messageControls);
       });
+  }
+
+  exportMessages(): void {
+    const messages = this.form.controls.messages.value.map((i) => i.message).filter(isMessage);
+
+    this.clipboard.copy(messages.join('\n'));
+    this.dialog.success(`${messages.length} message(s) copied to clipboard`);
   }
 }

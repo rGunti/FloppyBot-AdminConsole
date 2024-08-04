@@ -11,6 +11,16 @@
         <ng-icon name="bootstrapUpload"></ng-icon>
       </mat-icon>
     </button>
+    <button
+      mat-icon-button
+      matTooltip="Export Messages to Clipboard"
+      [disabled]="(selectedChannel$ | async) === undefined"
+      (click)="exportMessages()"
+    >
+      <mat-icon>
+        <ng-icon name="bootstrapDownload"></ng-icon>
+      </mat-icon>
+    </button>
   </mat-toolbar>
 
   <mat-card>
