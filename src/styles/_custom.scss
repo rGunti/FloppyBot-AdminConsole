@@ -2,3 +2,14 @@
   background-color: var(--fac-highlight-background) !important;
   color: var(--fac-highlight-color) !important;
 }
+
+.button-row {
+  display: flex;
+  &.right {
+    justify-content: flex-end;
+  }
+}
+
+.drag-handle {
+  cursor: move;
+}
