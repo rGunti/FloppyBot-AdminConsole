@@ -25,6 +25,10 @@ import { BehaviorSubject, filter, map, merge, of, shareReplay, startWith, switch
 import { CommandApiService } from '../../../api/command-api.service';
 import { TimerMessageConfig } from '../../../api/entities';
 import { ChannelSelectorComponent } from '../../../components/channel-selector/channel-selector.component';
+import {
+  ImportTextDialogComponent,
+  ImportTextDialogData,
+} from '../../../dialogs/import-text-dialog/import-text-dialog.component';
 import { ChannelService } from '../../../utils/channel/channel.service';
 import { DialogService } from '../../../utils/dialog.service';
 
@@ -248,6 +252,32 @@ export class TimerComponent {
   }
 
   importMessages(): void {
-    alert('Not implemented');
+    this.dialog
+      .show<string | null | undefined>(
+        ImportTextDialogComponent,
+        new ImportTextDialogData(
+          'Import Timer Messages',
+          'Enter the messages to be imported below (one per line). Note that these messages will be added at the end of the current list. No messages will be removed.',
+        ),
+      )
+      .pipe(
+        filter((importedText) => !!importedText),
+        switchMap((importedText) => this.selectedChannel$.pipe(map((channel) => [channel, importedText]))),
+      )
+      .subscribe(([channel, importedText]) => {
+        const messageControls = importedText!
+          .split('\n')
+          .map((message) => message.trim())
+          .filter(isMessage)
+          .map((message) => ({ id: `${channel}/${generateUniqueId()}`, message }))
+          .map(
+            (message) =>
+              new FormGroup({
+                id: new FormControl(message.id),
+                message: new FormControl(message.message, [Validators.required]),
+              }),
+          );
+        this.form.controls.messages.controls.push(...messageControls);
+      });
   }
 }

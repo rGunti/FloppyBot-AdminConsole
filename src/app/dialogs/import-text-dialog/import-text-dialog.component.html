@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>{{ dialogData.title }}</h1>
+<div mat-dialog-content>
+  <p class="text">{{ dialogData.placeholder }}</p>
+  <mat-form-field>
+    <textarea #textInput matInput placeholder="Data" rows="10"></textarea>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="false">Cancel</button>
+  <button mat-flat-button color="primary" [mat-dialog-close]="textInput.value">Import</button>
+</div>
