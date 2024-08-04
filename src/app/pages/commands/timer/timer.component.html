@@ -36,7 +36,9 @@
                 <textarea matInput [formControlName]="$index"></textarea>
                 <mat-error>This field is required.</mat-error>
                 <button mat-icon-button matSuffix (click)="removeMessage($index)" matTooltip="Remove message">
-                  <mat-icon>delete</mat-icon>
+                  <mat-icon>
+                    <ng-icon name="bootstrapTrash"></ng-icon>
+                  </mat-icon>
                 </button>
               </mat-form-field>
             }

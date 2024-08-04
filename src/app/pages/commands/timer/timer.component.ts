@@ -17,7 +17,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { bootstrapPlus } from '@ng-icons/bootstrap-icons';
+import { bootstrapPlus, bootstrapTrash } from '@ng-icons/bootstrap-icons';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { BehaviorSubject, filter, map, merge, of, shareReplay, startWith, switchMap, take, tap } from 'rxjs';
 
@@ -79,6 +79,7 @@ function validateInterval(control: AbstractControl): ValidationErrors | null {
   providers: [
     provideIcons({
       bootstrapPlus,
+      bootstrapTrash,
     }),
   ],
   templateUrl: './timer.component.html',
