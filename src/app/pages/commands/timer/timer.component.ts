@@ -36,7 +36,7 @@ function isMessage(message: string | null): boolean {
 }
 
 function validateMessage(group: AbstractControl): ValidationErrors | null {
-  const messageCount = group.get('messages')!.value?.split('\n').filter(isMessage).length || 0;
+  const messageCount = (group.get('messages')! as FormArray).value.filter(isMessage).length || 0;
   const minMessages = group.get('minMessages')!.value || 0;
 
   if (minMessages <= 0) {
@@ -99,12 +99,15 @@ export class TimerComponent {
   private readonly dialog = inject(DialogService);
 
   readonly channelInterfaceFilter = ['Twitch'];
-  readonly form = new FormGroup({
-    channelId: new FormControl('', [Validators.required]),
-    messages: new FormArray([new FormControl('', [Validators.required])]),
-    interval: new FormControl(0, [Validators.required, Validators.min(5)]),
-    minMessages: new FormControl(0, [Validators.required, Validators.min(0), validateInterval]),
-  });
+  readonly form = new FormGroup(
+    {
+      channelId: new FormControl('', [Validators.required]),
+      messages: new FormArray([new FormControl('', [Validators.required])]),
+      interval: new FormControl(0, [Validators.required, Validators.min(5)]),
+      minMessages: new FormControl(0, [Validators.required, Validators.min(0), validateInterval]),
+    },
+    { validators: [validateMessage] },
+  );
 
   readonly messageCount$ = merge(this.messageCountRefresh$, this.form.controls.messages.valueChanges).pipe(
     startWith(undefined),
