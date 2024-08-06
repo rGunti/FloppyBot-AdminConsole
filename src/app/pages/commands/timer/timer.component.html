@@ -65,7 +65,13 @@
                 <mat-icon cdkDragHandle class="drag-handle" matPrefix matTooltip="Drag me to move the message around">
                   <ng-icon name="bootstrapChevronExpand"></ng-icon>
                 </mat-icon>
-                <button mat-icon-button matSuffix (click)="removeMessage($index)" matTooltip="Remove message">
+                <button
+                  mat-icon-button
+                  matSuffix
+                  class="remove-message-button"
+                  (click)="removeMessage($index)"
+                  matTooltip="Remove message"
+                >
                   <mat-icon>
                     <ng-icon name="bootstrapTrash"></ng-icon>
                   </mat-icon>
@@ -79,7 +85,7 @@
             }
 
             <div class="button-row right">
-              <button mat-button (click)="addMessage()">
+              <button mat-button class="add-message-button" (click)="addMessage()">
                 <mat-icon>
                   <ng-icon name="bootstrapPlus"></ng-icon>
                 </mat-icon>
