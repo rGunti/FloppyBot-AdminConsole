@@ -29,6 +29,7 @@ import {
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { BehaviorSubject, filter, map, merge, of, shareReplay, startWith, switchMap, take, tap } from 'rxjs';
 
+import { environment } from '../../../../environments/environment';
 import { CommandApiService } from '../../../api/command-api.service';
 import { TimerMessageConfig } from '../../../api/entities';
 import { ChannelSelectorComponent } from '../../../components/channel-selector/channel-selector.component';
@@ -123,7 +124,7 @@ function generateUniqueId(): string {
   styleUrl: './timer.component.scss',
 })
 export class TimerComponent {
-  readonly showDebug = false;
+  readonly showDebug = environment.enableDebugTools;
 
   private readonly refresh$ = new BehaviorSubject<void>(undefined);
   private readonly messageCountRefresh$ = new BehaviorSubject<void>(undefined);
