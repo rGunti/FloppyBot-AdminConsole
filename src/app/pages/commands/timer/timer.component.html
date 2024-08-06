@@ -56,23 +56,36 @@
             (cdkDropListDropped)="onMessageDropped($event)"
           >
             @for (messageControl of form.controls.messages.controls; track messageControl.value.id) {
-              <mat-form-field cdkDrag [formGroupName]="$index">
+              <mat-form-field class="message-row" cdkDrag [formGroupName]="$index">
                 <input type="hidden" formControlName="id" />
+
                 <mat-label>Message {{ $index + 1 }}</mat-label>
                 <textarea matInput formControlName="message"></textarea>
-                <mat-error>This field is required.</mat-error>
+
                 <mat-icon cdkDragHandle class="drag-handle" matPrefix matTooltip="Drag me to move the message around">
                   <ng-icon name="bootstrapChevronExpand"></ng-icon>
                 </mat-icon>
-                <button mat-icon-button matSuffix (click)="removeMessage($index)" matTooltip="Remove message">
+                <button
+                  mat-icon-button
+                  matSuffix
+                  class="remove-message-button"
+                  (click)="removeMessage($index)"
+                  matTooltip="Remove message"
+                >
                   <mat-icon>
                     <ng-icon name="bootstrapTrash"></ng-icon>
                   </mat-icon>
                 </button>
+
+                <mat-error>This field is required.</mat-error>
+                @if (showDebug) {
+                  <mat-hint>{{ messageControl.value | json }}</mat-hint>
+                }
               </mat-form-field>
             }
+
             <div class="button-row right">
-              <button mat-button (click)="addMessage()">
+              <button mat-button class="add-message-button" (click)="addMessage()">
                 <mat-icon>
                   <ng-icon name="bootstrapPlus"></ng-icon>
                 </mat-icon>
@@ -95,6 +108,13 @@
               <mat-error> Min Messages needs to be >= 5. Set to 0 to enable Timer Messages. </mat-error>
             </mat-form-field>
           </div>
+
+          @if (showDebug) {
+            <div>
+              <h3>Form Value</h3>
+              <pre>{{ form.value | json }}</pre>
+            </div>
+          }
         </div>
       } @else {
         <div>
