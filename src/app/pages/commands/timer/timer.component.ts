@@ -193,8 +193,8 @@ export class TimerComponent {
       this.form.reset();
 
       console.log('TimerComponent', 'Patching form with new values', config);
-      const messages = config.messages.map((i) => ({ id: `${config.channelId}/${generateUniqueId()}`, message: i }));
-      this.form.controls.messages.controls.push(...messages.map((i) => generateNewRow(i.id, i.message)));
+      const messages = config.messages.map((i) => ({ id: generateUniqueId(), message: i }));
+      messages.forEach((message) => this.form.controls.messages.push(generateNewRow(message.id, message.message)));
       this.form.patchValue({
         channelId: config.channelId,
         messages,
@@ -242,16 +242,8 @@ export class TimerComponent {
   }
 
   addMessage(): void {
-    this.selectedChannel$
-      .pipe(
-        take(1),
-        filter((channel) => !!channel),
-      )
-      .subscribe((channel) => {
-        const newId = `${channel}/${generateUniqueId()}`;
-        this.form.controls.messages.push(generateNewRow(newId));
-        this.messageCountRefresh$.next();
-      });
+    this.form.controls.messages.push(generateNewRow(generateUniqueId()));
+    this.messageCountRefresh$.next();
   }
 
   removeMessage(index: number) {
@@ -275,28 +267,15 @@ export class TimerComponent {
           'Enter the messages to be imported below (one per line). Note that these messages will be added at the end of the current list. No messages will be removed.',
         ),
       )
-      .pipe(
-        filter((importedText) => !!importedText),
-        switchMap((importedText) => this.selectedChannel$.pipe(map((channel) => [channel, importedText]))),
-      )
-      .subscribe(([channel, importedText]) => {
+      .pipe(filter((importedText) => !!importedText))
+      .subscribe((importedText) => {
         const messages = importedText!
           .split('\n')
           .map((message) => message.trim())
           .filter(isMessage)
-          .map((message) => ({ id: `${channel}/${generateUniqueId()}`, message }));
-        this.form.controls.messages.controls.push(
-          ...messages.map(
-            (message) =>
-              new FormGroup({
-                id: new FormControl(message.id),
-                message: new FormControl(message.message, [Validators.required]),
-              }),
-          ),
-        );
-        this.form.patchValue({
-          ...this.form.value,
-          messages: [...this.form.controls.messages.value, ...messages],
+          .map((message) => ({ id: generateUniqueId(), message }));
+        messages.forEach((message) => {
+          this.form.controls.messages.push(generateNewRow(message.id, message.message));
         });
       });
   }

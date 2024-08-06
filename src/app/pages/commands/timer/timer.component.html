@@ -58,9 +58,10 @@
             @for (messageControl of form.controls.messages.controls; track messageControl.value.id) {
               <mat-form-field cdkDrag [formGroupName]="$index">
                 <input type="hidden" formControlName="id" />
+
                 <mat-label>Message {{ $index + 1 }}</mat-label>
                 <textarea matInput formControlName="message"></textarea>
-                <mat-error>This field is required.</mat-error>
+
                 <mat-icon cdkDragHandle class="drag-handle" matPrefix matTooltip="Drag me to move the message around">
                   <ng-icon name="bootstrapChevronExpand"></ng-icon>
                 </mat-icon>
@@ -69,6 +70,8 @@
                     <ng-icon name="bootstrapTrash"></ng-icon>
                   </mat-icon>
                 </button>
+
+                <mat-error>This field is required.</mat-error>
                 @if (showDebug) {
                   <mat-hint>{{ messageControl.value | json }}</mat-hint>
                 }
