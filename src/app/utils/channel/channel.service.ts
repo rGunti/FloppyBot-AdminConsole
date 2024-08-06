@@ -91,4 +91,11 @@ export class ChannelService implements OnDestroy {
   getChannelAlias(channelId: string): Observable<string> {
     return this.userReport$.pipe(map((report) => report.channelAliases[channelId] || channelId));
   }
+
+  /**
+   * This method is expected to be used by tests only.
+   */
+  updateSelectedChannelId(channelId: string): void {
+    this.selectedChannelIdSubject$.next(channelId);
+  }
 }

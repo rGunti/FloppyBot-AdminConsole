@@ -56,7 +56,7 @@
             (cdkDropListDropped)="onMessageDropped($event)"
           >
             @for (messageControl of form.controls.messages.controls; track messageControl.value.id) {
-              <mat-form-field cdkDrag [formGroupName]="$index">
+              <mat-form-field class="message-row" cdkDrag [formGroupName]="$index">
                 <input type="hidden" formControlName="id" />
 
                 <mat-label>Message {{ $index + 1 }}</mat-label>
