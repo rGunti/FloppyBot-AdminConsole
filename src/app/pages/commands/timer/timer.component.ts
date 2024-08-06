@@ -72,6 +72,19 @@ function validateInterval(control: AbstractControl): ValidationErrors | null {
   return null;
 }
 
+function generateNewRow(
+  id: string = '',
+  message: string = '',
+): FormGroup<{
+  id: FormControl<string | null>;
+  message: FormControl<string | null>;
+}> {
+  return new FormGroup({
+    id: new FormControl(id),
+    message: new FormControl(message, [Validators.required]),
+  });
+}
+
 function generateUniqueId(): string {
   return Math.random().toString(36).substring(2);
 }
@@ -110,6 +123,8 @@ function generateUniqueId(): string {
   styleUrl: './timer.component.scss',
 })
 export class TimerComponent {
+  readonly showDebug = false;
+
   private readonly refresh$ = new BehaviorSubject<void>(undefined);
   private readonly messageCountRefresh$ = new BehaviorSubject<void>(undefined);
 
@@ -123,12 +138,7 @@ export class TimerComponent {
   readonly form = new FormGroup(
     {
       channelId: new FormControl('', [Validators.required]),
-      messages: new FormArray([
-        new FormGroup({
-          id: new FormControl(''),
-          message: new FormControl('', [Validators.required]),
-        }),
-      ]),
+      messages: new FormArray([generateNewRow()]),
       interval: new FormControl(0, [Validators.required, Validators.min(5)]),
       minMessages: new FormControl(0, [Validators.required, Validators.min(0), validateInterval]),
     },
@@ -137,7 +147,7 @@ export class TimerComponent {
 
   readonly messageCount$ = merge(this.messageCountRefresh$, this.form.controls.messages.valueChanges).pipe(
     startWith(undefined),
-    map(() => this.form.get('messages')!.value),
+    map(() => this.form.controls.messages.value),
     map((messages) => messages.map((i) => i.message).filter(isMessage).length || 0),
     startWith(0),
   );
@@ -182,15 +192,11 @@ export class TimerComponent {
       this.form.reset();
 
       console.log('TimerComponent', 'Patching form with new values', config);
-      this.form.controls.messages.controls.push(
-        ...config.messages.map(
-          (message) =>
-            new FormGroup({ id: new FormControl(''), message: new FormControl(message, [Validators.required]) }),
-        ),
-      );
+      const messages = config.messages.map((i) => ({ id: `${config.channelId}/${generateUniqueId()}`, message: i }));
+      this.form.controls.messages.controls.push(...messages.map((i) => generateNewRow(i.id, i.message)));
       this.form.patchValue({
         channelId: config.channelId,
-        messages: config.messages.map((i) => ({ id: `${config.channelId}/${generateUniqueId()}`, message: i })),
+        messages,
         interval: config.interval,
         minMessages: config.minMessages,
       });
@@ -242,9 +248,7 @@ export class TimerComponent {
       )
       .subscribe((channel) => {
         const newId = `${channel}/${generateUniqueId()}`;
-        this.form.controls.messages.push(
-          new FormGroup({ id: new FormControl(newId), message: new FormControl('', [Validators.required]) }),
-        );
+        this.form.controls.messages.push(generateNewRow(newId));
         this.messageCountRefresh$.next();
       });
   }
@@ -275,19 +279,24 @@ export class TimerComponent {
         switchMap((importedText) => this.selectedChannel$.pipe(map((channel) => [channel, importedText]))),
       )
       .subscribe(([channel, importedText]) => {
-        const messageControls = importedText!
+        const messages = importedText!
           .split('\n')
           .map((message) => message.trim())
           .filter(isMessage)
-          .map((message) => ({ id: `${channel}/${generateUniqueId()}`, message }))
-          .map(
+          .map((message) => ({ id: `${channel}/${generateUniqueId()}`, message }));
+        this.form.controls.messages.controls.push(
+          ...messages.map(
             (message) =>
               new FormGroup({
                 id: new FormControl(message.id),
                 message: new FormControl(message.message, [Validators.required]),
               }),
-          );
-        this.form.controls.messages.controls.push(...messageControls);
+          ),
+        );
+        this.form.patchValue({
+          ...this.form.value,
+          messages: [...this.form.controls.messages.value, ...messages],
+        });
       });
   }
 

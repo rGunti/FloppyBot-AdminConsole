@@ -69,8 +69,12 @@
                     <ng-icon name="bootstrapTrash"></ng-icon>
                   </mat-icon>
                 </button>
+                @if (showDebug) {
+                  <mat-hint>{{ messageControl.value | json }}</mat-hint>
+                }
               </mat-form-field>
             }
+
             <div class="button-row right">
               <button mat-button (click)="addMessage()">
                 <mat-icon>
@@ -95,6 +99,12 @@
               <mat-error> Min Messages needs to be >= 5. Set to 0 to enable Timer Messages. </mat-error>
             </mat-form-field>
           </div>
+
+          @if (showDebug) {
+            <div>
+              <pre>{{ form.value | json }}</pre>
+            </div>
+          }
         </div>
       } @else {
         <div>
