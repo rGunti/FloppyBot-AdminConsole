@@ -9,41 +9,41 @@ importers:
   .:
     dependencies:
       '@angular/animations':
-        specifier: ^18.2.12
-        version: 18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))
+        specifier: ^18.2.13
+        version: 18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))
       '@angular/cdk':
         specifier: 18.2.14
-        version: 18.2.14(@angular/common@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)
+        version: 18.2.14(@angular/common@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)
       '@angular/common':
-        specifier: ^18.2.12
-        version: 18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)
+        specifier: ^18.2.13
+        version: 18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)
       '@angular/compiler':
-        specifier: ^18.2.12
-        version: 18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))
+        specifier: ^18.2.13
+        version: 18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))
       '@angular/core':
-        specifier: ^18.2.12
-        version: 18.2.12(rxjs@7.8.1)(zone.js@0.14.10)
+        specifier: ^18.2.13
+        version: 18.2.13(rxjs@7.8.1)(zone.js@0.14.10)
       '@angular/forms':
-        specifier: ^18.2.12
-        version: 18.2.12(@angular/common@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(@angular/platform-browser@18.2.12(@angular/animations@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10)))(rxjs@7.8.1)
+        specifier: ^18.2.13
+        version: 18.2.13(@angular/common@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(@angular/platform-browser@18.2.13(@angular/animations@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10)))(rxjs@7.8.1)
       '@angular/material':
         specifier: 18.2.14
-        version: 18.2.14(zaoeposlfpuxwz4gqhmipfbjcq)
+        version: 18.2.14(5mdcer2beaumo5tbfok523nkw4)
       '@angular/platform-browser':
-        specifier: ^18.2.12
-        version: 18.2.12(@angular/animations@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))
+        specifier: ^18.2.13
+        version: 18.2.13(@angular/animations@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))
       '@angular/platform-browser-dynamic':
-        specifier: ^18.2.12
-        version: 18.2.12(@angular/common@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/compiler@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(@angular/platform-browser@18.2.12(@angular/animations@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10)))
+        specifier: ^18.2.13
+        version: 18.2.13(@angular/common@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/compiler@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(@angular/platform-browser@18.2.13(@angular/animations@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10)))
       '@angular/router':
-        specifier: ^18.2.12
-        version: 18.2.12(@angular/common@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(@angular/platform-browser@18.2.12(@angular/animations@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10)))(rxjs@7.8.1)
+        specifier: ^18.2.13
+        version: 18.2.13(@angular/common@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(@angular/platform-browser@18.2.13(@angular/animations@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10)))(rxjs@7.8.1)
       '@angular/service-worker':
-        specifier: ^18.2.12
-        version: 18.2.12(@angular/common@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))
+        specifier: ^18.2.13
+        version: 18.2.13(@angular/common@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))
       '@auth0/auth0-angular':
         specifier: ^2.2.3
-        version: 2.2.3(@angular/common@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(@angular/router@18.2.12(@angular/common@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(@angular/platform-browser@18.2.12(@angular/animations@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10)))(rxjs@7.8.1))
+        version: 2.2.3(@angular/common@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(@angular/router@18.2.13(@angular/common@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(@angular/platform-browser@18.2.13(@angular/animations@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10)))(rxjs@7.8.1))
       '@ng-icons/bootstrap-icons':
         specifier: ^27.2.0
         version: 27.5.2
@@ -62,28 +62,28 @@ importers:
     devDependencies:
       '@angular-devkit/build-angular':
         specifier: ^18.2.14
-        version: 18.2.14(@angular/compiler-cli@18.2.12(@angular/compiler@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10)))(typescript@5.5.4))(@angular/service-worker@18.2.12(@angular/common@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10)))(@types/node@22.13.0)(chokidar@3.6.0)(karma@6.4.4)(typescript@5.5.4)(vite@5.4.14(@types/node@22.13.0)(less@4.2.0)(sass@1.77.6)(terser@5.31.6))
+        version: 18.2.14(@angular/compiler-cli@18.2.13(@angular/compiler@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10)))(typescript@5.5.4))(@angular/service-worker@18.2.13(@angular/common@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10)))(@types/node@22.13.1)(chokidar@3.6.0)(karma@6.4.4)(typescript@5.5.4)(vite@5.4.14(@types/node@22.13.1)(less@4.2.0)(sass@1.77.6)(terser@5.31.6))
       '@angular-eslint/builder':
-        specifier: 18.4.2
-        version: 18.4.2(eslint@8.57.1)(typescript@5.5.4)
+        specifier: 18.4.3
+        version: 18.4.3(chokidar@3.6.0)(eslint@8.57.1)(typescript@5.5.4)
       '@angular-eslint/eslint-plugin':
-        specifier: 18.4.2
-        version: 18.4.2(@typescript-eslint/utils@7.18.0(eslint@8.57.1)(typescript@5.5.4))(eslint@8.57.1)(typescript@5.5.4)
+        specifier: 18.4.3
+        version: 18.4.3(@typescript-eslint/utils@7.18.0(eslint@8.57.1)(typescript@5.5.4))(eslint@8.57.1)(typescript@5.5.4)
       '@angular-eslint/eslint-plugin-template':
-        specifier: 18.4.2
-        version: 18.4.2(@typescript-eslint/types@7.18.0)(@typescript-eslint/utils@7.18.0(eslint@8.57.1)(typescript@5.5.4))(eslint@8.57.1)(typescript@5.5.4)
+        specifier: 18.4.3
+        version: 18.4.3(@typescript-eslint/types@7.18.0)(@typescript-eslint/utils@7.18.0(eslint@8.57.1)(typescript@5.5.4))(eslint@8.57.1)(typescript@5.5.4)
       '@angular-eslint/schematics':
-        specifier: 18.4.2
-        version: 18.4.2(@angular-devkit/core@18.2.14(chokidar@3.6.0))(@angular-devkit/schematics@18.2.12(chokidar@3.6.0))(@typescript-eslint/types@7.18.0)(@typescript-eslint/utils@7.18.0(eslint@8.57.1)(typescript@5.5.4))(eslint@8.57.1)(typescript@5.5.4)
+        specifier: 18.4.3
+        version: 18.4.3(@typescript-eslint/types@7.18.0)(@typescript-eslint/utils@7.18.0(eslint@8.57.1)(typescript@5.5.4))(chokidar@3.6.0)(eslint@8.57.1)(typescript@5.5.4)
       '@angular-eslint/template-parser':
-        specifier: 18.4.2
-        version: 18.4.2(eslint@8.57.1)(typescript@5.5.4)
+        specifier: 18.4.3
+        version: 18.4.3(eslint@8.57.1)(typescript@5.5.4)
       '@angular/cli':
-        specifier: ^18.2.12
-        version: 18.2.12(chokidar@3.6.0)
+        specifier: ^18.2.14
+        version: 18.2.14(chokidar@3.6.0)
       '@angular/compiler-cli':
-        specifier: ^18.2.12
-        version: 18.2.12(@angular/compiler@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10)))(typescript@5.5.4)
+        specifier: ^18.2.13
+        version: 18.2.13(@angular/compiler@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10)))(typescript@5.5.4)
       '@types/jasmine':
         specifier: ~5.1.5
         version: 5.1.5
@@ -145,10 +145,6 @@ packages:
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
     engines: {node: '>=6.0.0'}
 
-  '@angular-devkit/architect@0.1802.12':
-    resolution: {integrity: sha512-bepVb2/GtJppYKaeW8yTGE6egmoWZ7zagFDsmBdbF+BYp+HmeoPsclARcdryBPVq68zedyTRdvhWSUTbw1AYuw==}
-    engines: {node: ^18.19.1 || ^20.11.1 || >=22.0.0, npm: ^6.11.0 || ^7.5.6 || >=8.0.0, yarn: '>= 1.13.0'}
-
   '@angular-devkit/architect@0.1802.14':
     resolution: {integrity: sha512-eplaGCXSlPwf1f4XwyzsYTd8/lJ0/Adm6XsODsBxvkZlIpLcps80/h2lH5MVJpoDREzIFu1BweDpYCoNK5yYZg==}
     engines: {node: ^18.19.1 || ^20.11.1 || >=22.0.0, npm: ^6.11.0 || ^7.5.6 || >=8.0.0, yarn: '>= 1.13.0'}
@@ -201,15 +197,6 @@ packages:
       webpack: ^5.30.0
       webpack-dev-server: ^5.0.2
 
-  '@angular-devkit/core@18.2.12':
-    resolution: {integrity: sha512-NtB6ypsaDyPE6/fqWOdfTmACs+yK5RqfH5tStEzWFeeDsIEDYKsJ06ypuRep7qTjYus5Rmttk0Ds+cFgz8JdUQ==}
-    engines: {node: ^18.19.1 || ^20.11.1 || >=22.0.0, npm: ^6.11.0 || ^7.5.6 || >=8.0.0, yarn: '>= 1.13.0'}
-    peerDependencies:
-      chokidar: ^3.5.2
-    peerDependenciesMeta:
-      chokidar:
-        optional: true
-
   '@angular-devkit/core@18.2.14':
     resolution: {integrity: sha512-UGIGOjXuOyCW+5S4tINu7e6LOu738CmTw3h7Ui1I8OzdTIYJcYJrei8sgrwDwOYADRal+p0MeMlnykH3TM5XBA==}
     engines: {node: ^18.19.1 || ^20.11.1 || >=22.0.0, npm: ^6.11.0 || ^7.5.6 || >=8.0.0, yarn: '>= 1.13.0'}
@@ -219,58 +206,55 @@ packages:
       chokidar:
         optional: true
 
-  '@angular-devkit/schematics@18.2.12':
-    resolution: {integrity: sha512-mMea9txHbnCX5lXLHlo0RAgfhFHDio45/jMsREM2PA8UtVf2S8ltXz7ZwUrUyMQRv8vaSfn4ijDstF4hDMnRgQ==}
+  '@angular-devkit/schematics@18.2.14':
+    resolution: {integrity: sha512-mukjZIHHB7gWratq8fZwUq5WZ+1bF4feG/idXr1wgQ+/FqWjs2PP7HDesHVcPymmRulpTyCpB7TNB1O1fgnCpA==}
     engines: {node: ^18.19.1 || ^20.11.1 || >=22.0.0, npm: ^6.11.0 || ^7.5.6 || >=8.0.0, yarn: '>= 1.13.0'}
 
-  '@angular-eslint/builder@18.4.2':
-    resolution: {integrity: sha512-eyI9sreaM9ukA24PCJoSqsjCYOiBf3TZ/Q1WY8PG0SwQWc03qJNqPl5K+/Ptmsc1RtoDCLCU6uaOBFPhb9lDxw==}
+  '@angular-eslint/builder@18.4.3':
+    resolution: {integrity: sha512-NzmrXlr7GFE+cjwipY/CxBscZXNqnuK0us1mO6Z2T6MeH6m+rRcdlY/rZyKoRniyNNvuzl6vpEsfMIMmnfebrA==}
     peerDependencies:
       eslint: ^8.57.0 || ^9.0.0
       typescript: '*'
 
-  '@angular-eslint/bundled-angular-compiler@18.4.2':
-    resolution: {integrity: sha512-K7pqmZI3Dl75zlLexyaM7bw4xdgk/3bhP1B6uqDKML9+vIIvccCR2bGvqFurqeFbJlMykzb3H4jytT+HpqV4tg==}
+  '@angular-eslint/bundled-angular-compiler@18.4.3':
+    resolution: {integrity: sha512-zdrA8mR98X+U4YgHzUKmivRU+PxzwOL/j8G7eTOvBuq8GPzsP+hvak+tyxlgeGm9HsvpFj9ERHLtJ0xDUPs8fg==}
 
-  '@angular-eslint/eslint-plugin-template@18.4.2':
-    resolution: {integrity: sha512-v9msmIdZK6lOEC4ScDeYKFLpszpJ5Ei+8ifkT7fXXKmPaWtPJtMbW+VGOUNm5Ezi+xByAGCn1qU+OF2aJ/4CLw==}
+  '@angular-eslint/eslint-plugin-template@18.4.3':
+    resolution: {integrity: sha512-ijGlX2N01ayMXTpeQivOA31AszO8OEbu9ZQUCxnu9AyMMhxyi2q50bujRChAvN9YXQfdQtbxuajxV6+aiWb5BQ==}
     peerDependencies:
       '@typescript-eslint/types': ^7.11.0 || ^8.0.0
       '@typescript-eslint/utils': ^7.11.0 || ^8.0.0
       eslint: ^8.57.0 || ^9.0.0
       typescript: '*'
 
-  '@angular-eslint/eslint-plugin@18.4.2':
-    resolution: {integrity: sha512-Oem4W2P54cPADN9rJenLj90rqDPUQWx5kZiz84FCnsSn5DBdsI5LGQoogNT9y3Jx/9VL/VGIMMA5B6qG+0hVlg==}
+  '@angular-eslint/eslint-plugin@18.4.3':
+    resolution: {integrity: sha512-AyJbupiwTBR81P6T59v+aULEnPpZBCBxL2S5QFWfAhNCwWhcof4GihvdK2Z87yhvzDGeAzUFSWl/beJfeFa+PA==}
     peerDependencies:
       '@typescript-eslint/utils': ^7.11.0 || ^8.0.0
       eslint: ^8.57.0 || ^9.0.0
       typescript: '*'
 
-  '@angular-eslint/schematics@18.4.2':
-    resolution: {integrity: sha512-pZCc3NhfwRT5S0DGXTzKbl3dD4I8K4LRYot+Aq4rzY5LtiGHDSi4PKu2M0OBSRrQFQXq7/2gDXGO0AvH6LX97w==}
-    peerDependencies:
-      '@angular-devkit/core': '>= 18.0.0 < 19.0.0'
-      '@angular-devkit/schematics': '>= 18.0.0 < 19.0.0'
+  '@angular-eslint/schematics@18.4.3':
+    resolution: {integrity: sha512-D5maKn5e6n58+8n7jLFLD4g+RGPOPeDSsvPc1sqial5tEKLxAJQJS9WZ28oef3bhkob6C60D+1H0mMmEEVvyVA==}
 
-  '@angular-eslint/template-parser@18.4.2':
-    resolution: {integrity: sha512-KGjDLUxMsdjaxC+8VTxCG07Q6qshOTWMYTvp2LZ4QBySDQnQuFwsIJIJfU8jJwzJCkPKfVpnyuHggAn7fdYnxA==}
+  '@angular-eslint/template-parser@18.4.3':
+    resolution: {integrity: sha512-JZMPtEB8yNip3kg4WDEWQyObSo2Hwf+opq2ElYuwe85GQkGhfJSJ2CQYo4FSwd+c5MUQAqESNRg9QqGYauDsiw==}
     peerDependencies:
       eslint: ^8.57.0 || ^9.0.0
       typescript: '*'
 
-  '@angular-eslint/utils@18.4.2':
-    resolution: {integrity: sha512-+c0r33QSkAnGmu/DYAPfzJJk5QDX4TP2d6EFtsenrufqRkZqrOcK4Q5t61J92Ukkr03XoqTzTDSBjlwAfM56Rw==}
+  '@angular-eslint/utils@18.4.3':
+    resolution: {integrity: sha512-w0bJ9+ELAEiPBSTPPm9bvDngfu1d8JbzUhvs2vU+z7sIz/HMwUZT5S4naypj2kNN0gZYGYrW0lt+HIbW87zTAQ==}
     peerDependencies:
       '@typescript-eslint/utils': ^7.11.0 || ^8.0.0
       eslint: ^8.57.0 || ^9.0.0
       typescript: '*'
 
-  '@angular/animations@18.2.12':
-    resolution: {integrity: sha512-XcWH/VFQ1Rddhdqi/iU8lW3Qg96yVx1NPfrO5lhcSSvVUzYWTZ5r+jh3GqYqUgPWyEp1Kpw3FLsOgVcGcBWQkQ==}
+  '@angular/animations@18.2.13':
+    resolution: {integrity: sha512-rG5J5Ek5Hg+Tz2NjkNOaG6PupiNK/lPfophXpsR1t/nWujqnMWX2krahD/i6kgD+jNWNKCJCYSOVvCx/BHOtKA==}
     engines: {node: ^18.19.1 || ^20.11.1 || >=22.0.0}
     peerDependencies:
-      '@angular/core': 18.2.12
+      '@angular/core': 18.2.13
 
   '@angular/build@18.2.14':
     resolution: {integrity: sha512-9g24Oe/ZLULacW3hEpRCjSZIJPJTzN5BeFbA27epSV5NsrQOoeUGsEpRs90Zmt6eReO0fW1BGshWRoZtpSedcw==}
@@ -305,49 +289,49 @@ packages:
       '@angular/core': ^18.0.0 || ^19.0.0
       rxjs: ^6.5.3 || ^7.4.0
 
-  '@angular/cli@18.2.12':
-    resolution: {integrity: sha512-xhuZ/b7IhqNw1MgXf+arWf4x+GfUSt/IwbdWU4+CO8A7h0Y46zQywouP/KUK3cMQZfVdHdciTBvlpF3vFacA6Q==}
+  '@angular/cli@18.2.14':
+    resolution: {integrity: sha512-kWgRRQtJPkr8iwN7DMbTi3sXOnv7H5QhbU/GgD3nNX3D8YCSPmnby4PAE/P3wn7FsIK9JsSchsCt7MZ37Urh9A==}
     engines: {node: ^18.19.1 || ^20.11.1 || >=22.0.0, npm: ^6.11.0 || ^7.5.6 || >=8.0.0, yarn: '>= 1.13.0'}
     hasBin: true
 
-  '@angular/common@18.2.12':
-    resolution: {integrity: sha512-gI5o8Bccsi8ow8Wk2vG4Tw/Rw9LoHEA9j8+qHKNR/55SCBsz68Syg310dSyxy+sApJO2WiqIadr5VP36dlSUFw==}
+  '@angular/common@18.2.13':
+    resolution: {integrity: sha512-4ZqrNp1PoZo7VNvW+sbSc2CB2axP1sCH2wXl8B0wdjsj8JY1hF1OhuugwhpAHtGxqewed2kCXayE+ZJqSTV4jw==}
     engines: {node: ^18.19.1 || ^20.11.1 || >=22.0.0}
     peerDependencies:
-      '@angular/core': 18.2.12
+      '@angular/core': 18.2.13
       rxjs: ^6.5.3 || ^7.4.0
 
-  '@angular/compiler-cli@18.2.12':
-    resolution: {integrity: sha512-IWimTNq5Q+i2Wxev6HLqnN4iYbPvLz04W1BBycT1LfGUsHcjFYLuUqbeUzHbk2snmBAzXkixgVpo8SF6P4Y5Pg==}
+  '@angular/compiler-cli@18.2.13':
+    resolution: {integrity: sha512-DBSh4AQwkiJDSiVvJATRmjxf6wyUs9pwQLgaFdSlfuTRO+sdb0J2z1r3BYm8t0IqdoyXzdZq2YCH43EmyvD71g==}
     engines: {node: ^18.19.1 || ^20.11.1 || >=22.0.0}
     hasBin: true
     peerDependencies:
-      '@angular/compiler': 18.2.12
+      '@angular/compiler': 18.2.13
       typescript: '>=5.4 <5.6'
 
-  '@angular/compiler@18.2.12':
-    resolution: {integrity: sha512-D5d5dLrjQal5DbAXJJNSsCC3UxzjOI2wbc+Iv+LOpRM1gpNwuYfZMX5W7cj62Ce4G2++78CJSppdKBp8D4HErQ==}
+  '@angular/compiler@18.2.13':
+    resolution: {integrity: sha512-TzWcrkopyjFF+WeDr2cRe8CcHjU72KfYV3Sm2TkBkcXrkYX5sDjGWrBGrG3hRB4e4okqchrOCvm1MiTdy2vKMA==}
     engines: {node: ^18.19.1 || ^20.11.1 || >=22.0.0}
     peerDependencies:
-      '@angular/core': 18.2.12
+      '@angular/core': 18.2.13
     peerDependenciesMeta:
       '@angular/core':
         optional: true
 
-  '@angular/core@18.2.12':
-    resolution: {integrity: sha512-wCf/OObwS6bpM60rk6bpMpCRGp0DlMLB1WNAMtfcaPNyqimVV5Bm98mWRhkOuRyvU3fU7iHhM/10ePVaoyu9+A==}
+  '@angular/core@18.2.13':
+    resolution: {integrity: sha512-8mbWHMgO95OuFV1Ejy4oKmbe9NOJ3WazQf/f7wks8Bck7pcihd0IKhlPBNjFllbF5o+04EYSwFhEtvEgjMDClA==}
     engines: {node: ^18.19.1 || ^20.11.1 || >=22.0.0}
     peerDependencies:
       rxjs: ^6.5.3 || ^7.4.0
       zone.js: ~0.14.10
 
-  '@angular/forms@18.2.12':
-    resolution: {integrity: sha512-FsukBJEU6jfAmht7TrODTkct/o4iwCZvGozuThOp0tYUPD/E1rZZzuKjEyTnT5Azpfkf0Wqx1nmpz80cczELOQ==}
+  '@angular/forms@18.2.13':
+    resolution: {integrity: sha512-A67D867fu3DSBhdLWWZl/F5pr7v2+dRM2u3U7ZJ0ewh4a+sv+0yqWdJW+a8xIoiHxS+btGEJL2qAKJiH+MCFfg==}
     engines: {node: ^18.19.1 || ^20.11.1 || >=22.0.0}
     peerDependencies:
-      '@angular/common': 18.2.12
-      '@angular/core': 18.2.12
-      '@angular/platform-browser': 18.2.12
+      '@angular/common': 18.2.13
+      '@angular/core': 18.2.13
+      '@angular/platform-browser': 18.2.13
       rxjs: ^6.5.3 || ^7.4.0
 
   '@angular/material@18.2.14':
@@ -361,42 +345,42 @@ packages:
       '@angular/platform-browser': ^18.0.0 || ^19.0.0
       rxjs: ^6.5.3 || ^7.4.0
 
-  '@angular/platform-browser-dynamic@18.2.12':
-    resolution: {integrity: sha512-dv1QEjYpcFno6+oUeGEDRWpB5g2Ufb0XkUbLJQIgrOk1Qbyzb8tmpDpTjok8jcKdquigMRWolr6Y1EOicfRlLw==}
+  '@angular/platform-browser-dynamic@18.2.13':
+    resolution: {integrity: sha512-kbQCf9+8EpuJC7buBxhSiwBtXvjAwAKh6MznD6zd2pyCYqfY6gfRCZQRtK59IfgVtKmEONWI9grEyNIRoTmqJg==}
     engines: {node: ^18.19.1 || ^20.11.1 || >=22.0.0}
     peerDependencies:
-      '@angular/common': 18.2.12
-      '@angular/compiler': 18.2.12
-      '@angular/core': 18.2.12
-      '@angular/platform-browser': 18.2.12
+      '@angular/common': 18.2.13
+      '@angular/compiler': 18.2.13
+      '@angular/core': 18.2.13
+      '@angular/platform-browser': 18.2.13
 
-  '@angular/platform-browser@18.2.12':
-    resolution: {integrity: sha512-DRSMznuxuecrs+v5BRyd60/R4vjkQtuYUEPfzdo+rqxM83Dmr3PGtnqPRgd5oAFUbATxf02hQXijRD27K7rZRg==}
+  '@angular/platform-browser@18.2.13':
+    resolution: {integrity: sha512-tu7ZzY6qD3ATdWFzcTcsAKe7M6cJeWbT/4/bF9unyGO3XBPcNYDKoiz10+7ap2PUd0fmPwvuvTvSNJiFEBnB8Q==}
     engines: {node: ^18.19.1 || ^20.11.1 || >=22.0.0}
     peerDependencies:
-      '@angular/animations': 18.2.12
-      '@angular/common': 18.2.12
-      '@angular/core': 18.2.12
+      '@angular/animations': 18.2.13
+      '@angular/common': 18.2.13
+      '@angular/core': 18.2.13
     peerDependenciesMeta:
       '@angular/animations':
         optional: true
 
-  '@angular/router@18.2.12':
-    resolution: {integrity: sha512-cz/1YWOZadAT35PPPYmpK3HSzKOE56nlUHue5bFkw73VSZr2iBn03ALLpd9YKzWgRmx3y7DqnlQtCkDu9JPGKQ==}
+  '@angular/router@18.2.13':
+    resolution: {integrity: sha512-VKmfgi/r/CkyBq9nChQ/ptmfu0JT/8ONnLVJ5H+SkFLRYJcIRyHLKjRihMCyVm6xM5yktOdCaW73NTQrFz7+bg==}
     engines: {node: ^18.19.1 || ^20.11.1 || >=22.0.0}
     peerDependencies:
-      '@angular/common': 18.2.12
-      '@angular/core': 18.2.12
-      '@angular/platform-browser': 18.2.12
+      '@angular/common': 18.2.13
+      '@angular/core': 18.2.13
+      '@angular/platform-browser': 18.2.13
       rxjs: ^6.5.3 || ^7.4.0
 
-  '@angular/service-worker@18.2.12':
-    resolution: {integrity: sha512-rgztA+Eduo69y6cvSDtAXC5lMTWjgowSSreiyM4ssyjwd8vD6h2TZp/3slr8Tt6+Lh9J4bK+UdcqMIjIdDxwSw==}
+  '@angular/service-worker@18.2.13':
+    resolution: {integrity: sha512-fVC943qEqGNUy923NMmSSzfoIqNw2k2UbG/3Y4QEmel/nZFWHA3PhiYr+lE7J3RhRHFMmnNP1bmXDJgy+R+pzA==}
     engines: {node: ^18.19.1 || ^20.11.1 || >=22.0.0}
     hasBin: true
     peerDependencies:
-      '@angular/common': 18.2.12
-      '@angular/core': 18.2.12
+      '@angular/common': 18.2.13
+      '@angular/core': 18.2.13
 
   '@auth0/auth0-angular@2.2.3':
     resolution: {integrity: sha512-4VI8VOPQe33Q5LSCjKHFGFB8+81HBw/6px3inOe8GRj/seim3F+QhMiz7vw7kcJkRu8ONiykAg6WDS/kVJ7rLg==}
@@ -1342,10 +1326,6 @@ packages:
     resolution: {integrity: sha512-Ey6176gZmeqZuY/W/nZiUyvmb1/qInjcpiZjXWi6nON+nxJpD1bxtSoBxNliGISae32n6OwbY+TSXPZ1CfS4bw==}
     engines: {node: '>=18'}
 
-  '@inquirer/figures@1.0.8':
-    resolution: {integrity: sha512-tKd+jsmhq21AP1LhexC0pPwsCxEhGgAkg28byjJAd+xhmIs8LUX8JbUc3vBf3PhLxWiB5EvyBE5X7JSPAqMAqg==}
-    engines: {node: '>=18'}
-
   '@inquirer/input@2.3.0':
     resolution: {integrity: sha512-XfnpCStx2xgh1LIRqPXrTNEEByqQWoxsWYzNRSEUxJ5c6EQlhMogJ3vHKu8aXuTacebtaZzMAHwEL0kAflKOBw==}
     engines: {node: '>=18'}
@@ -1653,8 +1633,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@schematics/angular@18.2.12':
-    resolution: {integrity: sha512-sIoeipsisK5eTLW3XuNZYcal83AfslBbgI7LnV+3VrXwpasKPGHwo2ZdwhCd2IXAkuJ02Iyu7MyV0aQRM9i/3g==}
+  '@schematics/angular@18.2.14':
+    resolution: {integrity: sha512-CHh6ew2Az71UlvVcnYeuMEwjwkZqR7y/9ebLzFRvczC71ZL8qPVBpBTVGbCpGBd54VEbCZVWRxBQoZZ5LP/aBw==}
     engines: {node: ^18.19.1 || ^20.11.1 || >=22.0.0, npm: ^6.11.0 || ^7.5.6 || >=8.0.0, yarn: '>= 1.13.0'}
 
   '@sigstore/bundle@2.3.2':
@@ -1665,9 +1645,9 @@ packages:
     resolution: {integrity: sha512-JzBqdVIyqm2FRQCulY6nbQzMpJJpSiJ8XXWMhtOX9eKgaXXpfNOF53lzQEjIydlStnd/eFtuC1dW4VYdD93oRg==}
     engines: {node: ^16.14.0 || >=18.0.0}
 
-  '@sigstore/protobuf-specs@0.3.2':
-    resolution: {integrity: sha512-c6B0ehIWxMI8wiS/bj6rHMPqeFvngFV7cDU/MY+B16P9Z3Mp9k8L93eYZ7BYzSickzuqAQqAq0V956b3Ju6mLw==}
-    engines: {node: ^16.14.0 || >=18.0.0}
+  '@sigstore/protobuf-specs@0.3.3':
+    resolution: {integrity: sha512-RpacQhBlwpBWd7KEJsRKcBQalbV28fvkxwTOJIqhIuDysMMaJW47V4OqW30iJB9uRpqOSxxEAQFdr8tTattReQ==}
+    engines: {node: ^18.17.0 || >=20.5.0}
 
   '@sigstore/sign@2.3.2':
     resolution: {integrity: sha512-5Vz5dPVuunIIvC5vBb0APwo7qKA4G9yM48kPWJT+OEERs40md5GoUR1yedwpekWZ4m0Hhw44m6zU+ObsON+iDA==}
@@ -1761,6 +1741,9 @@ packages:
 
   '@types/node@22.13.0':
     resolution: {integrity: sha512-ClIbNe36lawluuvq3+YYhnIN2CELi+6q8NpnM7PYp4hBn/TatfboPgVSm2rwKRfnV2M+Ty9GWDFI64KEe+kysA==}
+
+  '@types/node@22.13.1':
+    resolution: {integrity: sha512-jK8uzQlrvXqEU91UxiK5J7pKHyzgnI1Qnl0QDHIgVGuolJhRb9EEl28Cj9b3rGR8B2lhFCtvIm5os8lFnO/1Ew==}
 
   '@types/qs@6.9.18':
     resolution: {integrity: sha512-kK7dgTYDyGqS+e2Q4aK9X3D7q234CIZ1Bv0q/7Z5IwRDoADNU81xXJK/YVyLbLTZCoIwUoDoffFeF+p/eIklAA==}
@@ -2208,8 +2191,8 @@ packages:
     resolution: {integrity: sha512-7VT13fmjotKpGipCW9JEQAusEPE+Ei8nl6/g4FBAmIm0GOOLMua9NDDo/DWp0ZAxCr3cPq5ZpBqmPAQgDda2Pw==}
     engines: {node: '>= 8.10.0'}
 
-  chokidar@4.0.1:
-    resolution: {integrity: sha512-n8enUVCED/KVRQlab1hr3MVpcVMvxtZjmEa956u+4YijlmQED223XMSYj2tLuKvr4jcCTzNNMpQDUer72MMmzA==}
+  chokidar@4.0.3:
+    resolution: {integrity: sha512-Qgzu8kfBvo+cA4962jnP1KkS6Dop5NS6g7R5LFYJr4b8Ub94PPQXUksCw9PvXoeXPRRddRNC5C1JQUR2SMGtnA==}
     engines: {node: '>= 14.16.0'}
 
   chownr@2.0.0:
@@ -3095,10 +3078,6 @@ packages:
     resolution: {integrity: sha512-ZMERYes6pDydyuGidse7OsHxtbI7WVeUEozgR/g7rd0xUimYNlvZRE/K2MgZTjWy725IfelLeVcEM97mmtRGXw==}
     engines: {node: '>=8'}
 
-  is-core-module@2.15.1:
-    resolution: {integrity: sha512-z0vtXSwucUJtANQWldhbtbt7BnL0vxiFjIdDLAatwhDYty2bad6s+rijD6Ri4YuYJubLzIJLUidCh09e1djEVQ==}
-    engines: {node: '>= 0.4'}
-
   is-core-module@2.16.1:
     resolution: {integrity: sha512-UfoeMA6fIJ8wTYFEUjelnaGI67v6+N7qXJEvQuIGa99l4xsCruSYOVSQ0uPANn4dAzm8lkYPaKLrrijLq7x23w==}
     engines: {node: '>= 0.4'}
@@ -3651,8 +3630,8 @@ packages:
     resolution: {integrity: sha512-LA4ZjwlnUblHVgq0oBF3Jl/6h/Nvs5fzBLwdEF4nuxnFdsfajde4WfxtJr3CaiH+F6ewcIB/q4jQ4UzPyid+CQ==}
     hasBin: true
 
-  node-gyp@10.2.0:
-    resolution: {integrity: sha512-sp3FonBAaFe4aYTcFdZUn2NYkbP7xroPGYvQmP4Nl5PxamznItBnNCgjrVTKrEfQynInMsJvZrdmqUnysCJ8rw==}
+  node-gyp@10.3.1:
+    resolution: {integrity: sha512-Pp3nFHBThHzVtNY7U6JfPjvT/DTE8+o/4xKsLQtBoU+j2HLsGlhcfzflAoUreaJbNmYnX+LlLi0qjV8kpyO6xQ==}
     engines: {node: ^16.14.0 || >=18.0.0}
     hasBin: true
 
@@ -4044,9 +4023,9 @@ packages:
     resolution: {integrity: sha512-hOS089on8RduqdbhvQ5Z37A0ESjsqz6qnRcffsMU3495FuTdqSm+7bhJ29JvIOsBDEEnan5DPu9t3To9VRlMzA==}
     engines: {node: '>=8.10.0'}
 
-  readdirp@4.0.2:
-    resolution: {integrity: sha512-yDMz9g+VaZkqBYS/ozoBJwaBhTbZo3UNYQHNRw1D3UFQB8oHB4uS/tAODO+ZLjGWmUbKnIlOWO+aaIiAxrUWHA==}
-    engines: {node: '>= 14.16.0'}
+  readdirp@4.1.1:
+    resolution: {integrity: sha512-h80JrZu/MHUZCyHu5ciuoI0+WxsCxzxJTILn6Fs8rxSnFPh+UVHYfeIxK1nVGugMqkfC4vJcBOYbkfkwYK0+gw==}
+    engines: {node: '>= 14.18.0'}
 
   reflect-metadata@0.2.2:
     resolution: {integrity: sha512-urBwgfrvVP/eAyXx4hluJivBKzuEbSQs9rKWCrCkbSxNv8mxPcUZKeuoF3Uy4mJl3Lwprp6yy5/39VWigZ4K6Q==}
@@ -4222,8 +4201,8 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
-  semver@7.7.0:
-    resolution: {integrity: sha512-DrfFnPzblFmNrIZzg5RzHegbiRWg7KMR7btwi2yjHwx06zsUbO5g613sVwEV7FTwmzJu+Io0lJe2GJ3LxqpvBQ==}
+  semver@7.7.1:
+    resolution: {integrity: sha512-hlq8tAfn0m/61p4BVRcPzIGr6LKiMwo4VM6dGi6pt4qcRkmNzTcWq6eCEjEh+qXjkMDvPlOFFSGwQjoEa6gyMA==}
     engines: {node: '>=10'}
     hasBin: true
 
@@ -4328,8 +4307,8 @@ packages:
   sockjs@0.3.24:
     resolution: {integrity: sha512-GJgLTZ7vYb/JtPSSZ10hsOYIvEYsjbNU+zPdIHcUaWVNUEPivzxku31865sSSud0Da0W4lEeOPlmw93zLQchuQ==}
 
-  socks-proxy-agent@8.0.4:
-    resolution: {integrity: sha512-GNAq/eg8Udq2x0eNiFkr9gRg5bA7PXEWagQdeRX4cPSG+X/8V38v637gim9bjFptMk1QWsCTr0ttrJEiXbNnRw==}
+  socks-proxy-agent@8.0.5:
+    resolution: {integrity: sha512-HehCEsotFqbPW9sJ8WVYB6UbmIMv7kUUORIF2Nncq4VQvBfNBLibW9YZR5dlYCSUhwcD628pRllm7n+E+YTzJw==}
     engines: {node: '>= 14'}
 
   socks@2.8.3:
@@ -4366,8 +4345,8 @@ packages:
   spdx-expression-parse@3.0.1:
     resolution: {integrity: sha512-cbqHunsQWnJNE6KhVSMsMeH5H/L9EpymbzqTQ3uLwNCLZ1Q481oWaofqH7nO6V07xlXwY6PhQdQ2IedWx/ZK4Q==}
 
-  spdx-license-ids@3.0.20:
-    resolution: {integrity: sha512-jg25NiDV/1fLtSgEgyvVyDunvaNHbuwF9lfNV17gSmPFAlYzdfNBlLtLzXTevwkPj7DhGbmN9VnmJIgLnhvaBw==}
+  spdx-license-ids@3.0.21:
+    resolution: {integrity: sha512-Bvg/8F5XephndSK3JffaRqdT+gyhfqIPwDHpX80tJrF8QQRYMo8sNMeaZ2Dp5+jhwKnUmIOyFFQfHRkjJm5nXg==}
 
   spdy-transport@3.0.0:
     resolution: {integrity: sha512-hsLVFE5SjA6TCisWeJXFKniGGOpBgMLmerfO2aCyCU5s7nJ/rpAepqmFifv/GCbSbueEeAJJnmSQ2rKC/g8Fcw==}
@@ -4869,13 +4848,6 @@ snapshots:
       '@jridgewell/gen-mapping': 0.3.8
       '@jridgewell/trace-mapping': 0.3.25
 
-  '@angular-devkit/architect@0.1802.12(chokidar@3.6.0)':
-    dependencies:
-      '@angular-devkit/core': 18.2.12(chokidar@3.6.0)
-      rxjs: 7.8.1
-    transitivePeerDependencies:
-      - chokidar
-
   '@angular-devkit/architect@0.1802.14(chokidar@3.6.0)':
     dependencies:
       '@angular-devkit/core': 18.2.14(chokidar@3.6.0)
@@ -4883,14 +4855,14 @@ snapshots:
     transitivePeerDependencies:
       - chokidar
 
-  '@angular-devkit/build-angular@18.2.14(@angular/compiler-cli@18.2.12(@angular/compiler@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10)))(typescript@5.5.4))(@angular/service-worker@18.2.12(@angular/common@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10)))(@types/node@22.13.0)(chokidar@3.6.0)(karma@6.4.4)(typescript@5.5.4)(vite@5.4.14(@types/node@22.13.0)(less@4.2.0)(sass@1.77.6)(terser@5.31.6))':
+  '@angular-devkit/build-angular@18.2.14(@angular/compiler-cli@18.2.13(@angular/compiler@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10)))(typescript@5.5.4))(@angular/service-worker@18.2.13(@angular/common@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10)))(@types/node@22.13.1)(chokidar@3.6.0)(karma@6.4.4)(typescript@5.5.4)(vite@5.4.14(@types/node@22.13.1)(less@4.2.0)(sass@1.77.6)(terser@5.31.6))':
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@angular-devkit/architect': 0.1802.14(chokidar@3.6.0)
       '@angular-devkit/build-webpack': 0.1802.14(chokidar@3.6.0)(webpack-dev-server@5.0.4(webpack@5.94.0))(webpack@5.94.0(esbuild@0.23.0))
       '@angular-devkit/core': 18.2.14(chokidar@3.6.0)
-      '@angular/build': 18.2.14(@angular/compiler-cli@18.2.12(@angular/compiler@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10)))(typescript@5.5.4))(@angular/service-worker@18.2.12(@angular/common@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10)))(@types/node@22.13.0)(chokidar@3.6.0)(less@4.2.0)(postcss@8.4.41)(terser@5.31.6)(typescript@5.5.4)
-      '@angular/compiler-cli': 18.2.12(@angular/compiler@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10)))(typescript@5.5.4)
+      '@angular/build': 18.2.14(@angular/compiler-cli@18.2.13(@angular/compiler@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10)))(typescript@5.5.4))(@angular/service-worker@18.2.13(@angular/common@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10)))(@types/node@22.13.1)(chokidar@3.6.0)(less@4.2.0)(postcss@8.4.41)(terser@5.31.6)(typescript@5.5.4)
+      '@angular/compiler-cli': 18.2.13(@angular/compiler@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10)))(typescript@5.5.4)
       '@babel/core': 7.25.2
       '@babel/generator': 7.25.0
       '@babel/helper-annotate-as-pure': 7.24.7
@@ -4901,8 +4873,8 @@ snapshots:
       '@babel/preset-env': 7.25.3(@babel/core@7.25.2)
       '@babel/runtime': 7.25.0
       '@discoveryjs/json-ext': 0.6.1
-      '@ngtools/webpack': 18.2.14(@angular/compiler-cli@18.2.12(@angular/compiler@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10)))(typescript@5.5.4))(typescript@5.5.4)(webpack@5.94.0(esbuild@0.23.0))
-      '@vitejs/plugin-basic-ssl': 1.1.0(vite@5.4.14(@types/node@22.13.0)(less@4.2.0)(sass@1.77.6)(terser@5.31.6))
+      '@ngtools/webpack': 18.2.14(@angular/compiler-cli@18.2.13(@angular/compiler@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10)))(typescript@5.5.4))(typescript@5.5.4)(webpack@5.94.0(esbuild@0.23.0))
+      '@vitejs/plugin-basic-ssl': 1.1.0(vite@5.4.14(@types/node@22.13.1)(less@4.2.0)(sass@1.77.6)(terser@5.31.6))
       ansi-colors: 4.1.3
       autoprefixer: 10.4.20(postcss@8.4.41)
       babel-loader: 9.1.3(@babel/core@7.25.2)(webpack@5.94.0(esbuild@0.23.0))
@@ -4949,7 +4921,7 @@ snapshots:
       webpack-merge: 6.0.1
       webpack-subresource-integrity: 5.1.0(webpack@5.94.0(esbuild@0.23.0))
     optionalDependencies:
-      '@angular/service-worker': 18.2.12(@angular/common@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))
+      '@angular/service-worker': 18.2.13(@angular/common@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))
       esbuild: 0.23.0
       karma: 6.4.4
     transitivePeerDependencies:
@@ -4980,17 +4952,6 @@ snapshots:
     transitivePeerDependencies:
       - chokidar
 
-  '@angular-devkit/core@18.2.12(chokidar@3.6.0)':
-    dependencies:
-      ajv: 8.17.1
-      ajv-formats: 3.0.1(ajv@8.17.1)
-      jsonc-parser: 3.3.1
-      picomatch: 4.0.2
-      rxjs: 7.8.1
-      source-map: 0.7.4
-    optionalDependencies:
-      chokidar: 3.6.0
-
   '@angular-devkit/core@18.2.14(chokidar@3.6.0)':
     dependencies:
       ajv: 8.17.1
@@ -5002,9 +4963,9 @@ snapshots:
     optionalDependencies:
       chokidar: 3.6.0
 
-  '@angular-devkit/schematics@18.2.12(chokidar@3.6.0)':
+  '@angular-devkit/schematics@18.2.14(chokidar@3.6.0)':
     dependencies:
-      '@angular-devkit/core': 18.2.12(chokidar@3.6.0)
+      '@angular-devkit/core': 18.2.14(chokidar@3.6.0)
       jsonc-parser: 3.3.1
       magic-string: 0.30.11
       ora: 5.4.1
@@ -5012,17 +4973,21 @@ snapshots:
     transitivePeerDependencies:
       - chokidar
 
-  '@angular-eslint/builder@18.4.2(eslint@8.57.1)(typescript@5.5.4)':
+  '@angular-eslint/builder@18.4.3(chokidar@3.6.0)(eslint@8.57.1)(typescript@5.5.4)':
     dependencies:
+      '@angular-devkit/architect': 0.1802.14(chokidar@3.6.0)
+      '@angular-devkit/core': 18.2.14(chokidar@3.6.0)
       eslint: 8.57.1
       typescript: 5.5.4
+    transitivePeerDependencies:
+      - chokidar
 
-  '@angular-eslint/bundled-angular-compiler@18.4.2': {}
+  '@angular-eslint/bundled-angular-compiler@18.4.3': {}
 
-  '@angular-eslint/eslint-plugin-template@18.4.2(@typescript-eslint/types@7.18.0)(@typescript-eslint/utils@7.18.0(eslint@8.57.1)(typescript@5.5.4))(eslint@8.57.1)(typescript@5.5.4)':
+  '@angular-eslint/eslint-plugin-template@18.4.3(@typescript-eslint/types@7.18.0)(@typescript-eslint/utils@7.18.0(eslint@8.57.1)(typescript@5.5.4))(eslint@8.57.1)(typescript@5.5.4)':
     dependencies:
-      '@angular-eslint/bundled-angular-compiler': 18.4.2
-      '@angular-eslint/utils': 18.4.2(@typescript-eslint/utils@7.18.0(eslint@8.57.1)(typescript@5.5.4))(eslint@8.57.1)(typescript@5.5.4)
+      '@angular-eslint/bundled-angular-compiler': 18.4.3
+      '@angular-eslint/utils': 18.4.3(@typescript-eslint/utils@7.18.0(eslint@8.57.1)(typescript@5.5.4))(eslint@8.57.1)(typescript@5.5.4)
       '@typescript-eslint/types': 7.18.0
       '@typescript-eslint/utils': 7.18.0(eslint@8.57.1)(typescript@5.5.4)
       aria-query: 5.3.2
@@ -5030,59 +4995,60 @@ snapshots:
       eslint: 8.57.1
       typescript: 5.5.4
 
-  '@angular-eslint/eslint-plugin@18.4.2(@typescript-eslint/utils@7.18.0(eslint@8.57.1)(typescript@5.5.4))(eslint@8.57.1)(typescript@5.5.4)':
+  '@angular-eslint/eslint-plugin@18.4.3(@typescript-eslint/utils@7.18.0(eslint@8.57.1)(typescript@5.5.4))(eslint@8.57.1)(typescript@5.5.4)':
     dependencies:
-      '@angular-eslint/bundled-angular-compiler': 18.4.2
-      '@angular-eslint/utils': 18.4.2(@typescript-eslint/utils@7.18.0(eslint@8.57.1)(typescript@5.5.4))(eslint@8.57.1)(typescript@5.5.4)
+      '@angular-eslint/bundled-angular-compiler': 18.4.3
+      '@angular-eslint/utils': 18.4.3(@typescript-eslint/utils@7.18.0(eslint@8.57.1)(typescript@5.5.4))(eslint@8.57.1)(typescript@5.5.4)
       '@typescript-eslint/utils': 7.18.0(eslint@8.57.1)(typescript@5.5.4)
       eslint: 8.57.1
       typescript: 5.5.4
 
-  '@angular-eslint/schematics@18.4.2(@angular-devkit/core@18.2.14(chokidar@3.6.0))(@angular-devkit/schematics@18.2.12(chokidar@3.6.0))(@typescript-eslint/types@7.18.0)(@typescript-eslint/utils@7.18.0(eslint@8.57.1)(typescript@5.5.4))(eslint@8.57.1)(typescript@5.5.4)':
+  '@angular-eslint/schematics@18.4.3(@typescript-eslint/types@7.18.0)(@typescript-eslint/utils@7.18.0(eslint@8.57.1)(typescript@5.5.4))(chokidar@3.6.0)(eslint@8.57.1)(typescript@5.5.4)':
     dependencies:
       '@angular-devkit/core': 18.2.14(chokidar@3.6.0)
-      '@angular-devkit/schematics': 18.2.12(chokidar@3.6.0)
-      '@angular-eslint/eslint-plugin': 18.4.2(@typescript-eslint/utils@7.18.0(eslint@8.57.1)(typescript@5.5.4))(eslint@8.57.1)(typescript@5.5.4)
-      '@angular-eslint/eslint-plugin-template': 18.4.2(@typescript-eslint/types@7.18.0)(@typescript-eslint/utils@7.18.0(eslint@8.57.1)(typescript@5.5.4))(eslint@8.57.1)(typescript@5.5.4)
+      '@angular-devkit/schematics': 18.2.14(chokidar@3.6.0)
+      '@angular-eslint/eslint-plugin': 18.4.3(@typescript-eslint/utils@7.18.0(eslint@8.57.1)(typescript@5.5.4))(eslint@8.57.1)(typescript@5.5.4)
+      '@angular-eslint/eslint-plugin-template': 18.4.3(@typescript-eslint/types@7.18.0)(@typescript-eslint/utils@7.18.0(eslint@8.57.1)(typescript@5.5.4))(eslint@8.57.1)(typescript@5.5.4)
       ignore: 6.0.2
       semver: 7.6.3
       strip-json-comments: 3.1.1
     transitivePeerDependencies:
       - '@typescript-eslint/types'
       - '@typescript-eslint/utils'
+      - chokidar
       - eslint
       - typescript
 
-  '@angular-eslint/template-parser@18.4.2(eslint@8.57.1)(typescript@5.5.4)':
+  '@angular-eslint/template-parser@18.4.3(eslint@8.57.1)(typescript@5.5.4)':
     dependencies:
-      '@angular-eslint/bundled-angular-compiler': 18.4.2
+      '@angular-eslint/bundled-angular-compiler': 18.4.3
       eslint: 8.57.1
       eslint-scope: 8.2.0
       typescript: 5.5.4
 
-  '@angular-eslint/utils@18.4.2(@typescript-eslint/utils@7.18.0(eslint@8.57.1)(typescript@5.5.4))(eslint@8.57.1)(typescript@5.5.4)':
+  '@angular-eslint/utils@18.4.3(@typescript-eslint/utils@7.18.0(eslint@8.57.1)(typescript@5.5.4))(eslint@8.57.1)(typescript@5.5.4)':
     dependencies:
-      '@angular-eslint/bundled-angular-compiler': 18.4.2
+      '@angular-eslint/bundled-angular-compiler': 18.4.3
       '@typescript-eslint/utils': 7.18.0(eslint@8.57.1)(typescript@5.5.4)
       eslint: 8.57.1
       typescript: 5.5.4
 
-  '@angular/animations@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))':
+  '@angular/animations@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))':
     dependencies:
-      '@angular/core': 18.2.12(rxjs@7.8.1)(zone.js@0.14.10)
+      '@angular/core': 18.2.13(rxjs@7.8.1)(zone.js@0.14.10)
       tslib: 2.8.1
 
-  '@angular/build@18.2.14(@angular/compiler-cli@18.2.12(@angular/compiler@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10)))(typescript@5.5.4))(@angular/service-worker@18.2.12(@angular/common@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10)))(@types/node@22.13.0)(chokidar@3.6.0)(less@4.2.0)(postcss@8.4.41)(terser@5.31.6)(typescript@5.5.4)':
+  '@angular/build@18.2.14(@angular/compiler-cli@18.2.13(@angular/compiler@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10)))(typescript@5.5.4))(@angular/service-worker@18.2.13(@angular/common@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10)))(@types/node@22.13.1)(chokidar@3.6.0)(less@4.2.0)(postcss@8.4.41)(terser@5.31.6)(typescript@5.5.4)':
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@angular-devkit/architect': 0.1802.14(chokidar@3.6.0)
-      '@angular/compiler-cli': 18.2.12(@angular/compiler@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10)))(typescript@5.5.4)
+      '@angular/compiler-cli': 18.2.13(@angular/compiler@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10)))(typescript@5.5.4)
       '@babel/core': 7.25.2
       '@babel/helper-annotate-as-pure': 7.24.7
       '@babel/helper-split-export-declaration': 7.24.7
       '@babel/plugin-syntax-import-attributes': 7.24.7(@babel/core@7.25.2)
       '@inquirer/confirm': 3.1.22
-      '@vitejs/plugin-basic-ssl': 1.1.0(vite@5.4.14(@types/node@22.13.0)(less@4.2.0)(sass@1.77.6)(terser@5.31.6))
+      '@vitejs/plugin-basic-ssl': 1.1.0(vite@5.4.14(@types/node@22.13.1)(less@4.2.0)(sass@1.77.6)(terser@5.31.6))
       browserslist: 4.24.4
       critters: 0.0.24
       esbuild: 0.23.0
@@ -5099,10 +5065,10 @@ snapshots:
       sass: 1.77.6
       semver: 7.6.3
       typescript: 5.5.4
-      vite: 5.4.14(@types/node@22.13.0)(less@4.2.0)(sass@1.77.6)(terser@5.31.6)
+      vite: 5.4.14(@types/node@22.13.1)(less@4.2.0)(sass@1.77.6)(terser@5.31.6)
       watchpack: 2.4.1
     optionalDependencies:
-      '@angular/service-worker': 18.2.12(@angular/common@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))
+      '@angular/service-worker': 18.2.13(@angular/common@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))
       less: 4.2.0
       postcss: 8.4.41
     transitivePeerDependencies:
@@ -5115,23 +5081,23 @@ snapshots:
       - supports-color
       - terser
 
-  '@angular/cdk@18.2.14(@angular/common@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)':
+  '@angular/cdk@18.2.14(@angular/common@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)':
     dependencies:
-      '@angular/common': 18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)
-      '@angular/core': 18.2.12(rxjs@7.8.1)(zone.js@0.14.10)
+      '@angular/common': 18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)
+      '@angular/core': 18.2.13(rxjs@7.8.1)(zone.js@0.14.10)
       rxjs: 7.8.1
       tslib: 2.8.1
     optionalDependencies:
       parse5: 7.2.1
 
-  '@angular/cli@18.2.12(chokidar@3.6.0)':
+  '@angular/cli@18.2.14(chokidar@3.6.0)':
     dependencies:
-      '@angular-devkit/architect': 0.1802.12(chokidar@3.6.0)
-      '@angular-devkit/core': 18.2.12(chokidar@3.6.0)
-      '@angular-devkit/schematics': 18.2.12(chokidar@3.6.0)
+      '@angular-devkit/architect': 0.1802.14(chokidar@3.6.0)
+      '@angular-devkit/core': 18.2.14(chokidar@3.6.0)
+      '@angular-devkit/schematics': 18.2.14(chokidar@3.6.0)
       '@inquirer/prompts': 5.3.8
       '@listr2/prompt-adapter-inquirer': 2.0.15(@inquirer/prompts@5.3.8)
-      '@schematics/angular': 18.2.12(chokidar@3.6.0)
+      '@schematics/angular': 18.2.14(chokidar@3.6.0)
       '@yarnpkg/lockfile': 1.1.0
       ini: 4.1.3
       jsonc-parser: 3.3.1
@@ -5148,93 +5114,93 @@ snapshots:
       - chokidar
       - supports-color
 
-  '@angular/common@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)':
+  '@angular/common@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)':
     dependencies:
-      '@angular/core': 18.2.12(rxjs@7.8.1)(zone.js@0.14.10)
+      '@angular/core': 18.2.13(rxjs@7.8.1)(zone.js@0.14.10)
       rxjs: 7.8.1
       tslib: 2.8.1
 
-  '@angular/compiler-cli@18.2.12(@angular/compiler@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10)))(typescript@5.5.4)':
+  '@angular/compiler-cli@18.2.13(@angular/compiler@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10)))(typescript@5.5.4)':
     dependencies:
-      '@angular/compiler': 18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))
+      '@angular/compiler': 18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))
       '@babel/core': 7.25.2
       '@jridgewell/sourcemap-codec': 1.5.0
-      chokidar: 4.0.1
+      chokidar: 4.0.3
       convert-source-map: 1.9.0
       reflect-metadata: 0.2.2
-      semver: 7.6.3
+      semver: 7.7.1
       tslib: 2.8.1
       typescript: 5.5.4
       yargs: 17.7.2
     transitivePeerDependencies:
       - supports-color
 
-  '@angular/compiler@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))':
+  '@angular/compiler@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))':
     dependencies:
       tslib: 2.8.1
     optionalDependencies:
-      '@angular/core': 18.2.12(rxjs@7.8.1)(zone.js@0.14.10)
+      '@angular/core': 18.2.13(rxjs@7.8.1)(zone.js@0.14.10)
 
-  '@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10)':
+  '@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10)':
     dependencies:
       rxjs: 7.8.1
       tslib: 2.8.1
       zone.js: 0.14.10
 
-  '@angular/forms@18.2.12(@angular/common@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(@angular/platform-browser@18.2.12(@angular/animations@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10)))(rxjs@7.8.1)':
+  '@angular/forms@18.2.13(@angular/common@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(@angular/platform-browser@18.2.13(@angular/animations@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10)))(rxjs@7.8.1)':
     dependencies:
-      '@angular/common': 18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)
-      '@angular/core': 18.2.12(rxjs@7.8.1)(zone.js@0.14.10)
-      '@angular/platform-browser': 18.2.12(@angular/animations@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))
+      '@angular/common': 18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)
+      '@angular/core': 18.2.13(rxjs@7.8.1)(zone.js@0.14.10)
+      '@angular/platform-browser': 18.2.13(@angular/animations@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))
       rxjs: 7.8.1
       tslib: 2.8.1
 
-  '@angular/material@18.2.14(zaoeposlfpuxwz4gqhmipfbjcq)':
+  '@angular/material@18.2.14(5mdcer2beaumo5tbfok523nkw4)':
     dependencies:
-      '@angular/animations': 18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))
-      '@angular/cdk': 18.2.14(@angular/common@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)
-      '@angular/common': 18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)
-      '@angular/core': 18.2.12(rxjs@7.8.1)(zone.js@0.14.10)
-      '@angular/forms': 18.2.12(@angular/common@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(@angular/platform-browser@18.2.12(@angular/animations@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10)))(rxjs@7.8.1)
-      '@angular/platform-browser': 18.2.12(@angular/animations@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))
+      '@angular/animations': 18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))
+      '@angular/cdk': 18.2.14(@angular/common@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)
+      '@angular/common': 18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)
+      '@angular/core': 18.2.13(rxjs@7.8.1)(zone.js@0.14.10)
+      '@angular/forms': 18.2.13(@angular/common@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(@angular/platform-browser@18.2.13(@angular/animations@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10)))(rxjs@7.8.1)
+      '@angular/platform-browser': 18.2.13(@angular/animations@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))
       rxjs: 7.8.1
       tslib: 2.8.1
 
-  '@angular/platform-browser-dynamic@18.2.12(@angular/common@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/compiler@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(@angular/platform-browser@18.2.12(@angular/animations@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10)))':
+  '@angular/platform-browser-dynamic@18.2.13(@angular/common@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/compiler@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(@angular/platform-browser@18.2.13(@angular/animations@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10)))':
     dependencies:
-      '@angular/common': 18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)
-      '@angular/compiler': 18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))
-      '@angular/core': 18.2.12(rxjs@7.8.1)(zone.js@0.14.10)
-      '@angular/platform-browser': 18.2.12(@angular/animations@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))
+      '@angular/common': 18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)
+      '@angular/compiler': 18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))
+      '@angular/core': 18.2.13(rxjs@7.8.1)(zone.js@0.14.10)
+      '@angular/platform-browser': 18.2.13(@angular/animations@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))
       tslib: 2.8.1
 
-  '@angular/platform-browser@18.2.12(@angular/animations@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))':
+  '@angular/platform-browser@18.2.13(@angular/animations@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))':
     dependencies:
-      '@angular/common': 18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)
-      '@angular/core': 18.2.12(rxjs@7.8.1)(zone.js@0.14.10)
+      '@angular/common': 18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)
+      '@angular/core': 18.2.13(rxjs@7.8.1)(zone.js@0.14.10)
       tslib: 2.8.1
     optionalDependencies:
-      '@angular/animations': 18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))
+      '@angular/animations': 18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))
 
-  '@angular/router@18.2.12(@angular/common@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(@angular/platform-browser@18.2.12(@angular/animations@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10)))(rxjs@7.8.1)':
+  '@angular/router@18.2.13(@angular/common@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(@angular/platform-browser@18.2.13(@angular/animations@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10)))(rxjs@7.8.1)':
     dependencies:
-      '@angular/common': 18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)
-      '@angular/core': 18.2.12(rxjs@7.8.1)(zone.js@0.14.10)
-      '@angular/platform-browser': 18.2.12(@angular/animations@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))
+      '@angular/common': 18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)
+      '@angular/core': 18.2.13(rxjs@7.8.1)(zone.js@0.14.10)
+      '@angular/platform-browser': 18.2.13(@angular/animations@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))
       rxjs: 7.8.1
       tslib: 2.8.1
 
-  '@angular/service-worker@18.2.12(@angular/common@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))':
+  '@angular/service-worker@18.2.13(@angular/common@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))':
     dependencies:
-      '@angular/common': 18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)
-      '@angular/core': 18.2.12(rxjs@7.8.1)(zone.js@0.14.10)
+      '@angular/common': 18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)
+      '@angular/core': 18.2.13(rxjs@7.8.1)(zone.js@0.14.10)
       tslib: 2.8.1
 
-  '@auth0/auth0-angular@2.2.3(@angular/common@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(@angular/router@18.2.12(@angular/common@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(@angular/platform-browser@18.2.12(@angular/animations@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10)))(rxjs@7.8.1))':
+  '@auth0/auth0-angular@2.2.3(@angular/common@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(@angular/router@18.2.13(@angular/common@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(@angular/platform-browser@18.2.13(@angular/animations@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10)))(rxjs@7.8.1))':
     dependencies:
-      '@angular/common': 18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)
-      '@angular/core': 18.2.12(rxjs@7.8.1)(zone.js@0.14.10)
-      '@angular/router': 18.2.12(@angular/common@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(@angular/platform-browser@18.2.12(@angular/animations@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10)))(rxjs@7.8.1)
+      '@angular/common': 18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)
+      '@angular/core': 18.2.13(rxjs@7.8.1)(zone.js@0.14.10)
+      '@angular/router': 18.2.13(@angular/common@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(@angular/platform-browser@18.2.13(@angular/animations@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10)))(rxjs@7.8.1)
       '@auth0/auth0-spa-js': 2.1.3
       tslib: 2.8.1
 
@@ -6207,7 +6173,7 @@ snapshots:
   '@inquirer/checkbox@2.5.0':
     dependencies:
       '@inquirer/core': 9.2.1
-      '@inquirer/figures': 1.0.8
+      '@inquirer/figures': 1.0.10
       '@inquirer/type': 1.5.5
       ansi-escapes: 4.3.2
       yoctocolors-cjs: 2.1.2
@@ -6227,7 +6193,7 @@ snapshots:
       '@inquirer/figures': 1.0.10
       '@inquirer/type': 2.0.0
       '@types/mute-stream': 0.0.4
-      '@types/node': 22.13.0
+      '@types/node': 22.13.1
       '@types/wrap-ansi': 3.0.0
       ansi-escapes: 4.3.2
       cli-width: 4.1.0
@@ -6250,8 +6216,6 @@ snapshots:
       yoctocolors-cjs: 2.1.2
 
   '@inquirer/figures@1.0.10': {}
-
-  '@inquirer/figures@1.0.8': {}
 
   '@inquirer/input@2.3.0':
     dependencies:
@@ -6291,14 +6255,14 @@ snapshots:
   '@inquirer/search@1.1.0':
     dependencies:
       '@inquirer/core': 9.2.1
-      '@inquirer/figures': 1.0.8
+      '@inquirer/figures': 1.0.10
       '@inquirer/type': 1.5.5
       yoctocolors-cjs: 2.1.2
 
   '@inquirer/select@2.5.0':
     dependencies:
       '@inquirer/core': 9.2.1
-      '@inquirer/figures': 1.0.8
+      '@inquirer/figures': 1.0.10
       '@inquirer/type': 1.5.5
       ansi-escapes: 4.3.2
       yoctocolors-cjs: 2.1.2
@@ -6415,9 +6379,9 @@ snapshots:
     dependencies:
       tslib: 2.8.1
 
-  '@ngtools/webpack@18.2.14(@angular/compiler-cli@18.2.12(@angular/compiler@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10)))(typescript@5.5.4))(typescript@5.5.4)(webpack@5.94.0(esbuild@0.23.0))':
+  '@ngtools/webpack@18.2.14(@angular/compiler-cli@18.2.13(@angular/compiler@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10)))(typescript@5.5.4))(typescript@5.5.4)(webpack@5.94.0(esbuild@0.23.0))':
     dependencies:
-      '@angular/compiler-cli': 18.2.12(@angular/compiler@18.2.12(@angular/core@18.2.12(rxjs@7.8.1)(zone.js@0.14.10)))(typescript@5.5.4)
+      '@angular/compiler-cli': 18.2.13(@angular/compiler@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10)))(typescript@5.5.4)
       typescript: 5.5.4
       webpack: 5.94.0(esbuild@0.23.0)
 
@@ -6439,13 +6403,13 @@ snapshots:
       http-proxy-agent: 7.0.2
       https-proxy-agent: 7.0.6
       lru-cache: 10.4.3
-      socks-proxy-agent: 8.0.4
+      socks-proxy-agent: 8.0.5
     transitivePeerDependencies:
       - supports-color
 
   '@npmcli/fs@3.1.1':
     dependencies:
-      semver: 7.7.0
+      semver: 7.6.3
 
   '@npmcli/git@5.0.8':
     dependencies:
@@ -6456,7 +6420,7 @@ snapshots:
       proc-log: 4.2.0
       promise-inflight: 1.0.1
       promise-retry: 2.0.1
-      semver: 7.7.0
+      semver: 7.6.3
       which: 4.0.0
     transitivePeerDependencies:
       - bluebird
@@ -6476,7 +6440,7 @@ snapshots:
       json-parse-even-better-errors: 3.0.2
       normalize-package-data: 6.0.2
       proc-log: 4.2.0
-      semver: 7.7.0
+      semver: 7.6.3
     transitivePeerDependencies:
       - bluebird
 
@@ -6491,7 +6455,7 @@ snapshots:
       '@npmcli/node-gyp': 3.0.0
       '@npmcli/package-json': 5.2.1
       '@npmcli/promise-spawn': 7.0.2
-      node-gyp: 10.2.0
+      node-gyp: 10.3.1
       proc-log: 4.2.0
       which: 4.0.0
     transitivePeerDependencies:
@@ -6551,27 +6515,27 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.22.4':
     optional: true
 
-  '@schematics/angular@18.2.12(chokidar@3.6.0)':
+  '@schematics/angular@18.2.14(chokidar@3.6.0)':
     dependencies:
-      '@angular-devkit/core': 18.2.12(chokidar@3.6.0)
-      '@angular-devkit/schematics': 18.2.12(chokidar@3.6.0)
+      '@angular-devkit/core': 18.2.14(chokidar@3.6.0)
+      '@angular-devkit/schematics': 18.2.14(chokidar@3.6.0)
       jsonc-parser: 3.3.1
     transitivePeerDependencies:
       - chokidar
 
   '@sigstore/bundle@2.3.2':
     dependencies:
-      '@sigstore/protobuf-specs': 0.3.2
+      '@sigstore/protobuf-specs': 0.3.3
 
   '@sigstore/core@1.1.0': {}
 
-  '@sigstore/protobuf-specs@0.3.2': {}
+  '@sigstore/protobuf-specs@0.3.3': {}
 
   '@sigstore/sign@2.3.2':
     dependencies:
       '@sigstore/bundle': 2.3.2
       '@sigstore/core': 1.1.0
-      '@sigstore/protobuf-specs': 0.3.2
+      '@sigstore/protobuf-specs': 0.3.3
       make-fetch-happen: 13.0.1
       proc-log: 4.2.0
       promise-retry: 2.0.1
@@ -6580,7 +6544,7 @@ snapshots:
 
   '@sigstore/tuf@2.3.4':
     dependencies:
-      '@sigstore/protobuf-specs': 0.3.2
+      '@sigstore/protobuf-specs': 0.3.3
       tuf-js: 2.2.1
     transitivePeerDependencies:
       - supports-color
@@ -6589,7 +6553,7 @@ snapshots:
     dependencies:
       '@sigstore/bundle': 2.3.2
       '@sigstore/core': 1.1.0
-      '@sigstore/protobuf-specs': 0.3.2
+      '@sigstore/protobuf-specs': 0.3.3
 
   '@sinclair/typebox@0.27.8': {}
 
@@ -6673,7 +6637,7 @@ snapshots:
 
   '@types/mute-stream@0.0.4':
     dependencies:
-      '@types/node': 22.13.0
+      '@types/node': 22.13.1
 
   '@types/node-forge@1.3.11':
     dependencies:
@@ -6684,6 +6648,10 @@ snapshots:
       undici-types: 5.26.5
 
   '@types/node@22.13.0':
+    dependencies:
+      undici-types: 6.20.0
+
+  '@types/node@22.13.1':
     dependencies:
       undici-types: 6.20.0
 
@@ -6744,7 +6712,7 @@ snapshots:
       '@typescript-eslint/types': 6.21.0
       '@typescript-eslint/typescript-estree': 6.21.0(typescript@5.5.4)
       '@typescript-eslint/visitor-keys': 6.21.0
-      debug: 4.3.7
+      debug: 4.4.0
       eslint: 8.57.1
     optionalDependencies:
       typescript: 5.5.4
@@ -6798,7 +6766,7 @@ snapshots:
       globby: 11.1.0
       is-glob: 4.0.3
       minimatch: 9.0.3
-      semver: 7.7.0
+      semver: 7.7.1
       ts-api-utils: 1.3.0(typescript@5.5.4)
     optionalDependencies:
       typescript: 5.5.4
@@ -6813,7 +6781,7 @@ snapshots:
       globby: 11.1.0
       is-glob: 4.0.3
       minimatch: 9.0.5
-      semver: 7.7.0
+      semver: 7.7.1
       ts-api-utils: 1.3.0(typescript@5.5.4)
     optionalDependencies:
       typescript: 5.5.4
@@ -6843,9 +6811,9 @@ snapshots:
 
   '@ungap/structured-clone@1.2.0': {}
 
-  '@vitejs/plugin-basic-ssl@1.1.0(vite@5.4.14(@types/node@22.13.0)(less@4.2.0)(sass@1.77.6)(terser@5.31.6))':
+  '@vitejs/plugin-basic-ssl@1.1.0(vite@5.4.14(@types/node@22.13.1)(less@4.2.0)(sass@1.77.6)(terser@5.31.6))':
     dependencies:
-      vite: 5.4.14(@types/node@22.13.0)(less@4.2.0)(sass@1.77.6)(terser@5.31.6)
+      vite: 5.4.14(@types/node@22.13.1)(less@4.2.0)(sass@1.77.6)(terser@5.31.6)
 
   '@webassemblyjs/ast@1.14.1':
     dependencies:
@@ -7206,9 +7174,9 @@ snapshots:
     optionalDependencies:
       fsevents: 2.3.3
 
-  chokidar@4.0.1:
+  chokidar@4.0.3:
     dependencies:
-      readdirp: 4.0.2
+      readdirp: 4.1.1
 
   chownr@2.0.0: {}
 
@@ -7371,7 +7339,7 @@ snapshots:
       postcss-modules-scope: 3.2.1(postcss@8.5.1)
       postcss-modules-values: 4.0.0(postcss@8.5.1)
       postcss-value-parser: 4.2.0
-      semver: 7.7.0
+      semver: 7.6.3
     optionalDependencies:
       webpack: 5.94.0(esbuild@0.23.0)
 
@@ -8190,10 +8158,6 @@ snapshots:
     dependencies:
       binary-extensions: 2.3.0
 
-  is-core-module@2.15.1:
-    dependencies:
-      hasown: 2.0.2
-
   is-core-module@2.16.1:
     dependencies:
       hasown: 2.0.2
@@ -8270,11 +8234,11 @@ snapshots:
 
   istanbul-lib-instrument@6.0.3:
     dependencies:
-      '@babel/core': 7.26.7
+      '@babel/core': 7.25.2
       '@babel/parser': 7.26.7
       '@istanbuljs/schema': 0.1.3
       istanbul-lib-coverage: 3.2.2
-      semver: 7.7.0
+      semver: 7.6.3
     transitivePeerDependencies:
       - supports-color
 
@@ -8553,7 +8517,7 @@ snapshots:
 
   make-dir@4.0.0:
     dependencies:
-      semver: 7.7.0
+      semver: 7.7.1
 
   make-fetch-happen@13.0.1:
     dependencies:
@@ -8746,7 +8710,7 @@ snapshots:
   node-gyp-build@4.8.4:
     optional: true
 
-  node-gyp@10.2.0:
+  node-gyp@10.3.1:
     dependencies:
       env-paths: 2.2.1
       exponential-backoff: 3.1.1
@@ -8755,7 +8719,7 @@ snapshots:
       make-fetch-happen: 13.0.1
       nopt: 7.2.1
       proc-log: 4.2.0
-      semver: 7.7.0
+      semver: 7.6.3
       tar: 6.2.1
       which: 4.0.0
     transitivePeerDependencies:
@@ -8770,7 +8734,7 @@ snapshots:
   normalize-package-data@6.0.2:
     dependencies:
       hosted-git-info: 7.0.2
-      semver: 7.7.0
+      semver: 7.6.3
       validate-npm-package-license: 3.0.4
 
   normalize-path@3.0.0: {}
@@ -8783,7 +8747,7 @@ snapshots:
 
   npm-install-checks@6.3.0:
     dependencies:
-      semver: 7.7.0
+      semver: 7.6.3
 
   npm-normalize-package-bin@3.0.1: {}
 
@@ -8791,7 +8755,7 @@ snapshots:
     dependencies:
       hosted-git-info: 7.0.2
       proc-log: 4.2.0
-      semver: 7.7.0
+      semver: 7.6.3
       validate-npm-package-name: 5.0.1
 
   npm-packlist@8.0.2:
@@ -8803,7 +8767,7 @@ snapshots:
       npm-install-checks: 6.3.0
       npm-normalize-package-bin: 3.0.1
       npm-package-arg: 11.0.3
-      semver: 7.7.0
+      semver: 7.6.3
 
   npm-registry-fetch@17.1.0:
     dependencies:
@@ -9022,7 +8986,7 @@ snapshots:
       cosmiconfig: 9.0.0(typescript@5.5.4)
       jiti: 1.21.7
       postcss: 8.4.41
-      semver: 7.7.0
+      semver: 7.6.3
     optionalDependencies:
       webpack: 5.94.0(esbuild@0.23.0)
     transitivePeerDependencies:
@@ -9172,7 +9136,7 @@ snapshots:
     dependencies:
       picomatch: 2.3.1
 
-  readdirp@4.0.2: {}
+  readdirp@4.1.1: {}
 
   reflect-metadata@0.2.2: {}
 
@@ -9231,7 +9195,7 @@ snapshots:
 
   resolve@1.22.8:
     dependencies:
-      is-core-module: 2.15.1
+      is-core-module: 2.16.1
       path-parse: 1.0.7
       supports-preserve-symlinks-flag: 1.0.0
 
@@ -9342,7 +9306,7 @@ snapshots:
 
   semver@7.6.3: {}
 
-  semver@7.7.0: {}
+  semver@7.7.1: {}
 
   send@0.19.0:
     dependencies:
@@ -9441,7 +9405,7 @@ snapshots:
     dependencies:
       '@sigstore/bundle': 2.3.2
       '@sigstore/core': 1.1.0
-      '@sigstore/protobuf-specs': 0.3.2
+      '@sigstore/protobuf-specs': 0.3.3
       '@sigstore/sign': 2.3.2
       '@sigstore/tuf': 2.3.4
       '@sigstore/verify': 1.2.1
@@ -9500,7 +9464,7 @@ snapshots:
       uuid: 8.3.2
       websocket-driver: 0.7.4
 
-  socks-proxy-agent@8.0.4:
+  socks-proxy-agent@8.0.5:
     dependencies:
       agent-base: 7.1.3
       debug: 4.4.0
@@ -9533,16 +9497,16 @@ snapshots:
   spdx-correct@3.2.0:
     dependencies:
       spdx-expression-parse: 3.0.1
-      spdx-license-ids: 3.0.20
+      spdx-license-ids: 3.0.21
 
   spdx-exceptions@2.5.0: {}
 
   spdx-expression-parse@3.0.1:
     dependencies:
       spdx-exceptions: 2.5.0
-      spdx-license-ids: 3.0.20
+      spdx-license-ids: 3.0.21
 
-  spdx-license-ids@3.0.20: {}
+  spdx-license-ids@3.0.21: {}
 
   spdy-transport@3.0.0:
     dependencies:
@@ -9578,7 +9542,7 @@ snapshots:
   streamroller@3.1.5:
     dependencies:
       date-format: 4.0.14
-      debug: 4.4.0
+      debug: 4.3.7
       fs-extra: 8.1.0
     transitivePeerDependencies:
       - supports-color
@@ -9788,13 +9752,13 @@ snapshots:
 
   vary@1.1.2: {}
 
-  vite@5.4.14(@types/node@22.13.0)(less@4.2.0)(sass@1.77.6)(terser@5.31.6):
+  vite@5.4.14(@types/node@22.13.1)(less@4.2.0)(sass@1.77.6)(terser@5.31.6):
     dependencies:
       esbuild: 0.21.5
       postcss: 8.5.1
       rollup: 4.22.4
     optionalDependencies:
-      '@types/node': 22.13.0
+      '@types/node': 22.13.1
       fsevents: 2.3.3
       less: 4.2.0
       sass: 1.77.6
@@ -9804,14 +9768,14 @@ snapshots:
 
   vue-eslint-parser@9.4.3(eslint@8.57.1):
     dependencies:
-      debug: 4.3.7
+      debug: 4.4.0
       eslint: 8.57.1
       eslint-scope: 7.2.2
       eslint-visitor-keys: 3.4.3
       espree: 9.6.1
       esquery: 1.5.0
       lodash: 4.17.21
-      semver: 7.7.0
+      semver: 7.7.1
     transitivePeerDependencies:
       - supports-color
 
