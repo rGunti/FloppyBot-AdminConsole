@@ -12,8 +12,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatProgressBar } from '@angular/material/progress-bar';
-import { MatProgressSpinner } from '@angular/material/progress-spinner';
-import { MatOption, MatSelect } from '@angular/material/select';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -43,7 +41,6 @@ import { LogLevelComponent } from '../../../components/log-level/log-level.compo
 import { LogExceptionComponent } from '../../../dialogs/log-exception/log-exception.component';
 import { LogInfoComponent } from '../../../dialogs/log-info/log-info.component';
 import { DialogService } from '../../../utils/dialog.service';
-import { TruncatePipe } from '../../../utils/truncate.pipe';
 
 const LOG_LEVELS: readonly LogLevel[] = [
   LogLevel.Verbose,
@@ -66,11 +63,8 @@ const LOG_LEVELS: readonly LogLevel[] = [
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
-    MatSelect,
-    MatOption,
     MatTooltip,
     MatSlideToggle,
-    MatProgressSpinner,
     MatProgressBar,
     MatMenuModule,
     MatButton,
@@ -82,7 +76,6 @@ const LOG_LEVELS: readonly LogLevel[] = [
     MatIconButton,
     MatIcon,
     NgIconComponent,
-    TruncatePipe,
   ],
   providers: [
     provideIcons({

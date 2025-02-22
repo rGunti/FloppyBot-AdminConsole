@@ -4,6 +4,7 @@ import {
   ControlValueAccessor,
   FormControl,
   FormGroup,
+  FormsModule,
   NG_VALUE_ACCESSOR,
   ReactiveFormsModule,
   Validators,
@@ -13,7 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { bootstrapChatDots, bootstrapMusicNote } from '@ng-icons/bootstrap-icons';
-import { NgIconComponent, provideIcons } from '@ng-icons/core';
+import { provideIcons } from '@ng-icons/core';
 import { Subject, takeUntil } from 'rxjs';
 
 import { CommandResponse, CommandResponseType } from '../../api/entities';
@@ -38,11 +39,12 @@ import { FilePickerComponent } from '../file-picker/file-picker.component';
   styleUrl: './custom-command-response-form.component.scss',
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
     MatIconModule,
-    NgIconComponent,
     ReactiveFormsModule,
     FilePickerComponent,
     FormErrorPipe,
