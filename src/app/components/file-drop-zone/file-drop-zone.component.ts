@@ -11,7 +11,7 @@ import { DropZoneDirective } from '../../utils/drop-zone.directive';
 @Component({
   selector: 'fac-file-drop-zone',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatIconModule, NgIconComponent, DropZoneDirective, MatProgressBar],
+  imports: [CommonModule, MatButtonModule, MatIconModule, NgIconComponent, DropZoneDirective],
   providers: [
     provideIcons({
       bootstrapFileEarmarkArrowUp,

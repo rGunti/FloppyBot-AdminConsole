@@ -1,6 +1,6 @@
 import { CommonModule, DATE_PIPE_DEFAULT_OPTIONS } from '@angular/common';
 import { Component, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { MatButton, MatIconButton } from '@angular/material/button';
+import { MatIconButton } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIcon } from '@angular/material/icon';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
@@ -31,7 +31,6 @@ import { ChannelAliasPipe } from '../../../utils/channel/channel-alias.pipe';
     MatToolbarModule,
     ChannelSelectorComponent,
     MatProgressBarModule,
-    MatButton,
     MatIcon,
     MatIconButton,
     NgIconComponent,

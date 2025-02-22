@@ -11,7 +11,6 @@ import { CommandApiService } from '../../api/command-api.service';
 import { CommandInfo } from '../../api/entities';
 import { InterfaceIconComponent } from '../../components/interface-icon/interface-icon.component';
 import { PrivilegeIconComponent } from '../../components/privilege-icon/privilege-icon.component';
-import { ListPipe } from '../../utils/list.pipe';
 
 @Component({
   selector: 'fac-about-command-dialog',
@@ -22,7 +21,6 @@ import { ListPipe } from '../../utils/list.pipe';
     CommonModule,
     MatDialogModule,
     MatButtonModule,
-    ListPipe,
     PrivilegeIconComponent,
     InterfaceIconComponent,
     MatIcon,

@@ -8,7 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { NgIconComponent, provideIcons } from '@ng-icons/core';
+import { provideIcons } from '@ng-icons/core';
 import { filter, map, of, shareReplay, switchMap, take, tap } from 'rxjs';
 
 import { CommandApiService } from '../../../api/command-api.service';
@@ -25,7 +25,6 @@ import { DialogService } from '../../../utils/dialog.service';
     ReactiveFormsModule,
     ChannelSelectorComponent,
     MatIconModule,
-    NgIconComponent,
     MatToolbarModule,
     MatFormFieldModule,
     MatInputModule,
