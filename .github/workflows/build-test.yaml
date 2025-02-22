@@ -72,9 +72,7 @@ jobs:
           - 23.x
         pnpm-version:
           # latest stable
-          - 9.x
-          # latest build
-          - latest
+          - 10.x
         chrome-version:
           - stable
           - beta
