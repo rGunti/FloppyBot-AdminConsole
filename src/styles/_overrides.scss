@@ -47,3 +47,7 @@ mat-divider.mat-divider {
     --ng-icon__size: 40px !important;
   }
 }
+
+.mat-mdc-slide-toggle label {
+  color: var(--mat-sys-on-surface);
+}
