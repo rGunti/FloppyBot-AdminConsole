@@ -67,9 +67,9 @@ jobs:
       matrix:
         node-version:
           # current LTS
-          - 20.x
-          # next LTS
           - 22.x
+          # next
+          - 23.x
         pnpm-version:
           # latest stable
           - 9.x
