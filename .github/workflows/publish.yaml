@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - main
+      - post-ng19
     tags:
       - '*'
 
