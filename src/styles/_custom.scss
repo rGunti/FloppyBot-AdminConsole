@@ -5,6 +5,7 @@
 
 .button-row {
   display: flex;
+  justify-content: center;
   &.right {
     justify-content: flex-end;
   }

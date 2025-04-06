@@ -114,7 +114,7 @@ export class ManageQuotesComponent implements AfterViewInit, OnDestroy {
 
   editQuote(quote: Quote): void {
     this.dialog
-      .show<Quote>(EditQuoteDialogComponent, quote)
+      .show<Quote>(EditQuoteDialogComponent, quote, { width: '500px' })
       .pipe(
         filter((result) => !!result),
         switchMap((updatedQuote) =>

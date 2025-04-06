@@ -43,7 +43,6 @@ import { ADMIN_PERMISSIONS, Permissions } from '../../guards/permissions';
 import { AppUpdateService } from '../../utils/app-update.service';
 import { AuthService as AppAuthService } from '../../utils/auth.service';
 import { DialogService } from '../../utils/dialog.service';
-import { ThemeButtonComponent } from '../theme-button/theme-button.component';
 
 @Component({
   selector: 'fac-navigation',
@@ -59,7 +58,6 @@ import { ThemeButtonComponent } from '../theme-button/theme-button.component';
     MatDividerModule,
     MatTooltipModule,
     MatDialogModule,
-    ThemeButtonComponent,
   ],
   providers: [
     provideIcons({

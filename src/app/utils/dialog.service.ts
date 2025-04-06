@@ -1,6 +1,6 @@
 import { ComponentType } from '@angular/cdk/portal';
 import { inject, Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { map, Observable } from 'rxjs';
 
@@ -9,6 +9,8 @@ import { ErrorSnackComponent } from '../dialogs/error-snack/error-snack.componen
 import { GenericQuestionDialogComponent } from '../dialogs/generic-question-dialog/generic-question-dialog.component';
 import { NotImplementedDialogComponent } from '../dialogs/not-implemented-dialog/not-implemented-dialog.component';
 
+export type DialogParameters = MatDialogConfig;
+
 @Injectable({
   providedIn: 'root',
 })
@@ -16,9 +18,9 @@ export class DialogService {
   private readonly dialog = inject(MatDialog);
   private readonly snackbar = inject(MatSnackBar);
 
-  show<T>(component: ComponentType<unknown>, data?: unknown): Observable<T> {
+  show<T>(component: ComponentType<unknown>, data?: unknown, params?: DialogParameters): Observable<T> {
     return this.dialog
-      .open(component, { data })
+      .open(component, { data, ...params })
       .afterClosed()
       .pipe(map((result) => result as T));
   }
