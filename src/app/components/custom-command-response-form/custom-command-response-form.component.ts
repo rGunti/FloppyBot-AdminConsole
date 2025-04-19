@@ -13,6 +13,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { bootstrapChatDots, bootstrapMusicNote } from '@ng-icons/bootstrap-icons';
 import { provideIcons } from '@ng-icons/core';
 import { Subject, takeUntil } from 'rxjs';
@@ -45,6 +46,7 @@ import { FilePickerComponent } from '../file-picker/file-picker.component';
     MatInputModule,
     MatSelectModule,
     MatIconModule,
+    MatSlideToggleModule,
     ReactiveFormsModule,
     FilePickerComponent,
     FormErrorPipe,
@@ -70,6 +72,10 @@ export class CustomCommandResponseFormComponent implements ControlValueAccessor,
     }),
     auxiliaryContent: new FormControl<string | null | undefined>(null, {
       validators: [Validators.maxLength(400)],
+      updateOn: 'blur',
+    }),
+    sendAsReply: new FormControl<boolean>(true, {
+      validators: [Validators.required],
       updateOn: 'blur',
     }),
   });

@@ -243,7 +243,7 @@ export class CustomCommandEditorDialogComponent {
   }
 
   addResponse(responseType: CommandResponseType): void {
-    const newResponse: CommandResponse = { type: responseType, content: '' };
+    const newResponse: CommandResponse = { type: responseType, content: '', sendAsReply: true };
     this.responsesArray.push(this.constructResponseForm(newResponse));
   }
 
