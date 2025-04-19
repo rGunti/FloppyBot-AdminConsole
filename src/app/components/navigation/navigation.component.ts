@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
@@ -32,7 +32,7 @@ import {
   bootstrapWindowFullscreen,
 } from '@ng-icons/bootstrap-icons';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import { filter, map, Observable, shareReplay, switchMap } from 'rxjs';
+import { catchError, filter, map, Observable, shareReplay, switchMap } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
 import { VERSION } from '../../../version/version';
@@ -87,7 +87,7 @@ import { DialogService } from '../../utils/dialog.service';
   styleUrl: './navigation.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NavigationComponent {
+export class NavigationComponent implements OnInit {
   private readonly dialog = inject(DialogService);
   private readonly titleService = inject(TitleStrategy);
   private readonly router = inject(Router);
@@ -113,6 +113,19 @@ export class NavigationComponent {
     map(() => this.router.routerState.snapshot),
     map((snapshot) => this.titleService.buildTitle(snapshot)),
   );
+
+  ngOnInit(): void {
+    this.isAuthenticated$
+      .pipe(
+        filter((isAuthenticated) => !isAuthenticated),
+        switchMap(() => this.auth.getAccessTokenSilently()),
+        catchError((err) => {
+          console.log('Error getting access token, user likely not logged in. Error was:', err);
+          return [];
+        })
+      )
+      .subscribe();
+  }
 
   login(): void {
     const loginMode = environment.loginMode;

@@ -34,6 +34,8 @@ export const appConfig: ApplicationConfig = {
         httpInterceptor: {
           allowedList: [`${environment.api}/*`],
         },
+        cacheLocation: 'localstorage',
+        useRefreshTokens: true,
       }),
     ),
     // ChannelService should persist throughout the application to prevent deselection bugs
