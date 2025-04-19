@@ -203,11 +203,13 @@ describe('CommandService', () => {
                 type: 'Text',
                 content: 'This is a command\n\nWith multiple messages',
                 auxiliaryContent: null,
+                sendAsReply: false,
               },
               {
                 type: 'Sound',
                 content: `${CHANNEL_ID}/harmony.mp3`,
                 auxiliaryContent: null,
+                sendAsReply: true,
               },
             ],
             limitations: {
@@ -256,6 +258,7 @@ describe('CommandService', () => {
                 type: 'Text',
                 content: 'This is a command\n\nWith multiple messages',
                 auxiliaryContent: null,
+                sendAsReply: true,
               },
             ],
             limitations: {
@@ -304,6 +307,7 @@ describe('CommandService', () => {
                 type: 'Sound',
                 content: `${CHANNEL_ID}/harmony.mp3`,
                 auxiliaryContent: null,
+                sendAsReply: true,
               },
             ],
             limitations: {
