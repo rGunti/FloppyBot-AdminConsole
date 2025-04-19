@@ -232,6 +232,7 @@ export class CustomCommandEditorDialogComponent {
       type: [response.type, [Validators.required]],
       content: [response.content, [Validators.required, Validators.maxLength(300)]],
       auxiliaryContent: [response.auxiliaryContent],
+      sendAsReply: [response.sendAsReply],
     });
   }
 
