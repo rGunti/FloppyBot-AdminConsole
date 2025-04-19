@@ -129,6 +129,7 @@ export interface CommandResponse {
   type: CommandResponseType;
   content: string;
   auxiliaryContent?: string | null;
+  sendAsReply: boolean;
 }
 
 export interface CommandLimitation {

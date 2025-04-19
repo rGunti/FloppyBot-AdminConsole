@@ -232,6 +232,7 @@ export class CustomCommandEditorDialogComponent {
       type: [response.type, [Validators.required]],
       content: [response.content, [Validators.required, Validators.maxLength(300)]],
       auxiliaryContent: [response.auxiliaryContent],
+      sendAsReply: [response.sendAsReply],
     });
   }
 
@@ -243,7 +244,7 @@ export class CustomCommandEditorDialogComponent {
   }
 
   addResponse(responseType: CommandResponseType): void {
-    const newResponse: CommandResponse = { type: responseType, content: '' };
+    const newResponse: CommandResponse = { type: responseType, content: '', sendAsReply: true };
     this.responsesArray.push(this.constructResponseForm(newResponse));
   }
 
