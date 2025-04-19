@@ -122,7 +122,7 @@ export class NavigationComponent implements OnInit {
         catchError((err) => {
           console.log('Error getting access token, user likely not logged in. Error was:', err);
           return [];
-        })
+        }),
       )
       .subscribe();
   }
