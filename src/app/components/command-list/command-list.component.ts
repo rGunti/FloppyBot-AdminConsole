@@ -3,10 +3,10 @@ import { AfterViewInit, Component, EventEmitter, Input, Output, ViewChild } from
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormField, MatLabel, MatPrefix, MatSuffix } from '@angular/material/form-field';
-import { MatIcon, MatIconModule } from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {
@@ -17,6 +17,7 @@ import {
   bootstrapPower,
   bootstrapSearch,
   bootstrapTrash,
+  bootstrapX,
   bootstrapXCircle,
   bootstrapXLg,
 } from '@ng-icons/bootstrap-icons';
@@ -24,6 +25,7 @@ import { NgIconComponent, provideIcons } from '@ng-icons/core';
 
 import { CommandInfo } from '../../api/entities';
 import { ListPipe } from '../../utils/list.pipe';
+import { sortData } from '../../utils/sort';
 import { CommandRestrictionsComponent } from '../command-restrictions/command-restrictions.component';
 
 @Component({
@@ -45,6 +47,7 @@ import { CommandRestrictionsComponent } from '../command-restrictions/command-re
     MatInput,
     FormsModule,
     MatPrefix,
+    MatSuffix,
   ],
   providers: [
     provideIcons({
@@ -53,6 +56,7 @@ import { CommandRestrictionsComponent } from '../command-restrictions/command-re
       bootstrapTrash,
       bootstrapCheckCircle,
       bootstrapXCircle,
+      bootstrapX,
       bootstrapXLg,
       bootstrapBan,
       bootstrapPower,
@@ -87,6 +91,7 @@ export class CommandListComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+    this.dataSource.sortData = (data: CommandInfo[], sort: Sort) => sortData(data, sort);
   }
 
   getDetailTooltip(command: CommandInfo): string {
