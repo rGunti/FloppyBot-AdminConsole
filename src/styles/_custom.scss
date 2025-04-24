@@ -14,3 +14,14 @@
 .drag-handle {
   cursor: move;
 }
+
+.filter {
+  width: 100%;
+}
+
+.empty-text {
+  text-align: center;
+  font-size: 1.2em;
+  color: var(--fac-text-color);
+  padding: 10px;
+}
