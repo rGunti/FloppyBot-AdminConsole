@@ -1,3 +1,11 @@
+<mat-form-field class="filter">
+  <mat-label>Filter</mat-label>
+  <mat-icon matPrefix>
+    <ng-icon name="bootstrapFilter"></ng-icon>
+  </mat-icon>
+  <input matInput [(ngModel)]="dataSource.filter" />
+</mat-form-field>
+
 <mat-paginator [pageSize]="10" hidePageSize="true" showFirstLastButtons></mat-paginator>
 
 <table mat-table [dataSource]="dataSource" matSort>
@@ -65,6 +73,10 @@
       }
     </td>
   </ng-container>
+
+  <tr *matNoDataRow>
+    <td colspan="10" class="empty-text">Couldn't find any commands matching your filter.</td>
+  </tr>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>

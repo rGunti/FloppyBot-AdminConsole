@@ -1,7 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
+import { MatFormField, MatLabel, MatPrefix, MatSuffix } from '@angular/material/form-field';
+import { MatIcon, MatIconModule } from '@angular/material/icon';
+import { MatInput } from '@angular/material/input';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -9,6 +12,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import {
   bootstrapBan,
   bootstrapCheckCircle,
+  bootstrapFilter,
   bootstrapPencil,
   bootstrapPower,
   bootstrapSearch,
@@ -36,6 +40,11 @@ import { CommandRestrictionsComponent } from '../command-restrictions/command-re
     MatTooltipModule,
     CommandRestrictionsComponent,
     ListPipe,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    FormsModule,
+    MatPrefix,
   ],
   providers: [
     provideIcons({
@@ -47,6 +56,7 @@ import { CommandRestrictionsComponent } from '../command-restrictions/command-re
       bootstrapXLg,
       bootstrapBan,
       bootstrapPower,
+      bootstrapFilter,
     }),
   ],
   templateUrl: './command-list.component.html',
