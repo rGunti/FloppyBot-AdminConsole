@@ -58,6 +58,16 @@
               "outputHashing": "all",
               "serviceWorker": "ngsw-config.json"
             },
+            "playwright": {
+              "outputHashing": "all",
+              "serviceWorker": "ngsw-config.json",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.playwright.ts"
+                }
+              ]
+            },
             "development": {
               "optimization": false,
               "extractLicenses": false,
@@ -77,6 +87,10 @@
           "configurations": {
             "production": {
               "buildTarget": "floppybot-admin-console:build:production"
+            },
+            "playwright": {
+              "buildTarget": "floppybot-admin-console:build:playwright",
+              "watch": false
             },
             "development": {
               "buildTarget": "floppybot-admin-console:build:development"

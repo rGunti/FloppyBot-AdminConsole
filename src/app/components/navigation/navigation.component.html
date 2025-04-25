@@ -1,6 +1,6 @@
 <mat-toolbar>
   <mat-toolbar-row>
-    <button mat-icon-button [matMenuTriggerFor]="mMenu" matTooltip="Tap to start">
+    <button mat-icon-button data-testid="btn-main-menu" [matMenuTriggerFor]="mMenu" matTooltip="Tap to start">
       <mat-icon>
         <ng-icon name="bootstrapFloppy2"></ng-icon>
       </mat-icon>
@@ -101,7 +101,12 @@
         }
 
         <mat-divider></mat-divider>
-        <button mat-menu-item routerLink="/profile" routerLinkActive="mat-mdc-menu-item-highlighted">
+        <button
+          mat-menu-item
+          routerLink="/profile"
+          data-testid="btn-user-profile"
+          routerLinkActive="mat-mdc-menu-item-highlighted"
+        >
           @if (profilePictureUrl$ | async; as profilePictureUrl) {
             <mat-icon>
               <img [src]="profilePictureUrl" alt="User Avatar" class="avatar" />
@@ -120,14 +125,14 @@
           </mat-icon>
           Settings
         </button>
-        <button mat-menu-item (click)="logout()">
+        <button mat-menu-item data-testid="btn-logout" (click)="logout()">
           <mat-icon>
             <ng-icon name="bootstrapDoorOpen"></ng-icon>
           </mat-icon>
           Logout
         </button>
       } @else {
-        <button mat-menu-item (click)="login()">
+        <button mat-menu-item data-testid="btn-login" (click)="login()">
           <mat-icon>
             <ng-icon name="bootstrapUnlock"></ng-icon>
           </mat-icon>
