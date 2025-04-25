@@ -23,5 +23,5 @@
     "angular-page": {
       "skipChangeDetectionOnPush": true
     }
-  },
+  }
 }
