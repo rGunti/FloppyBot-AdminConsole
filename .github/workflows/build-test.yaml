@@ -167,13 +167,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-${{ matrix.node-version }}-${{ matrix.pnpm-version }}-
 
-      # Install dependencies
-      - name: Fetch dependencies
-        run: pnpm fetch && pnpm install --offline
-      - name: Install Playwright Browsers
-        run: pnpm playwright install --with-deps
-        env:
-          PLAYWRIGHT_BROWSERS_PATH: '/tmp/playwright-browsers'
+      # Setup Playwright
       - uses: actions/cache@v4
         name: Setup playwright cache
         with:
@@ -181,6 +175,14 @@ jobs:
           key: ${{ runner.os }}-playwright-browsers-${{ matrix.node-version }}-${{ matrix.pnpm-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-playwright-browsers-${{ matrix.node-version }}-${{ matrix.pnpm-version }}-
+
+      # Install dependencies
+      - name: Fetch dependencies
+        run: pnpm fetch && pnpm install --offline
+      - name: Install Playwright Browsers
+        run: pnpm playwright install --with-deps
+        env:
+          PLAYWRIGHT_BROWSERS_PATH: '/tmp/playwright-browsers'
 
       # Run Tests
       - name: Test
