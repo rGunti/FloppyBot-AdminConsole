@@ -126,6 +126,9 @@ jobs:
   playwright:
     name: E2E-Test Application
     runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.52.0-noble
+      options: --user 1001
     strategy:
       matrix:
         node-version:
@@ -162,22 +165,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-${{ matrix.node-version }}-${{ matrix.pnpm-version }}-
 
-      # Setup Playwright
-      - uses: actions/cache@v4
-        name: Setup playwright cache
-        with:
-          path: '/tmp/playwright-browsers'
-          key: ${{ runner.os }}-playwright-browsers-${{ matrix.node-version }}-${{ matrix.pnpm-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-playwright-browsers-${{ matrix.node-version }}-${{ matrix.pnpm-version }}-
-
       # Install dependencies
       - name: Fetch dependencies
         run: pnpm fetch && pnpm install --offline
       - name: Install Playwright Browsers
         run: pnpm playwright install --with-deps
-        env:
-          PLAYWRIGHT_BROWSERS_PATH: '/tmp/playwright-browsers'
 
       # Run Tests
       - name: Test
@@ -185,7 +177,6 @@ jobs:
         env:
           CI: 'true'
           FLOPPYBOT_CREDENTIALS: ${{ secrets.PLAYWRIGHT_USER }}
-          PLAYWRIGHT_BROWSERS_PATH: '/tmp/playwright-browsers'
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
