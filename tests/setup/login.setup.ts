@@ -54,8 +54,8 @@ setup('login', async ({ page }) => {
   await page.getByTestId('btn-main-menu').click();
   await page.getByTestId('btn-login').click();
 
-  await page.getByRole('textbox', { name: 'unused/emailPlaceholder' }).fill(credentials!.email);
-  await page.getByRole('textbox', { name: 'unused/passwordPlaceholder' }).fill(atob(credentials!.password));
+  await page.getByRole('textbox', { name: 'Testing User Email' }).fill(credentials!.email);
+  await page.getByRole('textbox', { name: 'Testing User Password' }).fill(atob(credentials!.password));
   await page.getByRole('button', { name: 'Continue' }).click();
 
   await page.getByTestId('btn-main-menu').click();
