@@ -71,15 +71,13 @@ jobs:
         node-version:
           # current LTS
           - 22.x
-          # next
-          - 23.x
         pnpm-version:
           # latest stable
           - 10.x
         chrome-version:
           - stable
           - beta
-          - dev
+          #- dev
           #- canary
     steps:
       # Checkout the repository
@@ -186,7 +184,7 @@ jobs:
 
       # Run Tests
       - name: Test
-        run: npx playwright test --only-changed=$GITHUB_BASE_REF
+        run: npx playwright test
         env:
           CI: 'true'
           FLOPPYBOT_CREDENTIALS: ${{ secrets.PLAYWRIGHT_USER }}
