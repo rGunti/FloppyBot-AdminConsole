@@ -168,8 +168,6 @@ jobs:
       # Install dependencies
       - name: Fetch dependencies
         run: pnpm fetch && pnpm install --offline
-      - name: Install Playwright Browsers
-        run: pnpm playwright install --with-deps
 
       # Run Tests
       - name: Test
