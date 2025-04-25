@@ -52,17 +52,14 @@ setup('login', async ({ page }) => {
 
   await page.goto('/');
   await page.getByTestId('btn-main-menu').click();
-
-  const loginPopupPromise = page.waitForEvent('popup');
   await page.getByTestId('btn-login').click();
 
-  const loginPopup = await loginPopupPromise;
-  await loginPopup.getByRole('textbox', { name: 'unused/emailPlaceholder' }).fill(credentials!.email);
-  await loginPopup.getByRole('textbox', { name: 'unused/passwordPlaceholder' }).fill(atob(credentials!.password));
-  await loginPopup.getByRole('button', { name: 'Continue' }).click();
-  // await loginPopup.getByRole('button', { name: 'Accept' }).click();
+  await page.getByRole('textbox', { name: 'unused/emailPlaceholder' }).fill(credentials!.email);
+  await page.getByRole('textbox', { name: 'unused/passwordPlaceholder' }).fill(atob(credentials!.password));
+  await page.getByRole('button', { name: 'Continue' }).click();
 
-  await expect(page.locator('fac-confirm-snack')).toContainText('Welcome, playwright');
+  await page.getByTestId('btn-main-menu').click();
+  await expect(page.getByTestId('btn-user-profile')).toContainText('Profile (playwright)');
 
   await page.context().storageState({ path: authFile });
 });
