@@ -172,6 +172,15 @@ jobs:
         run: pnpm fetch && pnpm install --offline
       - name: Install Playwright Browsers
         run: pnpm playwright install --with-deps
+        env:
+          PLAYWRIGHT_BROWSERS_PATH: '/tmp/playwright-browsers'
+      - uses: actions/cache@v4
+        name: Setup playwright cache
+        with:
+          path: '/tmp/playwright-browsers'
+          key: ${{ runner.os }}-playwright-browsers-${{ matrix.node-version }}-${{ matrix.pnpm-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-playwright-browsers-${{ matrix.node-version }}-${{ matrix.pnpm-version }}-
 
       # Run Tests
       - name: Test
@@ -179,6 +188,7 @@ jobs:
         env:
           CI: 'true'
           FLOPPYBOT_CREDENTIALS: ${{ secrets.PLAYWRIGHT_USER }}
+          PLAYWRIGHT_BROWSERS_PATH: '/tmp/playwright-browsers'
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
