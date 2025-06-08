@@ -1,0 +1,42 @@
+@if (hasError$ | async) {
+  <mat-card>
+    <mat-card-title>Connection failed!</mat-card-title>
+    <mat-card-content>
+      <p>
+        The connection to your Twitch account has failed. You may attempt again, if you want to. If the problem
+        persists, contact support.
+      </p>
+    </mat-card-content>
+  </mat-card>
+} @else {}
+
+@if (status$ | async; as status) {
+  <mat-card>
+    <mat-card-title>{{ status.title }}</mat-card-title>
+    <mat-card-content>
+      <div class="flex">
+        <span class="spacer"></span>
+        @switch (status.status) {
+          @case ('InProgress') {
+            <mat-spinner></mat-spinner>
+          }
+          @case ('Error') {
+            <ng-container>
+              <mat-icon class="response-icon">
+                <ng-icon name="bootstrapExclamationTriangle"></ng-icon>
+              </mat-icon>
+              <button mat-button routerLink="/settings/account-links">Go back to Account Links</button>
+            </ng-container>
+          }
+          @case ('Success') {
+            <mat-icon class="response-icon">
+              <ng-icon name="bootstrapCheck2"></ng-icon>
+            </mat-icon>
+          }
+        }
+        <span class="spacer"></span>
+      </div>
+      <p>{{ status.description }}</p>
+    </mat-card-content>
+  </mat-card>
+}

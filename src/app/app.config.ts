@@ -3,7 +3,7 @@ import { ApplicationConfig, importProvidersFrom, isDevMode } from '@angular/core
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideRouter, TitleStrategy } from '@angular/router';
 import { provideServiceWorker } from '@angular/service-worker';
-import { AuthHttpInterceptor, authHttpInterceptorFn, AuthModule } from '@auth0/auth0-angular';
+import { AuthHttpInterceptor, authHttpInterceptorFn, AuthModule, provideAuth0 } from '@auth0/auth0-angular';
 import { provideNgIconsConfig, withContentSecurityPolicy } from '@ng-icons/core';
 
 import { environment } from '../environments/environment';
@@ -28,16 +28,15 @@ export const appConfig: ApplicationConfig = {
       registrationStrategy: 'registerWhenStable:30000',
     }),
     provideHttpClient(withInterceptors([authHttpInterceptorFn, errorInterceptor])),
-    importProvidersFrom(
-      AuthModule.forRoot({
-        ...environment.auth,
-        httpInterceptor: {
-          allowedList: [`${environment.api}/*`],
-        },
-        cacheLocation: 'localstorage',
-        useRefreshTokens: true,
-      }),
-    ),
+    provideAuth0({
+      ...environment.auth,
+      httpInterceptor: {
+        allowedList: [`${environment.api}/*`],
+      },
+      cacheLocation: 'localstorage',
+      useRefreshTokens: true,
+      skipRedirectCallback: window.location.pathname !== '/callback',
+    }),
     // ChannelService should persist throughout the application to prevent deselection bugs
     ChannelService,
     AuthHttpInterceptor,

@@ -229,3 +229,12 @@ export interface AuditLogRecord {
   action: string;
   additionalData: string;
 }
+
+export interface TwitchAuthenticationStart {
+  loginUrl: string;
+}
+
+export interface TwitchAuthenticationConfirm {
+  sessionId: string;
+  code: string;
+}
