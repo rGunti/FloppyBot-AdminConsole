@@ -97,6 +97,20 @@ export const routes: Routes = [
           import('./pages/settings/channel-aliases/channel-aliases.component').then((m) => m.ChannelAliasesComponent),
         canActivate: [AuthGuard],
       },
+      {
+        path: 'account-links',
+        title: 'Settings / Account Links',
+        loadComponent: () =>
+          import('./pages/settings/account-links/account-links.component').then((m) => m.AccountLinksComponent),
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'account-links/confirm',
+        loadComponent: () =>
+          import('./pages/settings/account-links-confirm/account-links-confirm.component').then(
+            (m) => m.AccountLinksConfirmComponent,
+          ),
+      },
     ],
     canActivate: [AuthGuard],
   },

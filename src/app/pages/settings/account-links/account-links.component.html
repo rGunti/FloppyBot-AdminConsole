@@ -1,0 +1,47 @@
+<div class="mat-elevation-z8">
+  <mat-toolbar class="action-toolbar">
+    <fac-channel-selector></fac-channel-selector>
+    <button
+      mat-icon-button
+      matTooltip="Refresh"
+      [disabled]="(selectedChannelId$ | async) === undefined"
+      (click)="refresh$.next()"
+    >
+      <mat-icon>
+        <ng-icon name="bootstrapArrowCounterclockwise"></ng-icon>
+      </mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Accounts</mat-card-title>
+      <mat-card-subtitle> Connect other accounts to let FloppyBot act on your behalf. </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <h3>Connect Twitch</h3>
+      @if (hasCredentialsForSelectedChannel$ | async) {
+        <p>An account is linked to this channel.</p>
+        <button mat-button color="warn" (click)="revokeSession()">
+          <mat-icon>
+            <ng-icon name="bootstrapTrash"></ng-icon>
+          </mat-icon>
+          Revoke Credentials
+        </button>
+      } @else {
+        @if (hasInvalidChannelSelected$ | async) {
+          <p>This channel does not support a connection with Twitch. Only Twitch channels can be used.</p>
+        } @else {
+          <p>You can connect this channel to your Twitch account to allow for better integration.</p>
+        }
+
+        <button mat-button [disabled]="hasInvalidChannelSelected$ | async" (click)="initiateTwitchConnection()">
+          <mat-icon><ng-icon name="bootstrapTwitch"></ng-icon></mat-icon>
+
+          Connect with Twitch
+        </button>
+      }
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,0 +1,31 @@
+@if (status$ | async; as status) {
+  <mat-card>
+    <mat-card-title>{{ status.title }}</mat-card-title>
+    <mat-card-content>
+      <div class="flex">
+        <span class="spacer"></span>
+        @switch (status.status) {
+          @case ('InProgress') {
+            <mat-spinner></mat-spinner>
+          }
+          @case ('Error') {
+            <mat-icon class="response-icon">
+              <ng-icon name="bootstrapExclamationTriangle"></ng-icon>
+            </mat-icon>
+          }
+          @case ('Success') {
+            <mat-icon class="response-icon">
+              <ng-icon name="bootstrapCheck2"></ng-icon>
+            </mat-icon>
+          }
+        }
+        <span class="spacer"></span>
+      </div>
+      <p>{{ status.description }}</p>
+
+      @if (status.status === 'Error' || status.status === 'Success') {
+        <button mat-button routerLink="/settings/account-links">Go back to Account Links</button>
+      }
+    </mat-card-content>
+  </mat-card>
+}
