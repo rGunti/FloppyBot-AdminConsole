@@ -8,7 +8,16 @@ updates:
   - package-ecosystem: "npm"
     directory: "/" # Location of package manifests
     schedule:
-      interval: "weekly"
+      interval: "daily"
+    assignees:
+      - "rgunti"
+    reviewers:
+      - "rgunti"
+    labels:
+      - "dependencies"
+      - "pnpm"
+    commit-message:
+      prefix: "deps(pnpm)"
     ignore:
       # Ignore all major updates
       - dependency-name: "*"
@@ -19,16 +28,27 @@ updates:
         patterns:
           - "@angular/*"
           - "@angular-eslint/*"
+          - "@angular-devkit/*"
       ng-icons:
         patterns:
           - "@ng-icons/*"
-      typescript-eslint:
+      dev-dependencies:
         patterns:
-          - "@typescript-eslint/*"
+          - "*"
+        dependency-type: "development"
   - package-ecosystem: "docker"
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "daily"
+    assignees:
+      - "rgunti"
+    reviewers:
+      - "rgunti"
+    labels:
+      - "dependencies"
+      - "docker"
+    commit-message:
+      prefix: "deps(docker)"
     ignore:
       # Ignore all major updates
       - dependency-name: "*"
@@ -38,6 +58,15 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    assignees:
+      - "rgunti"
+    reviewers:
+      - "rgunti"
+    labels:
+      - "dependencies"
+      - "gh-actions"
+    commit-message:
+      prefix: "deps(gh-actions)"
     groups:
       actions:
         patterns:
