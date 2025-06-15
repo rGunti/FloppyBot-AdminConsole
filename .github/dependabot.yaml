@@ -19,6 +19,7 @@ updates:
         patterns:
           - "@angular/*"
           - "@angular-eslint/*"
+          - "@angular-devkit/*"
       ng-icons:
         patterns:
           - "@ng-icons/*"
