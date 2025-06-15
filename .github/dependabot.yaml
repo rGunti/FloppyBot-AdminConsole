@@ -32,9 +32,10 @@ updates:
       ng-icons:
         patterns:
           - "@ng-icons/*"
-      typescript-eslint:
+      dev-dependencies:
         patterns:
-          - "@typescript-eslint/*"
+          - "*"
+        dependency-type: "development"
   - package-ecosystem: "docker"
     directory: "/"
     schedule:
