@@ -9,10 +9,6 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: "daily"
-    assignees:
-      - "rgunti"
-    reviewers:
-      - "rgunti"
     labels:
       - "dependencies"
       - "pnpm"
@@ -40,10 +36,6 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
-    assignees:
-      - "rgunti"
-    reviewers:
-      - "rgunti"
     labels:
       - "dependencies"
       - "docker"
@@ -58,10 +50,6 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
-    assignees:
-      - "rgunti"
-    reviewers:
-      - "rgunti"
     labels:
       - "dependencies"
       - "gh-actions"
