@@ -98,12 +98,10 @@ export class ManageFilesComponent implements AfterViewInit, OnDestroy {
   }
 
   getDownloadTooltip(file: FileHeader): string {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return `Download file "${file.fileName}"`;
   }
 
   getDeleteTooltip(file: FileHeader): string {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return `Delete file "${file.fileName}"`;
   }
 
