@@ -93,7 +93,7 @@ jobs:
 
       # Setup Chrome
       - name: Setup Chrome V${{ matrix.chrome-version }}
-        uses: browser-actions/setup-chrome@v1
+        uses: browser-actions/setup-chrome@v2
         id: setup-chrome
         with:
           chrome-version: ${{ matrix.chrome-version }}
