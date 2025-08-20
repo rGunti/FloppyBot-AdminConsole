@@ -22,7 +22,7 @@ jobs:
           - 10.x
     steps:
       # Checkout the repository
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       # Setup Node.js and pnpm
       - name: Setup Node V${{ matrix.node-version }}
