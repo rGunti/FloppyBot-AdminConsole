@@ -15,7 +15,7 @@ jobs:
 
       # Setup Node.js and pnpm
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version-file: '.nvmrc'
       - name: Setup pnpm
@@ -82,7 +82,7 @@ jobs:
 
       # Setup Node.js and pnpm
       - name: Setup Node V${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: ${{ matrix.node-version }}
       - name: Setup pnpm V${{ matrix.pnpm-version }}
