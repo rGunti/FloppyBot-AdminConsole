@@ -26,7 +26,7 @@ jobs:
 
       # Setup Node.js and pnpm
       - name: Setup Node V${{ matrix.node-version }}
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node-version }}
       - name: Setup pnpm V${{ matrix.pnpm-version }}
