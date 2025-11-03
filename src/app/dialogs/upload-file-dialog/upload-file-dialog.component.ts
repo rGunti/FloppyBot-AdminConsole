@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
@@ -12,7 +11,7 @@ import { DialogService } from '../../utils/dialog.service';
 @Component({
   selector: 'fac-upload-file-dialog',
   standalone: true,
-  imports: [CommonModule, MatDialogModule, MatButtonModule, FileDropZoneComponent, MatProgressBar],
+  imports: [MatDialogModule, MatButtonModule, FileDropZoneComponent, MatProgressBar],
   templateUrl: './upload-file-dialog.component.html',
   styleUrl: './upload-file-dialog.component.scss',
 })

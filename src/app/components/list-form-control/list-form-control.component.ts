@@ -1,5 +1,4 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { CommonModule } from '@angular/common';
 import { Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
@@ -11,15 +10,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 @Component({
   selector: 'fac-list-form-control',
   standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatChipsModule,
-    MatIconModule,
-    MatTooltipModule,
-  ],
+  imports: [FormsModule, MatFormFieldModule, MatInputModule, MatChipsModule, MatIconModule, MatTooltipModule],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

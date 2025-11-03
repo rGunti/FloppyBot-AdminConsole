@@ -31,9 +31,11 @@
           <td class="title">Aliases</td>
           <td>
             <ul class="syntax">
-              <li *ngFor="let alias of commandInfo.aliases">
-                <code>{{ alias }}</code>
-              </li>
+              @for (alias of commandInfo.aliases; track alias) {
+                <li>
+                  <code>{{ alias }}</code>
+                </li>
+              }
             </ul>
           </td>
         </tr>
@@ -74,9 +76,11 @@
           <td class="title">Syntax</td>
           <td>
             <ul class="syntax">
-              <li *ngFor="let syntax of commandInfo.syntax">
-                <code>{{ command.name }} {{ syntax }}</code>
-              </li>
+              @for (syntax of commandInfo.syntax; track syntax) {
+                <li>
+                  <code>{{ command.name }} {{ syntax }}</code>
+                </li>
+              }
             </ul>
           </td>
         </tr>

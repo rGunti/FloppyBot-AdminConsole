@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormArray, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -33,7 +32,6 @@ interface BuiltInCommandEditorDialogData {
   selector: 'fac-built-in-command-editor-dialog',
   standalone: true,
   imports: [
-    CommonModule,
     MatDialogModule,
     MatTabsModule,
     MatButtonModule,

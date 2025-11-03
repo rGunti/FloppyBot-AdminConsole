@@ -1,6 +1,6 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { CommonModule } from '@angular/common';
-import { Component, Inject, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
@@ -95,6 +95,8 @@ import { PrivilegeService } from '../../utils/privilege.service';
   styleUrl: './custom-command-editor-dialog.component.scss',
 })
 export class CustomCommandEditorDialogComponent {
+  readonly command = inject<CustomCommand>(MAT_DIALOG_DATA);
+
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
 
   private readonly formBuilder = inject(FormBuilder);
@@ -185,7 +187,9 @@ export class CustomCommandEditorDialogComponent {
 
   readonly limitedToUsers = this.form.get('limitations.limitedToUsers')!.value || ([] as string[]);
 
-  constructor(@Inject(MAT_DIALOG_DATA) readonly command: CustomCommand) {
+  constructor() {
+    const command = this.command;
+
     console.log('CustomCommandEditorDialog', 'constructor', command);
     this.form.patchValue(command);
 

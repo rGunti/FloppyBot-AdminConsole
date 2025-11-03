@@ -1,5 +1,4 @@
 import { ClipboardModule } from '@angular/cdk/clipboard';
-import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
@@ -17,7 +16,6 @@ import { DialogService } from '../../utils/dialog.service';
   selector: 'fac-show-api-key-dialog',
   standalone: true,
   imports: [
-    CommonModule,
     MatDialogModule,
     MatButtonModule,
     MatFormFieldModule,

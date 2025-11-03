@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -17,7 +16,7 @@ import { PrivilegeLevel } from '../../api/entities';
 @Component({
   selector: 'fac-privilege-icon',
   standalone: true,
-  imports: [CommonModule, MatIconModule, NgIconComponent, MatTooltipModule],
+  imports: [MatIconModule, NgIconComponent, MatTooltipModule],
   providers: [
     provideIcons({
       bootstrapShieldLockFill,
