@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -9,7 +8,7 @@ import { NgIconComponent, provideIcons } from '@ng-icons/core';
 @Component({
   selector: 'fac-error-snack',
   standalone: true,
-  imports: [CommonModule, MatIconModule, MatButton, NgIconComponent],
+  imports: [MatIconModule, MatButton, NgIconComponent],
   providers: [
     provideIcons({
       bootstrapXCircle,

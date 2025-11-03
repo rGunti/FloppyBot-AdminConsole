@@ -54,7 +54,9 @@
           <mat-select formControlName="privilegeLevel">
             <mat-option [value]="null">
               <mat-icon>
-                <ng-icon *ngIf="defaultPrivilegeIcon" [svg]="defaultPrivilegeIcon"></ng-icon>
+                @if (defaultPrivilegeIcon) {
+                  <ng-icon [svg]="defaultPrivilegeIcon"></ng-icon>
+                }
               </mat-icon>
               Default ({{ defaultPrivilegeLevel }})
             </mat-option>

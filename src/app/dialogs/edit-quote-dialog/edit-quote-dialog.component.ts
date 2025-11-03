@@ -1,5 +1,5 @@
-import { CommonModule, DatePipe } from '@angular/common';
-import { Component, Inject, inject } from '@angular/core';
+import { DatePipe } from '@angular/common';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
@@ -15,7 +15,6 @@ import { Quote } from '../../api/entities';
   selector: 'fac-edit-quote-dialog',
   standalone: true,
   imports: [
-    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     MatDialogModule,
@@ -91,7 +90,9 @@ export class EditQuoteDialogComponent {
     ),
   });
 
-  constructor(@Inject(MAT_DIALOG_DATA) data: Quote) {
+  constructor() {
+    const data = inject<Quote>(MAT_DIALOG_DATA);
+
     this.form.patchValue(data);
   }
 

@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MatProgressBar } from '@angular/material/progress-bar';
 
@@ -10,7 +9,7 @@ import { FileSizePipe } from '../../utils/files/file-size.pipe';
   standalone: true,
   templateUrl: './file-storage-quota.component.html',
   styleUrl: './file-storage-quota.component.scss',
-  imports: [CommonModule, MatProgressBar, FileSizePipe],
+  imports: [MatProgressBar, FileSizePipe],
 })
 export class FileStorageQuotaComponent {
   @Input({ required: true }) quota!: FileStorageQuota | null | undefined;

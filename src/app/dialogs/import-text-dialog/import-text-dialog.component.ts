@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
@@ -14,7 +13,7 @@ export class ImportTextDialogData {
 
 @Component({
   standalone: true,
-  imports: [CommonModule, MatDialogModule, MatButtonModule, MatFormField, MatInput],
+  imports: [MatDialogModule, MatButtonModule, MatFormField, MatInput],
   templateUrl: './import-text-dialog.component.html',
   styleUrl: './import-text-dialog.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

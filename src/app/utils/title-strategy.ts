@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { RouterStateSnapshot, TitleStrategy } from '@angular/router';
 
@@ -6,11 +6,9 @@ import { RouterStateSnapshot, TitleStrategy } from '@angular/router';
   providedIn: 'root',
 })
 export class FloppyBotTitleStrategy extends TitleStrategy {
-  private static readonly prefix = 'FloppyBot Admin Console';
+  private readonly titleService = inject(Title);
 
-  constructor(private readonly titleService: Title) {
-    super();
-  }
+  private static readonly prefix = 'FloppyBot Admin Console';
 
   override updateTitle(snapshot: RouterStateSnapshot): void {
     const pageTitle = `${this.buildTitle(snapshot)}`;

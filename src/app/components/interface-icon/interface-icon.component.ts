@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -8,7 +7,7 @@ import { NgIconComponent, provideIcons } from '@ng-icons/core';
 @Component({
   selector: 'fac-interface-icon',
   standalone: true,
-  imports: [CommonModule, MatIconModule, NgIconComponent, MatTooltipModule],
+  imports: [MatIconModule, NgIconComponent, MatTooltipModule],
   providers: [
     provideIcons({
       bootstrapTwitch,

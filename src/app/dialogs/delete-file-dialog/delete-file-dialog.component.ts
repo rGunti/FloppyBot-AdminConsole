@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
@@ -9,7 +8,7 @@ import { FileSizePipe } from '../../utils/files/file-size.pipe';
 @Component({
   selector: 'fac-delete-file-dialog',
   standalone: true,
-  imports: [CommonModule, MatDialogModule, MatButtonModule, FileSizePipe],
+  imports: [MatDialogModule, MatButtonModule, FileSizePipe],
   templateUrl: './delete-file-dialog.component.html',
   styleUrl: './delete-file-dialog.component.scss',
 })

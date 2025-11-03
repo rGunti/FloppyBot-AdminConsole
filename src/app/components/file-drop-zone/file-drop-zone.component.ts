@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -10,7 +9,7 @@ import { DropZoneDirective } from '../../utils/drop-zone.directive';
 @Component({
   selector: 'fac-file-drop-zone',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatIconModule, NgIconComponent, DropZoneDirective],
+  imports: [MatButtonModule, MatIconModule, NgIconComponent, DropZoneDirective],
   providers: [
     provideIcons({
       bootstrapFileEarmarkArrowUp,

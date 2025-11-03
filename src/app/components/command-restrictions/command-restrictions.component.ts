@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -18,7 +17,7 @@ import { CommandInfo } from '../../api/entities';
 @Component({
   selector: 'fac-command-restrictions',
   standalone: true,
-  imports: [CommonModule, MatIconModule, NgIconComponent, MatTooltipModule],
+  imports: [MatIconModule, NgIconComponent, MatTooltipModule],
   providers: [
     provideIcons({
       bootstrapDiscord,

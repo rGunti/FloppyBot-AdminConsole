@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar';
@@ -8,7 +7,7 @@ import { NgIconComponent, provideIcons } from '@ng-icons/core';
 @Component({
   selector: 'fac-confirm-snack',
   standalone: true,
-  imports: [CommonModule, MatIconModule, NgIconComponent],
+  imports: [MatIconModule, NgIconComponent],
   providers: [
     provideIcons({
       bootstrapCheck2Circle,
