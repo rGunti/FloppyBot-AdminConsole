@@ -1,0 +1,37 @@
+:host {
+  display: block;
+}
+
+.action-toolbar {
+  & > * {
+    flex: 0;
+  }
+
+  fac-channel-selector {
+    flex: 1;
+    margin-top: 25px;
+  }
+}
+
+mat-card {
+  mat-card-content,
+  mat-card-title {
+    text-align: center;
+  }
+
+  mat-card-title {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}
+
+.flex {
+  display: flex;
+}
+
+.response-icon, .response-icon > ng-icon {
+  width: 64px;
+  height: 64px;
+
+  --ng-icon__size: 64px !important;
+}
