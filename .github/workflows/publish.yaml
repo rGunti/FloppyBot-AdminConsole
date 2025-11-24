@@ -21,7 +21,7 @@ jobs:
 
       # Checkout Code
       - name: Checkout Code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       # Setup Node.js and pnpm
       - name: Setup Node
