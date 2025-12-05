@@ -34,11 +34,13 @@
     <ng-icon name="bootstrapFilter"></ng-icon>
   </mat-icon>
   <input matInput [(ngModel)]="dataSource.filter" />
-  <button mat-icon-button matSuffix (click)="dataSource.filter = ''" matTooltip="Clear filter">
-    <mat-icon>
-      <ng-icon name="bootstrapX"></ng-icon>
-    </mat-icon>
-  </button>
+  @if (dataSource.filter) {
+    <button mat-icon-button matSuffix (click)="dataSource.filter = ''" matTooltip="Clear filter">
+      <mat-icon>
+        <ng-icon name="bootstrapX"></ng-icon>
+      </mat-icon>
+    </button>
+  }
 </mat-form-field>
 
 <mat-paginator [pageSize]="10" hidePageSize="true" showFirstLastButtons></mat-paginator>
