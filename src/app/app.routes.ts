@@ -42,6 +42,12 @@ export const routes: Routes = [
         title: 'Shoutout',
         loadComponent: () => import('./pages/commands/shoutout/shoutout.component').then((m) => m.ShoutoutComponent),
       },
+      {
+        path: 'twitch-rewards',
+        title: 'Twitch Channel Rewards',
+        loadComponent: () =>
+          import('./pages/commands/channel-rewards/channel-rewards.component').then((m) => m.ChannelRewardsComponent),
+      },
     ],
     canActivate: [AuthGuard],
   },

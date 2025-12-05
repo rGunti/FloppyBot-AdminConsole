@@ -1,0 +1,16 @@
+<div class="mat-elevation-z8">
+  <mat-toolbar class="action-toolbar">
+    <fac-channel-selector [interfaceFilter]="['Twitch']"></fac-channel-selector>
+    <button
+      mat-icon-button
+      matTooltip="Refresh"
+      [disabled]="(selectedChannelId$ | async) === undefined"
+      (click)="refresh$.next()"
+    >
+      <mat-icon>
+        <ng-icon name="bootstrapArrowCounterclockwise"></ng-icon>
+      </mat-icon>
+    </button>
+  </mat-toolbar>
+  <fac-twitch-rewards-list [rewards]="rewards$ | async" [channelId]="(this.selectedChannelId$ | async) || null" />
+</div>

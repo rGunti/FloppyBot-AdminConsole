@@ -1,0 +1,103 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Please note:</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <ul>
+      <li>
+        <b>Under development:</b> This feature is currently under development. Some features, such as linking rewards to
+        custom commands, are not yet available.
+      </li>
+      <li>
+        <b>Only available to Twitch affiliates and partners:</b> This function is only available to Twitch affiliates
+        and partners. If your channel does not have access to Channel Points and rewards, you cannot use this feature.
+      </li>
+      <li><b>Recently changed your rewards?</b> Please allow up to 30 minutes for the changes to be reflected here.</li>
+      <li>
+        <b
+          ><a [routerLink]="['/settings', 'account-links']" [queryParams]="{ channel: channelId }"
+            >Account linking required</a
+          >:</b
+        >
+        To link your Twitch account and allow FloppyBot to use channel rewards, navigate to
+        <a [routerLink]="['/settings', 'account-links']" [queryParams]="{ channel: channelId }"
+          >Settings &gt; Accounts</a
+        >. If you don't see any rewards showing up below, please ensure your Twitch account is properly linked.
+      </li>
+    </ul>
+  </mat-card-content>
+</mat-card>
+
+<mat-form-field class="filter">
+  <mat-label>Filter</mat-label>
+  <mat-icon matPrefix>
+    <ng-icon name="bootstrapFilter"></ng-icon>
+  </mat-icon>
+  <input matInput [(ngModel)]="dataSource.filter" />
+  <button mat-icon-button matSuffix (click)="dataSource.filter = ''" matTooltip="Clear filter">
+    <mat-icon>
+      <ng-icon name="bootstrapX"></ng-icon>
+    </mat-icon>
+  </button>
+</mat-form-field>
+
+<mat-paginator [pageSize]="10" hidePageSize="true" showFirstLastButtons></mat-paginator>
+
+<table mat-table [dataSource]="dataSource" matSort matSortActive="name" matSortDirection="asc">
+  <ng-container matColumnDef="status">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+    <td mat-cell *matCellDef="let reward">
+      @if (reward.isEnabled) {
+        @if (reward.isPaused) {
+          <mat-icon matTooltip="Paused" class="disabled">
+            <ng-icon name="bootstrapPauseBtn"></ng-icon>
+          </mat-icon>
+        } @else {
+          <mat-icon matTooltip="Active" class="success">
+            <ng-icon name="bootstrapCheckCircle"></ng-icon>
+          </mat-icon>
+        }
+      } @else {
+        <mat-icon matTooltip="Disabled" class="disabled">
+          <ng-icon name="bootstrapXLg"></ng-icon>
+        </mat-icon>
+      }
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="title">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Reward Title</th>
+    <td mat-cell *matCellDef="let reward">
+      <span>{{ reward.title }}</span>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="cost">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+      <span>Cost (Channel Points)</span>
+    </th>
+    <td mat-cell *matCellDef="let reward">
+      <span>{{ reward.cost | number }}</span>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef>Actions</th>
+    <td mat-cell *matCellDef="let reward">
+      <button mat-icon-button matTooltip="Link reward with custom command" disabled>
+        <mat-icon>
+          <ng-icon name="bootstrapLink45deg"></ng-icon>
+        </mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr *matNoDataRow>
+    <td colspan="10" class="empty-text">Couldn't find any rewards matching your filter.</td>
+  </tr>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
+
+<p class="list-summary">Found {{ dataSource.data.length }} rewards.</p>

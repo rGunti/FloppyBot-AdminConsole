@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { getUrl } from '../utils/api';
 
-import { TwitchAuthenticationConfirm, TwitchAuthenticationStart } from './entities';
+import { ChannelReward, TwitchAuthenticationConfirm, TwitchAuthenticationStart } from './entities';
 
 @Injectable({
   providedIn: 'root',
@@ -26,5 +26,9 @@ export class TwitchApiService {
 
   revokeSession(channel: string): Observable<void> {
     return this.http.delete<void>(getUrl(`/api/v2/twitch/${channel}/auth`));
+  }
+
+  getRewards(channel: string): Observable<ChannelReward[]> {
+    return this.http.get<ChannelReward[]>(getUrl(`/api/v2/twitch/${channel}/rewards`));
   }
 }

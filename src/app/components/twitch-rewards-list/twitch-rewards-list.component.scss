@@ -1,0 +1,33 @@
+:host {
+  display: block;
+}
+
+.command-aliases {
+  font-style: italic;
+  font-size: small;
+  margin-left: 10px;
+}
+
+.mat-column-status {
+  width: 100px;
+  text-align: center;
+}
+.mat-column-restrictions {
+  width: 150px;
+  text-align: center;
+}
+.mat-column-cost {
+  width: 200px;
+  text-align: right;
+}
+.mat-column-actions {
+  width: 200px;
+  text-align: right;
+}
+
+.list-summary {
+  text-align: center;
+  font-style: italic;
+  font-size: small;
+  padding: 10px;
+}

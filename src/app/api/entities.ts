@@ -238,3 +238,11 @@ export interface TwitchAuthenticationConfirm {
   sessionId: string;
   code: string;
 }
+
+export interface ChannelReward {
+  id: string;
+  title: string;
+  cost: number;
+  isEnabled: boolean;
+  isPaused: boolean;
+}
