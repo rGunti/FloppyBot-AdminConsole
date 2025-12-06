@@ -12,5 +12,11 @@
       </mat-icon>
     </button>
   </mat-toolbar>
-  <fac-twitch-rewards-list [rewards]="rewards$ | async" [channelId]="(this.selectedChannelId$ | async) || null" />
+  <fac-twitch-rewards-list
+    [rewards]="rewards$ | async"
+    [customCommands]="(commands$ | async) || []"
+    [channelId]="(this.selectedChannelId$ | async) || null"
+    (linkRewardCommand)="linkRewardCommand($event)"
+    (unlinkRewardCommand)="unlinkRewardCommand($event)"
+  />
 </div>

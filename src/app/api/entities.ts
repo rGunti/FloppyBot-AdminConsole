@@ -246,3 +246,8 @@ export interface ChannelReward {
   isEnabled: boolean;
   isPaused: boolean;
 }
+
+export interface TwitchReward {
+  reward: ChannelReward;
+  linkedCommand?: CustomCommand | null;
+}

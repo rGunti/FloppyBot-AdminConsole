@@ -1,11 +1,12 @@
 import { DecimalPipe } from '@angular/common';
-import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, computed, EventEmitter, Input, input, Output, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCard, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
 import { MatFormField, MatLabel, MatPrefix, MatSuffix } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -15,6 +16,7 @@ import {
   bootstrapBan,
   bootstrapCheckCircle,
   bootstrapCoin,
+  bootstrapCommand,
   bootstrapFilter,
   bootstrapLink45deg,
   bootstrapPauseBtn,
@@ -28,10 +30,8 @@ import {
 } from '@ng-icons/bootstrap-icons';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 
-import { ChannelReward } from '../../api/entities';
-import { ListPipe } from '../../utils/list.pipe';
-import { sortData } from '../../utils/sort';
-import { CommandRestrictionsComponent } from '../command-restrictions/command-restrictions.component';
+import { ChannelReward, CommandInfo, TwitchReward } from '../../api/entities';
+import { PropertyMapping, sortAliasedData, sortData } from '../../utils/sort';
 
 @Component({
   selector: 'fac-twitch-rewards-list',
@@ -43,8 +43,6 @@ import { CommandRestrictionsComponent } from '../command-restrictions/command-re
     NgIconComponent,
     MatButtonModule,
     MatTooltipModule,
-    CommandRestrictionsComponent,
-    ListPipe,
     MatFormField,
     MatLabel,
     MatInput,
@@ -57,6 +55,7 @@ import { CommandRestrictionsComponent } from '../command-restrictions/command-re
     MatCardContent,
     MatCardHeader,
     RouterLink,
+    MatMenuModule,
   ],
   providers: [
     provideIcons({
@@ -73,31 +72,44 @@ import { CommandRestrictionsComponent } from '../command-restrictions/command-re
       bootstrapPauseBtn,
       bootstrapCoin,
       bootstrapLink45deg,
+      bootstrapCommand,
     }),
   ],
   templateUrl: './twitch-rewards-list.component.html',
   styleUrl: './twitch-rewards-list.component.scss',
 })
 export class TwitchRewardsListComponent implements AfterViewInit {
-  readonly dataSource = new MatTableDataSource<ChannelReward>([]);
-  readonly displayedColumns: string[] = ['status', 'title', 'cost', 'actions'];
+  private readonly mapping: PropertyMapping<TwitchReward> = {
+    status: (reward: TwitchReward) =>
+      reward.reward.isEnabled ? (reward.reward.isPaused ? 'paused' : 'enabled') : 'disabled',
+    title: (reward: TwitchReward) => reward.reward.title,
+    cost: (reward: TwitchReward) => reward.reward.cost,
+    linkedCommandName: (reward: TwitchReward) => reward.linkedCommand?.name,
+  };
 
-  // @Output() readonly disableCommand = new EventEmitter<ChannelReward>();
-  // @Output() readonly deleteCommand = new EventEmitter<ChannelReward>();
-  // @Output() readonly showCommandDetails = new EventEmitter<ChannelReward>();
-  // @Output() readonly editCommand = new EventEmitter<ChannelReward>();
+  readonly dataSource = new MatTableDataSource<TwitchReward>([]);
+  readonly displayedColumns: string[] = ['status', 'title', 'cost', 'linkedCommandName', 'actions'];
 
-  @Input({ required: true }) get rewards(): ChannelReward[] {
+  @Output() readonly linkRewardCommand = new EventEmitter<[ChannelReward, CommandInfo]>();
+  @Output() readonly unlinkRewardCommand = new EventEmitter<ChannelReward>();
+
+  @Input({ required: true }) get rewards(): TwitchReward[] {
     return this.dataSource.data;
   }
-  set rewards(rewards: ChannelReward[] | null) {
+  set rewards(rewards: TwitchReward[] | null) {
     this.dataSource.data = rewards || [];
   }
 
+  readonly customCommands = input<CommandInfo[]>([]);
+
   @Input() channelId: string | null = null;
 
-  // @Input() allowDetail = true;
-  // @Input() allowDelete = false;
+  readonly sortedCommands = computed(() => {
+    const commands = this.customCommands().filter(
+      (c) => c.restrictedToInterfaces.length === 0 || c.restrictedToInterfaces.includes('Twitch'),
+    );
+    return sortData(commands, { active: 'name', direction: 'asc' });
+  });
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -105,6 +117,10 @@ export class TwitchRewardsListComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-    this.dataSource.sortData = (data: ChannelReward[], sort: Sort) => sortData(data, sort);
+    this.dataSource.sortData = (data: TwitchReward[], sort: Sort) => sortAliasedData(data, sort, this.mapping);
+  }
+
+  linkCommand(reward: ChannelReward, command: CommandInfo) {
+    this.linkRewardCommand.emit([reward, command]);
   }
 }
