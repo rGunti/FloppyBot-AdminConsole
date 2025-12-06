@@ -7,10 +7,33 @@ export function sortData<T>(data: T[], sort: Sort): T[] {
   return data.sort(byProperty(sort.active, sort.direction === 'asc'));
 }
 
+export declare type PropertyMapping<T> = Record<string, string | ((item: T) => unknown)>;
+
+export function sortAliasedData<T>(data: T[], sort: Sort, mapping: PropertyMapping<T>): T[] {
+  if (!sort.active || sort.direction === '') {
+    return data;
+  }
+
+  if (mapping[sort.active]) {
+    const prop = mapping[sort.active];
+    if (typeof prop === 'string') {
+      return data.sort(byProperty(prop, sort.direction === 'asc'));
+    } else {
+      return data.sort(byPropertyFunc(prop, sort.direction === 'asc'));
+    }
+  }
+
+  return data.sort(byProperty(sort.active, sort.direction === 'asc'));
+}
+
 function byProperty<T>(propName: string, sortAsc: boolean): (a: T, b: T) => number {
+  return byPropertyFunc<T>((item: T) => item[propName as keyof T], sortAsc);
+}
+
+function byPropertyFunc<T>(propFunc: (item: T) => unknown, sortAsc: boolean): (a: T, b: T) => number {
   return (a: T, b: T) => {
-    const aValue = a[propName as keyof T];
-    const bValue = b[propName as keyof T];
+    const aValue = propFunc(a);
+    const bValue = propFunc(b);
 
     if (typeof aValue === 'string' && typeof bValue === 'string') {
       return sortString(aValue, bValue, sortAsc);
@@ -20,11 +43,8 @@ function byProperty<T>(propName: string, sortAsc: boolean): (a: T, b: T) => numb
       return sortArray(aValue, bValue, sortAsc);
     }
 
-    if (aValue < bValue) {
-      return sortAsc ? -1 : 1;
-    }
-    if (aValue > bValue) {
-      return sortAsc ? 1 : -1;
+    if (typeof aValue === 'number' && typeof bValue === 'number') {
+      return sortAsc ? aValue - bValue : bValue - aValue;
     }
     return 0;
   };

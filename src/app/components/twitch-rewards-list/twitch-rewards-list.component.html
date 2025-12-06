@@ -45,12 +45,12 @@
 
 <mat-paginator [pageSize]="10" hidePageSize="true" showFirstLastButtons></mat-paginator>
 
-<table mat-table [dataSource]="dataSource" matSort matSortActive="name" matSortDirection="asc">
+<table mat-table [dataSource]="dataSource" matSort matSortActive="title" matSortDirection="asc">
   <ng-container matColumnDef="status">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
-    <td mat-cell *matCellDef="let reward">
-      @if (reward.isEnabled) {
-        @if (reward.isPaused) {
+    <td mat-cell *matCellDef="let link">
+      @if (link.reward.isEnabled) {
+        @if (link.reward.isPaused) {
           <mat-icon matTooltip="Paused" class="disabled">
             <ng-icon name="bootstrapPauseBtn"></ng-icon>
           </mat-icon>
@@ -69,8 +69,8 @@
 
   <ng-container matColumnDef="title">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Reward Title</th>
-    <td mat-cell *matCellDef="let reward">
-      <span>{{ reward.title }}</span>
+    <td mat-cell *matCellDef="let link">
+      <span>{{ link.reward.title }}</span>
     </td>
   </ng-container>
 
@@ -78,19 +78,49 @@
     <th mat-header-cell *matHeaderCellDef mat-sort-header>
       <span>Cost (Channel Points)</span>
     </th>
-    <td mat-cell *matCellDef="let reward">
-      <span>{{ reward.cost | number }}</span>
+    <td mat-cell *matCellDef="let link">
+      <span>{{ link.reward.cost | number }}</span>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="linkedCommandName">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+      <span>Commented to command</span>
+    </th>
+    <td mat-cell *matCellDef="let link">
+      @if (link.linkedCommand) {
+        <code class="command-name">&gt; {{ link.linkedCommand.name }}</code>
+      } @else {
+        <span>&ndash;</span>
+      }
     </td>
   </ng-container>
 
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef>Actions</th>
-    <td mat-cell *matCellDef="let reward">
-      <button mat-icon-button matTooltip="Link reward with custom command" disabled>
-        <mat-icon>
-          <ng-icon name="bootstrapLink45deg"></ng-icon>
-        </mat-icon>
-      </button>
+    <td mat-cell *matCellDef="let link">
+      @if (link.linkedCommand) {
+        <button
+          mat-icon-button
+          matTooltip="Disconnect reward from custom command"
+          (click)="unlinkRewardCommand.emit(link.reward)"
+        >
+          <mat-icon>
+            <ng-icon name="bootstrapTrash"></ng-icon>
+          </mat-icon>
+        </button>
+      } @else {
+        <button
+          mat-icon-button
+          matTooltip="Link reward with custom command"
+          [matMenuTriggerFor]="linkCommandMenu"
+          [matMenuTriggerData]="{ reward: link.reward }"
+        >
+          <mat-icon>
+            <ng-icon name="bootstrapLink45deg"></ng-icon>
+          </mat-icon>
+        </button>
+      }
     </td>
   </ng-container>
 
@@ -103,3 +133,22 @@
 </table>
 
 <p class="list-summary">Found {{ dataSource.data.length }} rewards.</p>
+
+<mat-menu #linkCommandMenu="matMenu">
+  <ng-template matMenuContent let-reward="reward">
+    @for (command of sortedCommands(); track command.name) {
+      <button mat-menu-item [disabled]="command.disabled" (click)="linkCommand(reward, command)">
+        <mat-icon>
+          <ng-icon name="bootstrapCommand" class="menu-icon"></ng-icon>
+        </mat-icon>
+        <span
+          >Link with <code class="command-name">{{ command.name }}</code></span
+        >
+      </button>
+    } @empty {
+      <button mat-menu-item disabled>
+        <span>No custom commands available to link</span>
+      </button>
+    }
+  </ng-template>
+</mat-menu>
