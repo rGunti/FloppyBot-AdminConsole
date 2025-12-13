@@ -1,6 +1,13 @@
 <mat-form-field>
   <mat-label>{{ label }}</mat-label>
   <input matInput readonly [(ngModel)]="value" />
+  @if (optional) {
+    <button mat-icon-button matSuffix matTooltip="Clear" (click)="clear()">
+      <mat-icon>
+        <ng-icon name="bootstrapX"></ng-icon>
+      </mat-icon>
+    </button>
+  }
   <button mat-icon-button matSuffix matTooltip="Select file" (click)="openFileDialog()">
     <mat-icon>
       <ng-icon name="bootstrapFolder2Open"></ng-icon>

@@ -1,10 +1,11 @@
+@use '@fontsource-variable/kode-mono';
+
 html,
 body {
   height: 100%;
 }
 body {
   margin: 0;
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
 // *** Colors
@@ -22,11 +23,22 @@ body {
 }
 
 // *** Forms
-input[type="number"] {
+input[type='number'] {
   text-align: right;
 }
 
 // *** Global Overrides
+code,
+pre,
+.syntax-code {
+  font-family: var(--fac-code-font);
+  color: var(--fac-code-color);
+}
+
+a {
+  color: var(--mat-button-text-label-text-color);
+}
+
 .mat-mdc-dialog-actions {
   justify-content: end !important;
 }

@@ -44,6 +44,15 @@ importers:
       '@auth0/auth0-angular':
         specifier: ^2.3.0
         version: 2.3.0(@angular/common@21.0.5(@angular/core@21.0.5(@angular/compiler@21.0.5)(rxjs@7.8.2)(zone.js@0.16.0))(rxjs@7.8.2))(@angular/core@21.0.5(@angular/compiler@21.0.5)(rxjs@7.8.2)(zone.js@0.16.0))(@angular/router@21.0.5(@angular/common@21.0.5(@angular/core@21.0.5(@angular/compiler@21.0.5)(rxjs@7.8.2)(zone.js@0.16.0))(rxjs@7.8.2))(@angular/core@21.0.5(@angular/compiler@21.0.5)(rxjs@7.8.2)(zone.js@0.16.0))(@angular/platform-browser@21.0.5(@angular/animations@21.0.5(@angular/core@21.0.5(@angular/compiler@21.0.5)(rxjs@7.8.2)(zone.js@0.16.0)))(@angular/common@21.0.5(@angular/core@21.0.5(@angular/compiler@21.0.5)(rxjs@7.8.2)(zone.js@0.16.0))(rxjs@7.8.2))(@angular/core@21.0.5(@angular/compiler@21.0.5)(rxjs@7.8.2)(zone.js@0.16.0)))(rxjs@7.8.2))
+      '@fontsource-variable/kode-mono':
+        specifier: ^5.2.8
+        version: 5.2.8
+      '@fontsource/inter':
+        specifier: ^5.2.8
+        version: 5.2.8
+      '@fontsource/poppins':
+        specifier: ^5.2.7
+        version: 5.2.7
       '@ng-icons/bootstrap-icons':
         specifier: ^33.0.0
         version: 33.0.0
@@ -897,6 +906,15 @@ packages:
   '@eslint/plugin-kit@0.4.1':
     resolution: {integrity: sha512-43/qtrDUokr7LJqoF2c3+RInu/t4zfrpYdoSDfYyhg52rwLV6TnOvdG4fXm7IkSB3wErkcmJS9iEhjVtOSEjjA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@fontsource-variable/kode-mono@5.2.8':
+    resolution: {integrity: sha512-X1O4RAIPyP4Vm8rVoKHirg3amVdE2XvIAQUvDRU17aCzSUz648/9w2KJafH1vK6g0uy7U8PrOCc1I11riXhHwQ==}
+
+  '@fontsource/inter@5.2.8':
+    resolution: {integrity: sha512-P6r5WnJoKiNVV+zvW2xM13gNdFhAEpQ9dQJHt3naLvfg+LkF2ldgSLiF4T41lf1SQCM9QmkqPTn4TH568IRagg==}
+
+  '@fontsource/poppins@5.2.7':
+    resolution: {integrity: sha512-6uQyPmseo4FgI97WIhA4yWRlNaoLk4vSDK/PyRwdqqZb5zAEuc+Kunt8JTMcsHYUEGYBtN15SNkMajMdqUSUmg==}
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -4725,6 +4743,12 @@ snapshots:
     dependencies:
       '@eslint/core': 0.17.0
       levn: 0.4.1
+
+  '@fontsource-variable/kode-mono@5.2.8': {}
+
+  '@fontsource/inter@5.2.8': {}
+
+  '@fontsource/poppins@5.2.7': {}
 
   '@humanfs/core@0.19.1': {}
 

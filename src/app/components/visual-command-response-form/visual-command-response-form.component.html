@@ -1,0 +1,96 @@
+<div class="form" [formGroup]="form">
+  <fac-file-picker
+    label="Image to show"
+    [restrictToChannel]="channelId()"
+    [restrictToTypes]="['image/*']"
+    valueMode="fileName"
+    formControlName="image"
+  ></fac-file-picker>
+
+  <mat-form-field>
+    <mat-label>Display Text (optional)</mat-label>
+    <input type="text" matInput formControlName="text" />
+    <mat-icon matIconPrefix>
+      <ng-icon name="bootstrapChatLeftText"></ng-icon>
+    </mat-icon>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Duration</mat-label>
+    <mat-icon matIconPrefix>
+      <ng-icon name="bootstrapClockHistory"></ng-icon>
+    </mat-icon>
+    <input type="text" matInput type="number" formControlName="duration" />
+    <span matTextSuffix>ms</span>
+  </mat-form-field>
+  <div class="row">
+    <mat-form-field>
+      <mat-label>Position (Vertical)</mat-label>
+      <mat-icon matIconPrefix>
+        <ng-icon name="bootstrapArrowsVertical"></ng-icon>
+      </mat-icon>
+      <mat-select formControlName="positionVertical">
+        <mat-option value="top">Top</mat-option>
+        <mat-option value="center">Center</mat-option>
+        <mat-option value="bottom">Bottom</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Position (Horizontal)</mat-label>
+      <mat-icon matIconPrefix>
+        <ng-icon name="bootstrapArrows"></ng-icon>
+      </mat-icon>
+      <mat-select formControlName="positionHorizontal">
+        <mat-option value="left">Left</mat-option>
+        <mat-option value="center">Center</mat-option>
+        <mat-option value="right">Right</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <mat-form-field>
+      <mat-label>Text Color</mat-label>
+      <mat-icon matIconPrefix>
+        <ng-icon name="bootstrapAlphabetUppercase"></ng-icon>
+      </mat-icon>
+      <input type="color" matInput formControlName="color" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Text Border Color</mat-label>
+      <mat-icon matIconPrefix>
+        <ng-icon name="bootstrapBorderOuter"></ng-icon>
+      </mat-icon>
+      <input type="color" matInput formControlName="borderColor" />
+    </mat-form-field>
+  </div>
+  <mat-form-field>
+    <mat-label>Font (optional)</mat-label>
+    <mat-icon matIconPrefix>
+      <ng-icon name="bootstrapFonts"></ng-icon>
+    </mat-icon>
+    <mat-select formControlName="font">
+      @for (font of fonts; track $index) {
+        @if (font === 'divider') {
+          <mat-divider />
+        } @else {
+          <mat-option [value]="font.font">
+            <span [style]="{ 'font-family': font.font || 'Poppins' }">{{ font.label || font.font }}</span>
+          </mat-option>
+        }
+      }
+    </mat-select>
+  </mat-form-field>
+  <fac-file-picker
+    label="Play audio"
+    [restrictToChannel]="channelId()"
+    [restrictToTypes]="['audio/*']"
+    valueMode="fileName"
+    [optional]="true"
+    formControlName="audio"
+  ></fac-file-picker>
+</div>
+
+<div class="text-preview">
+  @if (textPreview$ | async; as textPreview) {
+    <span [style]="textPreview.cssStyle">{{ textPreview.text }}</span>
+  }
+</div>

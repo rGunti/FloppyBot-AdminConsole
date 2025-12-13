@@ -1,12 +1,14 @@
 // Theming for m3: https://angular-material.dev/articles/angular-material-3
 @use '@angular/material' as mat;
-@use 'theme' as theme;
+@use '_theme-colors.scss' as theme;
 
-html, body {
-  color-scheme: dark;
-  @include mat.theme((
-    color: mat.$green-palette,
-    //typography: Roboto,
+$dark-theme: mat.define-theme(
+  (
+    color: (
+      theme-type: dark,
+      primary: theme.$primary-palette,
+      tertiary: theme.$tertiary-palette,
+    ),
     typography: (
       plain-family: Roboto,
       //brand-family: "Open Sans",
@@ -14,20 +16,22 @@ html, body {
       medium-weight: 500,
       regular-weight: 300,
     ),
-    density: 0
-  ));
+  )
+);
 
-  @include mat.color-variants-backwards-compatibility(mat.define-theme());
+:root {
+  @include mat.all-component-themes($dark-theme);
+  @include mat.color-variants-backwards-compatibility($dark-theme);
+}
 
-  @media (prefers-contrast: more) {
-    @include theme.high-contrast-overrides(light);
-  }
+html,
+body {
+  color-scheme: dark;
 
   & {
     height: 100%;
-    background-color: var(--mat-sys-surface);
-    color: var(--mat-sys-on-surface);
-    //background-color: black;
+    background-color: var(--mat-app-background-color);
+    color: var(--mat-app-text-color);
   }
 }
 
@@ -45,12 +49,4 @@ body {
     flex-direction: column;
     min-height: 100vh; /* Ensure the container takes the full viewport height */
   }
-}
-
-.syntax-code {
-  color: var(--mat-sys-on-primary-container);
-}
-
-a {
-  color: var(--mat-sys-primary);
 }
