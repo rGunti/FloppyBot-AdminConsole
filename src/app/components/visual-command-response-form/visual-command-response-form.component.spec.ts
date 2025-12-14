@@ -8,12 +8,12 @@ describe('VisualCommandResponseFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [VisualCommandResponseFormComponent]
-    })
-    .compileComponents();
+      imports: [VisualCommandResponseFormComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(VisualCommandResponseFormComponent);
     component = fixture.componentInstance;
+    fixture.componentRef.setInput('channelId', 'Twitch/NotARealName');
     fixture.detectChanges();
   });
 
