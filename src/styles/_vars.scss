@@ -1,4 +1,7 @@
 :root {
+  --fac-code-font: 'Kode Mono Variable', monospace;
+  --fac-code-color: var(--mat-button-text-label-text-color);
+
   // default theme
   --fac-default-theme-highlight-background: #c4c400;
   --fac-default-theme-highlight-border: #ccc;

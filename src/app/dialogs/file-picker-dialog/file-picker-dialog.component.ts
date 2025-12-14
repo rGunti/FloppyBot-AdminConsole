@@ -7,6 +7,7 @@ import { MatListModule } from '@angular/material/list';
 import { NgIconComponent } from '@ng-icons/core';
 import { map } from 'rxjs';
 
+import { FileHeader } from '../../api/entities';
 import { FileApiService } from '../../api/file-api.service';
 import { FileIconPipe } from '../../utils/files/file-icon.pipe';
 import { FileSizePipe } from '../../utils/files/file-size.pipe';
@@ -42,7 +43,20 @@ export class FilePickerDialogComponent {
       if (this.options.restrictToTypes.length === 0) {
         return files;
       }
-      return files.filter((file) => this.options.restrictToTypes.includes(file.mimeType));
+      return files.filter((file) => this.matchesAnyFileType(file, this.options.restrictToTypes));
     }),
   );
+
+  private matchesAnyFileType(file: FileHeader, fileTypes: string[]): boolean {
+    if (fileTypes.length === 0) {
+      return true;
+    }
+
+    return fileTypes.map((f) => this.convertFileTypeFilter(f)).some((r) => file.mimeType.match(r));
+  }
+
+  private convertFileTypeFilter(fileType: string): RegExp {
+    const expr = fileType.replace('/', '\\/').replace('*', '.*');
+    return new RegExp(`^${expr}$`, 'i');
+  }
 }

@@ -21,6 +21,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { CommandResponse, CommandResponseType } from '../../api/entities';
 import { FormErrorPipe } from '../../utils/forms/form-error.pipe';
 import { FilePickerComponent } from '../file-picker/file-picker.component';
+import { VisualCommandResponseFormComponent } from '../visual-command-response-form/visual-command-response-form.component';
 
 @Component({
   selector: 'fac-custom-command-response-form',
@@ -47,6 +48,7 @@ import { FilePickerComponent } from '../file-picker/file-picker.component';
     MatSelectModule,
     MatIconModule,
     MatSlideToggleModule,
+    VisualCommandResponseFormComponent,
     ReactiveFormsModule,
     FilePickerComponent,
     FormErrorPipe,

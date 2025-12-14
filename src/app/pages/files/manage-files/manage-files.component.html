@@ -24,7 +24,7 @@
   </mat-toolbar>
   <mat-paginator [pageSize]="10" hidePageSize="true" showFirstLastButtons></mat-paginator>
 
-  <table mat-table [dataSource]="dataSource" matSort>
+  <table mat-table [dataSource]="dataSource" matSort matSortActive="fileName" matSortDirection="asc">
     <ng-container matColumnDef="mimeType">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let file">

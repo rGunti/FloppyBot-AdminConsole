@@ -11,6 +11,7 @@
     <fac-file-picker
       label="Sound file to play"
       [restrictToChannel]="channelId!"
+      [restrictToTypes]="['audio/*']"
       formControlName="content"
     ></fac-file-picker>
     <mat-form-field>
@@ -19,11 +20,10 @@
       <mat-error>{{ form | formError: 'auxiliaryContent' | async }}</mat-error>
     </mat-form-field>
   } @else if (form.get('type')!.value === 'Visual') {
-    <mat-form-field>
-      <mat-label>Displayed Message</mat-label>
-      <textarea matInput formControlName="content" rows="4"></textarea>
-      <mat-error>{{ form | formError: 'content' | async }}</mat-error>
-    </mat-form-field>
+    <fac-visual-command-response-form
+      [channelId]="channelId!"
+      formControlName="content"
+    ></fac-visual-command-response-form>
     <mat-form-field>
       <mat-label>Response Message (optional)</mat-label>
       <textarea matInput formControlName="auxiliaryContent" rows="4"></textarea>

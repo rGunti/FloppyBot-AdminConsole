@@ -5,7 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { bootstrapFolder2Open } from '@ng-icons/bootstrap-icons';
+import { bootstrapFolder2Open, bootstrapX } from '@ng-icons/bootstrap-icons';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { filter } from 'rxjs';
 
@@ -36,6 +36,7 @@ import { DialogService } from '../../utils/dialog.service';
     },
     provideIcons({
       bootstrapFolder2Open,
+      bootstrapX,
     }),
   ],
   templateUrl: './file-picker.component.html',
@@ -47,6 +48,8 @@ export class FilePickerComponent implements ControlValueAccessor {
   @Input() label = 'Choose file';
   @Input({ required: true }) restrictToChannel!: string;
   @Input() restrictToTypes: string[] = [];
+  @Input() valueMode: 'fileName' | 'path' = 'path';
+  @Input() optional: boolean = false;
 
   private _onChange: (_: unknown) => void = () => {};
   private _onTouch: (_: unknown) => void = () => {};
@@ -62,8 +65,12 @@ export class FilePickerComponent implements ControlValueAccessor {
       } as FilePickerDialogOptions)
       .pipe(filter((result) => !!result))
       .subscribe((selectedFile) => {
-        this.writeValue(selectedFile.id);
+        this.writeValue(this.transformValue(selectedFile));
       });
+  }
+
+  clear(): void {
+    this.writeValue(null);
   }
 
   writeValue(obj: string | null): void {
@@ -82,5 +89,14 @@ export class FilePickerComponent implements ControlValueAccessor {
 
   setDisabledState?(isDisabled: boolean): void {
     this.disabled = isDisabled;
+  }
+
+  private transformValue(file: FileHeader): string {
+    switch (this.valueMode) {
+      case 'fileName':
+        return file.fileName;
+      case 'path':
+        return file.id;
+    }
   }
 }

@@ -1,0 +1,27 @@
+@use '@fontsource/inter';
+@use '@fontsource/poppins';
+
+mat-form-field,
+fac-file-picker {
+  width: 100%;
+}
+
+.row {
+  display: flex;
+}
+
+.text-preview {
+  font-size: 2em;
+  font-weight: bold;
+  text-align: center;
+
+  border: 1px solid white;
+  height: 3em;
+  margin-bottom: 10px;
+  padding: 10px;
+
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+}
