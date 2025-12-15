@@ -270,6 +270,7 @@ export class VisualCommandResponseFormComponent implements ControlValueAccessor,
       .map((k) => k as keyof VisualCommandResponseData)
       .filter((k) => !ignoreProperties.includes(k))
       .map((k) => [k, params[k]])
+      .filter(([, value]) => value !== null && value !== undefined)
       .map(([key, value]) => `${key}=${value}`);
 
     return [
