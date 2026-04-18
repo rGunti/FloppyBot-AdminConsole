@@ -234,7 +234,7 @@ export class CustomCommandEditorDialogComponent {
   private constructResponseForm(response: CommandResponse) {
     return this.formBuilder.group({
       type: [response.type, [Validators.required]],
-      content: [response.content, [Validators.required, Validators.maxLength(300)]],
+      content: [response.content, [Validators.required, Validators.maxLength(500)]],
       auxiliaryContent: [response.auxiliaryContent],
       sendAsReply: [response.sendAsReply],
     });
