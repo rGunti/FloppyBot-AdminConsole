@@ -19,7 +19,7 @@ jobs:
         with:
           node-version-file: '.nvmrc'
       - name: Setup pnpm
-        uses: pnpm/action-setup@v5
+        uses: pnpm/action-setup@v6
         with:
           version: 10.x
           run_install: false
@@ -86,7 +86,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Setup pnpm V${{ matrix.pnpm-version }}
-        uses: pnpm/action-setup@v5
+        uses: pnpm/action-setup@v6
         with:
           version: ${{ matrix.pnpm-version }}
           run_install: false
