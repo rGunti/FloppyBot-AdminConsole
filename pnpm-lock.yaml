@@ -54,11 +54,11 @@ importers:
         specifier: ^5.2.7
         version: 5.2.7
       '@ng-icons/bootstrap-icons':
-        specifier: ^33.2.1
-        version: 33.2.1
+        specifier: ^33.2.2
+        version: 33.2.2
       '@ng-icons/core':
-        specifier: ^33.2.1
-        version: 33.2.1(@angular-devkit/schematics@21.2.7(chokidar@5.0.0))(@angular/common@21.2.9(@angular/core@21.2.9(@angular/compiler@21.2.9)(rxjs@7.8.2)(zone.js@0.16.1))(rxjs@7.8.2))(@angular/core@21.2.9(@angular/compiler@21.2.9)(rxjs@7.8.2)(zone.js@0.16.1))(@schematics/angular@21.2.7(chokidar@5.0.0))(rxjs@7.8.2)
+        specifier: ^33.2.2
+        version: 33.2.2(@angular-devkit/schematics@21.2.7(chokidar@5.0.0))(@angular/common@21.2.9(@angular/core@21.2.9(@angular/compiler@21.2.9)(rxjs@7.8.2)(zone.js@0.16.1))(rxjs@7.8.2))(@angular/core@21.2.9(@angular/compiler@21.2.9)(rxjs@7.8.2)(zone.js@0.16.1))(@schematics/angular@21.2.7(chokidar@5.0.0))(rxjs@7.8.2)
       rxjs:
         specifier: ~7.8.2
         version: 7.8.2
@@ -1175,11 +1175,11 @@ packages:
       '@emnapi/core': ^1.7.1
       '@emnapi/runtime': ^1.7.1
 
-  '@ng-icons/bootstrap-icons@33.2.1':
-    resolution: {integrity: sha512-zsB7Y+WJjOF6dUGunGCGeHA5xKRpMWLqGwt8FJEdQIaDLY0z9uYJNMlDcrD9AhhAYMcecQVsHkQZTX2tdegMNQ==}
+  '@ng-icons/bootstrap-icons@33.2.2':
+    resolution: {integrity: sha512-YbaGBuay5egHf7btD34aqLxSGZlvOPaMzqxSExYXc30j682PVJTT+JgZhhhouMNO18jjFLx4M+75VrWcwE/b+A==}
 
-  '@ng-icons/core@33.2.1':
-    resolution: {integrity: sha512-2wCQHf4QdYXl9t8PaTc8LJ17BOmmvNe0OjOJ3yGKKkJpfp+un+N8gi5YJfL/cBJE+uxtb12w7kM8PAYuo1K6fg==}
+  '@ng-icons/core@33.2.2':
+    resolution: {integrity: sha512-MwxREFbCx5p+x+Lx26V1FkHFpqHR/6g1TmBG7aYx+FFe1DIfrxUVXM+LW/Mviv3dN5sLE/Fi0ULP79Gz9uG0SQ==}
     peerDependencies:
       '@angular-devkit/schematics': '>=21.0.0'
       '@angular/common': '>=21.0.0'
@@ -4896,11 +4896,11 @@ snapshots:
       '@tybys/wasm-util': 0.10.1
     optional: true
 
-  '@ng-icons/bootstrap-icons@33.2.1':
+  '@ng-icons/bootstrap-icons@33.2.2':
     dependencies:
       tslib: 2.8.1
 
-  '@ng-icons/core@33.2.1(@angular-devkit/schematics@21.2.7(chokidar@5.0.0))(@angular/common@21.2.9(@angular/core@21.2.9(@angular/compiler@21.2.9)(rxjs@7.8.2)(zone.js@0.16.1))(rxjs@7.8.2))(@angular/core@21.2.9(@angular/compiler@21.2.9)(rxjs@7.8.2)(zone.js@0.16.1))(@schematics/angular@21.2.7(chokidar@5.0.0))(rxjs@7.8.2)':
+  '@ng-icons/core@33.2.2(@angular-devkit/schematics@21.2.7(chokidar@5.0.0))(@angular/common@21.2.9(@angular/core@21.2.9(@angular/compiler@21.2.9)(rxjs@7.8.2)(zone.js@0.16.1))(rxjs@7.8.2))(@angular/core@21.2.9(@angular/compiler@21.2.9)(rxjs@7.8.2)(zone.js@0.16.1))(@schematics/angular@21.2.7(chokidar@5.0.0))(rxjs@7.8.2)':
     dependencies:
       '@angular-devkit/schematics': 21.2.7(chokidar@5.0.0)
       '@angular/common': 21.2.9(@angular/core@21.2.9(@angular/compiler@21.2.9)(rxjs@7.8.2)(zone.js@0.16.1))(rxjs@7.8.2)
