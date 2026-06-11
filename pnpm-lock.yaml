@@ -54,11 +54,11 @@ importers:
         specifier: ^5.2.7
         version: 5.2.7
       '@ng-icons/bootstrap-icons':
-        specifier: ^33.2.1
-        version: 33.2.1
+        specifier: ^33.2.3
+        version: 33.2.3
       '@ng-icons/core':
-        specifier: ^33.2.1
-        version: 33.2.1(@angular-devkit/schematics@21.2.13(chokidar@5.0.0))(@angular/common@21.2.14(@angular/core@21.2.14(@angular/compiler@21.2.14)(rxjs@7.8.2)(zone.js@0.16.1))(rxjs@7.8.2))(@angular/core@21.2.14(@angular/compiler@21.2.14)(rxjs@7.8.2)(zone.js@0.16.1))(@schematics/angular@21.2.13(chokidar@5.0.0))(rxjs@7.8.2)
+        specifier: ^33.2.3
+        version: 33.2.3(@angular-devkit/schematics@21.2.13(chokidar@5.0.0))(@angular/common@21.2.14(@angular/core@21.2.14(@angular/compiler@21.2.14)(rxjs@7.8.2)(zone.js@0.16.1))(rxjs@7.8.2))(@angular/core@21.2.14(@angular/compiler@21.2.14)(rxjs@7.8.2)(zone.js@0.16.1))(@schematics/angular@21.2.13(chokidar@5.0.0))(rxjs@7.8.2)
       rxjs:
         specifier: ~7.8.2
         version: 7.8.2
@@ -308,6 +308,7 @@ packages:
   '@angular/animations@21.2.14':
     resolution: {integrity: sha512-9WLnsJE0xqtd1rVtHMvsAUxFy3OdPks4bdmUIqyw23X/je7ytUALAGWNadffcZBwRpa1A6TUnLr9X4+Draz3kw==}
     engines: {node: ^20.19.0 || ^22.12.0 || >=24.0.0}
+    deprecated: '@angular/animations is deprecated. Use `animate.enter` and `animate.leave` instead.'
     peerDependencies:
       '@angular/core': 21.2.14
 
@@ -1183,11 +1184,11 @@ packages:
       '@emnapi/core': ^1.7.1
       '@emnapi/runtime': ^1.7.1
 
-  '@ng-icons/bootstrap-icons@33.2.1':
-    resolution: {integrity: sha512-zsB7Y+WJjOF6dUGunGCGeHA5xKRpMWLqGwt8FJEdQIaDLY0z9uYJNMlDcrD9AhhAYMcecQVsHkQZTX2tdegMNQ==}
+  '@ng-icons/bootstrap-icons@33.2.3':
+    resolution: {integrity: sha512-sShN2IPoym0b0PoPVkpA9EWGjETkYPyr8Ny2D1/SFBFVAVCtXSHiXilPODBry6UvqLbjjHU3PnZ8Kr+uUk3Jxg==}
 
-  '@ng-icons/core@33.2.1':
-    resolution: {integrity: sha512-2wCQHf4QdYXl9t8PaTc8LJ17BOmmvNe0OjOJ3yGKKkJpfp+un+N8gi5YJfL/cBJE+uxtb12w7kM8PAYuo1K6fg==}
+  '@ng-icons/core@33.2.3':
+    resolution: {integrity: sha512-W7QesmRRlLbjsJfb0DRzyZPxdXjo/m4drCk48vysir1KRDNhfN+6f43T5GW1y3vAmrOIF7kuXzad6Vr1c0LqHA==}
     peerDependencies:
       '@angular-devkit/schematics': '>=21.0.0'
       '@angular/common': '>=21.0.0'
@@ -4964,11 +4965,11 @@ snapshots:
       '@tybys/wasm-util': 0.10.2
     optional: true
 
-  '@ng-icons/bootstrap-icons@33.2.1':
+  '@ng-icons/bootstrap-icons@33.2.3':
     dependencies:
       tslib: 2.8.1
 
-  '@ng-icons/core@33.2.1(@angular-devkit/schematics@21.2.13(chokidar@5.0.0))(@angular/common@21.2.14(@angular/core@21.2.14(@angular/compiler@21.2.14)(rxjs@7.8.2)(zone.js@0.16.1))(rxjs@7.8.2))(@angular/core@21.2.14(@angular/compiler@21.2.14)(rxjs@7.8.2)(zone.js@0.16.1))(@schematics/angular@21.2.13(chokidar@5.0.0))(rxjs@7.8.2)':
+  '@ng-icons/core@33.2.3(@angular-devkit/schematics@21.2.13(chokidar@5.0.0))(@angular/common@21.2.14(@angular/core@21.2.14(@angular/compiler@21.2.14)(rxjs@7.8.2)(zone.js@0.16.1))(rxjs@7.8.2))(@angular/core@21.2.14(@angular/compiler@21.2.14)(rxjs@7.8.2)(zone.js@0.16.1))(@schematics/angular@21.2.13(chokidar@5.0.0))(rxjs@7.8.2)':
     dependencies:
       '@angular-devkit/schematics': 21.2.13(chokidar@5.0.0)
       '@angular/common': 21.2.14(@angular/core@21.2.14(@angular/compiler@21.2.14)(rxjs@7.8.2)(zone.js@0.16.1))(rxjs@7.8.2)
