@@ -1,11 +1,13 @@
 .page-navigation {
-  position: fixed;
+  position: sticky;
   top: 0;
-  left: 0;
-  right: 0;
   z-index: 99;
 }
 
-.page-container {
-  padding-top: 64px;
+.retirement-note {
+  padding: 8px 16px;
+  text-align: center;
+  font-size: 14px;
+  background-color: #ffb300;
+  color: #1a1a1a;
 }
